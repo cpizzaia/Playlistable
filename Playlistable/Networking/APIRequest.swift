@@ -32,52 +32,36 @@ class APIRequest {
     let method: HTTPMethod
     let body: Parameters?
     let headers: HTTPHeaders?
-    let success: DataCompletion
-    let failure: ErrorCompletion
-    
-    func mergeWithHeaders(_ dictionary: HTTPHeaders) -> RequestParams {
-      return RequestParams(
-        url: url,
-        method: method,
-        body: body,
-        headers: headers ?? [:],
-        success: success,
-        failure: failure
-      )
-    }
+    let success: SuccessResponse
+    let failure: FailureResponse
   }
   
-  typealias DataCompletion = (JSON) -> ()
-  typealias ErrorCompletion = (APIError) -> ()
+  typealias SuccessResponse = (JSON) -> ()
+  typealias FailureResponse = (APIError) -> ()
   
-  func get(url: String, headers: HTTPHeaders?, success: @escaping DataCompletion, failure: @escaping ErrorCompletion) {
+  func get(url: String, headers: HTTPHeaders?, success: @escaping SuccessResponse, failure: @escaping FailureResponse) {
     
     request(params: RequestParams(url: url, method: .get, body: nil, headers: headers, success: success, failure: failure))
-    
   }
   
-  func post(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping DataCompletion, failure: @escaping ErrorCompletion) {
+  func post(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping SuccessResponse, failure: @escaping FailureResponse) {
     
     request(params: RequestParams(url: url, method: .post, body: body, headers: headers, success: success, failure: failure))
-    
   }
   
-  func delete(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping DataCompletion, failure: @escaping ErrorCompletion) {
+  func delete(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping SuccessResponse, failure: @escaping FailureResponse) {
     
     request(params: RequestParams(url: url, method: .delete, body: body, headers: headers, success: success, failure: failure))
-    
   }
   
-  func patch(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping DataCompletion, failure: @escaping ErrorCompletion) {
+  func patch(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping SuccessResponse, failure: @escaping FailureResponse) {
     
     request(params: RequestParams(url: url, method: .patch, body: body, headers: headers, success: success, failure: failure))
-    
   }
   
-  func put(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping DataCompletion, failure: @escaping ErrorCompletion) {
+  func put(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping SuccessResponse, failure: @escaping FailureResponse) {
     
     request(params: RequestParams(url: url, method: .put, body: body, headers: headers, success: success, failure: failure))
-    
   }
   
   
