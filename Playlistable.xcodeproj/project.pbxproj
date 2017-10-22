@@ -12,9 +12,12 @@
 		AC02D0CE1F9CF5B3009ED193 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC02D0CC1F9CF5B3009ED193 /* Main.storyboard */; };
 		AC02D0D01F9CF5B3009ED193 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC02D0CF1F9CF5B3009ED193 /* Assets.xcassets */; };
 		AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC02D0D11F9CF5B3009ED193 /* LaunchScreen.storyboard */; };
+		C123A7C91CFEAE164A8E1B27 /* Pods_Playlistable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F2B3C9304F9A14993083D1 /* Pods_Playlistable.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15F2B3C9304F9A14993083D1 /* Pods_Playlistable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Playlistable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		34FD0E942F0AF4C649DE5319 /* Pods-Playlistable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playlistable.release.xcconfig"; path = "Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable.release.xcconfig"; sourceTree = "<group>"; };
 		AC02D0C51F9CF5B3009ED193 /* Playlistable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Playlistable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC02D0C81F9CF5B3009ED193 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC02D0CA1F9CF5B3009ED193 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,7 @@
 		AC02D0CF1F9CF5B3009ED193 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC02D0D21F9CF5B3009ED193 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC02D0D41F9CF5B3009ED193 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F205E7760234089465BFB399 /* Pods-Playlistable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playlistable.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C123A7C91CFEAE164A8E1B27 /* Pods_Playlistable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DABE51C90155E4DE5A9E905 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				15F2B3C9304F9A14993083D1 /* Pods_Playlistable.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A783AE7199AC9D14174EC29C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F205E7760234089465BFB399 /* Pods-Playlistable.debug.xcconfig */,
+				34FD0E942F0AF4C649DE5319 /* Pods-Playlistable.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		AC02D0BC1F9CF5B3009ED193 = {
 			isa = PBXGroup;
 			children = (
 				AC02D0C71F9CF5B3009ED193 /* Playlistable */,
 				AC02D0C61F9CF5B3009ED193 /* Products */,
+				A783AE7199AC9D14174EC29C /* Pods */,
+				4DABE51C90155E4DE5A9E905 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC02D0D71F9CF5B3009ED193 /* Build configuration list for PBXNativeTarget "Playlistable" */;
 			buildPhases = (
+				14096A0C10E1E71E02FA74E6 /* [CP] Check Pods Manifest.lock */,
 				AC02D0C11F9CF5B3009ED193 /* Sources */,
 				AC02D0C21F9CF5B3009ED193 /* Frameworks */,
 				AC02D0C31F9CF5B3009ED193 /* Resources */,
+				EAD9FA501EE079C9B0C0BF76 /* [CP] Embed Pods Frameworks */,
+				43E69DF3BF9F28B80BC52E23 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,57 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14096A0C10E1E71E02FA74E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Playlistable-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		43E69DF3BF9F28B80BC52E23 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EAD9FA501EE079C9B0C0BF76 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AC02D0C11F9CF5B3009ED193 /* Sources */ = {
@@ -272,6 +350,7 @@
 		};
 		AC02D0D81F9CF5B3009ED193 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F205E7760234089465BFB399 /* Pods-Playlistable.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +366,7 @@
 		};
 		AC02D0D91F9CF5B3009ED193 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34FD0E942F0AF4C649DE5319 /* Pods-Playlistable.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
