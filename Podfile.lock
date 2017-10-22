@@ -1,3 +1,32 @@
-PODFILE CHECKSUM: 15735fab2f38ba7509f535c382c892b36ed1c933
+PODS:
+  - Alamofire (4.5.1)
+  - ReSwift (4.0.0)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
+  - Spotify-iOS-SDK (0.25.0):
+    - Spotify-iOS-SDK/Authentication (= 0.25.0)
+    - Spotify-iOS-SDK/Metadata (= 0.25.0)
+    - Spotify-iOS-SDK/Playback (= 0.25.0)
+  - Spotify-iOS-SDK/Authentication (0.25.0)
+  - Spotify-iOS-SDK/Metadata (0.25.0)
+  - Spotify-iOS-SDK/Playback (0.25.0)
+  - SwiftyJSON (3.1.4)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.5)
+  - ReSwift
+  - SDWebImage (~> 3.8)
+  - Spotify-iOS-SDK (= 0.25)
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  Spotify-iOS-SDK: 58d4092b225578623dd17029f3c7e7042ac3ef6e
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+
+PODFILE CHECKSUM: 178310a13f3d7c0ebe957e9bbf05424254eca4a9
 
 COCOAPODS: 1.3.1
