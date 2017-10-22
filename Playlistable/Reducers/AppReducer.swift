@@ -1,5 +1,5 @@
 //
-//  ConfigureStore.swift
+//  AppReducer
 //  Playlistable
 //
 //  Created by Cody Pizzaia on 10/22/17.
@@ -9,7 +9,10 @@
 import Foundation
 import ReSwift
 
-let mainStore = Store<AppState>(
-  reducer: appReducer,
-  state: nil
-)
+struct AppState: StateType {
+  
+}
+
+func appReducer(action: Action, state: AppState?) -> AppState {
+  return AppState()
+}
