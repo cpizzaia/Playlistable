@@ -12,6 +12,8 @@
 		AC02D0CE1F9CF5B3009ED193 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC02D0CC1F9CF5B3009ED193 /* Main.storyboard */; };
 		AC02D0D01F9CF5B3009ED193 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC02D0CF1F9CF5B3009ED193 /* Assets.xcassets */; };
 		AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC02D0D11F9CF5B3009ED193 /* LaunchScreen.storyboard */; };
+		AC02D0DC1F9CF73B009ED193 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02D0DB1F9CF73B009ED193 /* APIRequest.swift */; };
+		AC02D0DF1F9CF7EF009ED193 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02D0DE1F9CF7EF009ED193 /* AppConstants.swift */; };
 		C123A7C91CFEAE164A8E1B27 /* Pods_Playlistable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F2B3C9304F9A14993083D1 /* Pods_Playlistable.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +27,8 @@
 		AC02D0CF1F9CF5B3009ED193 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC02D0D21F9CF5B3009ED193 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC02D0D41F9CF5B3009ED193 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC02D0DB1F9CF73B009ED193 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		AC02D0DE1F9CF7EF009ED193 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F205E7760234089465BFB399 /* Pods-Playlistable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playlistable.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +82,8 @@
 		AC02D0C71F9CF5B3009ED193 /* Playlistable */ = {
 			isa = PBXGroup;
 			children = (
+				AC02D0DD1F9CF7DE009ED193 /* Constants */,
+				AC02D0DA1F9CF6D6009ED193 /* Networking */,
 				AC02D0C81F9CF5B3009ED193 /* AppDelegate.swift */,
 				AC02D0CA1F9CF5B3009ED193 /* ViewController.swift */,
 				AC02D0CC1F9CF5B3009ED193 /* Main.storyboard */,
@@ -86,6 +92,22 @@
 				AC02D0D41F9CF5B3009ED193 /* Info.plist */,
 			);
 			path = Playlistable;
+			sourceTree = "<group>";
+		};
+		AC02D0DA1F9CF6D6009ED193 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				AC02D0DB1F9CF73B009ED193 /* APIRequest.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		AC02D0DD1F9CF7DE009ED193 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				AC02D0DE1F9CF7EF009ED193 /* AppConstants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,7 +248,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC02D0CB1F9CF5B3009ED193 /* ViewController.swift in Sources */,
+				AC02D0DC1F9CF73B009ED193 /* APIRequest.swift in Sources */,
 				AC02D0C91F9CF5B3009ED193 /* AppDelegate.swift in Sources */,
+				AC02D0DF1F9CF7EF009ED193 /* AppConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
