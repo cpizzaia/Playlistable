@@ -44,7 +44,7 @@ fileprivate var clientID: String {
 fileprivate var scopes: [String] {
   get {
     return [
-      "playlists-playlist-read-private",
+      "playlist-read-private",
       "playlist-read-collaborative",
       "playlist-modify-public",
       "playlist-modify-private",
