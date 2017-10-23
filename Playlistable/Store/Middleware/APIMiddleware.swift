@@ -14,7 +14,7 @@ import SwiftyJSON
 let apiMiddleware: Middleware<Any> = { dispatch, getState in
   return { next in
     return { action in
-      guard let apiAction = action as? APIAction else { return next(action) }
+      guard let apiAction = action as? CallSpotifyAPI else { return next(action) }
       
       next(apiAction.types.requestAction)
       
@@ -23,29 +23,22 @@ let apiMiddleware: Middleware<Any> = { dispatch, getState in
   }
 }
 
-fileprivate func translateToRequestParams(apiAction: APIAction, next: @escaping DispatchFunction) -> APIRequest.RequestParams {
+fileprivate func translateToRequestParams(apiAction: CallSpotifyAPI, next: @escaping DispatchFunction) -> APIRequest.RequestParams {
   return APIRequest.RequestParams(
     url: apiAction.url,
     method: apiAction.method,
     body: apiAction.body,
     headers: apiAction.headers,
     success: { data in
-      var successAction = apiAction.types.successAction
-      successAction.payload = data
-      
-      next(successAction)
+      next(apiAction.types.successAction.init(payload: data))
   },
     failure: { error in
-      var failureAction = apiAction.types.failureAction
-      
-      failureAction.error = error
-      
-      next(failureAction)
+      next(apiAction.types.failureAction.init(error: error))
   }
   )
 }
 
-struct APIAction: Action {
+struct CallSpotifyAPI: Action {
   let endpoint: String
   let method: HTTPMethod
   let headers: HTTPHeaders?
@@ -60,14 +53,16 @@ struct APIAction: Action {
 
 struct APITypes {
   let requestAction: Action
-  let successAction: APIResponseSuccessAction
-  let failureAction: APIResponseFailureAction
+  let successAction: APIResponseSuccessAction.Type
+  let failureAction: APIResponseFailureAction.Type
 }
 
 protocol APIResponseSuccessAction: Action {
-  var payload: JSON { get set }
+  var payload: JSON { get }
+  init(payload: JSON)
 }
 
 protocol APIResponseFailureAction: Action {
-  var error: APIRequest.APIError { get set }
+  var error: APIRequest.APIError { get }
+  init(error: APIRequest.APIError)
 }
