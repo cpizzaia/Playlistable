@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class APIRequest {
+  static let shared = APIRequest()
   
   struct APIError: Error {
     let code: Int
@@ -39,33 +40,7 @@ class APIRequest {
   typealias SuccessResponse = (JSON) -> ()
   typealias FailureResponse = (APIError) -> ()
   
-  func get(url: String, headers: HTTPHeaders?, success: @escaping SuccessResponse, failure: @escaping FailureResponse) {
-    
-    request(params: RequestParams(url: url, method: .get, body: nil, headers: headers, success: success, failure: failure))
-  }
-  
-  func post(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping SuccessResponse, failure: @escaping FailureResponse) {
-    
-    request(params: RequestParams(url: url, method: .post, body: body, headers: headers, success: success, failure: failure))
-  }
-  
-  func delete(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping SuccessResponse, failure: @escaping FailureResponse) {
-    
-    request(params: RequestParams(url: url, method: .delete, body: body, headers: headers, success: success, failure: failure))
-  }
-  
-  func patch(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping SuccessResponse, failure: @escaping FailureResponse) {
-    
-    request(params: RequestParams(url: url, method: .patch, body: body, headers: headers, success: success, failure: failure))
-  }
-  
-  func put(url: String, body: Parameters?, headers: HTTPHeaders?, success: @escaping SuccessResponse, failure: @escaping FailureResponse) {
-    
-    request(params: RequestParams(url: url, method: .put, body: body, headers: headers, success: success, failure: failure))
-  }
-  
-  
-  private func request(params: RequestParams) {
+ func request(params: RequestParams) {
     log("\(params.method.rawValue): \(params.url)")
     
     Alamofire.request(

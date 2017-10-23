@@ -10,22 +10,22 @@ import Foundation
 
 struct SpotifyTranslator {
   // MARK: Public Static Methods
-  static func translateToSuccessResponse(response: SpotifyRequest.TracksResponse) -> APIRequest.SuccessResponse {
-    return { data in
-      
-    }
-  }
-  
-  static func translateToSuccessResponse(response: SpotifyRequest.ArtistsResponse) -> APIRequest.SuccessResponse {
-    return { data in
-      
-    }
-  }
-  
-  static func translateToSuccessResponse(response: SpotifyRequest.AlbumsResponse) -> APIRequest.SuccessResponse {
-    return { data in
-      
-    }
-  }
+//  static func translateToSuccessResponse(response: SpotifyRequest.TracksResponse) -> APIRequest.SuccessResponse {
+//    return { data in
+//      
+//    }
+//  }
+//  
+//  static func translateToSuccessResponse(response: SpotifyRequest.ArtistsResponse) -> APIRequest.SuccessResponse {
+//    return { data in
+//      
+//    }
+//  }
+//  
+//  static func translateToSuccessResponse(response: SpotifyRequest.AlbumsResponse) -> APIRequest.SuccessResponse {
+//    return { data in
+//      
+//    }
+//  }
   
 }
