@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AC0148761F9D700200F9A732 /* SpotifyAuthActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0148751F9D700200F9A732 /* SpotifyAuthActions.swift */; };
+		AC0148791F9D80C100F9A732 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0148781F9D80C100F9A732 /* UIViewControllerExtension.swift */; };
+		AC01487B1F9D855D00F9A732 /* APIQueryParamsFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01487A1F9D855D00F9A732 /* APIQueryParamsFormatter.swift */; };
+		AC01487D1F9D8A4900F9A732 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01487C1F9D8A4900F9A732 /* StringExtensions.swift */; };
 		AC02D0C91F9CF5B3009ED193 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02D0C81F9CF5B3009ED193 /* AppDelegate.swift */; };
 		AC02D0CB1F9CF5B3009ED193 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02D0CA1F9CF5B3009ED193 /* ViewController.swift */; };
 		AC02D0CE1F9CF5B3009ED193 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC02D0CC1F9CF5B3009ED193 /* Main.storyboard */; };
@@ -31,6 +34,9 @@
 		15F2B3C9304F9A14993083D1 /* Pods_Playlistable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Playlistable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FD0E942F0AF4C649DE5319 /* Pods-Playlistable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playlistable.release.xcconfig"; path = "Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable.release.xcconfig"; sourceTree = "<group>"; };
 		AC0148751F9D700200F9A732 /* SpotifyAuthActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthActions.swift; sourceTree = "<group>"; };
+		AC0148781F9D80C100F9A732 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		AC01487A1F9D855D00F9A732 /* APIQueryParamsFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIQueryParamsFormatter.swift; sourceTree = "<group>"; };
+		AC01487C1F9D8A4900F9A732 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AC02D0C51F9CF5B3009ED193 /* Playlistable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Playlistable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC02D0C81F9CF5B3009ED193 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC02D0CA1F9CF5B3009ED193 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +87,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AC0148771F9D80B000F9A732 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AC0148781F9D80C100F9A732 /* UIViewControllerExtension.swift */,
+				AC01487C1F9D8A4900F9A732 /* StringExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		AC02D0BC1F9CF5B3009ED193 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +117,7 @@
 		AC02D0C71F9CF5B3009ED193 /* Playlistable */ = {
 			isa = PBXGroup;
 			children = (
+				AC0148771F9D80B000F9A732 /* Extensions */,
 				ACBDF1461F9D4E13001760D7 /* Actions */,
 				ACBDF1411F9D3730001760D7 /* Reducers */,
 				ACBDF13E1F9D1693001760D7 /* Store */,
@@ -122,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				AC02D0DB1F9CF73B009ED193 /* APIRequest.swift */,
+				AC01487A1F9D855D00F9A732 /* APIQueryParamsFormatter.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -317,8 +334,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC01487B1F9D855D00F9A732 /* APIQueryParamsFormatter.swift in Sources */,
 				AC02D0CB1F9CF5B3009ED193 /* ViewController.swift in Sources */,
 				ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */,
+				AC0148791F9D80C100F9A732 /* UIViewControllerExtension.swift in Sources */,
 				AC02D0DC1F9CF73B009ED193 /* APIRequest.swift in Sources */,
 				AC0148761F9D700200F9A732 /* SpotifyAuthActions.swift in Sources */,
 				AC02D0C91F9CF5B3009ED193 /* AppDelegate.swift in Sources */,
@@ -331,6 +350,7 @@
 				ACBDF1371F9CFE48001760D7 /* Track.swift in Sources */,
 				ACBDF1431F9D3749001760D7 /* AppReducer.swift in Sources */,
 				ACBDF1391F9CFE5B001760D7 /* Album.swift in Sources */,
+				AC01487D1F9D8A4900F9A732 /* StringExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import ReSwift
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, StoreSubscriber {
+  
+  func newState(state: AppState) {
+    
+  }
+  
+  typealias StoreSubscriberStateType = AppState
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -19,7 +26,20 @@ class ViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-
-
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    mainStore.subscribe(self)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    mainStore.unsubscribe(self)
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    oAuthSpotify(dispatch: mainStore.dispatch)
+  }
 }
 
