@@ -10,11 +10,25 @@ import Foundation
 import ReSwift
 
 struct SpotifyAuthState {
-  
+  var token: String?
+  var isAuthed: Bool {
+    get {
+      return token != nil
+    }
+  }
 }
 
-fileprivate let initialSpotifyAuthState = SpotifyAuthState()
+fileprivate let initialSpotifyAuthState = SpotifyAuthState(token: nil)
 
 func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuthState {
-  return state ?? initialSpotifyAuthState
+  var state = state ?? initialSpotifyAuthState
+  
+  switch action {
+  case let action as ReceiveSpotifyAuth:
+    state.token = action.token
+  default:
+    break
+  }
+  
+  return state
 }

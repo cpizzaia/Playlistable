@@ -10,9 +10,11 @@ import Foundation
 import ReSwift
 
 struct AppState: StateType {
-  
+  var spotifyAuth: SpotifyAuthState
 }
 
 func appReducer(action: Action, state: AppState?) -> AppState {
-  return AppState()
+  return AppState(
+    spotifyAuth: spotifyAuthReducer(action: action, state: state?.spotifyAuth)
+  )
 }

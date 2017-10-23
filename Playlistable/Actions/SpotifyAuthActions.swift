@@ -16,11 +16,8 @@ struct RequestSpotifyAuth: Action {
   let isRequesting = true
 }
 
-struct ReceiveSpotifyAuth: APIResponseSuccessAction {
-  let payload: JSON
-}
-struct FailureSpotifyAuth: APIResponseFailureAction {
-  let error: APIRequest.APIError
+struct ReceiveSpotifyAuth: Action {
+  let token: String
 }
 
 fileprivate var hasSpotifyInstalled: Bool {
@@ -104,4 +101,10 @@ func oAuthSpotify(dispatch: DispatchFunction) {
       animated: true
     )
   }
+}
+
+func receiveSpotifyAuth(url: URL) {
+  guard let authToken = url.queryParameters?["code"] else { return }
+  
+  mainStore.dispatch(ReceiveSpotifyAuth(token: authToken))
 }

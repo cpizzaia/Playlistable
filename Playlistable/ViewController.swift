@@ -11,8 +11,10 @@ import ReSwift
 
 class ViewController: UIViewController, StoreSubscriber {
   
+  var isAuthed = false
+  
   func newState(state: AppState) {
-    
+    isAuthed = state.spotifyAuth.isAuthed
   }
   
   typealias StoreSubscriberStateType = AppState
@@ -39,7 +41,7 @@ class ViewController: UIViewController, StoreSubscriber {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    oAuthSpotify(dispatch: mainStore.dispatch)
+    if !isAuthed { oAuthSpotify(dispatch: mainStore.dispatch) }
   }
 }
 
