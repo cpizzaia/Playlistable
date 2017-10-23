@@ -34,7 +34,7 @@ fileprivate var oAuthUrl: URL {
 
 fileprivate var clientID: String {
   get {
-    return ProcessInfo.processInfo.environment["spotify_client_id"] ?? ""
+    return "78aa57559d21489e83d50d8fec3579d1"
   }
 }
 
