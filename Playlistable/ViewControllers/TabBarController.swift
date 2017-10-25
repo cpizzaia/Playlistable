@@ -1,15 +1,17 @@
 //
-//  ViewController.swift
+//  TabBarController.swift
 //  Playlistable
 //
-//  Created by Cody Pizzaia on 10/22/17.
+//  Created by Cody Pizzaia on 10/24/17.
 //  Copyright © 2017 Cody Pizzaia. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import ReSwift
+import UIKit
 
-class ViewController: UIViewController, StoreSubscriber {
+class TabBarController: UITabBarController, StoreSubscriber {
+  @IBOutlet var libraryTab: UITabBarItem!
   
   var isAuthed = false
   
@@ -18,12 +20,16 @@ class ViewController: UIViewController, StoreSubscriber {
   }
   
   typealias StoreSubscriberStateType = AppState
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    let tabOne = loadUIViewControllerFromNib(named: "LibraryViewController")
+    
+    tabOne.tabBarItem = libraryTab
+    
+    viewControllers = [tabOne]
   }
-
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -43,5 +49,5 @@ class ViewController: UIViewController, StoreSubscriber {
     super.viewDidAppear(animated)
     if !isAuthed { oAuthSpotify(dispatch: mainStore.dispatch) }
   }
+  
 }
-

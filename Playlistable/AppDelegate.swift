@@ -18,10 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow(frame: UIScreen.main.bounds)
     
-    window?.rootViewController = loadUIViewControllerFromNib(named: "ViewController")
+    window?.rootViewController = loadUIViewControllerFromNib(named: "TabBarController")
     
     window?.makeKeyAndVisible()
-    
     
     return true
   }

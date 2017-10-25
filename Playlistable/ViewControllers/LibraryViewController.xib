@@ -11,14 +11,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <viewController id="ts5-2P-8Bk" customClass="ViewController" customModule="Playlistable" customModuleProvider="target">
-            <view key="view" contentMode="scaleToFill" id="yc7-fP-wtJ">
+        <viewController id="9BB-qZ-2tm" customClass="LibraryViewController" customModule="Playlistable" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="zAO-Vq-7E4">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                <viewLayoutGuide key="safeArea" id="ia9-Dr-rMI"/>
+                <viewLayoutGuide key="safeArea" id="QmZ-B1-8t6"/>
             </view>
-            <point key="canvasLocation" x="58" y="109"/>
+            <point key="canvasLocation" x="57" y="58"/>
         </viewController>
     </objects>
 </document>
