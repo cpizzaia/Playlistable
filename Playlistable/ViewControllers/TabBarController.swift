@@ -23,7 +23,7 @@ class TabBarController: UITabBarController, StoreSubscriber {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    let tabOne = loadUIViewControllerFromNib(named: "LibraryViewController")
+    let tabOne = loadUIViewControllerFromNib(LibraryViewController.self)
     
     tabOne.tabBarItem = libraryTab
     
