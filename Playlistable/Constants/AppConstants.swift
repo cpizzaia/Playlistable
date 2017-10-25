@@ -7,10 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
 func log(_ message: String, functionName: String = #function, line: Int = #line, fileName: String = #file) {
   let className: String = fileName.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? ""
   let statement = "[MT:\(Thread.isMainThread)] \(className) -> \(functionName)[L:\(line)]: \(message)"
   
   print(statement)
+}
+
+
+func loadUIViewControllerFromNib(named name: String) -> UIViewController {
+  return Bundle.main.loadNibNamed(name, owner: nil)?.first as! UIViewController
 }

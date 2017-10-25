@@ -18,9 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow(frame: UIScreen.main.bounds)
     
-    let viewController = Bundle.main.loadNibNamed("ViewController", owner: nil)?.first as! ViewController
-    
-    window?.rootViewController = viewController
+    window?.rootViewController = loadUIViewControllerFromNib(named: "ViewController")
     
     window?.makeKeyAndVisible()
     
