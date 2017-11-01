@@ -10,8 +10,8 @@ import Foundation
 
 struct Track {
   let id: String
-  let albumID: String
-  let artistIDs: [String]
+  var albumID: String
+  var artistIDs: [String]
   let images: [Image]
   let durationMS: Int
   let name: String

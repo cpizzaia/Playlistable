@@ -10,11 +10,11 @@ import Foundation
 import ReSwift
 
 struct MyLibraryState {
-  var mySavedTracks: [Track]
+  var mySavedTrackIDs: [String]
   var isRequestingSavedTracks: Bool
 }
 
-fileprivate let initialMyLibraryState = MyLibraryState(mySavedTracks: [], isRequestingSavedTracks: false)
+fileprivate let initialMyLibraryState = MyLibraryState(mySavedTrackIDs: [], isRequestingSavedTracks: false)
 
 func spotifyAuthReducer(action: Action, state: MyLibraryState?) -> MyLibraryState {
   var state = state ?? initialMyLibraryState

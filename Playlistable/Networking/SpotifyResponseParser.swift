@@ -10,7 +10,5 @@ import Foundation
 import SwiftyJSON
 
 struct SpotifyResponseParser {
-  static func parseSavedTracks(json: JSON) -> [Track] {
-    return []
-  }
+  
 }

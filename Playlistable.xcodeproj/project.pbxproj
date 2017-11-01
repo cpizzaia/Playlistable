@@ -27,6 +27,8 @@
 		AC8AB6B41FA967ED00251F85 /* ArtistFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6B31FA967ED00251F85 /* ArtistFactory.swift */; };
 		AC8AB6B61FA968D500251F85 /* AlbumFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6B51FA968D500251F85 /* AlbumFactory.swift */; };
 		AC8AB6B81FA969C000251F85 /* ImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6B71FA969C000251F85 /* ImageFactory.swift */; };
+		AC8AB6BA1FA9760F00251F85 /* ResourceReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6B91FA9760F00251F85 /* ResourceReducer.swift */; };
+		AC8AB6BC1FA9777D00251F85 /* ResourceActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */; };
 		ACA09EA51F9D556800220E8B /* APIMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA09EA41F9D556800220E8B /* APIMiddleware.swift */; };
 		ACBDF1331F9CFC23001760D7 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1321F9CFC23001760D7 /* Artist.swift */; };
 		ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1341F9CFDF7001760D7 /* Image.swift */; };
@@ -64,6 +66,8 @@
 		AC8AB6B31FA967ED00251F85 /* ArtistFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistFactory.swift; sourceTree = "<group>"; };
 		AC8AB6B51FA968D500251F85 /* AlbumFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumFactory.swift; sourceTree = "<group>"; };
 		AC8AB6B71FA969C000251F85 /* ImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFactory.swift; sourceTree = "<group>"; };
+		AC8AB6B91FA9760F00251F85 /* ResourceReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceReducer.swift; sourceTree = "<group>"; };
+		AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceActions.swift; sourceTree = "<group>"; };
 		ACA09EA41F9D556800220E8B /* APIMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMiddleware.swift; sourceTree = "<group>"; };
 		ACBDF1321F9CFC23001760D7 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		ACBDF1341F9CFDF7001760D7 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 				ACBDF1421F9D3749001760D7 /* AppReducer.swift */,
 				ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */,
 				AC8AB6AA1FA95F1600251F85 /* MyLibraryReducer.swift */,
+				AC8AB6B91FA9760F00251F85 /* ResourceReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -227,6 +232,7 @@
 			children = (
 				AC0148751F9D700200F9A732 /* SpotifyAuthActions.swift */,
 				AC8AB6AC1FA95FBF00251F85 /* MyLibraryActions.swift */,
+				AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -392,8 +398,10 @@
 				ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */,
 				ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */,
 				AC8AB6AB1FA95F1600251F85 /* MyLibraryReducer.swift in Sources */,
+				AC8AB6BA1FA9760F00251F85 /* ResourceReducer.swift in Sources */,
 				AC8AB6B61FA968D500251F85 /* AlbumFactory.swift in Sources */,
 				AC8AB6B81FA969C000251F85 /* ImageFactory.swift in Sources */,
+				AC8AB6BC1FA9777D00251F85 /* ResourceActions.swift in Sources */,
 				AC8AB6B41FA967ED00251F85 /* ArtistFactory.swift in Sources */,
 				AC01487F1F9D907D00F9A732 /* URLExtensions.swift in Sources */,
 				AC8AB6AD1FA95FBF00251F85 /* MyLibraryActions.swift in Sources */,
