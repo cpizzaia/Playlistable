@@ -30,7 +30,7 @@ fileprivate func translateToRequestParams(apiAction: CallSpotifyAPI, next: @esca
     body: apiAction.body,
     headers: apiAction.headers,
     success: { data in
-      next(apiAction.types.successAction.init(payload: data))
+      next(apiAction.types.successAction.init(response: data))
   },
     failure: { error in
       next(apiAction.types.failureAction.init(error: error))
@@ -49,6 +49,14 @@ struct CallSpotifyAPI: Action {
       return "https://api.spotify.com" + endpoint
     }
   }
+  
+  init(endpoint: String, method: HTTPMethod, types: APITypes) {
+    self.endpoint = endpoint
+    self.method = method
+    self.types = types
+    headers = nil
+    body = nil
+  }
 }
 
 struct APITypes {
@@ -58,8 +66,8 @@ struct APITypes {
 }
 
 protocol APIResponseSuccessAction: Action {
-  var payload: JSON { get }
-  init(payload: JSON)
+  var response: JSON { get }
+  init(response: JSON)
 }
 
 protocol APIResponseFailureAction: Action {

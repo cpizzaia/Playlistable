@@ -11,5 +11,5 @@ import Foundation
 struct Image {
   let height: Int
   let width: Int
-  let url: Int
+  let url: URL
 }
