@@ -20,6 +20,7 @@
 		AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7411FA02D3500CAAD13 /* TabBarController.swift */; };
 		AC16D7441FA02DD900CAAD13 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7431FA02DD900CAAD13 /* LibraryViewController.swift */; };
 		AC16D7461FA02E1700CAAD13 /* LibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC16D7451FA02E1700CAAD13 /* LibraryViewController.xib */; };
+		AC3268951FAFC3A9000AA05B /* ParseResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3268941FAFC3A9000AA05B /* ParseResources.swift */; };
 		AC8AB6AB1FA95F1600251F85 /* MyLibraryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AA1FA95F1600251F85 /* MyLibraryReducer.swift */; };
 		AC8AB6AD1FA95FBF00251F85 /* MyLibraryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AC1FA95FBF00251F85 /* MyLibraryActions.swift */; };
 		AC8AB6AF1FA9641B00251F85 /* SpotifyResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AE1FA9641B00251F85 /* SpotifyResponseParser.swift */; };
@@ -59,6 +60,7 @@
 		AC16D7411FA02D3500CAAD13 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AC16D7431FA02DD900CAAD13 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		AC16D7451FA02E1700CAAD13 /* LibraryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LibraryViewController.xib; sourceTree = "<group>"; };
+		AC3268941FAFC3A9000AA05B /* ParseResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResources.swift; sourceTree = "<group>"; };
 		AC8AB6AA1FA95F1600251F85 /* MyLibraryReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryReducer.swift; sourceTree = "<group>"; };
 		AC8AB6AC1FA95FBF00251F85 /* MyLibraryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryActions.swift; sourceTree = "<group>"; };
 		AC8AB6AE1FA9641B00251F85 /* SpotifyResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponseParser.swift; sourceTree = "<group>"; };
@@ -174,6 +176,15 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		AC3268931FAFC382000AA05B /* APIMiddleware */ = {
+			isa = PBXGroup;
+			children = (
+				ACA09EA41F9D556800220E8B /* APIMiddleware.swift */,
+				AC3268941FAFC3A9000AA05B /* ParseResources.swift */,
+			);
+			path = APIMiddleware;
+			sourceTree = "<group>";
+		};
 		AC6271A11F9EDB9B002B068B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,8 +251,8 @@
 		ACBDF14B1F9D53F4001760D7 /* Middleware */ = {
 			isa = PBXGroup;
 			children = (
+				AC3268931FAFC382000AA05B /* APIMiddleware */,
 				ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */,
-				ACA09EA41F9D556800220E8B /* APIMiddleware.swift */,
 			);
 			path = Middleware;
 			sourceTree = "<group>";
@@ -409,6 +420,7 @@
 				AC02D0DF1F9CF7EF009ED193 /* AppConstants.swift in Sources */,
 				ACBDF1371F9CFE48001760D7 /* Track.swift in Sources */,
 				ACBDF1431F9D3749001760D7 /* AppReducer.swift in Sources */,
+				AC3268951FAFC3A9000AA05B /* ParseResources.swift in Sources */,
 				AC16D7441FA02DD900CAAD13 /* LibraryViewController.swift in Sources */,
 				ACBDF1391F9CFE5B001760D7 /* Album.swift in Sources */,
 			);

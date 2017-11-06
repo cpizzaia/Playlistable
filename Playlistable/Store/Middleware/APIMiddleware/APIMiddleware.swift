@@ -30,6 +30,7 @@ fileprivate func translateToRequestParams(apiAction: CallSpotifyAPI, next: @esca
     body: apiAction.body,
     headers: apiAction.headers,
     success: { data in
+      parseResources(fromJSON: data, next: next)
       next(apiAction.types.successAction.init(response: data))
   },
     failure: { error in
