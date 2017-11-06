@@ -10,10 +10,33 @@ import Foundation
 import ReSwift
 import UIKit
 
-class LibraryViewController: UIViewController {
+class LibraryViewController: UIViewController, StoreSubscriber {
+  typealias StoreSubscriberStateType = AppState
+  
+  var savedTracks = [Track]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    mainStore.subscribe(self)
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    mainStore.unsubscribe(self)
+  }
+  
+  func newState(state: AppState) {
+    let isAuthed = state.spotifyAuth.isAuthed
+    let isRequestingSavedTracks = state.myLibrary.isRequestingSavedTracks
     
+    
+    
+    if isAuthed && state.myLibrary.mySavedTrackIDs.isEmpty && !isRequestingSavedTracks {
+      mainStore.dispatch(getSavedTracks())
+    }
   }
 }

@@ -12,5 +12,5 @@ import ReSwift
 let mainStore = Store<AppState>(
   reducer: appReducer,
   state: nil,
-  middleware: [loggingMiddleware]
+  middleware: [apiMiddleware, loggingMiddleware]
 )

@@ -10,18 +10,27 @@ import Foundation
 import ReSwift
 
 struct MyLibraryState {
-  var mySavedTrackIDs: [String]
+  typealias TrackID = String
+  
+  var mySavedTrackIDs: [TrackID]
   var isRequestingSavedTracks: Bool
 }
 
 fileprivate let initialMyLibraryState = MyLibraryState(mySavedTrackIDs: [], isRequestingSavedTracks: false)
 
-func spotifyAuthReducer(action: Action, state: MyLibraryState?) -> MyLibraryState {
+func myLibraryReducer(action: Action, state: MyLibraryState?) -> MyLibraryState {
   var state = state ?? initialMyLibraryState
   
   switch action {
   case _ as RequestSavedTracks:
     state.isRequestingSavedTracks = true
+  case let action as ReceiveSavedTracks:
+    state.mySavedTrackIDs = action.response["items"].array?.flatMap { json in
+      return json["track"]["id"].string
+    } ?? []
+    state.isRequestingSavedTracks = false
+  case _ as ErrorSavedTracks:
+    state.isRequestingSavedTracks = false
   default:
     break
   }

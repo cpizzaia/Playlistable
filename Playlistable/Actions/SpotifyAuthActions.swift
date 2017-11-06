@@ -7,17 +7,26 @@
 //
 
 import Foundation
+import Alamofire
 import Spotify
 import ReSwift
 import SwiftyJSON
 import SafariServices
 
+struct InitializeOAuth: Action {
+  let isInitializing = true
+}
+
 struct RequestSpotifyAuth: Action {
   let isRequesting = true
 }
 
-struct ReceiveSpotifyAuth: Action {
-  let token: String
+struct ErrorSpotifyAuth: APIResponseFailureAction {
+  let error: APIRequest.APIError
+}
+
+struct ReceiveSpotifyAuth: APIResponseSuccessAction {
+  let response: JSON
 }
 
 fileprivate var hasSpotifyInstalled: Bool {
@@ -35,6 +44,18 @@ fileprivate var oAuthUrl: URL {
 fileprivate var clientID: String {
   get {
     return "78aa57559d21489e83d50d8fec3579d1"
+  }
+}
+
+fileprivate var clientSecret: String {
+  get {
+    return "2d1756d853834abeb15ffdb1ac045321"
+  }
+}
+
+fileprivate var redirectURI: String {
+  get {
+    return "playlistable://"
   }
 }
 
@@ -69,7 +90,7 @@ fileprivate var oAuthQueryParams: String {
       [
         "client_id": clientID,
         "response_type": "code",
-        "redirect_uri": "playlistable://",
+        "redirect_uri": redirectURI,
         "scope": scopes.joined(separator: " ")
       ]
     )
@@ -104,7 +125,24 @@ func oAuthSpotify(dispatch: DispatchFunction) {
 }
 
 func receiveSpotifyAuth(url: URL) {
-  guard let authToken = url.queryParameters?["code"] else { return }
+  guard let code = url.queryParameters?["code"] else { return }
   
-  mainStore.dispatch(ReceiveSpotifyAuth(token: authToken))
+  mainStore.dispatch(CallAPI(
+    method: .post,
+    headers: nil,
+    body: [
+      "grant_type": "authorization_code",
+      "code": code,
+      "redirect_uri": redirectURI,
+      "client_id": clientID,
+      "client_secret": clientSecret
+    ],
+    bodyEncoding: URLEncoding.default,
+    types: APITypes(
+      requestAction: RequestSpotifyAuth(),
+      successAction: ReceiveSpotifyAuth.self,
+      failureAction: ErrorSpotifyAuth.self
+    ),
+    url: "https://accounts.spotify.com/api/token"
+  ))
 }

@@ -22,7 +22,7 @@ struct ErrorSavedTracks: APIResponseFailureAction {
 
 func getSavedTracks() -> Action {
   return CallSpotifyAPI(
-    endpoint: "",
+    endpoint: "/v1/me/tracks",
     method: .get,
     types: APITypes(
       requestAction: RequestSavedTracks(),

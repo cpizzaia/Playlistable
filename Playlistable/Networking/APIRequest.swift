@@ -33,6 +33,7 @@ class APIRequest {
     let method: HTTPMethod
     let body: Parameters?
     let headers: HTTPHeaders?
+    let encoding: ParameterEncoding
     let success: SuccessResponse
     let failure: FailureResponse
   }
@@ -47,7 +48,7 @@ class APIRequest {
       params.url,
       method: params.method,
       parameters: params.body,
-      encoding: JSONEncoding.default,
+      encoding: URLEncoding.default,
       headers: params.headers
       ).validate().responseJSON(completionHandler: { response in
         self.handle(response: response, params: params)

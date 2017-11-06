@@ -21,7 +21,7 @@ fileprivate struct ResourceCollection {
   let albums: [JSON]
   let tracks: [JSON]
   
-  func merge(withCollection collection: ResourceCollection) -> ResourceCollection {
+  func merged(withCollection collection: ResourceCollection) -> ResourceCollection {
     return ResourceCollection(
       artists: artists + collection.artists,
       albums: albums + collection.albums,
@@ -49,10 +49,10 @@ fileprivate func gatherResources(fromJSON json: JSON) -> ResourceCollection {
   
   json.forEach { key, value in
     if let type = value.string, key == "type" {
-      resources = parse(type: type, fromJSON: json).merge(withCollection: resources)
+      resources = parse(type: type, fromJSON: json).merged(withCollection: resources)
     }
     
-    resources = gatherResources(fromJSON: value).merge(withCollection: resources)
+    resources = gatherResources(fromJSON: value).merged(withCollection: resources)
   }
   
   return resources
