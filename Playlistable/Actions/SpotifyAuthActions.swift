@@ -17,9 +17,7 @@ struct InitializeOAuth: Action {
   let isInitializing = true
 }
 
-struct RequestSpotifyAuth: Action {
-  let isRequesting = true
-}
+struct RequestSpotifyAuth: APIRequestAction {}
 
 struct ErrorSpotifyAuth: APIResponseFailureAction {
   let error: APIRequest.APIError
@@ -139,7 +137,7 @@ func receiveSpotifyAuth(url: URL) {
     ],
     bodyEncoding: URLEncoding.default,
     types: APITypes(
-      requestAction: RequestSpotifyAuth(),
+      requestAction: RequestSpotifyAuth.self,
       successAction: ReceiveSpotifyAuth.self,
       failureAction: ErrorSpotifyAuth.self
     ),

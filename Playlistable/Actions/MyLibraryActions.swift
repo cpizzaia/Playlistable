@@ -10,7 +10,7 @@ import Foundation
 import ReSwift
 import SwiftyJSON
 
-struct RequestSavedTracks: Action {}
+struct RequestSavedTracks: APIRequestAction {}
 
 struct ReceiveSavedTracks: APIResponseSuccessAction {
   let response: JSON
@@ -25,7 +25,7 @@ func getSavedTracks() -> Action {
     endpoint: "/v1/me/tracks",
     method: .get,
     types: APITypes(
-      requestAction: RequestSavedTracks(),
+      requestAction: RequestSavedTracks.self,
       successAction: ReceiveSavedTracks.self,
       failureAction: ErrorSavedTracks.self
     )

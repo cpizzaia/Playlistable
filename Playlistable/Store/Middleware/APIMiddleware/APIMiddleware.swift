@@ -16,7 +16,7 @@ let apiMiddleware: Middleware<Any> = { dispatch, getState in
     return { action in
       guard let apiAction = action as? APIAction else { return next(action) }
       
-      next(apiAction.types.requestAction)
+      next(apiAction.types.requestAction.init())
       
       APIRequest.shared.request(params: translateToRequestParams(apiAction: apiAction, next: next))
     }
@@ -82,9 +82,13 @@ protocol APIAction: Action {
 }
 
 struct APITypes {
-  let requestAction: Action
+  let requestAction: APIRequestAction.Type
   let successAction: APIResponseSuccessAction.Type
   let failureAction: APIResponseFailureAction.Type
+}
+
+protocol APIRequestAction: Action {
+  init()
 }
 
 protocol APIResponseSuccessAction: Action {
