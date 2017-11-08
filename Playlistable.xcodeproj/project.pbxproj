@@ -39,6 +39,8 @@
 		ACBDF1431F9D3749001760D7 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1421F9D3749001760D7 /* AppReducer.swift */; };
 		ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */; };
 		ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */; };
+		ACE6E78E1FB2BE750005BE41 /* LibraryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6E78D1FB2BE750005BE41 /* LibraryTableViewCell.swift */; };
+		ACE6E7901FB2BE850005BE41 /* LibraryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACE6E78F1FB2BE850005BE41 /* LibraryTableViewCell.xib */; };
 		ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */; };
 		C123A7C91CFEAE164A8E1B27 /* Pods_Playlistable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F2B3C9304F9A14993083D1 /* Pods_Playlistable.framework */; };
 /* End PBXBuildFile section */
@@ -80,6 +82,8 @@
 		ACBDF1421F9D3749001760D7 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthReducer.swift; sourceTree = "<group>"; };
 		ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingMiddlware.swift; sourceTree = "<group>"; };
+		ACE6E78D1FB2BE750005BE41 /* LibraryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTableViewCell.swift; sourceTree = "<group>"; };
+		ACE6E78F1FB2BE850005BE41 /* LibraryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LibraryTableViewCell.xib; sourceTree = "<group>"; };
 		ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
 		F205E7760234089465BFB399 /* Pods-Playlistable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playlistable.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +148,7 @@
 		AC02D0C71F9CF5B3009ED193 /* Playlistable */ = {
 			isa = PBXGroup;
 			children = (
+				ACE6E78C1FB2BE5B0005BE41 /* TableViewCells */,
 				AC8AB6B01FA9649F00251F85 /* Factories */,
 				AC6271A11F9EDB9B002B068B /* ViewControllers */,
 				AC0148771F9D80B000F9A732 /* Extensions */,
@@ -260,6 +265,15 @@
 			path = Middleware;
 			sourceTree = "<group>";
 		};
+		ACE6E78C1FB2BE5B0005BE41 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				ACE6E78D1FB2BE750005BE41 /* LibraryTableViewCell.swift */,
+				ACE6E78F1FB2BE850005BE41 /* LibraryTableViewCell.xib */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -324,6 +338,7 @@
 			files = (
 				AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */,
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,
+				ACE6E7901FB2BE850005BE41 /* LibraryTableViewCell.xib in Resources */,
 				AC16D7461FA02E1700CAAD13 /* LibraryViewController.xib in Resources */,
 				AC02D0D01F9CF5B3009ED193 /* Assets.xcassets in Resources */,
 			);
@@ -415,6 +430,7 @@
 				ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */,
 				AC8AB6BA1FA9760F00251F85 /* ResourceReducer.swift in Sources */,
 				AC8AB6B61FA968D500251F85 /* AlbumFactory.swift in Sources */,
+				ACE6E78E1FB2BE750005BE41 /* LibraryTableViewCell.swift in Sources */,
 				AC8AB6B81FA969C000251F85 /* ImageFactory.swift in Sources */,
 				AC8AB6BC1FA9777D00251F85 /* ResourceActions.swift in Sources */,
 				AC8AB6B41FA967ED00251F85 /* ArtistFactory.swift in Sources */,
