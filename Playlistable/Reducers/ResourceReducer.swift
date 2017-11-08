@@ -17,6 +17,24 @@ struct ResourceState {
   var tracks: [TrackID: Track]
   var albums: [AlbumID: Album]
   var artists: [ArtistID: Artist]
+  
+  func tracksFor(ids: [TrackID]) -> [Track] {
+    return ids.flatMap { id in
+      return tracks[id]
+    }
+  }
+  
+  func albumsFor(ids: [AlbumID]) -> [Album] {
+    return ids.flatMap { id in
+      return albums[id]
+    }
+  }
+  
+  func artistsFor(ids: [ArtistID]) -> [Artist] {
+    return ids.flatMap { id in
+      return artists[id]
+    }
+  }
 }
 
 fileprivate let initialResourceState = ResourceState(

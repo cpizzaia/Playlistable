@@ -19,7 +19,7 @@ struct TrackFactory {
       let id = json["id"].string,
       let durationMS = json["duration_ms"].int,
       let name = json["name"].string,
-      let previewURL = json["previewURL"].string else {
+      let previewURL = json["preview_url"].string else {
         return nil
     }
     

@@ -33,9 +33,9 @@ class LibraryViewController: UIViewController, StoreSubscriber {
     let isAuthed = state.spotifyAuth.isAuthed
     let isRequestingSavedTracks = state.myLibrary.isRequestingSavedTracks
     
+    savedTracks = state.resources.tracksFor(ids: state.myLibrary.mySavedTrackIDs)
     
-    
-    if isAuthed && state.myLibrary.mySavedTrackIDs.isEmpty && !isRequestingSavedTracks {
+    if isAuthed && savedTracks.isEmpty && !isRequestingSavedTracks {
       mainStore.dispatch(getSavedTracks())
     }
   }
