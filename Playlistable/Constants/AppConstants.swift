@@ -17,7 +17,7 @@ func log(_ message: String, functionName: String = #function, line: Int = #line,
 }
 
 
-func loadUIViewControllerFromNib<T: UIViewController>(_ className: T.Type) -> UIViewController {
+func loadUIViewControllerFromNib<T: UIViewController>(_ className: T.Type) -> T {
   
-  return Bundle.main.loadNibNamed(String(describing: className), owner: nil)?.first as! UIViewController
+  return Bundle.main.loadNibNamed(String(describing: className), owner: nil)?.first as! T
 }

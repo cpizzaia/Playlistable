@@ -21,6 +21,7 @@ class LibraryViewController: UIViewController, StoreSubscriber {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    tabBarController?.title = "Library"
     mainStore.subscribe(self)
   }
   

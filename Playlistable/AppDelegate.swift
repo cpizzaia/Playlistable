@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow(frame: UIScreen.main.bounds)
     
-    window?.rootViewController = loadUIViewControllerFromNib(TabBarController.self)
+    window?.rootViewController = UINavigationController(rootViewController: loadUIViewControllerFromNib(TabBarController.self))
     
     window?.makeKeyAndVisible()
     
