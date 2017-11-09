@@ -23,6 +23,7 @@ struct ErrorSavedTracks: APIResponseFailureAction {
 func getSavedTracks() -> Action {
   return CallSpotifyAPI(
     endpoint: "/v1/me/tracks",
+    queryParams: ["limit": "50"],
     method: .get,
     types: APITypes(
       requestAction: RequestSavedTracks.self,

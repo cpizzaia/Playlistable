@@ -27,7 +27,7 @@ struct TrackFactory {
       id: id,
       albumID: "",
       artistIDs: [],
-      images: ImageFactory.createImages(fromJSONArray: json["images"].array ?? []),
+      images: ImageFactory.createImages(fromJSONArray: json["album"]["images"].array ?? []),
       durationMS: durationMS,
       name: name,
       previewURL: previewURL

@@ -45,11 +45,19 @@ struct CallSpotifyAPI: APIAction {
   let method: HTTPMethod
   let headers: HTTPHeaders?
   let body: Parameters?
+  let queryParams: QueryParams?
   let bodyEncoding: ParameterEncoding
   let types: APITypes
   var url: String {
     get {
-      return "https://api.spotify.com" + endpoint
+      return "https://api.spotify.com" + endpoint + queryString
+    }
+  }
+  private var queryString: String {
+    get {
+      return queryParams?.reduce("?", { result, keyValue in
+        return result + "&\(keyValue.key)=\(keyValue.value)"
+      }) ?? ""
     }
   }
   
@@ -57,6 +65,17 @@ struct CallSpotifyAPI: APIAction {
     self.endpoint = endpoint
     self.method = method
     self.types = types
+    headers = ["Authorization": "Bearer \(mainStore.state.spotifyAuth.token ?? "")"]
+    body = nil
+    bodyEncoding = JSONEncoding.default
+    queryParams = nil
+  }
+  
+  init(endpoint: String, queryParams: QueryParams, method: HTTPMethod, types: APITypes) {
+    self.endpoint = endpoint
+    self.method = method
+    self.types = types
+    self.queryParams = queryParams
     headers = ["Authorization": "Bearer \(mainStore.state.spotifyAuth.token ?? "")"]
     body = nil
     bodyEncoding = JSONEncoding.default
@@ -80,6 +99,8 @@ protocol APIAction: Action {
   var types: APITypes { get }
   var url: String { get }
 }
+
+typealias QueryParams = [String: String]
 
 struct APITypes {
   let requestAction: APIRequestAction.Type
