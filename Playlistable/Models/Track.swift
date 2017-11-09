@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Track {
+struct Track: BrowsableItem {
   let id: String
   var albumID: String
   var artistIDs: [String]
@@ -17,21 +17,10 @@ struct Track {
   let name: String
   let previewURL: String
   
-  var largeImageURL: URL? {
+  // BrowsableItem Properties
+  var title: String {
     get {
-      return images.first(where: { $0.height >= 640 })?.url ?? mediumImageURL ?? smallImageURL
-    }
-  }
-  
-  var mediumImageURL: URL? {
-    get {
-      return images.first(where: { $0.height >= 300 && $0.height < 640 })?.url ?? smallImageURL
-    }
-  }
-  
-  var smallImageURL: URL? {
-    get {
-      return images.first(where: {$0.height <= 64 })?.url
+      return name
     }
   }
 }

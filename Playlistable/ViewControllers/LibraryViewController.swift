@@ -10,12 +10,8 @@ import Foundation
 import ReSwift
 import UIKit
 
-class LibraryViewController: UIViewController, StoreSubscriber, UITableViewDelegate, UITableViewDataSource {
+class LibraryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   @IBOutlet var libraryTableView: UITableView!
-  
-  typealias StoreSubscriberStateType = AppState
-  
-  var savedTracks = [Track]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,30 +23,17 @@ class LibraryViewController: UIViewController, StoreSubscriber, UITableViewDeleg
     
     libraryTableView.dataSource = self
     libraryTableView.delegate = self
+    
+    libraryTableView.reloadData()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     tabBarController?.title = "Library"
-    mainStore.subscribe(self)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    mainStore.unsubscribe(self)
-  }
-  
-  func newState(state: AppState) {
-    let isAuthed = state.spotifyAuth.isAuthed
-    let isRequestingSavedTracks = state.myLibrary.isRequestingSavedTracks
-    
-    savedTracks = state.resources.tracksFor(ids: state.myLibrary.mySavedTrackIDs)
-    
-    libraryTableView.reloadData()
-    
-    if isAuthed && savedTracks.isEmpty && !isRequestingSavedTracks {
-      mainStore.dispatch(getSavedTracks())
-    }
   }
   
   // MARK: Table View Methods
@@ -73,7 +56,7 @@ class LibraryViewController: UIViewController, StoreSubscriber, UITableViewDeleg
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let viewController = loadUIViewControllerFromNib(InspectAllViewController.self)
     
-    viewController.tracks = savedTracks
+    viewController.type = .savedTracks
     
     navigationController?.pushViewController(viewController, animated: true)
   }

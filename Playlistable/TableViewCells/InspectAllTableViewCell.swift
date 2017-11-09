@@ -15,8 +15,8 @@ class InspectAllTableViewCell: UITableViewCell {
   @IBOutlet var titleLabel: UILabel!
   @IBOutlet var itemImage: UIImageView!
   
-  func setupCellFor(item: Track) {
-    titleLabel.text = item.name
+  func setupCellFor(item: BrowsableItem) {
+    titleLabel.text = item.title
     if let mediumImageURL = item.mediumImageURL {
       itemImage.sd_setImage(with: mediumImageURL)
     }

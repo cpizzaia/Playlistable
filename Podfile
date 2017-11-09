@@ -9,6 +9,7 @@ target 'Playlistable' do
   pod 'SwiftyJSON'
   pod 'ReSwift'
   pod 'SDWebImage', '~>3.8'
+  pod 'SVProgressHUD'
   # Pods for Playlistable
 
 end
