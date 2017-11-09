@@ -69,4 +69,12 @@ class LibraryViewController: UIViewController, StoreSubscriber, UITableViewDeleg
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 50
   }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let viewController = loadUIViewControllerFromNib(InspectAllViewController.self)
+    
+    viewController.tracks = savedTracks
+    
+    navigationController?.pushViewController(viewController, animated: true)
+  }
 }
