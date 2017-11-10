@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol BrowsableItem {
+protocol Item {
   var title: String { get }
   var images: [Image] { get }
   var id: String { get }
 }
 
-extension BrowsableItem {
+extension Item {
   var largeImageURL: URL? {
     get {
       return images.first(where: { $0.height >= 640 })?.url ?? mediumImageURL ?? smallImageURL

@@ -11,9 +11,9 @@ import ReSwift
 
 struct SeedsState {
   typealias ID = String
-  var items: [ID: BrowsableItem]
+  var items: [ID: Item]
   
-  func isInSeeds(item: BrowsableItem) -> Bool {
+  func isInSeeds(item: Item) -> Bool {
     return items[item.id] != nil
   }
 }

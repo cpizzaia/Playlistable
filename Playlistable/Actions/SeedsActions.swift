@@ -10,9 +10,9 @@ import Foundation
 import ReSwift
 
 struct AddSeed: Action {
-  let item: BrowsableItem
+  let item: Item
 }
 
 struct RemoveSeed: Action {
-  let item: BrowsableItem
+  let item: Item
 }

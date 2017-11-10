@@ -24,7 +24,7 @@
 		AC18FCC01FB3E7A20079AFC8 /* InspectAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCBF1FB3E7A20079AFC8 /* InspectAllViewController.swift */; };
 		AC18FCC41FB3E95A0079AFC8 /* InspectAllTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC18FCC31FB3E95A0079AFC8 /* InspectAllTableViewCell.xib */; };
 		AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */; };
-		AC18FCC81FB412A20079AFC8 /* BrowsableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC71FB412A20079AFC8 /* BrowsableItem.swift */; };
+		AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC71FB412A20079AFC8 /* Item.swift */; };
 		AC3268951FAFC3A9000AA05B /* ParseResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3268941FAFC3A9000AA05B /* ParseResources.swift */; };
 		AC8AB6AB1FA95F1600251F85 /* MyLibraryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AA1FA95F1600251F85 /* MyLibraryReducer.swift */; };
 		AC8AB6AD1FA95FBF00251F85 /* MyLibraryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AC1FA95FBF00251F85 /* MyLibraryActions.swift */; };
@@ -74,7 +74,7 @@
 		AC18FCBF1FB3E7A20079AFC8 /* InspectAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectAllViewController.swift; sourceTree = "<group>"; };
 		AC18FCC31FB3E95A0079AFC8 /* InspectAllTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InspectAllTableViewCell.xib; sourceTree = "<group>"; };
 		AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectAllTableViewCell.swift; sourceTree = "<group>"; };
-		AC18FCC71FB412A20079AFC8 /* BrowsableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowsableItem.swift; sourceTree = "<group>"; };
+		AC18FCC71FB412A20079AFC8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AC3268941FAFC3A9000AA05B /* ParseResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResources.swift; sourceTree = "<group>"; };
 		AC8AB6AA1FA95F1600251F85 /* MyLibraryReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryReducer.swift; sourceTree = "<group>"; };
 		AC8AB6AC1FA95FBF00251F85 /* MyLibraryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryActions.swift; sourceTree = "<group>"; };
@@ -238,7 +238,7 @@
 				ACBDF1341F9CFDF7001760D7 /* Image.swift */,
 				ACBDF1361F9CFE48001760D7 /* Track.swift */,
 				ACBDF1381F9CFE5B001760D7 /* Album.swift */,
-				AC18FCC71FB412A20079AFC8 /* BrowsableItem.swift */,
+				AC18FCC71FB412A20079AFC8 /* Item.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -453,7 +453,7 @@
 				AC18FCC01FB3E7A20079AFC8 /* InspectAllViewController.swift in Sources */,
 				ACBDF1401F9D172E001760D7 /* ConfigureStore.swift in Sources */,
 				ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */,
-				AC18FCC81FB412A20079AFC8 /* BrowsableItem.swift in Sources */,
+				AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */,
 				ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */,
 				AC8AB6AB1FA95F1600251F85 /* MyLibraryReducer.swift in Sources */,
 				ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Track: BrowsableItem {
+struct Track: Item {
   let id: String
   var albumID: String
   var artistIDs: [String]

@@ -26,7 +26,7 @@ class InspectAllTableViewCell: UITableViewCell {
   
   private var _seededCell = false
   
-  func setupCellFor(item: BrowsableItem) {
+  func setupCellFor(item: Item) {
     titleLabel.text = item.title
     if let mediumImageURL = item.mediumImageURL {
       itemImage.sd_setImage(with: mediumImageURL)

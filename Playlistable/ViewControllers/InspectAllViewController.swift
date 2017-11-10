@@ -20,7 +20,7 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
   
   @IBOutlet var inspectAllTableView: UITableView!
   
-  var items = [BrowsableItem]()
+  var items = [Item]()
   var seeds: SeedsState?
   
   var type: CollectionType?
