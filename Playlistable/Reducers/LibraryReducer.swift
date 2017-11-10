@@ -9,16 +9,16 @@
 import Foundation
 import ReSwift
 
-struct MyLibraryState {
+struct LibraryState {
   typealias TrackID = String
   
   var mySavedTrackIDs: [TrackID]
   var isRequestingSavedTracks: Bool
 }
 
-fileprivate let initialMyLibraryState = MyLibraryState(mySavedTrackIDs: [], isRequestingSavedTracks: false)
+fileprivate let initialMyLibraryState = LibraryState(mySavedTrackIDs: [], isRequestingSavedTracks: false)
 
-func myLibraryReducer(action: Action, state: MyLibraryState?) -> MyLibraryState {
+func myLibraryReducer(action: Action, state: LibraryState?) -> LibraryState {
   var state = state ?? initialMyLibraryState
   
   switch action {
