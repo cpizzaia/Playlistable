@@ -57,6 +57,17 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
     default:
       break
     }
+    
+    if seeds?.isFull == true {
+      presentAlertView(
+        title: "Limit Reached",
+        message: "Would you like to generate a playlist off of these?",
+        successActionTitle: "Ok",
+        failureActionTitle: "Cancel",
+        success: {},
+        failure: {}
+      )
+    }
   }
   
   private func setupForSavedTracks(state: AppState) {

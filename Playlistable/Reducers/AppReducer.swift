@@ -12,7 +12,7 @@ import ReSwift
 struct AppState: StateType {
   var spotifyAuth: SpotifyAuthState
   var resources: ResourceState
-  var myLibrary: MyLibraryState
+  var myLibrary: LibraryState
   var seeds: SeedsState
 }
 
