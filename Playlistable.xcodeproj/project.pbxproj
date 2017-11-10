@@ -36,6 +36,8 @@
 		AC8AB6BA1FA9760F00251F85 /* ResourceReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6B91FA9760F00251F85 /* ResourceReducer.swift */; };
 		AC8AB6BC1FA9777D00251F85 /* ResourceActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */; };
 		ACA09EA51F9D556800220E8B /* APIMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA09EA41F9D556800220E8B /* APIMiddleware.swift */; };
+		ACAA1A421FB548F700F6B345 /* SeedsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA1A411FB548F700F6B345 /* SeedsReducer.swift */; };
+		ACAA1A441FB54A8B00F6B345 /* SeedsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA1A431FB54A8B00F6B345 /* SeedsActions.swift */; };
 		ACBDF1331F9CFC23001760D7 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1321F9CFC23001760D7 /* Artist.swift */; };
 		ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1341F9CFDF7001760D7 /* Image.swift */; };
 		ACBDF1371F9CFE48001760D7 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1361F9CFE48001760D7 /* Track.swift */; };
@@ -84,6 +86,8 @@
 		AC8AB6B91FA9760F00251F85 /* ResourceReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceReducer.swift; sourceTree = "<group>"; };
 		AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceActions.swift; sourceTree = "<group>"; };
 		ACA09EA41F9D556800220E8B /* APIMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMiddleware.swift; sourceTree = "<group>"; };
+		ACAA1A411FB548F700F6B345 /* SeedsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsReducer.swift; sourceTree = "<group>"; };
+		ACAA1A431FB54A8B00F6B345 /* SeedsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsActions.swift; sourceTree = "<group>"; };
 		ACBDF1321F9CFC23001760D7 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		ACBDF1341F9CFDF7001760D7 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		ACBDF1361F9CFE48001760D7 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
@@ -255,6 +259,7 @@
 				ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */,
 				AC8AB6AA1FA95F1600251F85 /* MyLibraryReducer.swift */,
 				AC8AB6B91FA9760F00251F85 /* ResourceReducer.swift */,
+				ACAA1A411FB548F700F6B345 /* SeedsReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 				AC0148751F9D700200F9A732 /* SpotifyAuthActions.swift */,
 				AC8AB6AC1FA95FBF00251F85 /* MyLibraryActions.swift */,
 				AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */,
+				ACAA1A431FB54A8B00F6B345 /* SeedsActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -441,6 +447,7 @@
 				AC0148761F9D700200F9A732 /* SpotifyAuthActions.swift in Sources */,
 				AC02D0C91F9CF5B3009ED193 /* AppDelegate.swift in Sources */,
 				AC8AB6AF1FA9641B00251F85 /* SpotifyResponseParser.swift in Sources */,
+				ACAA1A421FB548F700F6B345 /* SeedsReducer.swift in Sources */,
 				ACA09EA51F9D556800220E8B /* APIMiddleware.swift in Sources */,
 				AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */,
 				AC18FCC01FB3E7A20079AFC8 /* InspectAllViewController.swift in Sources */,
@@ -452,6 +459,7 @@
 				ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */,
 				AC8AB6BA1FA9760F00251F85 /* ResourceReducer.swift in Sources */,
 				AC8AB6B61FA968D500251F85 /* AlbumFactory.swift in Sources */,
+				ACAA1A441FB54A8B00F6B345 /* SeedsActions.swift in Sources */,
 				ACE6E78E1FB2BE750005BE41 /* LibraryTableViewCell.swift in Sources */,
 				AC8AB6B81FA969C000251F85 /* ImageFactory.swift in Sources */,
 				AC8AB6BC1FA9777D00251F85 /* ResourceActions.swift in Sources */,

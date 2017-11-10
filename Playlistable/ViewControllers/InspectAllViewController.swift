@@ -21,6 +21,7 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
   @IBOutlet var inspectAllTableView: UITableView!
   
   var items = [BrowsableItem]()
+  var seeds: SeedsState?
   
   var type: CollectionType?
   
@@ -48,6 +49,8 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
   }
   
   func newState(state: AppState) {
+    seeds = state.seeds
+    
     switch type {
     case .some(.savedTracks):
       setupForSavedTracks(state: state)
@@ -83,7 +86,11 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "inspectAllCell") as! InspectAllTableViewCell
     
-    cell.setupCellFor(item: items[indexPath.row])
+    let item = items[indexPath.row]
+    
+    cell.setupCellFor(item: item)
+    
+    cell.seededCell = seeds?.isInSeeds(item: item) == true
     
     return cell
   }
@@ -92,5 +99,13 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
     return 70
   }
   
-  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let item = items[indexPath.row]
+    
+    if seeds?.isInSeeds(item: item) == true {
+      mainStore.dispatch(RemoveSeed(item: item))
+    } else {
+      mainStore.dispatch(AddSeed(item: item))
+    }
+  }
 }

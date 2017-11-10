@@ -15,6 +15,17 @@ class InspectAllTableViewCell: UITableViewCell {
   @IBOutlet var titleLabel: UILabel!
   @IBOutlet var itemImage: UIImageView!
   
+  var seededCell: Bool {
+    get {
+      return _seededCell
+    } set {
+      backgroundColor = newValue ? .cyan : .clear
+      _seededCell = newValue
+    }
+  }
+  
+  private var _seededCell = false
+  
   func setupCellFor(item: BrowsableItem) {
     titleLabel.text = item.title
     if let mediumImageURL = item.mediumImageURL {

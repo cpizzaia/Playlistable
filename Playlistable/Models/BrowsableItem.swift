@@ -11,6 +11,7 @@ import Foundation
 protocol BrowsableItem {
   var title: String { get }
   var images: [Image] { get }
+  var id: String { get }
 }
 
 extension BrowsableItem {
