@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController id="dRd-uh-Axl" customClass="GeneratedPlaylistViewController" customModule="Playlistable" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="W6v-NY-9rj">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghv-aI-z0Z">
+                        <rect key="frame" x="-0.5" y="20" width="375" height="647"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your generated playlist will appear here." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u01-0S-9sV">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="u01-0S-9sV" firstAttribute="centerX" secondItem="ghv-aI-z0Z" secondAttribute="centerX" id="2aG-f0-c3y"/>
+                            <constraint firstItem="u01-0S-9sV" firstAttribute="centerY" secondItem="ghv-aI-z0Z" secondAttribute="centerY" id="EFq-gU-R1l"/>
+                            <constraint firstItem="u01-0S-9sV" firstAttribute="width" secondItem="ghv-aI-z0Z" secondAttribute="width" id="mw4-8c-Azt"/>
+                            <constraint firstItem="u01-0S-9sV" firstAttribute="height" secondItem="ghv-aI-z0Z" secondAttribute="height" id="trf-b2-d9i"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLN-KF-n8r">
+                        <rect key="frame" x="-0.5" y="20" width="375" height="647"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSw-rK-SIH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="playButtonTapped:" destination="dRd-uh-Axl" eventType="touchUpInside" id="zpP-2a-sM7"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jUM-Fh-aUO">
+                                <rect key="frame" x="0.5" y="52" width="375" height="595"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jUM-Fh-aUO" firstAttribute="width" secondItem="CLN-KF-n8r" secondAttribute="width" id="0bq-Gv-nTn"/>
+                            <constraint firstItem="jUM-Fh-aUO" firstAttribute="top" secondItem="iSw-rK-SIH" secondAttribute="bottom" id="9ye-fI-0Zo"/>
+                            <constraint firstItem="iSw-rK-SIH" firstAttribute="height" secondItem="CLN-KF-n8r" secondAttribute="height" multiplier="0.08" id="ErE-YD-RsK"/>
+                            <constraint firstItem="iSw-rK-SIH" firstAttribute="top" secondItem="CLN-KF-n8r" secondAttribute="top" id="HA7-6A-d6R"/>
+                            <constraint firstItem="jUM-Fh-aUO" firstAttribute="centerX" secondItem="CLN-KF-n8r" secondAttribute="centerX" id="gae-HF-JNH"/>
+                            <constraint firstAttribute="bottom" secondItem="jUM-Fh-aUO" secondAttribute="bottom" id="p9Z-da-6tv"/>
+                            <constraint firstItem="iSw-rK-SIH" firstAttribute="centerX" secondItem="CLN-KF-n8r" secondAttribute="centerX" id="pXL-DL-xkw"/>
+                            <constraint firstItem="iSw-rK-SIH" firstAttribute="width" secondItem="CLN-KF-n8r" secondAttribute="width" id="yDI-bM-BhZ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="dgD-ca-50p" firstAttribute="bottom" secondItem="ghv-aI-z0Z" secondAttribute="bottom" id="191-97-vda"/>
+                    <constraint firstItem="ghv-aI-z0Z" firstAttribute="centerX" secondItem="dgD-ca-50p" secondAttribute="centerX" id="GH9-kr-JOa"/>
+                    <constraint firstItem="ghv-aI-z0Z" firstAttribute="width" secondItem="W6v-NY-9rj" secondAttribute="width" id="IQB-pk-Vpv"/>
+                    <constraint firstItem="CLN-KF-n8r" firstAttribute="top" secondItem="dgD-ca-50p" secondAttribute="top" id="Kte-AS-9My"/>
+                    <constraint firstItem="CLN-KF-n8r" firstAttribute="width" secondItem="W6v-NY-9rj" secondAttribute="width" id="NgQ-GX-dyg"/>
+                    <constraint firstItem="CLN-KF-n8r" firstAttribute="centerX" secondItem="dgD-ca-50p" secondAttribute="centerX" id="QHr-BU-nXg"/>
+                    <constraint firstItem="dgD-ca-50p" firstAttribute="bottom" secondItem="CLN-KF-n8r" secondAttribute="bottom" id="aUl-Gd-aGS"/>
+                    <constraint firstItem="ghv-aI-z0Z" firstAttribute="top" secondItem="dgD-ca-50p" secondAttribute="top" id="ey7-me-VJU"/>
+                </constraints>
+                <viewLayoutGuide key="safeArea" id="dgD-ca-50p"/>
+            </view>
+            <connections>
+                <outlet property="noPlaylistView" destination="ghv-aI-z0Z" id="8Gc-Qq-B5z"/>
+                <outlet property="playButton" destination="iSw-rK-SIH" id="FgB-8a-mDc"/>
+                <outlet property="playlistTableView" destination="jUM-Fh-aUO" id="rRS-D7-Nwn"/>
+                <outlet property="playlistView" destination="CLN-KF-n8r" id="Jqk-JH-9Wl"/>
+            </connections>
+            <point key="canvasLocation" x="-105" y="-125"/>
+        </viewController>
+    </objects>
+</document>

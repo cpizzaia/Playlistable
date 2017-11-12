@@ -11,6 +11,7 @@ import ReSwift
 import UIKit
 
 class TabBarController: UITabBarController, StoreSubscriber {
+  @IBOutlet var generatedPlaylistTab: UITabBarItem!
   @IBOutlet var libraryTab: UITabBarItem!
   
   var isAuthed = false
@@ -23,11 +24,15 @@ class TabBarController: UITabBarController, StoreSubscriber {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    let tabOne = loadUIViewControllerFromNib(LibraryViewController.self)
+    let tabOne = loadUIViewControllerFromNib(GeneratedPlaylistViewController.self)
     
-    tabOne.tabBarItem = libraryTab
+    tabOne.tabBarItem = generatedPlaylistTab
     
-    viewControllers = [tabOne]
+    let tabTwo = loadUIViewControllerFromNib(LibraryViewController.self)
+    
+    tabTwo.tabBarItem = libraryTab
+    
+    viewControllers = [tabOne, tabTwo]
   }
   
   override func didReceiveMemoryWarning() {
