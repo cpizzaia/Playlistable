@@ -24,11 +24,12 @@ class TabBarController: UITabBarController, StoreSubscriber {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    let tabOne = loadUIViewControllerFromNib(GeneratedPlaylistViewController.self)
+  
+    let tabOne = UINavigationController(rootViewController: loadUIViewControllerFromNib(GeneratedPlaylistViewController.self))
     
     tabOne.tabBarItem = generatedPlaylistTab
     
-    let tabTwo = loadUIViewControllerFromNib(LibraryViewController.self)
+    let tabTwo = UINavigationController(rootViewController: loadUIViewControllerFromNib(LibraryViewController.self))
     
     tabTwo.tabBarItem = libraryTab
     

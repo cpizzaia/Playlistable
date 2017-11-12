@@ -46,7 +46,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     
     mainStore.subscribe(self)
     
-    tabBarController?.title = "Generated Playlist"
+    navigationItem.title = "Generated Playlist"
   }
   
   override func viewWillDisappear(_ animated: Bool) {

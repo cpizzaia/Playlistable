@@ -29,7 +29,7 @@ class LibraryViewController: UIViewController, UITableViewDelegate, UITableViewD
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    tabBarController?.title = "Library"
+    navigationItem.title = "Library"
   }
   
   override func viewWillDisappear(_ animated: Bool) {

@@ -67,13 +67,8 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
         success: {
           guard let seeds = self.seeds else { return }
           
-          UIViewController.returnToTabBarController { tabBarVC in
-            guard let tabBarVC = tabBarVC else { return }
-            tabBarVC.selectedViewController = tabBarVC.viewControllers?[0]
-            mainStore.dispatch(generatePlaylist(fromSeeds: seeds))
-          }
-         
-          
+          self.tabBarController?.selectedIndex = 0
+          mainStore.dispatch(generatePlaylist(fromSeeds: seeds))
       },
         failure: {}
       )
