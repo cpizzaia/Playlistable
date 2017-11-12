@@ -19,6 +19,7 @@
 		AC11971B1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC11971A1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift */; };
 		AC11971D1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC11971C1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib */; };
 		AC11971F1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC11971E1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift */; };
+		AC1197211FB8F447009D1646 /* GeneratePlaylistActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1197201FB8F447009D1646 /* GeneratePlaylistActions.swift */; };
 		AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC16D73F1FA02CA300CAAD13 /* TabBarController.xib */; };
 		AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7411FA02D3500CAAD13 /* TabBarController.swift */; };
 		AC16D7441FA02DD900CAAD13 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7431FA02DD900CAAD13 /* LibraryViewController.swift */; };
@@ -72,6 +73,7 @@
 		AC11971A1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedPlaylistViewController.swift; sourceTree = "<group>"; };
 		AC11971C1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneratedPlaylistViewController.xib; sourceTree = "<group>"; };
 		AC11971E1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedPlaylistReducer.swift; sourceTree = "<group>"; };
+		AC1197201FB8F447009D1646 /* GeneratePlaylistActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePlaylistActions.swift; sourceTree = "<group>"; };
 		AC16D73F1FA02CA300CAAD13 /* TabBarController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabBarController.xib; sourceTree = "<group>"; };
 		AC16D7411FA02D3500CAAD13 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AC16D7431FA02DD900CAAD13 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				AC8AB6AC1FA95FBF00251F85 /* LibraryActions.swift */,
 				AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */,
 				ACAA1A431FB54A8B00F6B345 /* SeedsActions.swift */,
+				AC1197201FB8F447009D1646 /* GeneratePlaylistActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				AC02D0DF1F9CF7EF009ED193 /* AppConstants.swift in Sources */,
 				ACBDF1371F9CFE48001760D7 /* Track.swift in Sources */,
 				ACBDF1431F9D3749001760D7 /* AppReducer.swift in Sources */,
+				AC1197211FB8F447009D1646 /* GeneratePlaylistActions.swift in Sources */,
 				AC3268951FAFC3A9000AA05B /* ParseResources.swift in Sources */,
 				AC16D7441FA02DD900CAAD13 /* LibraryViewController.swift in Sources */,
 				ACBDF1391F9CFE5B001760D7 /* Album.swift in Sources */,

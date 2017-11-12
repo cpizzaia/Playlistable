@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import ReSwift
+import SVProgressHUD
 
 class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoreSubscriber {
   typealias StoreSubscriberStateType = AppState
@@ -33,6 +34,11 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     
     playlistTableView.delegate = self
     playlistTableView.dataSource = self
+    
+    playlistTableView.register(
+      UINib(nibName: "InspectAllTableViewCell", bundle: nil),
+      forCellReuseIdentifier: "generatedTrackCell"
+    )
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +57,18 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   
   
   func newState(state: AppState) {
-    tracks = []
+    tracks = state.resources.tracksFor(ids: state.generatedPlaylist.trackIDs)
     
     noPlaylistView.isHidden = !noTracks
     playlistView.isHidden = noTracks
+    
+    playlistTableView.reloadData()
+    
+    if state.generatedPlaylist.isGenerating {
+      SVProgressHUD.show()
+    } else {
+      SVProgressHUD.dismiss()
+    }
   }
   
   // MARK: Table View Methods
@@ -63,6 +77,14 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    let cell = tableView.dequeueReusableCell(withIdentifier: "generatedTrackCell") as! InspectAllTableViewCell
+    
+    cell.setupCellFor(item: tracks[indexPath.row])
+    
+    return cell
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 70
   }
 }

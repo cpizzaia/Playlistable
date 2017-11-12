@@ -11,10 +11,25 @@ import ReSwift
 
 struct GeneratedPlaylistState {
   var trackIDs: [String]
+  var isGenerating: Bool
 }
 
-fileprivate let initialGeneratedPlaylistState = GeneratedPlaylistState(trackIDs: [])
+fileprivate let initialGeneratedPlaylistState = GeneratedPlaylistState(trackIDs: [], isGenerating: false)
 
 func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) -> GeneratedPlaylistState {
-  return initialGeneratedPlaylistState
+  var state = state ?? initialGeneratedPlaylistState
+  
+  switch action {
+  case _ as RequestGeneratePlaylist:
+    state.isGenerating = true
+  case let action as ReceiveGeneratePlaylist:
+    state.isGenerating = false
+    state.trackIDs = action.response["tracks"].array?.flatMap({ $0["id"].string }) ?? []
+  case _ as ErrorGeneratePlaylist:
+    state.isGenerating = false
+  default:
+    break
+  }
+  
+  return state
 }

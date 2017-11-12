@@ -64,7 +64,17 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
         message: "Would you like to generate a playlist off of these?",
         successActionTitle: "Ok",
         failureActionTitle: "Cancel",
-        success: {},
+        success: {
+          guard let seeds = self.seeds else { return }
+          
+          UIViewController.returnToTabBarController { tabBarVC in
+            guard let tabBarVC = tabBarVC else { return }
+            tabBarVC.selectedViewController = tabBarVC.viewControllers?[0]
+            mainStore.dispatch(generatePlaylist(fromSeeds: seeds))
+          }
+         
+          
+      },
         failure: {}
       )
     }
