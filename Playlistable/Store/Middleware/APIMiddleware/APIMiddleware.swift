@@ -33,9 +33,11 @@ fileprivate func translateToRequestParams(apiAction: APIAction, next: @escaping 
     success: { data in
       parseResources(fromJSON: data, next: next)
       next(apiAction.types.successAction.init(response: data))
+      apiAction.success?(data)
   },
     failure: { error in
       next(apiAction.types.failureAction.init(error: error))
+      apiAction.failure?()
   }
   )
 }
@@ -48,6 +50,8 @@ struct CallSpotifyAPI: APIAction {
   let queryParams: QueryParams?
   let bodyEncoding: ParameterEncoding
   let types: APITypes
+  let success: ((JSON) -> ())?
+  let failure: (() -> ())?
   var url: String {
     get {
       return "https://api.spotify.com" + endpoint + queryString
@@ -69,6 +73,8 @@ struct CallSpotifyAPI: APIAction {
     body = nil
     bodyEncoding = JSONEncoding.default
     queryParams = nil
+    success = nil
+    failure = nil
   }
   
   init(endpoint: String, queryParams: QueryParams, method: HTTPMethod, types: APITypes) {
@@ -79,6 +85,8 @@ struct CallSpotifyAPI: APIAction {
     headers = ["Authorization": "Bearer \(mainStore.state.spotifyAuth.token ?? "")"]
     body = nil
     bodyEncoding = JSONEncoding.default
+    success = nil
+    failure = nil
   }
 }
 
@@ -89,6 +97,8 @@ struct CallAPI: APIAction {
   let bodyEncoding: ParameterEncoding
   let types: APITypes
   let url: String
+  let success: ((JSON) -> ())?
+  let failure: (() -> ())?
 }
 
 protocol APIAction: Action {
@@ -98,6 +108,8 @@ protocol APIAction: Action {
   var bodyEncoding: ParameterEncoding { get }
   var types: APITypes { get }
   var url: String { get }
+  var success: ((JSON) -> ())? { get }
+  var failure: (() -> ())? { get }
 }
 
 typealias QueryParams = [String: String]

@@ -141,6 +141,16 @@ func receiveSpotifyAuth(url: URL) {
       successAction: ReceiveSpotifyAuth.self,
       failureAction: ErrorSpotifyAuth.self
     ),
-    url: "https://accounts.spotify.com/api/token"
+    url: "https://accounts.spotify.com/api/token",
+    success: { json in
+      guard let token = json["access_token"].string else { return }
+      
+      initializePlayer(
+        clientID: clientID,
+        accessToken: token,
+        dispatch: mainStore.dispatch
+      )
+  },
+    failure: {}
   ))
 }
