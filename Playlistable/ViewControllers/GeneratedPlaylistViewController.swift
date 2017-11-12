@@ -65,6 +65,8 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     playlistTableView.reloadData()
     
     if state.generatedPlaylist.isGenerating {
+      noPlaylistView.isHidden = true
+      playlistView.isHidden = true
       SVProgressHUD.show()
     } else {
       SVProgressHUD.dismiss()
