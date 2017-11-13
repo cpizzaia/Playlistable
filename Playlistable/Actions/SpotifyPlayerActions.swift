@@ -24,6 +24,10 @@ struct PlayTrack: Action {
   let trackID: String
 }
 
+struct PlayingTrack: Action {
+  let trackID: String
+}
+
 fileprivate func startPlayer(clientID: String) -> Action {
   
   do {
@@ -35,17 +39,15 @@ fileprivate func startPlayer(clientID: String) -> Action {
   return StartedPlayer()
 }
 
-fileprivate func loginPlayer(accessToken: String) -> Action {
+fileprivate func loginPlayer(accessToken: String) {
   player.login(withAccessToken: accessToken)
-  
-  return LoggedInPlayer()
 }
 
 func initializePlayer(clientID: String, accessToken: String, dispatch: DispatchFunction) {
-  player.delegate = playerDelegate
-  player.playbackDelegate = playerDelegate
+  player.delegate = streamingDelegate
+  player.playbackDelegate = playbackDelegate
   dispatch(startPlayer(clientID: clientID))
-  dispatch(loginPlayer(accessToken: accessToken))
+  loginPlayer(accessToken: accessToken)
   dispatch(InitializedPlayer())
 }
 
@@ -61,13 +63,12 @@ func playTrack(id: String) -> Action {
   return PlayTrack(trackID: id)
 }
 
-fileprivate let playerDelegate = PlayerDelegate()
+fileprivate let streamingDelegate = StreamingDelegate()
+fileprivate let playbackDelegate = PlaybackDelegate()
 
-fileprivate class PlayerDelegate: NSObject, SPTAudioStreamingPlaybackDelegate, SPTAudioStreamingDelegate {
-  
-  // MARK: SPTAudioStreamingDelegate Methods
+fileprivate class StreamingDelegate: NSObject, SPTAudioStreamingDelegate {
   func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
-    
+    mainStore.dispatch(LoggedInPlayer())
   }
   
   func audioStreamingDidLogout(_ audioStreaming: SPTAudioStreamingController!) {
@@ -97,9 +98,11 @@ fileprivate class PlayerDelegate: NSObject, SPTAudioStreamingPlaybackDelegate, S
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangeRepeatStatus repeateMode: SPTRepeatMode) {
     
   }
+}
+
+fileprivate class PlaybackDelegate: NSObject, SPTAudioStreamingPlaybackDelegate {
   
   
-  // MARK: SPTAudioStreamingPlaybackDelegate Methods
   func audioStreamingDidPopQueue(_ audioStreaming: SPTAudioStreamingController!) {
     
   }
@@ -141,7 +144,7 @@ fileprivate class PlayerDelegate: NSObject, SPTAudioStreamingPlaybackDelegate, S
   }
   
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStartPlayingTrack trackUri: String!) {
-    
+    mainStore.dispatch(PlayingTrack(trackID: String(trackUri.split(separator: ":").last!)))
   }
   
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {
