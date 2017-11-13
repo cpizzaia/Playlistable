@@ -20,6 +20,9 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   
   
   @IBAction func playButtonTapped(_ sender: UIButton) {
+    guard let track = tracks.first else { return }
+    
+    mainStore.dispatch(playTrack(id: track.id))
   }
   
   var tracks = [Track]()

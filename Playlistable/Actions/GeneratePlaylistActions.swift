@@ -25,7 +25,11 @@ func generatePlaylist(fromSeeds seeds: SeedsState) -> Action {
   
   return CallSpotifyAPI(
     endpoint: "/v1/recommendations",
-    queryParams: ["seed_tracks": trackIDs.joined(separator: ","), "limit": "100"],
+    queryParams: [
+      "seed_tracks": trackIDs.joined(separator: ","),
+      "limit": "100",
+      "market": "US"
+    ],
     method: .get,
     types: APITypes(
       requestAction: RequestGeneratePlaylist.self,
