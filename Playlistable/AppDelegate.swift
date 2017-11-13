@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow(frame: UIScreen.main.bounds)
     
-    window?.rootViewController = loadUIViewControllerFromNib(TabBarController.self)
+    window?.rootViewController = loadUIViewControllerFromNib(PlayerBarContainerViewController.self)
     
     window?.makeKeyAndVisible()
     

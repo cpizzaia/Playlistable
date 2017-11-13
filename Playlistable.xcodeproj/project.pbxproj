@@ -22,6 +22,8 @@
 		AC1197211FB8F447009D1646 /* GeneratePlaylistActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1197201FB8F447009D1646 /* GeneratePlaylistActions.swift */; };
 		AC1197231FB90EBB009D1646 /* SpotifyPlayerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1197221FB90EBB009D1646 /* SpotifyPlayerActions.swift */; };
 		AC1197251FB91198009D1646 /* SpotifyPlayerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1197241FB91198009D1646 /* SpotifyPlayerReducer.swift */; };
+		AC11972F1FB95686009D1646 /* PlayerBarContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC11972E1FB95686009D1646 /* PlayerBarContainerViewController.swift */; };
+		AC1197311FB956B1009D1646 /* PlayerBarContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC1197301FB956B1009D1646 /* PlayerBarContainerViewController.xib */; };
 		AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC16D73F1FA02CA300CAAD13 /* TabBarController.xib */; };
 		AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7411FA02D3500CAAD13 /* TabBarController.swift */; };
 		AC16D7441FA02DD900CAAD13 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7431FA02DD900CAAD13 /* LibraryViewController.swift */; };
@@ -78,6 +80,8 @@
 		AC1197201FB8F447009D1646 /* GeneratePlaylistActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePlaylistActions.swift; sourceTree = "<group>"; };
 		AC1197221FB90EBB009D1646 /* SpotifyPlayerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlayerActions.swift; sourceTree = "<group>"; };
 		AC1197241FB91198009D1646 /* SpotifyPlayerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlayerReducer.swift; sourceTree = "<group>"; };
+		AC11972E1FB95686009D1646 /* PlayerBarContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerBarContainerViewController.swift; sourceTree = "<group>"; };
+		AC1197301FB956B1009D1646 /* PlayerBarContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerBarContainerViewController.xib; sourceTree = "<group>"; };
 		AC16D73F1FA02CA300CAAD13 /* TabBarController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabBarController.xib; sourceTree = "<group>"; };
 		AC16D7411FA02D3500CAAD13 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AC16D7431FA02DD900CAAD13 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 				AC18FCBF1FB3E7A20079AFC8 /* InspectAllViewController.swift */,
 				AC11971A1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift */,
 				AC11971C1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib */,
+				AC11972E1FB95686009D1646 /* PlayerBarContainerViewController.swift */,
+				AC1197301FB956B1009D1646 /* PlayerBarContainerViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -375,6 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC1197311FB956B1009D1646 /* PlayerBarContainerViewController.xib in Resources */,
 				AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */,
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,
 				ACE6E7901FB2BE850005BE41 /* LibraryTableViewCell.xib in Resources */,
@@ -471,6 +478,7 @@
 				ACA09EA51F9D556800220E8B /* APIMiddleware.swift in Sources */,
 				AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */,
 				AC18FCC01FB3E7A20079AFC8 /* InspectAllViewController.swift in Sources */,
+				AC11972F1FB95686009D1646 /* PlayerBarContainerViewController.swift in Sources */,
 				ACBDF1401F9D172E001760D7 /* ConfigureStore.swift in Sources */,
 				ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */,
 				AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */,
