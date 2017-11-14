@@ -11,6 +11,27 @@ import ReSwift
 import Spotify
 
 fileprivate let player = SPTAudioStreamingController.sharedInstance()!
+fileprivate let spotifyPlayer = SpotifyPlayer()
+
+fileprivate class SpotifyPlayer: StoreSubscriber {
+  typealias StoreSubscriberStateType = AppState
+  
+  init() {
+    mainStore.subscribe(self)
+  }
+  
+  func newState(state: AppState) {
+    let spotifyPlayerState = state.spotifyPlayer
+    
+    guard let currentTrackID = spotifyPlayerState.playingTrackID else { return }
+    
+    guard !spotifyPlayerState.isPlaying && spotifyPlayerState.isPlayingQueue else { return }
+    
+    if let action = playTrack(inQueue: spotifyPlayerState.queueTrackIDs, afterTrackID: currentTrackID) {
+      mainStore.dispatch(action)
+    }
+  }
+}
 
 struct StartedPlayer: Action {}
 
@@ -19,6 +40,10 @@ struct LoggedInPlayer: Action {}
 struct StartPlayerFailed: Action {}
 
 struct InitializedPlayer: Action {}
+
+struct PlayQueue: Action {
+  let trackIDs: [String]
+}
 
 struct PlayTrack: Action {
   let trackID: String
@@ -65,6 +90,23 @@ func playTrack(id: String) -> Action {
   })
   
   return PlayTrack(trackID: id)
+}
+
+func playQueue(trackIDs: [String], startingWithTrackID trackID: String, dispatch: DispatchFunction) {
+  dispatch(PlayQueue(trackIDs: trackIDs))
+  
+  dispatch(playTrack(id: trackID))
+}
+
+func playTrack(inQueue queue: [String], afterTrackID trackID: String) -> Action? {
+  guard let currentTrackIndex = queue.index(of: trackID) else { return nil }
+  let nextTrackIndex = queue.index(after: currentTrackIndex)
+  
+  if nextTrackIndex != queue.endIndex {
+    return playTrack(id: queue[nextTrackIndex])
+  } else {
+    return nil
+  }
 }
 
 fileprivate func id(fromURI uri: String) -> String {

@@ -13,9 +13,21 @@ struct SpotifyPlayerState {
   var isInitialized: Bool
   var playingTrackID: String?
   var isPlaying: Bool
+  var queueTrackIDs: [String]
+  
+  var isPlayingQueue: Bool {
+    get {
+      return !queueTrackIDs.isEmpty
+    }
+  }
 }
 
-fileprivate let initialSpotifyPlayerState = SpotifyPlayerState(isInitialized: false, playingTrackID: nil, isPlaying: false)
+fileprivate let initialSpotifyPlayerState = SpotifyPlayerState(
+  isInitialized: false,
+  playingTrackID: nil,
+  isPlaying: false,
+  queueTrackIDs: []
+)
 
 func spotifyPlayerReducer(action: Action, state: SpotifyPlayerState?) -> SpotifyPlayerState{
   var state = state ?? initialSpotifyPlayerState
@@ -28,6 +40,8 @@ func spotifyPlayerReducer(action: Action, state: SpotifyPlayerState?) -> Spotify
     state.isPlaying = true
   case _ as StoppedPlaying:
     state.isPlaying = false
+  case let action as PlayQueue:
+    state.queueTrackIDs = action.trackIDs
   default:
     break
   }
