@@ -28,6 +28,10 @@ struct PlayingTrack: Action {
   let trackID: String
 }
 
+struct StoppedPlaying: Action {
+  let trackID: String
+}
+
 fileprivate func startPlayer(clientID: String) -> Action {
   
   do {
@@ -61,6 +65,10 @@ func playTrack(id: String) -> Action {
   })
   
   return PlayTrack(trackID: id)
+}
+
+fileprivate func id(fromURI uri: String) -> String {
+  return String(uri.split(separator: ":").last!)
 }
 
 fileprivate let streamingDelegate = StreamingDelegate()
@@ -140,11 +148,11 @@ fileprivate class PlaybackDelegate: NSObject, SPTAudioStreamingPlaybackDelegate 
   }
   
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
-    
+    mainStore.dispatch(StoppedPlaying(trackID: id(fromURI: trackUri)))
   }
   
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStartPlayingTrack trackUri: String!) {
-    mainStore.dispatch(PlayingTrack(trackID: String(trackUri.split(separator: ":").last!)))
+    mainStore.dispatch(PlayingTrack(trackID: id(fromURI: trackUri)))
   }
   
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {

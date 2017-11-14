@@ -12,7 +12,7 @@ import ReSwift
 let loggingMiddleware: Middleware<Any> = { dispatch, getState in
   return { next in
     return { action in
-      log("\(action)")
+      log("\(String(describing: type(of: action)))")
       
       next(action)
     }

@@ -26,6 +26,8 @@ func spotifyPlayerReducer(action: Action, state: SpotifyPlayerState?) -> Spotify
   case let action as PlayingTrack:
     state.playingTrackID = action.trackID
     state.isPlaying = true
+  case _ as StoppedPlaying:
+    state.isPlaying = false
   default:
     break
   }

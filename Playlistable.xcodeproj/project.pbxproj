@@ -54,6 +54,8 @@
 		ACBDF1431F9D3749001760D7 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1421F9D3749001760D7 /* AppReducer.swift */; };
 		ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */; };
 		ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */; };
+		ACD4B00D1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACD4B00C1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib */; };
+		ACD4B00F1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4B00E1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift */; };
 		ACE6E78E1FB2BE750005BE41 /* LibraryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6E78D1FB2BE750005BE41 /* LibraryTableViewCell.swift */; };
 		ACE6E7901FB2BE850005BE41 /* LibraryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACE6E78F1FB2BE850005BE41 /* LibraryTableViewCell.xib */; };
 		ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */; };
@@ -112,6 +114,8 @@
 		ACBDF1421F9D3749001760D7 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthReducer.swift; sourceTree = "<group>"; };
 		ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingMiddlware.swift; sourceTree = "<group>"; };
+		ACD4B00C1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneratedPlaylistTrackTableViewCell.xib; sourceTree = "<group>"; };
+		ACD4B00E1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedPlaylistTrackTableViewCell.swift; sourceTree = "<group>"; };
 		ACE6E78D1FB2BE750005BE41 /* LibraryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTableViewCell.swift; sourceTree = "<group>"; };
 		ACE6E78F1FB2BE850005BE41 /* LibraryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LibraryTableViewCell.xib; sourceTree = "<group>"; };
 		ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
@@ -315,6 +319,8 @@
 				ACE6E78F1FB2BE850005BE41 /* LibraryTableViewCell.xib */,
 				AC18FCC31FB3E95A0079AFC8 /* InspectAllTableViewCell.xib */,
 				AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */,
+				ACD4B00C1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib */,
+				ACD4B00E1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 			files = (
 				AC1197311FB956B1009D1646 /* PlayerBarContainerViewController.xib in Resources */,
 				AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */,
+				ACD4B00D1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib in Resources */,
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,
 				ACE6E7901FB2BE850005BE41 /* LibraryTableViewCell.xib in Resources */,
 				AC18FCC41FB3E95A0079AFC8 /* InspectAllTableViewCell.xib in Resources */,
@@ -464,6 +471,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACD4B00F1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift in Sources */,
 				AC01487B1F9D855D00F9A732 /* APIQueryParamsFormatter.swift in Sources */,
 				ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */,
 				AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */,

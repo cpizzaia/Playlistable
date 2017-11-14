@@ -22,6 +22,7 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   @IBOutlet var durationWidthConstraint: NSLayoutConstraint!
   
   var isAnimatingDuration = false
+  var endTime: Double?
   
   func newState(state: AppState) {
     playBarView.isHidden = !state.spotifyPlayer.isPlaying
@@ -55,8 +56,12 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   }
   
   func animateDuration(startTime: Double, endTime: Double) {
-    if isAnimatingDuration { return }
+    if self.endTime == endTime { return }
+    self.endTime = endTime
     
+    durationBarView.layer.removeAllAnimations()
+    
+
     isAnimatingDuration = true
     
     let percentCompleted = startTime / endTime
@@ -64,7 +69,7 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
     
     let fullWidth = view.frame.size.width
     
-    self.durationWidthConstraint.constant = fullWidth * CGFloat(1 - percentCompleted)
+    durationWidthConstraint.constant = fullWidth * CGFloat(1 - percentCompleted)
     
     view.layoutIfNeeded()
     
@@ -74,5 +79,6 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
     }, completion: { finished in
       self.isAnimatingDuration = false
     })
+    
   }
 }

@@ -26,6 +26,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
   
   var tracks = [Track]()
+  var currentlyPlayingTrack: Track?
   var noTracks: Bool {
     get {
       return tracks.isEmpty
@@ -39,7 +40,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     playlistTableView.dataSource = self
     
     playlistTableView.register(
-      UINib(nibName: "InspectAllTableViewCell", bundle: nil),
+      UINib(nibName: "GeneratedPlaylistTrackTableViewCell", bundle: nil),
       forCellReuseIdentifier: "generatedTrackCell"
     )
   }
@@ -62,6 +63,13 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   func newState(state: AppState) {
     tracks = state.resources.tracksFor(ids: state.generatedPlaylist.trackIDs)
     
+    if let playingTrackID = state.spotifyPlayer.playingTrackID {
+      currentlyPlayingTrack = state.resources.tracks[playingTrackID]
+    } else {
+      currentlyPlayingTrack = nil
+    }
+    
+    
     noPlaylistView.isHidden = !noTracks
     playlistView.isHidden = noTracks
     
@@ -82,11 +90,19 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "generatedTrackCell") as! InspectAllTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "generatedTrackCell") as! GeneratedPlaylistTrackTableViewCell
     
-    cell.setupCellFor(item: tracks[indexPath.row])
+    let track = tracks[indexPath.row]
+    
+    cell.setupCell(forTrack: track)
+    
+    cell.currentlyPlaying = track.id == currentlyPlayingTrack?.id
     
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    mainStore.dispatch(playTrack(id: tracks[indexPath.row].id))
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
