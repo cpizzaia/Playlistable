@@ -11,10 +11,10 @@ import ReSwift
 import Spotify
 
 fileprivate let player = SPTAudioStreamingController.sharedInstance()!
-fileprivate let spotifyPlayer = SpotifyPlayer()
 
-fileprivate class SpotifyPlayer: StoreSubscriber {
+fileprivate class QueuePlayer: StoreSubscriber {
   typealias StoreSubscriberStateType = AppState
+  static let shared = QueuePlayer()
   
   init() {
     mainStore.subscribe(self)
@@ -25,12 +25,15 @@ fileprivate class SpotifyPlayer: StoreSubscriber {
     
     guard let currentTrackID = spotifyPlayerState.playingTrackID else { return }
     
-    guard !spotifyPlayerState.isPlaying && spotifyPlayerState.isPlayingQueue else { return }
+    guard !spotifyPlayerState.isPlaying && spotifyPlayerState.isPlayingQueue && !spotifyPlayerState.isStartingToPlay else { return }
     
     if let action = playTrack(inQueue: spotifyPlayerState.queueTrackIDs, afterTrackID: currentTrackID) {
       mainStore.dispatch(action)
     }
   }
+  
+  // FIXME: Blank function to get it to init without calling shared and storing nothing.
+  func start() {}
 }
 
 struct StartedPlayer: Action {}
@@ -76,6 +79,7 @@ func initializePlayer(clientID: String, accessToken: String) -> Action {
   return WrapInDispatch { dispatch in
     player.delegate = streamingDelegate
     player.playbackDelegate = playbackDelegate
+    QueuePlayer.shared.start()
     dispatch(startPlayer(clientID: clientID))
     loginPlayer(accessToken: accessToken)
     dispatch(InitializedPlayer())
