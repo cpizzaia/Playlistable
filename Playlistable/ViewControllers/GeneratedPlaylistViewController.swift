@@ -24,11 +24,10 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     
     mainStore.dispatch(playTrack(id: track.id))
     
-    playQueue(
+    mainStore.dispatch(playQueue(
       trackIDs: tracks.map { $0.id },
-      startingWithTrackID: track.id,
-      dispatch: mainStore.dispatch
-    )
+      startingWithTrackID: track.id
+    ))
   }
   
   var tracks = [Track]()

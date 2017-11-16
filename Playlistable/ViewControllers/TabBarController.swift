@@ -53,7 +53,7 @@ class TabBarController: UITabBarController, StoreSubscriber {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    if !isAuthed { oAuthSpotify(dispatch: mainStore.dispatch) }
+    if !isAuthed { mainStore.dispatch(oAuthSpotify()) }
   }
   
 }

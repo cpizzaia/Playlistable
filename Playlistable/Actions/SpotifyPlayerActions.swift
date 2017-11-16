@@ -72,12 +72,14 @@ fileprivate func loginPlayer(accessToken: String) {
   player.login(withAccessToken: accessToken)
 }
 
-func initializePlayer(clientID: String, accessToken: String, dispatch: DispatchFunction) {
-  player.delegate = streamingDelegate
-  player.playbackDelegate = playbackDelegate
-  dispatch(startPlayer(clientID: clientID))
-  loginPlayer(accessToken: accessToken)
-  dispatch(InitializedPlayer())
+func initializePlayer(clientID: String, accessToken: String) -> Action {
+  return WrapInDispatch { dispatch in
+    player.delegate = streamingDelegate
+    player.playbackDelegate = playbackDelegate
+    dispatch(startPlayer(clientID: clientID))
+    loginPlayer(accessToken: accessToken)
+    dispatch(InitializedPlayer())
+  }
 }
 
 func playTrack(id: String) -> Action {
@@ -92,10 +94,12 @@ func playTrack(id: String) -> Action {
   return PlayTrack(trackID: id)
 }
 
-func playQueue(trackIDs: [String], startingWithTrackID trackID: String, dispatch: DispatchFunction) {
-  dispatch(PlayQueue(trackIDs: trackIDs))
-  
-  dispatch(playTrack(id: trackID))
+func playQueue(trackIDs: [String], startingWithTrackID trackID: String) -> Action {
+  return WrapInDispatch { dispatch in
+    dispatch(PlayQueue(trackIDs: trackIDs))
+    
+    dispatch(playTrack(id: trackID))
+  }
 }
 
 func playTrack(inQueue queue: [String], afterTrackID trackID: String) -> Action? {

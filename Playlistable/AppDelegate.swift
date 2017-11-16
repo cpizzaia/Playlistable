@@ -36,7 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    receiveSpotifyAuth(url: url)
+    if let action = receiveSpotifyAuth(url: url) {
+      mainStore.dispatch(action)
+    }
+    
     return true
   }
 

@@ -107,50 +107,53 @@ fileprivate var webURL: URL {
   }
 }
 
-func oAuthSpotify(dispatch: DispatchFunction) {
-  dispatch(RequestSpotifyAuth())
-
-  if hasSpotifyInstalled {
-    log("Authing from spotify app")
-    UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
-  } else {
-    log("Authing from webview")
-    UIViewController.currentViewController()?.present(
-      SFSafariViewController(url: webURL),
-      animated: true
-    )
+func oAuthSpotify() -> Action {
+  return WrapInDispatch { dispatch in
+    dispatch(RequestSpotifyAuth())
+    
+    if hasSpotifyInstalled {
+      log("Authing from spotify app")
+      UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+    } else {
+      log("Authing from webview")
+      UIViewController.currentViewController()?.present(
+        SFSafariViewController(url: webURL),
+        animated: true
+      )
+    }
   }
 }
 
-func receiveSpotifyAuth(url: URL) {
-  guard let code = url.queryParameters?["code"] else { return }
+func receiveSpotifyAuth(url: URL) -> Action? {
+  guard let code = url.queryParameters?["code"] else { return nil }
   
-  mainStore.dispatch(CallAPI(
-    method: .post,
-    headers: nil,
-    body: [
-      "grant_type": "authorization_code",
-      "code": code,
-      "redirect_uri": redirectURI,
-      "client_id": clientID,
-      "client_secret": clientSecret
-    ],
-    bodyEncoding: URLEncoding.default,
-    types: APITypes(
-      requestAction: RequestSpotifyAuth.self,
-      successAction: ReceiveSpotifyAuth.self,
-      failureAction: ErrorSpotifyAuth.self
-    ),
-    url: "https://accounts.spotify.com/api/token",
-    success: { json in
-      guard let token = json["access_token"].string else { return }
-      
-      initializePlayer(
-        clientID: clientID,
-        accessToken: token,
-        dispatch: mainStore.dispatch
-      )
-  },
-    failure: {}
-  ))
+  return WrapInDispatch { dispatch in
+    dispatch(CallAPI(
+      method: .post,
+      headers: nil,
+      body: [
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": redirectURI,
+        "client_id": clientID,
+        "client_secret": clientSecret
+      ],
+      bodyEncoding: URLEncoding.default,
+      types: APITypes(
+        requestAction: RequestSpotifyAuth.self,
+        successAction: ReceiveSpotifyAuth.self,
+        failureAction: ErrorSpotifyAuth.self
+      ),
+      url: "https://accounts.spotify.com/api/token",
+      success: { json in
+        guard let token = json["access_token"].string else { return }
+        
+        dispatch(initializePlayer(clientID: clientID, accessToken: token))
+    },
+      failure: {}
+    ))
+  }
+  
+  
+  
 }
