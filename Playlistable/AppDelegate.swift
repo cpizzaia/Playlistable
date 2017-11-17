@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
     DispatchQueue.global().async {
-      try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: AVAudioSessionCategoryOptions.mixWithOthers)
+      try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
       
       try? AVAudioSession.sharedInstance().setActive(true)
     }
@@ -29,20 +29,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window?.makeKeyAndVisible()
     
+    startStateManagers()
+    
     return true
   }
   
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-    
-    
-    
+
     if let action = receiveSpotifyAuth(url: url) {
       mainStore.dispatch(action)
     }
     
     return true
   }
-
-
+  
+  private func startStateManagers() {
+    LockScreenManager.start()
+    PlayerQueueManager.start()
+  }
 }
 
