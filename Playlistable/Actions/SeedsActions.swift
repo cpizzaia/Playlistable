@@ -16,3 +16,7 @@ struct AddSeed: Action {
 struct RemoveSeed: Action {
   let item: Item
 }
+
+struct GeneratedFromSeeds: Action {
+  let seeds: [Item]
+}

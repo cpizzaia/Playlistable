@@ -88,6 +88,18 @@ struct CallSpotifyAPI: APIAction {
     success = nil
     failure = nil
   }
+  
+  init(endpoint: String, queryParams: QueryParams, method: HTTPMethod, types: APITypes, success: @escaping (JSON) -> (), failure: @escaping () -> ()) {
+    self.endpoint = endpoint
+    self.method = method
+    self.types = types
+    self.queryParams = queryParams
+    headers = ["Authorization": "Bearer \(mainStore.state.spotifyAuth.token ?? "")"]
+    body = nil
+    bodyEncoding = JSONEncoding.default
+    self.success = success
+    self.failure = failure
+  }
 }
 
 struct CallAPI: APIAction {

@@ -34,6 +34,8 @@ func seedsReducer(action: Action, state: SeedsState?) -> SeedsState {
     state.items[action.item.id] = action.item
   case let action as RemoveSeed:
     state.items.removeValue(forKey: action.item.id)
+  case _ as GeneratedFromSeeds:
+    state.items = [:]
   default:
     break
   }

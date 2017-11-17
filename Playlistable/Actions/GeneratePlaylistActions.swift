@@ -23,19 +23,27 @@ struct ErrorGeneratePlaylist: APIResponseFailureAction {
 func generatePlaylist(fromSeeds seeds: SeedsState) -> Action {
   let trackIDs = getIDs(forType: Track.self, fromSeeds: seeds)
   
-  return CallSpotifyAPI(
-    endpoint: "/v1/recommendations",
-    queryParams: [
-      "seed_tracks": trackIDs.joined(separator: ","),
-      "limit": "100",
-      "market": "US"
-    ],
-    method: .get,
-    types: APITypes(
-      requestAction: RequestGeneratePlaylist.self,
-      successAction: ReceiveGeneratePlaylist.self,
-      failureAction: ErrorGeneratePlaylist.self)
-  )
+  return WrapInDispatch { dispatch in
+    dispatch(CallSpotifyAPI(
+      endpoint: "/v1/recommendations",
+      queryParams: [
+        "seed_tracks": trackIDs.joined(separator: ","),
+        "limit": "100",
+        "market": "US"
+      ],
+      method: .get,
+      types: APITypes(
+        requestAction: RequestGeneratePlaylist.self,
+        successAction: ReceiveGeneratePlaylist.self,
+        failureAction: ErrorGeneratePlaylist.self
+      ),
+      success: { json in
+        dispatch(GeneratedFromSeeds(seeds: seeds.items.map { $0.value }))
+    },
+      failure: {}
+    ))
+  }
+  
 }
 
 fileprivate func getIDs<T: Item>(forType type: T.Type, fromSeeds seeds: SeedsState) -> [String] {
