@@ -36,6 +36,15 @@ struct StoppedPlaying: Action {
   let trackID: String
 }
 
+struct Pausing: Action {}
+struct Paused: Action {}
+struct FailedToPause: Action {}
+
+struct Resuming: Action {}
+struct Resumed: Action {}
+struct FailedToResume: Action {}
+
+
 fileprivate func startPlayer(clientID: String) -> Action {
   
   do {
@@ -85,10 +94,49 @@ func playTrack(inQueue queue: [String], afterTrackID trackID: String) -> Action?
   guard let currentTrackIndex = queue.index(of: trackID) else { return nil }
   let nextTrackIndex = queue.index(after: currentTrackIndex)
   
-  if nextTrackIndex != queue.endIndex {
+  if nextTrackIndex <= queue.endIndex {
     return playTrack(id: queue[nextTrackIndex])
   } else {
     return nil
+  }
+}
+
+func playTrack(inQueue queue: [String], beforeTrackID trackID: String) -> Action? {
+  guard let currentTrackIndex = queue.index(of: trackID) else { return nil }
+  let nextTrackIndex = queue.index(before: currentTrackIndex)
+  
+  if nextTrackIndex >= queue.startIndex {
+    return playTrack(id: queue[nextTrackIndex])
+  } else {
+    return nil
+  }
+}
+
+func pause() -> Action {
+  return WrapInDispatch { dispatch in
+    dispatch(Pausing())
+    
+    player.setIsPlaying(false, callback: { error in
+      if error != nil {
+        dispatch(FailedToPause())
+      } else {
+        
+      }
+    })
+  }
+}
+
+func resume() -> Action {
+  return WrapInDispatch { dispatch in
+    dispatch(Resuming())
+    
+    player.setIsPlaying(true, callback: { error in
+      if error != nil {
+        dispatch(FailedToResume())
+      } else {
+        
+      }
+    })
   }
 }
 
@@ -165,7 +213,14 @@ fileprivate class PlaybackDelegate: NSObject, SPTAudioStreamingPlaybackDelegate 
   }
   
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didReceive event: SpPlaybackEvent) {
-    
+    switch event {
+    case SPPlaybackNotifyPlay:
+      mainStore.dispatch(Resumed())
+    case SPPlaybackNotifyPause:
+      mainStore.dispatch(Paused())
+    default:
+      break
+    }
   }
   
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangeShuffleStatus enabled: Bool) {

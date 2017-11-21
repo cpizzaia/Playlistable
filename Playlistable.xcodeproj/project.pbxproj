@@ -28,8 +28,8 @@
 		AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7411FA02D3500CAAD13 /* TabBarController.swift */; };
 		AC16D7441FA02DD900CAAD13 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7431FA02DD900CAAD13 /* LibraryViewController.swift */; };
 		AC16D7461FA02E1700CAAD13 /* LibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC16D7451FA02E1700CAAD13 /* LibraryViewController.xib */; };
-		AC17B7FA1FBE9ACA0029AFB6 /* LockscreenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7F91FBE9ACA0029AFB6 /* LockscreenManager.swift */; };
-		AC17B7FC1FBE9B390029AFB6 /* PlayerQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7FB1FBE9B390029AFB6 /* PlayerQueueManager.swift */; };
+		AC17B7FA1FBE9ACA0029AFB6 /* LockscreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */; };
+		AC17B7FC1FBE9B390029AFB6 /* PlayerQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7FB1FBE9B390029AFB6 /* PlayerQueueController.swift */; };
 		AC17B7FE1FBE9C3F0029AFB6 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */; };
 		AC18FCBE1FB3E75B0079AFC8 /* InspectAllViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC18FCBD1FB3E75B0079AFC8 /* InspectAllViewController.xib */; };
 		AC18FCC01FB3E7A20079AFC8 /* InspectAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCBF1FB3E7A20079AFC8 /* InspectAllViewController.swift */; };
@@ -92,8 +92,8 @@
 		AC16D7411FA02D3500CAAD13 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AC16D7431FA02DD900CAAD13 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		AC16D7451FA02E1700CAAD13 /* LibraryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LibraryViewController.xib; sourceTree = "<group>"; };
-		AC17B7F91FBE9ACA0029AFB6 /* LockscreenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockscreenManager.swift; sourceTree = "<group>"; };
-		AC17B7FB1FBE9B390029AFB6 /* PlayerQueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerQueueManager.swift; sourceTree = "<group>"; };
+		AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockscreenController.swift; sourceTree = "<group>"; };
+		AC17B7FB1FBE9B390029AFB6 /* PlayerQueueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerQueueController.swift; sourceTree = "<group>"; };
 		AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		AC18FCBD1FB3E75B0079AFC8 /* InspectAllViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InspectAllViewController.xib; sourceTree = "<group>"; };
 		AC18FCBF1FB3E7A20079AFC8 /* InspectAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectAllViewController.swift; sourceTree = "<group>"; };
@@ -230,8 +230,8 @@
 		AC17B7F61FBE99900029AFB6 /* StateManagers */ = {
 			isa = PBXGroup;
 			children = (
-				AC17B7F91FBE9ACA0029AFB6 /* LockscreenManager.swift */,
-				AC17B7FB1FBE9B390029AFB6 /* PlayerQueueManager.swift */,
+				AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */,
+				AC17B7FB1FBE9B390029AFB6 /* PlayerQueueController.swift */,
 				AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */,
 			);
 			path = StateManagers;
@@ -512,7 +512,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC17B7FC1FBE9B390029AFB6 /* PlayerQueueManager.swift in Sources */,
+				AC17B7FC1FBE9B390029AFB6 /* PlayerQueueController.swift in Sources */,
 				ACD4B00F1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift in Sources */,
 				AC01487B1F9D855D00F9A732 /* APIQueryParamsFormatter.swift in Sources */,
 				ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */,
@@ -548,7 +548,7 @@
 				AC11971F1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift in Sources */,
 				AC01487F1F9D907D00F9A732 /* URLExtensions.swift in Sources */,
 				AC8AB6AD1FA95FBF00251F85 /* LibraryActions.swift in Sources */,
-				AC17B7FA1FBE9ACA0029AFB6 /* LockscreenManager.swift in Sources */,
+				AC17B7FA1FBE9ACA0029AFB6 /* LockscreenController.swift in Sources */,
 				ACBDF1331F9CFC23001760D7 /* Artist.swift in Sources */,
 				AC02D0DF1F9CF7EF009ED193 /* AppConstants.swift in Sources */,
 				ACBDF1371F9CFE48001760D7 /* Track.swift in Sources */,

@@ -14,11 +14,40 @@ struct SpotifyPlayerState {
   var playingTrackID: String?
   var isPlaying: Bool
   var isStartingToPlay: Bool
+  var isPausing: Bool
+  var isPaused: Bool
   var queueTrackIDs: [String]
   
+  // MARK: Selectors
   var isPlayingQueue: Bool {
     get {
       return !queueTrackIDs.isEmpty
+    }
+  }
+  
+  var positionOfCurrentTrackInQueue: Int? {
+    get {
+      guard let trackID = playingTrackID else { return nil }
+      return queueTrackIDs.index(of: trackID)
+    }
+  }
+  
+  var isPlayingTrackInQueue: Bool {
+    get {
+      return positionOfCurrentTrackInQueue != nil
+    }
+  }
+  
+  var isPlayingFirstTrackInQueue: Bool {
+    get {
+      return positionOfCurrentTrackInQueue == queueTrackIDs.startIndex
+    }
+  }
+  
+  var isPlayingLastTrackInQueue: Bool {
+    get {
+      guard let currentPosition = positionOfCurrentTrackInQueue else { return false }
+      return currentPosition - 1 == queueTrackIDs.endIndex
     }
   }
 }
@@ -28,6 +57,8 @@ fileprivate let initialSpotifyPlayerState = SpotifyPlayerState(
   playingTrackID: nil,
   isPlaying: false,
   isStartingToPlay: false,
+  isPausing: false,
+  isPaused: false,
   queueTrackIDs: []
 )
 
@@ -43,10 +74,20 @@ func spotifyPlayerReducer(action: Action, state: SpotifyPlayerState?) -> Spotify
     state.playingTrackID = action.trackID
     state.isPlaying = true
     state.isStartingToPlay = false
+    state.isPaused = false
   case _ as StoppedPlaying:
     state.isPlaying = false
   case let action as PlayQueue:
     state.queueTrackIDs = action.trackIDs
+  case _ as Paused:
+    state.isPaused = true
+    state.isPlaying = false
+    state.isPausing = false
+  case _ as Pausing:
+    state.isPausing = true
+  case _ as Resumed:
+    state.isPlaying = true
+    state.isPaused = false
   default:
     break
   }

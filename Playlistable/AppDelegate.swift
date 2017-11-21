@@ -44,8 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func startStateManagers() {
-    LockScreenManager.start()
-    PlayerQueueManager.start()
+    LockScreenController.start()
+    PlayerQueueController.start()
   }
 }
 

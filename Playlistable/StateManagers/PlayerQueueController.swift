@@ -1,5 +1,5 @@
 //
-//  PlayerQueueManager.swift
+//  PlayerQueueController.swift
 //  Playlistable
 //
 //  Created by Cody Pizzaia on 11/16/17.
@@ -9,12 +9,12 @@
 import Foundation
 import ReSwift
 
-class PlayerQueueManager: StateManager {
+class PlayerQueueController: StateManager {
   typealias StoreSubscriberStateType = AppState
-  private static var instance: PlayerQueueManager?
+  private static var instance: PlayerQueueController?
   
   static func start() {
-    instance = PlayerQueueManager()
+    instance = PlayerQueueController()
   }
   
   private init() {
@@ -26,10 +26,17 @@ class PlayerQueueManager: StateManager {
     
     guard let currentTrackID = spotifyPlayerState.playingTrackID else { return }
     
-    guard !spotifyPlayerState.isPlaying && spotifyPlayerState.isPlayingQueue && !spotifyPlayerState.isStartingToPlay else { return }
+    guard shouldPlayNextTrack(state: state.spotifyPlayer) else { return }
     
     if let action = playTrack(inQueue: spotifyPlayerState.queueTrackIDs, afterTrackID: currentTrackID) {
       mainStore.dispatch(action)
     }
+  }
+  
+  private func shouldPlayNextTrack(state: SpotifyPlayerState) -> Bool {
+    return !state.isPlaying &&
+      state.isPlayingQueue &&
+      !state.isStartingToPlay &&
+      !state.isPausing && !state.isPaused
   }
 }
