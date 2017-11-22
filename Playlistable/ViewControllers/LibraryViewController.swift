@@ -38,13 +38,20 @@ class LibraryViewController: UIViewController, UITableViewDelegate, UITableViewD
   
   // MARK: Table View Methods
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return 2
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = libraryTableView.dequeueReusableCell(withIdentifier: "libraryCell") as! LibraryTableViewCell
     
-    cell.setupCellWith(title: "Saved Tracks")
+    switch indexPath.row {
+    case 0:
+      cell.setupCellWith(title: "Saved Tracks")
+    case 1:
+      cell.setupCellWith(title: "Playlistable Saved Tracks")
+    default:
+      break
+    }
     
     return cell
   }
@@ -56,7 +63,14 @@ class LibraryViewController: UIViewController, UITableViewDelegate, UITableViewD
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let viewController = loadUIViewControllerFromNib(InspectAllViewController.self)
     
-    viewController.type = .savedTracks
+    switch indexPath.row {
+    case 0:
+      viewController.type = .savedTracks
+    case 1:
+      viewController.type = .playlistableSavedTracks
+    default:
+      break
+    }
     
     navigationController?.pushViewController(viewController, animated: true)
   }

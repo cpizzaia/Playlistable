@@ -27,6 +27,14 @@ struct ReceiveSpotifyAuth: APIResponseSuccessAction {
   let response: JSON
 }
 
+struct RequestCurrentUser: APIRequestAction {}
+struct ReceiveCurrentUser: APIResponseSuccessAction {
+  let response: JSON
+}
+struct ErrorCurrentUser: APIResponseFailureAction {
+  let error: APIRequest.APIError
+}
+
 fileprivate var hasSpotifyInstalled: Bool {
   get {
     return SPTAuth.supportsApplicationAuthentication()
@@ -149,11 +157,21 @@ func receiveSpotifyAuth(url: URL) -> Action? {
         guard let token = json["access_token"].string else { return }
         
         dispatch(initializePlayer(clientID: clientID, accessToken: token))
+        dispatch(getCurrentUser())
     },
       failure: {}
     ))
   }
-  
-  
-  
+}
+
+func getCurrentUser() -> Action {
+  return CallSpotifyAPI(
+    endpoint: "/v1/me",
+    method: .get,
+    types: APITypes(
+      requestAction: RequestCurrentUser.self,
+      successAction: ReceiveCurrentUser.self,
+      failureAction: ErrorCurrentUser.self
+    )
+  )
 }

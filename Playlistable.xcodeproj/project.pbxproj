@@ -100,6 +100,7 @@
 		AC18FCC31FB3E95A0079AFC8 /* InspectAllTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InspectAllTableViewCell.xib; sourceTree = "<group>"; };
 		AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectAllTableViewCell.swift; sourceTree = "<group>"; };
 		AC18FCC71FB412A20079AFC8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Playlistable.entitlements; sourceTree = "<group>"; };
 		AC3268941FAFC3A9000AA05B /* ParseResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResources.swift; sourceTree = "<group>"; };
 		AC83D6551FBD46D500E9D004 /* wrapInDispatchMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wrapInDispatchMiddleware.swift; sourceTree = "<group>"; };
 		AC8AB6AA1FA95F1600251F85 /* LibraryReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryReducer.swift; sourceTree = "<group>"; };
@@ -190,6 +191,7 @@
 		AC02D0C71F9CF5B3009ED193 /* Playlistable */ = {
 			isa = PBXGroup;
 			children = (
+				AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */,
 				AC17B7F61FBE99900029AFB6 /* StateManagers */,
 				ACE6E78C1FB2BE5B0005BE41 /* TableViewCells */,
 				AC8AB6B01FA9649F00251F85 /* Factories */,
@@ -401,6 +403,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -485,6 +490,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 				"${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -494,6 +500,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -687,6 +694,7 @@
 			baseConfigurationReference = F205E7760234089465BFB399 /* Pods-Playlistable.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Playlistable/Playlistable.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6Y8FXYPMN;
 				INFOPLIST_FILE = Playlistable/Info.plist;
@@ -703,6 +711,7 @@
 			baseConfigurationReference = 34FD0E942F0AF4C649DE5319 /* Pods-Playlistable.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Playlistable/Playlistable.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W6Y8FXYPMN;
 				INFOPLIST_FILE = Playlistable/Info.plist;

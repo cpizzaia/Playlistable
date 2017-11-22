@@ -107,7 +107,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    mainStore.dispatch(playTrack(id: tracks[indexPath.row].id))
+    mainStore.dispatch(playQueue(trackIDs: tracks.map { $0.id }, startingWithTrackID: tracks[indexPath.row].id))
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

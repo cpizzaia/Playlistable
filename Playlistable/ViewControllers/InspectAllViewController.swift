@@ -14,6 +14,7 @@ import ReSwift
 class InspectAllViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoreSubscriber {
   enum CollectionType {
     case savedTracks
+    case playlistableSavedTracks
   }
   
   typealias StoreSubscriberStateType = AppState
@@ -54,6 +55,8 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
     switch type {
     case .some(.savedTracks):
       setupForSavedTracks(state: state)
+    case .some(.playlistableSavedTracks):
+      break
     default:
       break
     }

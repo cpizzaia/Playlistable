@@ -11,6 +11,7 @@ import ReSwift
 
 struct SpotifyAuthState {
   var token: String?
+  var userID: String?
   var isInitializing: Bool
   var isRequesting: Bool
   var isAuthed: Bool {
@@ -20,7 +21,7 @@ struct SpotifyAuthState {
   }
 }
 
-fileprivate let initialSpotifyAuthState = SpotifyAuthState(token: nil, isInitializing: false, isRequesting: false)
+fileprivate let initialSpotifyAuthState = SpotifyAuthState(token: nil, userID: nil, isInitializing: false, isRequesting: false)
 
 func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuthState {
   var state = state ?? initialSpotifyAuthState
@@ -35,6 +36,8 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
     state.isInitializing = false
   case _ as InitializeOAuth:
     state.isInitializing = true
+  case let action as ReceiveCurrentUser:
+    state.userID = action.response["id"].string
   default:
     break
   }

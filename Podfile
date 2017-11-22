@@ -10,6 +10,7 @@ target 'Playlistable' do
   pod 'ReSwift'
   pod 'SDWebImage', '~>3.8'
   pod 'SVProgressHUD'
+  pod 'Locksmith'
   # Pods for Playlistable
 
 end
