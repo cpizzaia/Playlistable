@@ -16,17 +16,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P9i-qR-iAo">
-                        <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </tableView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y6F-06-A2k">
+                        <rect key="frame" x="0.0" y="10" width="375" height="667"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P9i-qR-iAo">
+                                <rect key="frame" x="0.0" y="5" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="P9i-qR-iAo" firstAttribute="centerX" secondItem="J5Z-a8-aj2" secondAttribute="centerX" id="74L-Xb-zLH"/>
+                            <constraint firstItem="P9i-qR-iAo" firstAttribute="height" secondItem="y6F-06-A2k" secondAttribute="height" id="Cj7-ha-1Mm"/>
+                            <constraint firstItem="P9i-qR-iAo" firstAttribute="width" secondItem="y6F-06-A2k" secondAttribute="width" id="GD0-wu-5qS"/>
+                            <constraint firstItem="P9i-qR-iAo" firstAttribute="centerY" secondItem="J5Z-a8-aj2" secondAttribute="centerY" id="Ivu-4f-TMQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="J5Z-a8-aj2"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="P9i-qR-iAo" firstAttribute="height" secondItem="hGQ-Z2-2jv" secondAttribute="height" id="HMN-8l-nSt"/>
-                    <constraint firstItem="P9i-qR-iAo" firstAttribute="centerX" secondItem="hGQ-Z2-2jv" secondAttribute="centerX" id="al3-Dh-Qoj"/>
-                    <constraint firstItem="P9i-qR-iAo" firstAttribute="width" secondItem="hGQ-Z2-2jv" secondAttribute="width" id="ck4-wi-4i2"/>
-                    <constraint firstItem="P9i-qR-iAo" firstAttribute="centerY" secondItem="hGQ-Z2-2jv" secondAttribute="centerY" id="eVt-sb-DDP"/>
+                    <constraint firstItem="y6F-06-A2k" firstAttribute="centerX" secondItem="hGQ-Z2-2jv" secondAttribute="centerX" id="Ud2-ze-NyC"/>
+                    <constraint firstItem="y6F-06-A2k" firstAttribute="centerY" secondItem="hGQ-Z2-2jv" secondAttribute="centerY" id="rWc-hq-WUZ"/>
+                    <constraint firstItem="y6F-06-A2k" firstAttribute="height" secondItem="ifx-bb-M0h" secondAttribute="height" id="wXd-aj-meW"/>
+                    <constraint firstItem="y6F-06-A2k" firstAttribute="width" secondItem="ifx-bb-M0h" secondAttribute="width" id="zFG-wV-LG9"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="hGQ-Z2-2jv"/>
             </view>
