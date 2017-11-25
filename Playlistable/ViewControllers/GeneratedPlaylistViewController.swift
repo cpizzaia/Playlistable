@@ -43,6 +43,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     
     playlistTableView.delegate = self
     playlistTableView.dataSource = self
+    playlistTableView.delaysContentTouches = false
     
     playlistTableView.register(
       UINib(nibName: "GeneratedPlaylistTrackTableViewCell", bundle: nil),
