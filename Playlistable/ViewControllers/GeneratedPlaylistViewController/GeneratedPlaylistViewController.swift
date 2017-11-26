@@ -38,6 +38,9 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     }
   }
   
+  var userID: String?
+  var savedTracksPlaylistID: String?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -88,6 +91,9 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     } else {
       SVProgressHUD.dismiss()
     }
+    
+    userID = state.spotifyAuth.userID
+    savedTracksPlaylistID = state.myLibrary.playlistableSavedTracksPlaylistID
   }
   
   // MARK: Table View Methods
@@ -100,7 +106,15 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     
     let track = tracks[indexPath.row]
     
-    cell.setupCell(forTrack: track)
+    cell.setupCell(forTrack: track, saveTrackFunction: {
+      guard let userID = self.userID else { return }
+      
+      mainStore.dispatch(saveToAndCreatePlaylistableSavedTracksIfNeeded(
+        trackID: track.id,
+        userID: userID,
+        playlistID: self.savedTracksPlaylistID
+      ))
+    })
     
     cell.currentlyPlaying = track.id == currentlyPlayingTrack?.id
     

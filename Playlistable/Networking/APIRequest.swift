@@ -48,7 +48,7 @@ class APIRequest {
       params.url,
       method: params.method,
       parameters: params.body,
-      encoding: URLEncoding.default,
+      encoding: params.encoding,
       headers: params.headers
       ).validate().responseJSON(completionHandler: { response in
         self.handle(response: response, params: params)

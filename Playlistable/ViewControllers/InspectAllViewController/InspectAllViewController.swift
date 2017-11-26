@@ -19,6 +19,9 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
   
   typealias StoreSubscriberStateType = AppState
   
+  @IBOutlet var noItemsView: UIView!
+  @IBOutlet var noItemsLabel: UILabel!
+  @IBOutlet var populatedItemsView: UIView!
   @IBOutlet var inspectAllTableView: UITableView!
   
   var items = [Item]()
@@ -56,7 +59,7 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
     case .some(.savedTracks):
       setupForSavedTracks(state: state)
     case .some(.playlistableSavedTracks):
-      break
+      setupForPlaylistableSavedTracks(state: state)
     default:
       break
     }
@@ -95,6 +98,36 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
       items = state.resources.tracksFor(ids: state.myLibrary.mySavedTrackIDs)
       inspectAllTableView.reloadData()
     }
+    
+    noItemsLabel.text = "Your saved tracks will appear here."
+    shouldDisplayNoItemsView(library.mySavedTrackIDs.isEmpty)
+  }
+  
+  private func setupForPlaylistableSavedTracks(state: AppState) {
+    let library = state.myLibrary
+    noItemsLabel.text = "Playlistable saved tracks will appear here."
+    shouldDisplayNoItemsView(library.playlistableSavedTrackIDs.isEmpty)
+    
+    guard let playlistID = library.playlistableSavedTracksPlaylistID else { return }
+    guard let userID = state.spotifyAuth.userID else { return }
+    
+    if !library.isRequestingPlaylistableSavedTracks {
+      SVProgressHUD.show()
+    } else {
+      SVProgressHUD.dismiss()
+    }
+    
+    if library.playlistableSavedTrackIDs.isEmpty && !library.isRequestingPlaylistableSavedTracks {
+      mainStore.dispatch(getPlaylistableSavedTracks(userID: userID, playlistID: playlistID))
+    } else {
+      items = state.resources.tracksFor(ids: library.playlistableSavedTrackIDs)
+      inspectAllTableView.reloadData()
+    }
+  }
+  
+  private func shouldDisplayNoItemsView(_ bool: Bool) {
+    noItemsView.isHidden = !bool
+    populatedItemsView.isHidden = bool
   }
   
   // MARK: UITableView Methods

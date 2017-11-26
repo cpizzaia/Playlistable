@@ -12,6 +12,10 @@ import UIKit
 class GeneratedPlaylistTrackTableViewCell: UITableViewCell {
   @IBOutlet var trackImage: UIImageView!
   @IBOutlet var trackTitle: UILabel!
+  @IBOutlet var saveTrackButton: UIButton!
+  @IBAction func saveTrackButtonTapped(_ sender: UIButton) {
+    saveTrackFunction?()
+  }
   
   var currentlyPlaying: Bool {
     get {
@@ -22,10 +26,16 @@ class GeneratedPlaylistTrackTableViewCell: UITableViewCell {
     }
   }
   
+  var saveTrackFunction: (() -> ())?
+  
+  
   private var _currentlyPlaying = false
   
-  func setupCell(forTrack track: Track) {
+  func setupCell(forTrack track: Track, saveTrackFunction: (() -> ())?) {
+    self.saveTrackFunction = saveTrackFunction
+    
     trackTitle.text = track.name
+    
     if let mediumImageURL = track.mediumImageURL {
       trackImage.sd_setImage(with: mediumImageURL)
     }

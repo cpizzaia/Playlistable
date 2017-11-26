@@ -29,7 +29,7 @@ fileprivate func translateToRequestParams(apiAction: APIAction, next: @escaping 
     method: apiAction.method,
     body: apiAction.body,
     headers: apiAction.headers,
-    encoding: JSONEncoding.default,
+    encoding: apiAction.bodyEncoding,
     success: { data in
       parseResources(fromJSON: data, next: next)
       next(apiAction.types.successAction.init(response: data))
