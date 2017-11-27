@@ -2,4 +2,55 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            condition = "track.name == &quot;Baked Pancakes&quot;"
+            continueAfterRunningActions = "No"
+            filePath = "Playlistable/ViewControllers/GeneratedPlaylistViewController/GeneratedPlaylistViewController.swift"
+            timestampString = "533444378.445738"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Playlistable.GeneratedPlaylistViewController.tableView(__ObjC.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __ObjC.UITableViewCell"
+                  moduleName = "Playlistable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/justinpizzaia/Desktop/Playlistable/Playlistable/ViewControllers/GeneratedPlaylistViewController/GeneratedPlaylistViewController.swift"
+                  timestampString = "533444378.586525"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "752">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Playlistable.GeneratedPlaylistViewController.tableView(__ObjC.UITableView, cellForRowAt: Foundation.IndexPath) -&gt; __ObjC.UITableViewCell"
+                  moduleName = "Playlistable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/justinpizzaia/Desktop/Playlistable/Playlistable/ViewControllers/GeneratedPlaylistViewController/GeneratedPlaylistViewController.swift"
+                  timestampString = "533444378.58922"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
+                  offsetFromSymbolStart = "196">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

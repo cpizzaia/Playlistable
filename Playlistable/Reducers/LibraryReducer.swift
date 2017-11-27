@@ -68,12 +68,17 @@ func myLibraryReducer(action: Action, state: LibraryState?) -> LibraryState {
     state.playlistableSavedTrackIDs = action.response["items"].array?.flatMap { json in
       return json["track"]["id"].string
     } ?? []
-  
+    
+    state.isRequestingPlaylistableSavedTracks = false
   case _ as ErrorPlaylistableSavedTracks:
     state.isRequestingPlaylistableSavedTracks = false
   
   case let action as SavedTrack:
     state.playlistableSavedTrackIDs = state.playlistableSavedTrackIDs + [action.id]
+  case let action as UnSavedTrack:
+    state.playlistableSavedTrackIDs = state.playlistableSavedTrackIDs.filter { id in
+      return action.id != id
+    }
   default:
     break
   }

@@ -10,11 +10,16 @@ import Foundation
 import UIKit
 
 class GeneratedPlaylistTrackTableViewCell: UITableViewCell {
+  enum ActionType {
+    case add
+    case remove
+  }
+  
   @IBOutlet var trackImage: UIImageView!
   @IBOutlet var trackTitle: UILabel!
   @IBOutlet var saveTrackButton: UIButton!
   @IBAction func saveTrackButtonTapped(_ sender: UIButton) {
-    saveTrackFunction?()
+    action?()
   }
   
   var currentlyPlaying: Bool {
@@ -26,19 +31,28 @@ class GeneratedPlaylistTrackTableViewCell: UITableViewCell {
     }
   }
   
-  var saveTrackFunction: (() -> ())?
+  var action: (() -> ())?
   
   
   private var _currentlyPlaying = false
   
-  func setupCell(forTrack track: Track, saveTrackFunction: (() -> ())?) {
-    self.saveTrackFunction = saveTrackFunction
+  func setupCell(forTrack track: Track, actionType: ActionType, action: (() -> ())?) {
+    self.action = action
     
     trackTitle.text = track.name
     
     if let mediumImageURL = track.mediumImageURL {
       trackImage.sd_setImage(with: mediumImageURL)
     }
+    
+    switch actionType {
+    case .add:
+      saveTrackButton.setTitle("+", for: .normal)
+    case .remove:
+      saveTrackButton.setTitle("-", for: .normal)
+    }
+    
+    
   }
   
 }

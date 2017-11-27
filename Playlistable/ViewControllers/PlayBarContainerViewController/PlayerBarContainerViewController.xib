@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="569" width="375" height="49"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OBE-EX-AZA">
-                                <rect key="frame" x="166" y="14" width="42" height="21"/>
+                                <rect key="frame" x="-0.5" y="0.0" width="375" height="49"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -35,12 +35,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="OBE-EX-AZA" firstAttribute="height" secondItem="lUj-yV-iLD" secondAttribute="height" id="53m-FP-g9d"/>
                             <constraint firstAttribute="bottom" secondItem="1LZ-Ei-9HS" secondAttribute="bottom" id="9LW-Fp-h07"/>
                             <constraint firstItem="1LZ-Ei-9HS" firstAttribute="leading" secondItem="lUj-yV-iLD" secondAttribute="leading" id="DUX-PD-NF8"/>
                             <constraint firstItem="OBE-EX-AZA" firstAttribute="centerY" secondItem="lUj-yV-iLD" secondAttribute="centerY" id="FQ3-Xs-MDL"/>
                             <constraint firstItem="OBE-EX-AZA" firstAttribute="centerX" secondItem="lUj-yV-iLD" secondAttribute="centerX" id="JjR-a6-dI1"/>
                             <constraint firstAttribute="trailing" secondItem="1LZ-Ei-9HS" secondAttribute="trailing" id="TpM-m0-LTi"/>
                             <constraint firstAttribute="height" constant="49" id="W8I-Y2-1Nj"/>
+                            <constraint firstItem="OBE-EX-AZA" firstAttribute="width" secondItem="lUj-yV-iLD" secondAttribute="width" id="iMM-Z5-YiG"/>
                         </constraints>
                     </view>
                 </subviews>

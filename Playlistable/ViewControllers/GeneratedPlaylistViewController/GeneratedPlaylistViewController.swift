@@ -40,6 +40,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   
   var userID: String?
   var savedTracksPlaylistID: String?
+  var savedTrackIDs = [String]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -82,8 +83,6 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     noPlaylistView.isHidden = !noTracks
     playlistView.isHidden = noTracks
     
-    playlistTableView.reloadData()
-    
     if state.generatedPlaylist.isGenerating {
       noPlaylistView.isHidden = true
       playlistView.isHidden = true
@@ -94,6 +93,9 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     
     userID = state.spotifyAuth.userID
     savedTracksPlaylistID = state.myLibrary.playlistableSavedTracksPlaylistID
+    savedTrackIDs = state.myLibrary.playlistableSavedTrackIDs
+    
+    playlistTableView.reloadData()
   }
   
   // MARK: Table View Methods
@@ -106,14 +108,27 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     
     let track = tracks[indexPath.row]
     
-    cell.setupCell(forTrack: track, saveTrackFunction: {
+    let isSavedTrack = savedTrackIDs.contains(track.id)
+    
+    cell.setupCell(forTrack: track, actionType: isSavedTrack ? .remove : .add, action: {
       guard let userID = self.userID else { return }
       
-      mainStore.dispatch(saveToAndCreatePlaylistableSavedTracksIfNeeded(
-        trackID: track.id,
-        userID: userID,
-        playlistID: self.savedTracksPlaylistID
-      ))
+      if isSavedTrack {
+        guard let playlistID = self.savedTracksPlaylistID else { return }
+        mainStore.dispatch(UnSaveFromPlaylistableTracks(
+          trackID: track.id,
+          userID: userID,
+          playlistID: playlistID)
+        )
+      } else {
+        mainStore.dispatch(saveToAndCreatePlaylistableSavedTracksIfNeeded(
+          trackID: track.id,
+          userID: userID,
+          playlistID: self.savedTracksPlaylistID
+        ))
+      }
+      
+      
     })
     
     cell.currentlyPlaying = track.id == currentlyPlayingTrack?.id

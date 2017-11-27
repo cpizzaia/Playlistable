@@ -27,6 +27,10 @@ func delay(_ delay:Double, closure:@escaping ()->()) {
     deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }
 
+func trackURI(fromID id: String) -> String {
+  return "spotify:track:\(id)"
+}
+
 struct KeychainKeys {
   static let playlistableSavedTracksPlaylistID = "playlistableSavedTracksPlaylistID"
 }

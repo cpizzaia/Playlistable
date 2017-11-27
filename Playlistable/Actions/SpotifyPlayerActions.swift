@@ -72,7 +72,7 @@ func initializePlayer(clientID: String, accessToken: String) -> Action {
 
 func playTrack(id: String) -> Action {
   player.playSpotifyURI(
-    "spotify:track:\(id)",
+    trackURI(fromID: id),
     startingWith: 0,
     startingWithPosition: 0,
     callback: { error in

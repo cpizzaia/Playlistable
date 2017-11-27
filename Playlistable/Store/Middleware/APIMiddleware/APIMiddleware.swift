@@ -89,7 +89,7 @@ struct CallSpotifyAPI: APIAction {
     failure = nil
   }
   
-  init(endpoint: String, method: HTTPMethod, body: Parameters, types: APITypes, success: @escaping (JSON) -> (), failure: @escaping () -> ()) {
+  init(endpoint: String, method: HTTPMethod, body: Parameters, types: APITypes, success: ((JSON) -> ())?, failure: (() -> ())?) {
     self.endpoint = endpoint
     self.method = method
     self.types = types
@@ -101,7 +101,7 @@ struct CallSpotifyAPI: APIAction {
     self.failure = failure
   }
   
-  init(endpoint: String, queryParams: QueryParams, method: HTTPMethod, types: APITypes, success: @escaping (JSON) -> (), failure: @escaping () -> ()) {
+  init(endpoint: String, queryParams: QueryParams, method: HTTPMethod, types: APITypes, success: ((JSON) -> ())?, failure: (() -> ())?) {
     self.endpoint = endpoint
     self.method = method
     self.types = types

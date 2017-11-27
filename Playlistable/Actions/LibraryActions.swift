@@ -43,11 +43,23 @@ struct ErrorPlaylistableSavedTracks: APIResponseFailureAction {
   let error: APIRequest.APIError
 }
 
+struct RequestUnSavePlaylistableTrack: APIRequestAction {}
+struct ReceiveUnSavePlaylistableTrack: APIResponseSuccessAction {
+  let response: JSON
+}
+struct ErrorUnSavePlaylistableTrack: APIResponseFailureAction {
+  let error: APIRequest.APIError
+}
+
 struct StoredPlaylistableSavedTracksPlaylistID: Action {
   let id: String
 }
 
 struct SavedTrack: Action {
+  let id: String
+}
+
+struct UnSavedTrack: Action {
   let id: String
 }
 
@@ -121,7 +133,7 @@ fileprivate func saveToPlaylistableTracks(trackID: String, userID: String, playl
     dispatch(CallSpotifyAPI(
       endpoint: "/v1/users/\(userID)/playlists/\(playlistID)/tracks",
       method: .post,
-      body: ["uris": ["spotify:track:\(trackID)"]],
+      body: ["uris": [trackURI(fromID: trackID)]],
       types: APITypes(
         requestAction: RequestSavePlaylistableTrack.self,
         successAction: ReceiveSavePlaylistableTrack.self,
@@ -130,7 +142,26 @@ fileprivate func saveToPlaylistableTracks(trackID: String, userID: String, playl
       success: { json in
         dispatch(SavedTrack(id: trackID))
     },
-      failure: {}
+      failure: nil
+    ))
+  }
+}
+
+func UnSaveFromPlaylistableTracks(trackID: String, userID: String, playlistID: String) -> Action {
+  return WrapInDispatch { dispatch in
+    dispatch(CallSpotifyAPI(
+      endpoint: "/v1/users/\(userID)/playlists/\(playlistID)/tracks",
+      method: .delete,
+      body: ["tracks": [["uri": trackURI(fromID: trackID)]]],
+      types: APITypes(
+        requestAction: RequestSavePlaylistableTrack.self,
+        successAction: ReceiveSavePlaylistableTrack.self,
+        failureAction: ErrorSavePlaylistableTrack.self
+      ),
+      success: { json in
+        dispatch(UnSavedTrack(id: trackID))
+    },
+      failure: nil
     ))
   }
 }

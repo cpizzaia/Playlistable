@@ -111,7 +111,7 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
     guard let playlistID = library.playlistableSavedTracksPlaylistID else { return }
     guard let userID = state.spotifyAuth.userID else { return }
     
-    if !library.isRequestingPlaylistableSavedTracks {
+    if library.isRequestingPlaylistableSavedTracks {
       SVProgressHUD.show()
     } else {
       SVProgressHUD.dismiss()
