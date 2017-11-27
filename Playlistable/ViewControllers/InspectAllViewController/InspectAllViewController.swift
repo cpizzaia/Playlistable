@@ -164,4 +164,14 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
     return isPlayerBarHidden ? 0 : playerBarHeight
   }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let scrollViewHeight = scrollView.frame.size.height
+    let scrollContentSizeHeight = scrollView.contentSize.height
+    let scrollOffset = scrollView.contentOffset.y
+    
+    if scrollOffset > (scrollContentSizeHeight - scrollViewHeight) {
+      
+    }
+  }
 }

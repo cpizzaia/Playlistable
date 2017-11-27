@@ -63,17 +63,32 @@ struct UnSavedTrack: Action {
   let id: String
 }
 
-func getSavedTracks() -> Action {
-  return CallSpotifyAPI(
-    endpoint: "/v1/me/tracks",
-    queryParams: ["limit": "50"],
-    method: .get,
-    types: APITypes(
-      requestAction: RequestSavedTracks.self,
-      successAction: ReceiveSavedTracks.self,
-      failureAction: ErrorSavedTracks.self
+func getSavedTracks(nextPageURL: String? = nil) -> Action {
+  if let url = nextPageURL {
+    return CallSpotifyAPI(
+      endpoint: url,
+      method: .get,
+      types: APITypes(
+        requestAction: RequestSavedTracks.self,
+        successAction: ReceiveSavedTracks.self,
+        failureAction: ErrorSavedTracks.self
+      )
     )
-  )
+  } else {
+    return CallSpotifyAPI(
+      endpoint: "/v1/me/tracks",
+      queryParams: ["limit": "50"],
+      method: .get,
+      types: APITypes(
+        requestAction: RequestSavedTracks.self,
+        successAction: ReceiveSavedTracks.self,
+        failureAction: ErrorSavedTracks.self
+      )
+    )
+  }
+  
+  
+  
 }
 
 func getPlaylistableSavedTracks(userID: String, playlistID: String) -> Action {

@@ -15,6 +15,7 @@ struct LibraryState {
   
   var mySavedTrackIDs: [TrackID]
   var isRequestingSavedTracks: Bool
+  var savedTracksNextURL: String?
   
   var playlistableSavedTracksPlaylistID: String?
   var playlistableSavedTrackIDs: [String]
@@ -25,6 +26,7 @@ struct LibraryState {
 fileprivate let initialMyLibraryState = LibraryState(
   mySavedTrackIDs: [],
   isRequestingSavedTracks: false,
+  savedTracksNextURL: nil,
   playlistableSavedTracksPlaylistID: Locksmith.loadDataForUserAccount(
     userAccount: KeychainKeys.playlistableSavedTracksPlaylistID)?[KeychainKeys.playlistableSavedTracksPlaylistID] as? String,
   playlistableSavedTrackIDs: [],
@@ -43,6 +45,7 @@ func myLibraryReducer(action: Action, state: LibraryState?) -> LibraryState {
     state.mySavedTrackIDs = action.response["items"].array?.flatMap { json in
       return json["track"]["id"].string
     } ?? []
+    state.savedTracksNextURL = action.response["next"].string
     state.isRequestingSavedTracks = false
     
   case _ as ErrorSavedTracks:
