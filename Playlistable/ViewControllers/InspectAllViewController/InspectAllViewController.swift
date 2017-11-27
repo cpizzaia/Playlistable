@@ -160,4 +160,8 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
       mainStore.dispatch(AddSeed(item: item))
     }
   }
+  
+  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return isPlayerBarHidden ? 0 : playerBarHeight
+  }
 }

@@ -143,4 +143,8 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 70
   }
+  
+  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return isPlayerBarHidden ? 0 : playerBarHeight
+  }
 }

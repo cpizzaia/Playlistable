@@ -26,6 +26,7 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   
   func newState(state: AppState) {
     playBarView.isHidden = !state.spotifyPlayer.isPlaying
+    isPlayerBarHidden = playBarView.isHidden
     
     if let trackID = state.spotifyPlayer.playingTrackID, state.spotifyPlayer.isPlaying {
       let track = state.resources.tracksFor(ids: [trackID]).first!
