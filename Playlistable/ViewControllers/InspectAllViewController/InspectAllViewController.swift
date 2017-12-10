@@ -26,6 +26,8 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
   
   var items = [Item]()
   var seeds: SeedsState?
+  var isRequesting = false
+  var nextPageURL: String?
   
   var type: CollectionType?
   
@@ -90,10 +92,6 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
       SVProgressHUD.dismiss()
     }
     
-    if library.mySavedTrackIDs.isEmpty && !library.isRequestingSavedTracks {
-      mainStore.dispatch(getSavedTracks())
-    }
-    
     if !library.mySavedTrackIDs.isEmpty {
       items = state.resources.tracksFor(ids: state.myLibrary.mySavedTrackIDs)
       inspectAllTableView.reloadData()
@@ -101,6 +99,10 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
     
     noItemsLabel.text = "Your saved tracks will appear here."
     shouldDisplayNoItemsView(library.mySavedTrackIDs.isEmpty)
+    
+    nextPageURL = library.savedTracksNextURL
+    
+    isRequesting = library.isRequestingSavedTracks
   }
   
   private func setupForPlaylistableSavedTracks(state: AppState) {
@@ -123,6 +125,8 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
       items = state.resources.tracksFor(ids: library.playlistableSavedTrackIDs)
       inspectAllTableView.reloadData()
     }
+    
+    isRequesting = library.isRequestingPlaylistableSavedTracks
   }
   
   private func shouldDisplayNoItemsView(_ bool: Bool) {
@@ -170,8 +174,14 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
     let scrollContentSizeHeight = scrollView.contentSize.height
     let scrollOffset = scrollView.contentOffset.y
     
-    if scrollOffset > (scrollContentSizeHeight - scrollViewHeight) {
-      
+    if scrollOffset > (scrollContentSizeHeight - scrollViewHeight) && !isRequesting && nextPageURL != nil {
+      switch type {
+      case .some(.savedTracks):
+        isRequesting = true
+        mainStore.dispatch(getSavedTracks(nextPageURL: nextPageURL))
+      default:
+        break
+      }
     }
   }
 }
