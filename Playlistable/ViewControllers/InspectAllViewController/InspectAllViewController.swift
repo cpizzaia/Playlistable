@@ -84,25 +84,25 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
   }
   
   private func setupForSavedTracks(state: AppState) {
-    let library = state.myLibrary
+    let savedTracks = state.savedTracks
     
-    if library.isRequestingSavedTracks {
+    if savedTracks.isRequesting {
       SVProgressHUD.show()
     } else {
       SVProgressHUD.dismiss()
     }
     
-    if !library.mySavedTrackIDs.isEmpty {
-      items = state.resources.tracksFor(ids: state.myLibrary.mySavedTrackIDs)
+    if !savedTracks.trackIDs.isEmpty {
+      items = state.resources.tracksFor(ids: savedTracks.trackIDs)
       inspectAllTableView.reloadData()
     }
     
     noItemsLabel.text = "Your saved tracks will appear here."
-    shouldDisplayNoItemsView(library.mySavedTrackIDs.isEmpty)
+    shouldDisplayNoItemsView(savedTracks.trackIDs.isEmpty)
     
-    nextPageURL = library.savedTracksNextURL
+    nextPageURL = savedTracks.nextURL
     
-    isRequesting = library.isRequestingSavedTracks
+    isRequesting = savedTracks.isRequesting
   }
   
   private func setupForPlaylistableSavedTracks(state: AppState) {
