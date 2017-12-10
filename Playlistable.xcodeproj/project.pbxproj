@@ -39,8 +39,8 @@
 		AC3268951FAFC3A9000AA05B /* ParseResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3268941FAFC3A9000AA05B /* ParseResources.swift */; };
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
 		AC57871B1FDCB1E30057D41A /* SavedTracksReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57871A1FDCB1E30057D41A /* SavedTracksReducer.swift */; };
+		AC57871D1FDCB5FF0057D41A /* PlaylistableSavedTracksReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57871C1FDCB5FF0057D41A /* PlaylistableSavedTracksReducer.swift */; };
 		AC83D6561FBD46D500E9D004 /* wrapInDispatchMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC83D6551FBD46D500E9D004 /* wrapInDispatchMiddleware.swift */; };
-		AC8AB6AB1FA95F1600251F85 /* LibraryReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AA1FA95F1600251F85 /* LibraryReducer.swift */; };
 		AC8AB6AD1FA95FBF00251F85 /* LibraryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AC1FA95FBF00251F85 /* LibraryActions.swift */; };
 		AC8AB6AF1FA9641B00251F85 /* SpotifyResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AE1FA9641B00251F85 /* SpotifyResponseParser.swift */; };
 		AC8AB6B21FA964B300251F85 /* TrackFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6B11FA964B300251F85 /* TrackFactory.swift */; };
@@ -107,8 +107,8 @@
 		AC3268941FAFC3A9000AA05B /* ParseResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResources.swift; sourceTree = "<group>"; };
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AC57871A1FDCB1E30057D41A /* SavedTracksReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTracksReducer.swift; sourceTree = "<group>"; };
+		AC57871C1FDCB5FF0057D41A /* PlaylistableSavedTracksReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistableSavedTracksReducer.swift; sourceTree = "<group>"; };
 		AC83D6551FBD46D500E9D004 /* wrapInDispatchMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wrapInDispatchMiddleware.swift; sourceTree = "<group>"; };
-		AC8AB6AA1FA95F1600251F85 /* LibraryReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryReducer.swift; sourceTree = "<group>"; };
 		AC8AB6AC1FA95FBF00251F85 /* LibraryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryActions.swift; sourceTree = "<group>"; };
 		AC8AB6AE1FA9641B00251F85 /* SpotifyResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponseParser.swift; sourceTree = "<group>"; };
 		AC8AB6B11FA964B300251F85 /* TrackFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackFactory.swift; sourceTree = "<group>"; };
@@ -393,12 +393,12 @@
 			children = (
 				ACBDF1421F9D3749001760D7 /* AppReducer.swift */,
 				ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */,
-				AC8AB6AA1FA95F1600251F85 /* LibraryReducer.swift */,
 				AC8AB6B91FA9760F00251F85 /* ResourceReducer.swift */,
 				ACAA1A411FB548F700F6B345 /* SeedsReducer.swift */,
 				AC11971E1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift */,
 				AC1197241FB91198009D1646 /* SpotifyPlayerReducer.swift */,
 				AC57871A1FDCB1E30057D41A /* SavedTracksReducer.swift */,
+				AC57871C1FDCB5FF0057D41A /* PlaylistableSavedTracksReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -616,12 +616,12 @@
 				ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */,
 				AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */,
 				ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */,
-				AC8AB6AB1FA95F1600251F85 /* LibraryReducer.swift in Sources */,
 				AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */,
 				AC83D6561FBD46D500E9D004 /* wrapInDispatchMiddleware.swift in Sources */,
 				ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */,
 				AC8AB6BA1FA9760F00251F85 /* ResourceReducer.swift in Sources */,
 				AC8AB6B61FA968D500251F85 /* AlbumFactory.swift in Sources */,
+				AC57871D1FDCB5FF0057D41A /* PlaylistableSavedTracksReducer.swift in Sources */,
 				ACAA1A441FB54A8B00F6B345 /* SeedsActions.swift in Sources */,
 				ACE6E78E1FB2BE750005BE41 /* LibraryTableViewCell.swift in Sources */,
 				AC8AB6B81FA969C000251F85 /* ImageFactory.swift in Sources */,

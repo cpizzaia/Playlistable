@@ -179,7 +179,7 @@ func getCurrentUser() -> Action {
         
         // FIXME: I should not have to ask the main store for anything in a function,
         // it should just be entered as a parameter
-        guard let playlistID = mainStore.state.myLibrary.playlistableSavedTracksPlaylistID else { return }
+        guard let playlistID = mainStore.state.playlistableSavedTracks.playlistID else { return }
         // This needs to be done because we need to be a able to see which tracks you've already
         // saved in the app so we don't double up.
         dispatch(getPlaylistableSavedTracks(userID: userID, playlistID: playlistID))

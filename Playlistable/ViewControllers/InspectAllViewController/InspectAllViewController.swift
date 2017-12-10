@@ -106,27 +106,27 @@ class InspectAllViewController: UIViewController, UITableViewDelegate, UITableVi
   }
   
   private func setupForPlaylistableSavedTracks(state: AppState) {
-    let library = state.myLibrary
+    let playlistableSavedTracks = state.playlistableSavedTracks
     noItemsLabel.text = "Playlistable saved tracks will appear here."
-    shouldDisplayNoItemsView(library.playlistableSavedTrackIDs.isEmpty)
+    shouldDisplayNoItemsView(playlistableSavedTracks.trackIDs.isEmpty)
     
-    guard let playlistID = library.playlistableSavedTracksPlaylistID else { return }
+    guard let playlistID = playlistableSavedTracks.playlistID else { return }
     guard let userID = state.spotifyAuth.userID else { return }
     
-    if library.isRequestingPlaylistableSavedTracks {
+    if playlistableSavedTracks.isRequesting {
       SVProgressHUD.show()
     } else {
       SVProgressHUD.dismiss()
     }
     
-    if library.playlistableSavedTrackIDs.isEmpty && !library.isRequestingPlaylistableSavedTracks {
+    if playlistableSavedTracks.trackIDs.isEmpty && !playlistableSavedTracks.isRequesting {
       mainStore.dispatch(getPlaylistableSavedTracks(userID: userID, playlistID: playlistID))
     } else {
-      items = state.resources.tracksFor(ids: library.playlistableSavedTrackIDs)
+      items = state.resources.tracksFor(ids: playlistableSavedTracks.trackIDs)
       inspectAllTableView.reloadData()
     }
     
-    isRequesting = library.isRequestingPlaylistableSavedTracks
+    isRequesting = playlistableSavedTracks.isRequesting
   }
   
   private func shouldDisplayNoItemsView(_ bool: Bool) {

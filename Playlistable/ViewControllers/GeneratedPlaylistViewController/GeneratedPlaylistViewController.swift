@@ -92,8 +92,8 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     }
     
     userID = state.spotifyAuth.userID
-    savedTracksPlaylistID = state.myLibrary.playlistableSavedTracksPlaylistID
-    savedTrackIDs = state.myLibrary.playlistableSavedTrackIDs
+    savedTracksPlaylistID = state.playlistableSavedTracks.playlistID
+    savedTrackIDs = state.playlistableSavedTracks.trackIDs
     
     playlistTableView.reloadData()
   }
