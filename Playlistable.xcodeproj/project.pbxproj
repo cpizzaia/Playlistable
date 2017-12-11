@@ -40,6 +40,8 @@
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
 		AC57871B1FDCB1E30057D41A /* SavedTracksReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57871A1FDCB1E30057D41A /* SavedTracksReducer.swift */; };
 		AC57871D1FDCB5FF0057D41A /* PlaylistableSavedTracksReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57871C1FDCB5FF0057D41A /* PlaylistableSavedTracksReducer.swift */; };
+		AC5787201FDE17F00057D41A /* SeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57871F1FDE17F00057D41A /* SeedsViewController.swift */; };
+		AC5787221FDE18140057D41A /* SeedsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC5787211FDE18140057D41A /* SeedsViewController.xib */; };
 		AC83D6561FBD46D500E9D004 /* wrapInDispatchMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC83D6551FBD46D500E9D004 /* wrapInDispatchMiddleware.swift */; };
 		AC8AB6AD1FA95FBF00251F85 /* LibraryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AC1FA95FBF00251F85 /* LibraryActions.swift */; };
 		AC8AB6AF1FA9641B00251F85 /* SpotifyResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AE1FA9641B00251F85 /* SpotifyResponseParser.swift */; };
@@ -108,6 +110,8 @@
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AC57871A1FDCB1E30057D41A /* SavedTracksReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTracksReducer.swift; sourceTree = "<group>"; };
 		AC57871C1FDCB5FF0057D41A /* PlaylistableSavedTracksReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistableSavedTracksReducer.swift; sourceTree = "<group>"; };
+		AC57871F1FDE17F00057D41A /* SeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsViewController.swift; sourceTree = "<group>"; };
+		AC5787211FDE18140057D41A /* SeedsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeedsViewController.xib; sourceTree = "<group>"; };
 		AC83D6551FBD46D500E9D004 /* wrapInDispatchMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wrapInDispatchMiddleware.swift; sourceTree = "<group>"; };
 		AC8AB6AC1FA95FBF00251F85 /* LibraryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryActions.swift; sourceTree = "<group>"; };
 		AC8AB6AE1FA9641B00251F85 /* SpotifyResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponseParser.swift; sourceTree = "<group>"; };
@@ -256,9 +260,19 @@
 			path = APIMiddleware;
 			sourceTree = "<group>";
 		};
+		AC57871E1FDE17DE0057D41A /* SeedsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC57871F1FDE17F00057D41A /* SeedsViewController.swift */,
+				AC5787211FDE18140057D41A /* SeedsViewController.xib */,
+			);
+			path = SeedsViewController;
+			sourceTree = "<group>";
+		};
 		AC6271A11F9EDB9B002B068B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AC57871E1FDE17DE0057D41A /* SeedsViewController */,
 				AC8C20421FC9E1F6006FF1AC /* LibraryViewController */,
 				AC8C20411FC9E1E4006FF1AC /* TabBarController */,
 				AC8C20431FC9E20D006FF1AC /* InspectAllViewController */,
@@ -509,6 +523,7 @@
 				AC1197311FB956B1009D1646 /* PlayerBarContainerViewController.xib in Resources */,
 				AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */,
 				ACD4B00D1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib in Resources */,
+				AC5787221FDE18140057D41A /* SeedsViewController.xib in Resources */,
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,
 				ACE6E7901FB2BE850005BE41 /* LibraryTableViewCell.xib in Resources */,
 				AC18FCC41FB3E95A0079AFC8 /* InspectAllTableViewCell.xib in Resources */,
@@ -601,6 +616,7 @@
 				AC8AB6B21FA964B300251F85 /* TrackFactory.swift in Sources */,
 				AC02D0DC1F9CF73B009ED193 /* APIRequest.swift in Sources */,
 				AC0148761F9D700200F9A732 /* SpotifyAuthActions.swift in Sources */,
+				AC5787201FDE17F00057D41A /* SeedsViewController.swift in Sources */,
 				AC02D0C91F9CF5B3009ED193 /* AppDelegate.swift in Sources */,
 				AC57871B1FDCB1E30057D41A /* SavedTracksReducer.swift in Sources */,
 				AC8AB6AF1FA9641B00251F85 /* SpotifyResponseParser.swift in Sources */,

@@ -18,5 +18,5 @@ struct RemoveSeed: Action {
 }
 
 struct GeneratedFromSeeds: Action {
-  let seeds: [Item]
+  let seeds: SeedsState
 }

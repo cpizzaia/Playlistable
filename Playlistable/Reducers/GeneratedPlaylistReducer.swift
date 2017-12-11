@@ -12,10 +12,10 @@ import ReSwift
 struct GeneratedPlaylistState {
   var trackIDs: [String]
   var isGenerating: Bool
-  var seedsUsed: [Item]
+  var seedsUsed: SeedsState?
 }
 
-fileprivate let initialGeneratedPlaylistState = GeneratedPlaylistState(trackIDs: [], isGenerating: false, seedsUsed: [])
+fileprivate let initialGeneratedPlaylistState = GeneratedPlaylistState(trackIDs: [], isGenerating: false, seedsUsed: nil)
 
 func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) -> GeneratedPlaylistState {
   var state = state ?? initialGeneratedPlaylistState

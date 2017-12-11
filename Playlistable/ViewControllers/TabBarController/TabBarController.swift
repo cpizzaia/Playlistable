@@ -13,6 +13,7 @@ import UIKit
 class TabBarController: UITabBarController, StoreSubscriber {
   @IBOutlet var generatedPlaylistTab: UITabBarItem!
   @IBOutlet var libraryTab: UITabBarItem!
+  @IBOutlet var seedsTab: UITabBarItem!
   
   var isAuthed = false
   
@@ -29,11 +30,15 @@ class TabBarController: UITabBarController, StoreSubscriber {
     
     tabOne.tabBarItem = generatedPlaylistTab
     
-    let tabTwo = UINavigationController(rootViewController: loadUIViewControllerFromNib(LibraryViewController.self))
+    let tabTwo = UINavigationController(rootViewController: loadUIViewControllerFromNib(SeedsViewController.self))
     
-    tabTwo.tabBarItem = libraryTab
+    tabTwo.tabBarItem = seedsTab
     
-    viewControllers = [tabOne, tabTwo]
+    let tabThree = UINavigationController(rootViewController: loadUIViewControllerFromNib(LibraryViewController.self))
+    
+    tabThree.tabBarItem = libraryTab
+    
+    viewControllers = [tabOne, tabTwo, tabThree]
   }
   
   override func didReceiveMemoryWarning() {

@@ -38,7 +38,7 @@ func generatePlaylist(fromSeeds seeds: SeedsState) -> Action {
         failureAction: ErrorGeneratePlaylist.self
       ),
       success: { json in
-        dispatch(GeneratedFromSeeds(seeds: seeds.items.map { $0.value }))
+        dispatch(GeneratedFromSeeds(seeds: seeds))
     },
       failure: {}
     ))
