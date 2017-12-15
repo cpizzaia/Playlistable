@@ -11,9 +11,6 @@ import ReSwift
 import UIKit
 
 class TabBarController: UITabBarController, StoreSubscriber {
-  @IBOutlet var generatedPlaylistTab: UITabBarItem!
-  @IBOutlet var libraryTab: UITabBarItem!
-  @IBOutlet var seedsTab: UITabBarItem!
   
   var isAuthed = false
   
@@ -28,17 +25,28 @@ class TabBarController: UITabBarController, StoreSubscriber {
   
     let tabOne = UINavigationController(rootViewController: loadUIViewControllerFromNib(GeneratedPlaylistViewController.self))
     
-    tabOne.tabBarItem = generatedPlaylistTab
+    tabOne.tabBarItem = UITabBarItem()
+    tabOne.tabBarItem.title = "Playlist"
     
     let tabTwo = UINavigationController(rootViewController: loadUIViewControllerFromNib(SeedsViewController.self))
     
-    tabTwo.tabBarItem = seedsTab
+    tabTwo.tabBarItem = UITabBarItem()
+    tabTwo.tabBarItem.title = "Seeds"
     
     let tabThree = UINavigationController(rootViewController: loadUIViewControllerFromNib(LibraryViewController.self))
     
-    tabThree.tabBarItem = libraryTab
+    tabThree.tabBarItem = UITabBarItem()
+    tabThree.tabBarItem.title = "Library"
     
-    viewControllers = [tabOne, tabTwo, tabThree]
+    let tabFour = UINavigationController(rootViewController:
+        loadUIViewControllerFromNib(SearchViewController.self)
+    )
+    
+    tabFour.tabBarItem = UITabBarItem()
+    tabFour.tabBarItem.title = "Search"
+    
+    
+    viewControllers = [tabOne, tabTwo, tabThree, tabFour]
   }
   
   override func didReceiveMemoryWarning() {

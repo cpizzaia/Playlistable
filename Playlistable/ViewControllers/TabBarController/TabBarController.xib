@@ -16,24 +16,6 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tabBar>
-            <viewControllers>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="x6Q-ir-brd">
-                    <tabBarItem key="tabBarItem" title="Item" id="gVs-Vb-j59"/>
-                    <toolbarItems/>
-                </viewController>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="8qU-6q-dnt" userLabel="Item 2">
-                    <tabBarItem key="tabBarItem" title="Item" id="4GJ-tE-F2t"/>
-                    <toolbarItems/>
-                </viewController>
-                <viewController id="Ufo-MM-hm8">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="t3b-RR-fr3"/>
-                </viewController>
-            </viewControllers>
-            <connections>
-                <outlet property="generatedPlaylistTab" destination="gVs-Vb-j59" id="t5r-zG-S7S"/>
-                <outlet property="libraryTab" destination="t3b-RR-fr3" id="C8X-H2-Y6Y"/>
-                <outlet property="seedsTab" destination="4GJ-tE-F2t" id="aBM-Dt-Bav"/>
-            </connections>
             <point key="canvasLocation" x="-140" y="39"/>
         </tabBarController>
     </objects>
