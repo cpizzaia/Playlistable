@@ -23,8 +23,11 @@ func searchReducer(action: Action, state: SearchState?) -> SearchState {
   switch action {
   case _ as RequestSearch:
     state.isRequesting = true
-  case _ as ReceiveSearch:
+  case let action as ReceiveSearch:
     state.isRequesting = false
+    state.trackIDs = action.response["tracks"]["items"].array?.flatMap {
+      $0["id"].string
+      } ?? []
   case _ as ErrorSearch:
     state.isRequesting = false
   case let action as StoreQuery:

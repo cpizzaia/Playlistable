@@ -17,6 +17,7 @@ struct AppState: StateType {
   var seeds: SeedsState
   var generatedPlaylist: GeneratedPlaylistState
   var spotifyPlayer: SpotifyPlayerState
+  var search: SearchState
 }
 
 func appReducer(action: Action, state: AppState?) -> AppState {
@@ -27,6 +28,7 @@ func appReducer(action: Action, state: AppState?) -> AppState {
     playlistableSavedTracks: playlistableSavedTracksReducer(action: action, state: state?.playlistableSavedTracks),
     seeds: seedsReducer(action: action, state: state?.seeds),
     generatedPlaylist: generatedPlaylistReducer(action: action, state: state?.generatedPlaylist),
-    spotifyPlayer: spotifyPlayerReducer(action: action, state: state?.spotifyPlayer)
+    spotifyPlayer: spotifyPlayerReducer(action: action, state: state?.spotifyPlayer),
+    search: searchReducer(action: action, state: state?.search)
   )
 }
