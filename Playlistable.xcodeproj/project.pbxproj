@@ -37,6 +37,8 @@
 		AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */; };
 		AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC71FB412A20079AFC8 /* Item.swift */; };
 		AC3268951FAFC3A9000AA05B /* ParseResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3268941FAFC3A9000AA05B /* ParseResources.swift */; };
+		AC36E6DA1FE593660025BBE1 /* SearchReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6D91FE593660025BBE1 /* SearchReducer.swift */; };
+		AC36E6DC1FE5942A0025BBE1 /* SearchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6DB1FE5942A0025BBE1 /* SearchActions.swift */; };
 		AC53C96F1FE37BA100664733 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC53C96E1FE37BA100664733 /* SearchViewController.xib */; };
 		AC53C9711FE37C6300664733 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53C9701FE37C6300664733 /* SearchViewController.swift */; };
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
@@ -109,6 +111,8 @@
 		AC18FCC71FB412A20079AFC8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Playlistable.entitlements; sourceTree = "<group>"; };
 		AC3268941FAFC3A9000AA05B /* ParseResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResources.swift; sourceTree = "<group>"; };
+		AC36E6D91FE593660025BBE1 /* SearchReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReducer.swift; sourceTree = "<group>"; };
+		AC36E6DB1FE5942A0025BBE1 /* SearchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActions.swift; sourceTree = "<group>"; };
 		AC53C96E1FE37BA100664733 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		AC53C9701FE37C6300664733 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -429,6 +433,7 @@
 				AC1197241FB91198009D1646 /* SpotifyPlayerReducer.swift */,
 				AC57871A1FDCB1E30057D41A /* SavedTracksReducer.swift */,
 				AC57871C1FDCB5FF0057D41A /* PlaylistableSavedTracksReducer.swift */,
+				AC36E6D91FE593660025BBE1 /* SearchReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -442,6 +447,7 @@
 				ACAA1A431FB54A8B00F6B345 /* SeedsActions.swift */,
 				AC1197201FB8F447009D1646 /* GeneratePlaylistActions.swift */,
 				AC1197221FB90EBB009D1646 /* SpotifyPlayerActions.swift */,
+				AC36E6DB1FE5942A0025BBE1 /* SearchActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -632,6 +638,7 @@
 				ACAA1A421FB548F700F6B345 /* SeedsReducer.swift in Sources */,
 				AC1197231FB90EBB009D1646 /* SpotifyPlayerActions.swift in Sources */,
 				ACA09EA51F9D556800220E8B /* APIMiddleware.swift in Sources */,
+				AC36E6DA1FE593660025BBE1 /* SearchReducer.swift in Sources */,
 				AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */,
 				AC8C20401FC9DA2F006FF1AC /* UIButtonExtensions.swift in Sources */,
 				AC18FCC01FB3E7A20079AFC8 /* InspectAllViewController.swift in Sources */,
@@ -643,6 +650,7 @@
 				AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */,
 				AC83D6561FBD46D500E9D004 /* wrapInDispatchMiddleware.swift in Sources */,
 				ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */,
+				AC36E6DC1FE5942A0025BBE1 /* SearchActions.swift in Sources */,
 				AC8AB6BA1FA9760F00251F85 /* ResourceReducer.swift in Sources */,
 				AC8AB6B61FA968D500251F85 /* AlbumFactory.swift in Sources */,
 				AC57871D1FDCB5FF0057D41A /* PlaylistableSavedTracksReducer.swift in Sources */,
