@@ -39,6 +39,8 @@
 		AC3268951FAFC3A9000AA05B /* ParseResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3268941FAFC3A9000AA05B /* ParseResources.swift */; };
 		AC36E6DA1FE593660025BBE1 /* SearchReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6D91FE593660025BBE1 /* SearchReducer.swift */; };
 		AC36E6DC1FE5942A0025BBE1 /* SearchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6DB1FE5942A0025BBE1 /* SearchActions.swift */; };
+		AC36E6E01FE5D9660025BBE1 /* SearchResultSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC36E6DF1FE5D9660025BBE1 /* SearchResultSectionHeaderView.xib */; };
+		AC36E6E31FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6E21FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift */; };
 		AC53C96F1FE37BA100664733 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC53C96E1FE37BA100664733 /* SearchViewController.xib */; };
 		AC53C9711FE37C6300664733 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53C9701FE37C6300664733 /* SearchViewController.swift */; };
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
@@ -113,6 +115,8 @@
 		AC3268941FAFC3A9000AA05B /* ParseResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResources.swift; sourceTree = "<group>"; };
 		AC36E6D91FE593660025BBE1 /* SearchReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReducer.swift; sourceTree = "<group>"; };
 		AC36E6DB1FE5942A0025BBE1 /* SearchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActions.swift; sourceTree = "<group>"; };
+		AC36E6DF1FE5D9660025BBE1 /* SearchResultSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultSectionHeaderView.xib; sourceTree = "<group>"; };
+		AC36E6E21FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultSectionHeaderView.swift; sourceTree = "<group>"; };
 		AC53C96E1FE37BA100664733 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		AC53C9701FE37C6300664733 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -267,9 +271,19 @@
 			path = APIMiddleware;
 			sourceTree = "<group>";
 		};
+		AC36E6E11FE5DBBA0025BBE1 /* SearchResultSectionHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				AC36E6DF1FE5D9660025BBE1 /* SearchResultSectionHeaderView.xib */,
+				AC36E6E21FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift */,
+			);
+			path = SearchResultSectionHeaderView;
+			sourceTree = "<group>";
+		};
 		AC53C96D1FE37B8200664733 /* SearchController */ = {
 			isa = PBXGroup;
 			children = (
+				AC36E6E11FE5DBBA0025BBE1 /* SearchResultSectionHeaderView */,
 				AC53C96E1FE37BA100664733 /* SearchViewController.xib */,
 				AC53C9701FE37C6300664733 /* SearchViewController.swift */,
 			);
@@ -543,6 +557,7 @@
 				AC11971D1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib in Resources */,
 				AC18FCBE1FB3E75B0079AFC8 /* InspectAllViewController.xib in Resources */,
 				AC16D7461FA02E1700CAAD13 /* LibraryViewController.xib in Resources */,
+				AC36E6E01FE5D9660025BBE1 /* SearchResultSectionHeaderView.xib in Resources */,
 				AC02D0D01F9CF5B3009ED193 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -646,6 +661,7 @@
 				ACBDF1401F9D172E001760D7 /* ConfigureStore.swift in Sources */,
 				ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */,
 				AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */,
+				AC36E6E31FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift in Sources */,
 				ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */,
 				AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */,
 				AC83D6561FBD46D500E9D004 /* wrapInDispatchMiddleware.swift in Sources */,

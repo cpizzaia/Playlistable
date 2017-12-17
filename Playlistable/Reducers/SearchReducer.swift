@@ -12,10 +12,18 @@ import ReSwift
 struct SearchState {
   var query: String?
   var trackIDs: [String]
+  var artistIDs: [String]
+  var albumIDs: [String]
   var isRequesting: Bool
 }
 
-fileprivate let initialSearchState = SearchState(query: nil, trackIDs: [], isRequesting: false)
+fileprivate let initialSearchState = SearchState(
+  query: nil,
+  trackIDs: [],
+  artistIDs: [],
+  albumIDs: [],
+  isRequesting: false
+)
 
 func searchReducer(action: Action, state: SearchState?) -> SearchState {
   var state = state ?? initialSearchState
@@ -25,9 +33,17 @@ func searchReducer(action: Action, state: SearchState?) -> SearchState {
     state.isRequesting = true
   case let action as ReceiveSearch:
     state.isRequesting = false
+    state.artistIDs = action.response["artists"]["items"].array?.flatMap {
+      $0["id"].string
+    } ?? []
+    
+    state.albumIDs = action.response["albums"]["items"].array?.flatMap {
+      $0["id"].string
+    } ?? []
+    
     state.trackIDs = action.response["tracks"]["items"].array?.flatMap {
       $0["id"].string
-      } ?? []
+    } ?? []
   case _ as ErrorSearch:
     state.isRequesting = false
   case let action as StoreQuery:

@@ -8,10 +8,17 @@
 
 import Foundation
 
-struct Album {
+struct Album: Item {
   let id: String
   let artistIDs: [String]
   let trackIDs: [String]
   let images: [Image]
   let name: String
+  
+  // BrowsableItem Properties
+  var title: String {
+    get {
+      return name
+    }
+  }
 }

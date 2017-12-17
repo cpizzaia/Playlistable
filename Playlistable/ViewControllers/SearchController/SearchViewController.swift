@@ -18,8 +18,21 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
   @IBOutlet var searchBar: UISearchBar!
   @IBOutlet var searchResultsTableView: UITableView!
   
-  var tracks = [Track]()
+  private struct SearchCollection {
+    let artists: [Artist]
+    let albums: [Album]
+    let tracks: [Track]
+    
+    var isEmpty: Bool {
+      get {
+        return artists.isEmpty && albums.isEmpty && tracks.isEmpty
+      }
+    }
+  }
+  
   var seeds: SeedsState?
+  
+  private var searchData = SearchCollection(artists: [], albums: [], tracks: [])
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,34 +66,99 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     noResultsView.isHidden = false
     
     seeds = state.seeds
-    tracks = state.resources.tracksFor(ids: state.search.trackIDs)
     
-    let noResults = tracks.isEmpty
+    searchData = SearchCollection(
+      artists: state.resources.artistsFor(ids: state.search.artistIDs),
+      albums: state.resources.albumsFor(ids: state.search.albumIDs),
+      tracks: state.resources.tracksFor(ids: state.search.trackIDs)
+    )
+    
+    let noResults = searchData.isEmpty
     
     searchResultsTableView.isHidden = noResults
     noResultsView.isHidden = !noResults
     searchResultsTableView.reloadData()
   }
   
+  private func getResourceFor(section: Int) -> [Item]? {
+    switch section {
+    case 0:
+      return searchData.tracks
+    case 1:
+      return searchData.albums
+    case 2:
+      return searchData.artists
+    default:
+      return nil
+    }
+  }
+  
+  private func numberOfRowsCapped(items: [Item]) -> Int {
+    return items.count > 3 ? 3 : items.count
+  }
+  
   // MARK: UITableView Methods
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tracks.count
+    guard let items = getResourceFor(section: section) else { return 0 }
+    
+    return numberOfRowsCapped(items: items)
+  }
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
+    var count = 0
+    
+    if !searchData.tracks.isEmpty { count += 1 }
+    if !searchData.albums.isEmpty { count += 1 }
+    if !searchData.artists.isEmpty { count += 1 }
+    
+    return count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell") as! InspectAllTableViewCell
     
-    let track = tracks[indexPath.row]
+    guard let items = getResourceFor(section: indexPath.section) else {
+      return UITableViewCell()
+    }
     
-    cell.setupCellFor(item: track)
+    let item = items[indexPath.row]
     
-    cell.isSelected = seeds?.isInSeeds(item: track) == true
+    cell.setupCellFor(item: item)
+    
+    cell.isSelected = seeds?.isInSeeds(item: item) == true
     
     return cell
   }
   
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    guard let items = getResourceFor(section: section) else {
+      return nil
+    }
+    
+    let view = loadUIViewFromNib(SearchResultSectionHeaderView.self)
+    
+    view.actionButton.setTitle("See All", for: .normal)
+    
+    switch items.first {
+    case _ as Artist:
+      view.titleLabel.text = "Artists"
+    case _ as Track:
+      view.titleLabel.text = "Tracks"
+    case _ as Album:
+      view.titleLabel.text = "Albums"
+    default:
+      break
+    }
+    
+    return view
+  }
+  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 70
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 30
   }
   
   // MARK: UISearchBar Methods

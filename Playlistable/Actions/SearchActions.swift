@@ -26,7 +26,10 @@ func search(query: String) -> Action {
   return WrapInDispatch { dispatch in
     dispatch(CallSpotifyAPI(
       endpoint: "/v1/search",
-      queryParams: ["q": query.replacingOccurrences(of: " ", with: "+"), "type": "track"],
+      queryParams: [
+        "q": query.replacingOccurrences(of: " ", with: "+"),
+        "type": "track,artist,album"
+      ],
       method: .get,
       types: APITypes(
         requestAction: RequestSearch.self,

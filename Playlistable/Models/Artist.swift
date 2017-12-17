@@ -8,8 +8,15 @@
 
 import Foundation
 
-struct Artist {
+struct Artist: Item {
   let id: String
   let images: [Image]
   let name: String
+  
+  // BrowsableItem Properties
+  var title: String {
+    get {
+      return name
+    }
+  }
 }
