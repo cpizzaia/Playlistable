@@ -78,6 +78,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     searchResultsTableView.isHidden = noResults
     noResultsView.isHidden = !noResults
     searchResultsTableView.reloadData()
+    noResultsLabel.text = state.search.query == nil ? "Your search results will appear here" : "Your search had no results"
   }
   
   private func getResourceFor(section: Int) -> [Item]? {
@@ -125,7 +126,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     
     cell.setupCellFor(item: item)
     
-    cell.isSelected = seeds?.isInSeeds(item: item) == true
+    cell.seededCell = seeds?.isInSeeds(item: item) == true
     
     return cell
   }
@@ -159,6 +160,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 30
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let items = getResourceFor(section: indexPath.section) else { return }
+    
+    let item = items[indexPath.row]
+    
+    if seeds?.isInSeeds(item: item) == true {
+      mainStore.dispatch(RemoveSeed(item: item))
+    } else {
+      mainStore.dispatch(AddSeed(item: item))
+    }
   }
   
   // MARK: UISearchBar Methods

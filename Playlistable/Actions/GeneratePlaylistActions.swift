@@ -22,15 +22,30 @@ struct ErrorGeneratePlaylist: APIResponseFailureAction {
 
 func generatePlaylist(fromSeeds seeds: SeedsState) -> Action {
   let trackIDs = getIDs(forType: Track.self, fromSeeds: seeds)
+  let artistIDs = getIDs(forType: Artist.self, fromSeeds: seeds)
+  let albumIDs = getIDs(forType: Album.self, fromSeeds: seeds)
+  
+  var queryParams = [
+    "limit": "100",
+    "market": "US"
+  ]
+  
+  if !trackIDs.isEmpty {
+    queryParams = queryParams.union(["seed_tracks": trackIDs.joined(separator: ",")])
+  }
+  
+  if !artistIDs.isEmpty {
+    queryParams = queryParams.union(["seed_artists": artistIDs.joined(separator: ",")])
+  }
+  
+  if !albumIDs.isEmpty {
+    queryParams = queryParams.union(["seed_albums": albumIDs.joined(separator: ",")])
+  }
   
   return WrapInDispatch { dispatch in
     dispatch(CallSpotifyAPI(
       endpoint: "/v1/recommendations",
-      queryParams: [
-        "seed_tracks": trackIDs.joined(separator: ","),
-        "limit": "100",
-        "market": "US"
-      ],
+      queryParams: queryParams,
       method: .get,
       types: APITypes(
         requestAction: RequestGeneratePlaylist.self,

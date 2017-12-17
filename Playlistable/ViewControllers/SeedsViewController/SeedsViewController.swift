@@ -86,14 +86,14 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
   }
   
   private func setTitleLabel() {
-    titleLabel.text = "You have selected the following tracks"
+    titleLabel.text = "You have selected the following items"
     
     if seeds?.items.isEmpty == true {
       
       if generatedPlaylistSeeds?.items.isEmpty == false {
-        titleLabel.text = "Generated a playlist using these tracks"
+        titleLabel.text = "Generated a playlist using these items"
       } else {
-        titleLabel.text = "Your selected tracks will appear here"
+        titleLabel.text = "Your selected items will appear here"
       }
       
     }
