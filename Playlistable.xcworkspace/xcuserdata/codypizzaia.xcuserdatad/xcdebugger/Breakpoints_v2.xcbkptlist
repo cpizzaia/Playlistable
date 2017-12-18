@@ -2,4 +2,70 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Playlistable/Reducers/ResourceReducer.swift"
+            timestampString = "535258101.260278"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "resourceReducer(action:state:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Playlistable.resourceReducer(action: ReSwift.Action, state: Swift.Optional&lt;Playlistable.ResourceState&gt;) -&gt; Playlistable.ResourceState"
+                  moduleName = "Playlistable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/justinpizzaia/Desktop/Playlistable/Playlistable/Reducers/ResourceReducer.swift"
+                  timestampString = "535256045.689768"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "1140">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Playlistable.Artist) -&gt; () in Playlistable.resourceReducer(action: ReSwift.Action, state: Swift.Optional&lt;Playlistable.ResourceState&gt;) -&gt; Playlistable.ResourceState"
+                  moduleName = "Playlistable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/justinpizzaia/Desktop/Playlistable/Playlistable/Reducers/ResourceReducer.swift"
+                  timestampString = "535256045.691933"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Playlistable/Reducers/ResourceReducer.swift"
+            timestampString = "535258101.26035"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "resourceReducer(action:state:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -32,6 +32,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
   var seeds: SeedsState?
   
   private var searchData = SearchCollection(artists: [], tracks: [])
+  private var sections = [Int: [Item]]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -80,14 +81,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
   }
   
   private func getResourceFor(section: Int) -> [Item]? {
-    switch section {
-    case 0:
-      return searchData.tracks
-    case 1:
-      return searchData.artists
-    default:
-      return nil
-    }
+    return sections[section]
   }
   
   private func numberOfRowsCapped(items: [Item]) -> Int {
@@ -103,9 +97,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
   
   func numberOfSections(in tableView: UITableView) -> Int {
     var count = 0
+    sections = [:]
     
-    if !searchData.tracks.isEmpty { count += 1 }
-    if !searchData.artists.isEmpty { count += 1 }
+    if !searchData.tracks.isEmpty {
+      sections[count] = searchData.tracks
+      count += 1
+    }
+    
+    if !searchData.artists.isEmpty {
+      sections[count] = searchData.artists
+      count += 1
+    }
     
     return count
   }
