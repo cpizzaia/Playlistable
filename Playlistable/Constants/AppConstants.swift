@@ -13,7 +13,12 @@ import UIKit
 // this is so we can detect if it's displayed and adjust for it's height,
 // there is probably a better way to do this than a global variable.
 var isPlayerBarHidden = false
-var playerBarHeight = CGFloat(55.0)
+fileprivate var playerBarHeight = CGFloat(55.0)
+var heightForFooterWithPlayerBar: CGFloat {
+  get {
+    return isPlayerBarHidden ? 0 : playerBarHeight
+  }
+}
 
 func log(_ message: String, functionName: String = #function, line: Int = #line, fileName: String = #file) {
   let className: String = fileName.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? ""

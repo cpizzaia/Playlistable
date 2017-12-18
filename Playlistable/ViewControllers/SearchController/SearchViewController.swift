@@ -20,19 +20,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
   
   private struct SearchCollection {
     let artists: [Artist]
-    let albums: [Album]
     let tracks: [Track]
     
     var isEmpty: Bool {
       get {
-        return artists.isEmpty && albums.isEmpty && tracks.isEmpty
+        return artists.isEmpty && tracks.isEmpty
       }
     }
   }
   
   var seeds: SeedsState?
   
-  private var searchData = SearchCollection(artists: [], albums: [], tracks: [])
+  private var searchData = SearchCollection(artists: [], tracks: [])
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -69,7 +68,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     
     searchData = SearchCollection(
       artists: state.resources.artistsFor(ids: state.search.artistIDs),
-      albums: state.resources.albumsFor(ids: state.search.albumIDs),
       tracks: state.resources.tracksFor(ids: state.search.trackIDs)
     )
     
@@ -86,8 +84,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     case 0:
       return searchData.tracks
     case 1:
-      return searchData.albums
-    case 2:
       return searchData.artists
     default:
       return nil
@@ -109,7 +105,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     var count = 0
     
     if !searchData.tracks.isEmpty { count += 1 }
-    if !searchData.albums.isEmpty { count += 1 }
     if !searchData.artists.isEmpty { count += 1 }
     
     return count
@@ -138,15 +133,23 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     
     let view = loadUIViewFromNib(SearchResultSectionHeaderView.self)
     
-    view.actionButton.setTitle("See All", for: .normal)
-    
     switch items.first {
     case _ as Artist:
-      view.titleLabel.text = "Artists"
+      view.setupView(withTitle: "Artists", buttonTitle: "See All", andAction: {
+        let vc = loadUIViewControllerFromNib(SeeAllSearchResultsViewController.self)
+        
+        vc.type = .artists
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+      })
     case _ as Track:
-      view.titleLabel.text = "Tracks"
-    case _ as Album:
-      view.titleLabel.text = "Albums"
+      view.setupView(withTitle: "Tracks", buttonTitle: "See All", andAction: {
+        let vc = loadUIViewControllerFromNib(SeeAllSearchResultsViewController.self)
+        
+        vc.type = .tracks
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+      })
     default:
       break
     }
@@ -172,6 +175,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     } else {
       mainStore.dispatch(AddSeed(item: item))
     }
+  }
+  
+  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return heightForFooterWithPlayerBar
   }
   
   // MARK: UISearchBar Methods
