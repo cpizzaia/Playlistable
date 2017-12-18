@@ -18,11 +18,11 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JSU-cd-Slf">
-                        <rect key="frame" x="0.0" y="91" width="375" height="482.5"/>
+                        <rect key="frame" x="0.0" y="91" width="375" height="452.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tableView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLl-ir-mJk">
-                        <rect key="frame" x="130" y="613.5" width="116" height="33.5"/>
+                        <rect key="frame" x="130" y="573.5" width="116" height="33.5"/>
                         <state key="normal" title="Generate Playlist"/>
                         <connections>
                             <action selector="generatePlaylistButtonTapped:" destination="it6-4U-JVr" eventType="touchUpInside" id="d7X-8z-fwU"/>
@@ -37,11 +37,11 @@
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="2zq-HP-mpX" firstAttribute="bottom" secondItem="iLl-ir-mJk" secondAttribute="bottom" constant="20" id="4QI-q1-noS"/>
+                    <constraint firstItem="2zq-HP-mpX" firstAttribute="bottom" secondItem="iLl-ir-mJk" secondAttribute="bottom" constant="60" id="4QI-q1-noS"/>
                     <constraint firstItem="iLl-ir-mJk" firstAttribute="height" secondItem="ReG-al-d15" secondAttribute="height" multiplier="0.05" id="7xy-mK-Hfg"/>
                     <constraint firstItem="JSU-cd-Slf" firstAttribute="width" secondItem="ReG-al-d15" secondAttribute="width" id="DyR-Sr-gR3"/>
                     <constraint firstItem="JSU-cd-Slf" firstAttribute="centerX" secondItem="2zq-HP-mpX" secondAttribute="centerX" id="Jfa-cV-gKI"/>
-                    <constraint firstItem="iLl-ir-mJk" firstAttribute="top" secondItem="JSU-cd-Slf" secondAttribute="bottom" constant="40" id="OZL-hp-4rK"/>
+                    <constraint firstItem="iLl-ir-mJk" firstAttribute="top" secondItem="JSU-cd-Slf" secondAttribute="bottom" constant="30" id="OZL-hp-4rK"/>
                     <constraint firstItem="GUg-UF-q2m" firstAttribute="width" secondItem="ReG-al-d15" secondAttribute="width" id="Q1r-lZ-WPz"/>
                     <constraint firstItem="iLl-ir-mJk" firstAttribute="centerX" secondItem="2zq-HP-mpX" secondAttribute="centerX" id="Uah-Xs-vap"/>
                     <constraint firstItem="JSU-cd-Slf" firstAttribute="top" secondItem="GUg-UF-q2m" secondAttribute="bottom" constant="20" id="XZQ-hR-1Vr"/>
