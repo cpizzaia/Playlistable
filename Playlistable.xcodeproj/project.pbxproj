@@ -67,6 +67,7 @@
 		ACD4B00D1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACD4B00C1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib */; };
 		ACD4B00F1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4B00E1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift */; };
 		ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */; };
+		ACF43248200BF57E00110B53 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF43247200BF57E00110B53 /* UIImageExtensions.swift */; };
 		C123A7C91CFEAE164A8E1B27 /* Pods_Playlistable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F2B3C9304F9A14993083D1 /* Pods_Playlistable.framework */; };
 /* End PBXBuildFile section */
 
@@ -136,6 +137,7 @@
 		ACD4B00C1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneratedPlaylistTrackTableViewCell.xib; sourceTree = "<group>"; };
 		ACD4B00E1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedPlaylistTrackTableViewCell.swift; sourceTree = "<group>"; };
 		ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
+		ACF43247200BF57E00110B53 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		F205E7760234089465BFB399 /* Pods-Playlistable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Playlistable.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,6 +178,7 @@
 				ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */,
 				AC8C203F1FC9DA2F006FF1AC /* UIButtonExtensions.swift */,
 				AC5787181FDCAD860057D41A /* StringExtensions.swift */,
+				ACF43247200BF57E00110B53 /* UIImageExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				ACAA1A421FB548F700F6B345 /* SeedsReducer.swift in Sources */,
 				AC1197231FB90EBB009D1646 /* SpotifyPlayerActions.swift in Sources */,
 				ACA09EA51F9D556800220E8B /* APIMiddleware.swift in Sources */,
+				ACF43248200BF57E00110B53 /* UIImageExtensions.swift in Sources */,
 				AC36E6DA1FE593660025BBE1 /* SearchReducer.swift in Sources */,
 				AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */,
 				AC8C20401FC9DA2F006FF1AC /* UIButtonExtensions.swift in Sources */,

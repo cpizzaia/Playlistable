@@ -30,6 +30,10 @@ class InspectAllTableViewCell: UITableViewCell {
     titleLabel.text = item.title
     if let mediumImageURL = item.mediumImageURL {
       itemImage.sd_setImage(with: mediumImageURL)
+    } else {
+      itemImage.image = UIImage.placeholder
     }
+    
+    itemImage.contentMode = .scaleAspectFill
   }
 }
