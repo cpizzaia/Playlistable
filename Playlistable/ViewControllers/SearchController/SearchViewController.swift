@@ -131,7 +131,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     
     let item = items[indexPath.row]
     
-    cell.setupCellFor(item: item)
+    cell.setupCellFor(item: item, action: nil)
     
     cell.seededCell = seeds?.isInSeeds(item: item) == true
     
