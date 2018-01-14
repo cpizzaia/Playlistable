@@ -33,20 +33,15 @@ class TabBarController: UITabBarController, StoreSubscriber {
     tabTwo.tabBarItem = UITabBarItem()
     tabTwo.tabBarItem.title = "Seeds"
     
-    let tabThree = UINavigationController(rootViewController: loadUIViewControllerFromNib(LibraryViewController.self))
-    
-    tabThree.tabBarItem = UITabBarItem()
-    tabThree.tabBarItem.title = "Library"
-    
-    let tabFour = UINavigationController(rootViewController:
+    let tabThree = UINavigationController(rootViewController:
         loadUIViewControllerFromNib(SearchViewController.self)
     )
     
-    tabFour.tabBarItem = UITabBarItem()
-    tabFour.tabBarItem.title = "Search"
+    tabThree.tabBarItem = UITabBarItem()
+    tabThree.tabBarItem.title = "Search"
     
     
-    viewControllers = [tabOne, tabTwo, tabThree, tabFour]
+    viewControllers = [tabOne, tabTwo, tabThree]
   }
   
   override func didReceiveMemoryWarning() {
