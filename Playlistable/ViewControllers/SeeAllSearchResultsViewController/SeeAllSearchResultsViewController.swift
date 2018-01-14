@@ -18,6 +18,7 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
   enum ControllerType {
     case artists
     case tracks
+    case albums
   }
   
   // MARK: Public Properties
@@ -58,6 +59,8 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
       items = state.resources.artistsFor(ids: state.search.artistIDs)
     case .some(.tracks):
       items = state.resources.tracksFor(ids: state.search.trackIDs)
+    case .some(.albums):
+      items = state.resources.albumsFor(ids: state.search.albumIDs)
     default:
       break
     }

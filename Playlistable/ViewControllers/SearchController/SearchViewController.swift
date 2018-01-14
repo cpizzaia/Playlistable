@@ -164,7 +164,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
       })
     case _ as Album:
       view.setupView(withTitle: "Albums", buttonTitle: "See All", andAction: {
+        let vc = loadUIViewControllerFromNib(SeeAllSearchResultsViewController.self)
         
+        vc.type = .albums
+        
+        self.navigationController?.pushViewController(vc, animated: true)
       })
     default:
       break
