@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Playlistable/Reducers/ResourceReducer.swift"
-            timestampString = "535258101.260278"
+            timestampString = "537676981.63153"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "resourceReducer(action:state:)"
             landmarkType = "9">
             <Locations>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Playlistable/Reducers/ResourceReducer.swift"
-            timestampString = "535258101.26035"
+            timestampString = "537676981.6315989"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "resourceReducer(action:state:)"
             landmarkType = "9">
          </BreakpointContent>

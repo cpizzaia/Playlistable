@@ -39,8 +39,6 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
   
   var userID: String?
-  var savedTracksPlaylistID: String?
-  var savedTrackIDs = [String]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -92,8 +90,6 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     }
     
     userID = state.spotifyAuth.userID
-    savedTracksPlaylistID = state.playlistableSavedTracks.playlistID
-    savedTrackIDs = state.playlistableSavedTracks.trackIDs
     
     playlistTableView.reloadData()
   }
@@ -108,28 +104,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     
     let track = tracks[indexPath.row]
     
-    let isSavedTrack = savedTrackIDs.contains(track.id)
-    
-    cell.setupCell(forTrack: track, actionType: isSavedTrack ? .remove : .add, action: {
-      guard let userID = self.userID else { return }
-      
-      if isSavedTrack {
-        guard let playlistID = self.savedTracksPlaylistID else { return }
-        mainStore.dispatch(UnSaveFromPlaylistableTracks(
-          trackID: track.id,
-          userID: userID,
-          playlistID: playlistID)
-        )
-      } else {
-        mainStore.dispatch(saveToAndCreatePlaylistableSavedTracksIfNeeded(
-          trackID: track.id,
-          userID: userID,
-          playlistID: self.savedTracksPlaylistID
-        ))
-      }
-      
-      
-    })
+    cell.setupCell(forTrack: track, actionType: .add, action: {})
     
     cell.currentlyPlaying = track.id == currentlyPlayingTrack?.id
     

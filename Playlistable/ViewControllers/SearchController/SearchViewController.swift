@@ -21,17 +21,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
   private struct SearchCollection {
     let artists: [Artist]
     let tracks: [Track]
+    let albums: [Album]
     
     var isEmpty: Bool {
       get {
-        return artists.isEmpty && tracks.isEmpty
+        return artists.isEmpty && tracks.isEmpty && albums.isEmpty
       }
     }
   }
   
   var seeds: SeedsState?
   
-  private var searchData = SearchCollection(artists: [], tracks: [])
+  private var searchData = SearchCollection(artists: [], tracks: [], albums: [])
   private var sections = [Int: [Item]]()
   
   override func viewDidLoad() {
@@ -45,6 +46,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
       UINib(nibName: "InspectAllTableViewCell", bundle: nil),
       forCellReuseIdentifier: "searchCell"
     )
+    
+    searchResultsTableView.showsVerticalScrollIndicator = false
+    searchResultsTableView.separatorStyle = .none
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -69,7 +73,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     
     searchData = SearchCollection(
       artists: state.resources.artistsFor(ids: state.search.artistIDs),
-      tracks: state.resources.tracksFor(ids: state.search.trackIDs)
+      tracks: state.resources.tracksFor(ids: state.search.trackIDs),
+      albums: state.resources.albumsFor(ids: state.search.albumIDs)
     )
     
     let noResults = searchData.isEmpty
@@ -109,6 +114,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
       count += 1
     }
     
+    if !searchData.albums.isEmpty {
+      sections[count] = searchData.albums
+      count += 1
+    }
+    
     return count
   }
   
@@ -121,7 +131,21 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     
     let item = items[indexPath.row]
     
-    cell.setupCellFor(item: item)
+    if let album  = item as? Album {
+      cell.setupCellFor(item: item, action: {
+        mainStore.dispatch(InspectAlbum(albumID: album.id))
+        
+        let vc = loadUIViewControllerFromNib(ItemWithTrackListViewController.self)
+        
+        vc.itemType = .album
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+      })
+    } else {
+      cell.setupCellFor(item: item, action: nil)
+    }
+    
+    
     
     cell.seededCell = seeds?.isInSeeds(item: item) == true
     
@@ -152,6 +176,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
         
         self.navigationController?.pushViewController(vc, animated: true)
       })
+    case _ as Album:
+      view.setupView(withTitle: "Albums", buttonTitle: "See All", andAction: {
+        let vc = loadUIViewControllerFromNib(SeeAllSearchResultsViewController.self)
+        
+        vc.type = .albums
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+      })
     default:
       break
     }
@@ -171,6 +203,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     guard let items = getResourceFor(section: indexPath.section) else { return }
     
     let item = items[indexPath.row]
+    
+    guard item is Track || item is Artist else {
+      tableView.deselectRow(at: indexPath, animated: false)
+      return
+    }
     
     if seeds?.isInSeeds(item: item) == true {
       mainStore.dispatch(RemoveSeed(item: item))

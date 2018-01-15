@@ -24,6 +24,10 @@ struct ResourceState {
     }
   }
   
+  func albumFor(id: AlbumID) -> Album? {
+    return albums[id]
+  }
+  
   func albumsFor(ids: [AlbumID]) -> [Album] {
     return ids.flatMap { id in
       return albums[id]

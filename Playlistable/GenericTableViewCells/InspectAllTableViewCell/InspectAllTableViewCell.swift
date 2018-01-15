@@ -14,6 +14,10 @@ class InspectAllTableViewCell: UITableViewCell {
   
   @IBOutlet var titleLabel: UILabel!
   @IBOutlet var itemImage: UIImageView!
+  @IBOutlet var actionButton: UIButton!
+  @IBAction func actionButtonTapped(_ sender: UIButton) {
+    action()
+  }
   
   var seededCell: Bool {
     get {
@@ -24,12 +28,27 @@ class InspectAllTableViewCell: UITableViewCell {
     }
   }
   
+  var action = {}
+  
   private var _seededCell = false
   
-  func setupCellFor(item: Item) {
+  func setupCellFor(item: Item, action: (() -> ())?) {
+    self.action = action ?? {}
     titleLabel.text = item.title
     if let mediumImageURL = item.mediumImageURL {
       itemImage.sd_setImage(with: mediumImageURL)
+    } else {
+      itemImage.image = UIImage.placeholder
+    }
+    
+    itemImage.contentMode = .scaleAspectFill
+    
+    if action != nil {
+      actionButton.setTitle(">", for: .normal)
+      actionButton.isEnabled = true
+    } else {
+      actionButton.setTitle("", for: .normal)
+      actionButton.isEnabled = false
     }
   }
 }
