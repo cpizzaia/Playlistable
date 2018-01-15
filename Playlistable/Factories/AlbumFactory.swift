@@ -22,7 +22,7 @@ struct AlbumFactory {
     return Album(
       id: id,
       artistIDs: [],
-      trackIDs: [],
+      trackIDs: json["tracks"]["items"].array?.flatMap { $0["id"].string } ?? [],
       images: ImageFactory.createImages(fromJSONArray: json["images"].array ?? []),
       name: name
     )

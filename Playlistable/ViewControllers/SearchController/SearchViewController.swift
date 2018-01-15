@@ -131,7 +131,21 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     
     let item = items[indexPath.row]
     
-    cell.setupCellFor(item: item, action: nil)
+    if let album  = item as? Album {
+      cell.setupCellFor(item: item, action: {
+        mainStore.dispatch(InspectAlbum(albumID: album.id))
+        
+        let vc = loadUIViewControllerFromNib(ItemWithTrackListViewController.self)
+        
+        vc.itemType = .album
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+      })
+    } else {
+      cell.setupCellFor(item: item, action: nil)
+    }
+    
+    
     
     cell.seededCell = seeds?.isInSeeds(item: item) == true
     
