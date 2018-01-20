@@ -39,6 +39,8 @@
 		AC36E6E31FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6E21FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift */; };
 		AC36E6E61FE731090025BBE1 /* SeeAllSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6E51FE731090025BBE1 /* SeeAllSearchResultsViewController.swift */; };
 		AC36E6E81FE731370025BBE1 /* SeeAllSearchResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC36E6E71FE731370025BBE1 /* SeeAllSearchResultsViewController.xib */; };
+		AC4C84D72014046400C8A4E6 /* ItemWithTrackListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84D62014046400C8A4E6 /* ItemWithTrackListHeaderView.xib */; };
+		AC4C84DA2014050300C8A4E6 /* ItemWithTrackListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84D92014050300C8A4E6 /* ItemWithTrackListHeaderView.swift */; };
 		AC53C96F1FE37BA100664733 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC53C96E1FE37BA100664733 /* SearchViewController.xib */; };
 		AC53C9711FE37C6300664733 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53C9701FE37C6300664733 /* SearchViewController.swift */; };
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
@@ -113,6 +115,8 @@
 		AC36E6E21FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultSectionHeaderView.swift; sourceTree = "<group>"; };
 		AC36E6E51FE731090025BBE1 /* SeeAllSearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllSearchResultsViewController.swift; sourceTree = "<group>"; };
 		AC36E6E71FE731370025BBE1 /* SeeAllSearchResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeeAllSearchResultsViewController.xib; sourceTree = "<group>"; };
+		AC4C84D62014046400C8A4E6 /* ItemWithTrackListHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemWithTrackListHeaderView.xib; sourceTree = "<group>"; };
+		AC4C84D92014050300C8A4E6 /* ItemWithTrackListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWithTrackListHeaderView.swift; sourceTree = "<group>"; };
 		AC53C96E1FE37BA100664733 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		AC53C9701FE37C6300664733 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -285,6 +289,15 @@
 				AC36E6E71FE731370025BBE1 /* SeeAllSearchResultsViewController.xib */,
 			);
 			path = SeeAllSearchResultsViewController;
+			sourceTree = "<group>";
+		};
+		AC4C84D8201404E600C8A4E6 /* ItemWithTrackListHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				AC4C84D62014046400C8A4E6 /* ItemWithTrackListHeaderView.xib */,
+				AC4C84D92014050300C8A4E6 /* ItemWithTrackListHeaderView.swift */,
+			);
+			path = ItemWithTrackListHeaderView;
 			sourceTree = "<group>";
 		};
 		AC53C96D1FE37B8200664733 /* SearchController */ = {
@@ -464,6 +477,7 @@
 		ACF43249200C12EF00110B53 /* ItemWithTrackListViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AC4C84D8201404E600C8A4E6 /* ItemWithTrackListHeaderView */,
 				ACF4324A200C132C00110B53 /* ItemWithTrackListViewController.swift */,
 				ACF4324C200C136C00110B53 /* ItemWithTrackListViewController.xib */,
 			);
@@ -543,6 +557,7 @@
 				AC1197311FB956B1009D1646 /* PlayerBarContainerViewController.xib in Resources */,
 				AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */,
 				ACD4B00D1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib in Resources */,
+				AC4C84D72014046400C8A4E6 /* ItemWithTrackListHeaderView.xib in Resources */,
 				ACF4324D200C136C00110B53 /* ItemWithTrackListViewController.xib in Resources */,
 				AC5787221FDE18140057D41A /* SeedsViewController.xib in Resources */,
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,
@@ -638,6 +653,7 @@
 				AC8AB6B21FA964B300251F85 /* TrackFactory.swift in Sources */,
 				AC02D0DC1F9CF73B009ED193 /* APIRequest.swift in Sources */,
 				AC0148761F9D700200F9A732 /* SpotifyAuthActions.swift in Sources */,
+				AC4C84DA2014050300C8A4E6 /* ItemWithTrackListHeaderView.swift in Sources */,
 				AC5787201FDE17F00057D41A /* SeedsViewController.swift in Sources */,
 				AC53C9711FE37C6300664733 /* SearchViewController.swift in Sources */,
 				AC02D0C91F9CF5B3009ED193 /* AppDelegate.swift in Sources */,

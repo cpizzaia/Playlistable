@@ -5,8 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,41 +16,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9QI-vJ-DeN">
-                        <rect key="frame" x="94" y="43.5" width="187.5" height="187.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="9QI-vJ-DeN" secondAttribute="height" multiplier="1:1" id="Y93-eJ-gBm"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsh-g8-lsv">
-                        <rect key="frame" x="0.0" y="251" width="375" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0w8-dh-GwB">
-                        <rect key="frame" x="-0.5" y="292" width="375" height="355"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="0w8-dh-GwB">
+                        <rect key="frame" x="-0.5" y="10" width="375" height="667"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </tableView>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="0w8-dh-GwB" firstAttribute="width" secondItem="Nk0-7V-WC3" secondAttribute="width" id="2Ib-55-9rM"/>
-                    <constraint firstItem="MvZ-nF-lLn" firstAttribute="bottom" secondItem="0w8-dh-GwB" secondAttribute="bottom" constant="20" id="Cym-Kq-NIe"/>
-                    <constraint firstItem="fsh-g8-lsv" firstAttribute="centerX" secondItem="MvZ-nF-lLn" secondAttribute="centerX" id="O1C-zu-Ir9"/>
-                    <constraint firstItem="9QI-vJ-DeN" firstAttribute="centerX" secondItem="MvZ-nF-lLn" secondAttribute="centerX" id="Q42-4Z-hDH"/>
-                    <constraint firstItem="9QI-vJ-DeN" firstAttribute="width" secondItem="Nk0-7V-WC3" secondAttribute="width" multiplier="0.5" id="RAE-LF-Kc3"/>
-                    <constraint firstItem="fsh-g8-lsv" firstAttribute="top" secondItem="9QI-vJ-DeN" secondAttribute="bottom" constant="20" id="Ru1-po-bxn"/>
-                    <constraint firstItem="9QI-vJ-DeN" firstAttribute="top" secondItem="MvZ-nF-lLn" secondAttribute="top" constant="23.5" id="VxA-Pq-Xcf"/>
-                    <constraint firstItem="fsh-g8-lsv" firstAttribute="width" secondItem="Nk0-7V-WC3" secondAttribute="width" id="twI-QL-SQk"/>
-                    <constraint firstItem="0w8-dh-GwB" firstAttribute="centerX" secondItem="MvZ-nF-lLn" secondAttribute="centerX" id="v4E-7P-yZA"/>
-                    <constraint firstItem="0w8-dh-GwB" firstAttribute="top" secondItem="fsh-g8-lsv" secondAttribute="bottom" constant="20" id="z4X-Af-Srh"/>
+                    <constraint firstItem="0w8-dh-GwB" firstAttribute="centerY" secondItem="MvZ-nF-lLn" secondAttribute="centerY" id="Om0-rI-ogj"/>
+                    <constraint firstItem="0w8-dh-GwB" firstAttribute="width" secondItem="Nk0-7V-WC3" secondAttribute="width" id="Oyc-zl-u6A"/>
+                    <constraint firstItem="0w8-dh-GwB" firstAttribute="centerX" secondItem="MvZ-nF-lLn" secondAttribute="centerX" id="Qlc-hP-Cvl"/>
+                    <constraint firstItem="0w8-dh-GwB" firstAttribute="height" secondItem="Nk0-7V-WC3" secondAttribute="height" id="TgC-sv-rMu"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="MvZ-nF-lLn"/>
             </view>
             <connections>
-                <outlet property="itemImageView" destination="9QI-vJ-DeN" id="wAC-ue-2vf"/>
-                <outlet property="itemTitleLabel" destination="fsh-g8-lsv" id="hWd-rq-vtN"/>
                 <outlet property="trackListTableView" destination="0w8-dh-GwB" id="ref-b5-1ZE"/>
             </connections>
             <point key="canvasLocation" x="239" y="-169"/>

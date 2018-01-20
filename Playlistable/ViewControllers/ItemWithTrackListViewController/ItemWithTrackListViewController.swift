@@ -17,8 +17,6 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     case album
   }
   
-  @IBOutlet var itemImageView: UIImageView!
-  @IBOutlet var itemTitleLabel: UILabel!
   @IBOutlet var trackListTableView: UITableView!
   
   var item: Item?
@@ -30,6 +28,7 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     super.viewDidLoad()
     
     trackListTableView.separatorStyle = .none
+    trackListTableView.showsVerticalScrollIndicator = false
     trackListTableView.register(
       UINib(nibName: "InspectAllTableViewCell", bundle: nil),
       forCellReuseIdentifier: "trackListCell"
@@ -80,14 +79,6 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
       tracks = []
       mainStore.dispatch(getAlbumTracks(album: album))
     }
-    
-    if let imageURL = album.largeImageURL {
-      itemImageView.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholder)
-    } else {
-      itemImageView.image = UIImage.placeholder
-    }
-    
-    itemTitleLabel.text = album.title
   }
   
   // MARK; UITableViewDelegate Methods
@@ -119,6 +110,20 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     } else {
       mainStore.dispatch(AddSeed(item: track))
     }
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    guard let item = item else { return nil }
+    
+    let view = loadUIViewFromNib(ItemWithTrackListHeaderView.self)
+    
+    view.setup(forItem: item)
+    
+    return view
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return UIScreen.main.bounds.width
   }
   
 }
