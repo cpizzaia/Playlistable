@@ -43,8 +43,6 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     
     navigationController?.navigationBar.isHidden = false
     
-    navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-    
     mainStore.subscribe(self)
   }
   
@@ -64,6 +62,8 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
       tracks = []
       item = nil
     }
+    
+    title = item?.title
     
     trackListTableView.reloadData()
   }
