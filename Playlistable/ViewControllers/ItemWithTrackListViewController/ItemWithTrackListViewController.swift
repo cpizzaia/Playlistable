@@ -36,6 +36,9 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     
     trackListTableView.delegate = self
     trackListTableView.dataSource = self
+    trackListTableView.backgroundColor = UIColor.clear
+    
+    view.backgroundColor = UIColor.myDarkBlack
   }
   
   override func viewWillAppear(_ animated: Bool) {

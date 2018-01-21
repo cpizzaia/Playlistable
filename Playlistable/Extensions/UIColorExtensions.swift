@@ -24,7 +24,7 @@ extension UIColor {
   
   static var myWhite: UIColor {
     get {
-      return UIColor(rgb: 0x000000)
+      return UIColor(rgb: 0xFFFFFF)
     }
   }
   

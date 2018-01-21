@@ -37,6 +37,11 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
       UINib(nibName: "InspectAllTableViewCell", bundle: nil),
       forCellReuseIdentifier: "searchResultCell"
     )
+    
+    resultsTableView.backgroundColor = UIColor.clear
+    resultsTableView.separatorStyle = .none
+    
+    view.backgroundColor = UIColor.myDarkBlack
   }
   
   override func viewWillAppear(_ animated: Bool) {

@@ -43,6 +43,7 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    view.backgroundColor = UIColor.myDarkBlack
     
     seedsTableView.delegate = self
     seedsTableView.dataSource = self
@@ -54,7 +55,14 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
       forCellReuseIdentifier: "seedsCell"
     )
     
+    seedsTableView.separatorStyle = .none
+    seedsTableView.backgroundColor = UIColor.clear
     
+    titleLabel.font = UIFont.myFont(withSize: 17)
+    titleLabel.textColor = UIColor.myWhite
+    
+    generatePlaylistButton.setTitleColor(UIColor.myWhite, for: .normal)
+    generatePlaylistButton.titleLabel?.font = UIFont.myFont(withSize: 17)
   }
   
   override func viewWillAppear(_ animated: Bool) {

@@ -25,5 +25,18 @@ class SearchResultSectionHeaderView: UIView {
     titleLabel.text = title
     actionButton.setTitle(buttonTitle, for: .normal)
     self.action = action
+    
+    styleView()
+  }
+  
+  // MARK: Private Methods
+  private func styleView() {
+    titleLabel.textColor = UIColor.myWhite
+    titleLabel.font = UIFont.myFont(withSize: 17)
+    
+    actionButton.titleLabel?.font = UIFont.myFont(withSize: 17)
+    actionButton.setTitleColor(UIColor.myWhite, for: .normal)
+    
+    backgroundColor = UIColor.myDarkBlack
   }
 }

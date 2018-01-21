@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window?.makeKeyAndVisible()
     
+    application.statusBarStyle = .lightContent
+    
     startStateManagers()
     
     return true

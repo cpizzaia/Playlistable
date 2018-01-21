@@ -22,6 +22,9 @@ class TabBarController: UITabBarController, StoreSubscriber {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    tabBar.backgroundColor = UIColor.myLightBlack
+    tabBar.barTintColor = UIColor.myLightBlack
   
     let tabOne = UINavigationController(rootViewController: loadUIViewControllerFromNib(GeneratedPlaylistViewController.self))
     
@@ -42,6 +45,8 @@ class TabBarController: UITabBarController, StoreSubscriber {
     
     
     viewControllers = [tabOne, tabTwo, tabThree]
+    
+    viewControllers?.forEach { self.setup(navigationController: $0 as! UINavigationController) }
   }
   
   override func didReceiveMemoryWarning() {
@@ -62,6 +67,16 @@ class TabBarController: UITabBarController, StoreSubscriber {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     if !isAuthed { mainStore.dispatch(oAuthSpotify()) }
+  }
+  
+  private func setup(navigationController: UINavigationController) {
+    navigationController.navigationBar.titleTextAttributes = [
+      NSAttributedStringKey.font: UIFont.myFont(withSize: 17),
+      NSAttributedStringKey.foregroundColor: UIColor.myWhite
+    ]
+    
+    navigationController.navigationBar.backgroundColor = UIColor.myLightBlack
+    navigationController.navigationBar.barTintColor = UIColor.myLightBlack
   }
   
 }

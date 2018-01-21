@@ -62,6 +62,8 @@
 		<string>CircularStd-Medium.otf</string>
 		<string>CircularStd-MediumItalic.otf</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

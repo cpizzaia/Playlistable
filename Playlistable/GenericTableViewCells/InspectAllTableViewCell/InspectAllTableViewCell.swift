@@ -26,7 +26,7 @@ class InspectAllTableViewCell: UITableViewCell {
     get {
       return _seededCell
     } set {
-      backgroundColor = newValue ? .cyan : .clear
+      backgroundColor = newValue ? .yellow : .clear
       _seededCell = newValue
     }
   }
@@ -77,5 +77,17 @@ class InspectAllTableViewCell: UITableViewCell {
       actionButton.setTitle("", for: .normal)
       actionButton.isEnabled = false
     }
+    
+    styleCell()
+  }
+  
+  private func styleCell() {
+    titleLabel.textColor = UIColor.myWhite
+    titleLabel.font = UIFont.myFont(withSize: 17)
+    
+    actionButton.setTitleColor(UIColor.myWhite, for: .normal)
+    actionButton.titleLabel?.font = UIFont.myFont(withSize: 17)
+    
+    backgroundColor = UIColor.clear
   }
 }

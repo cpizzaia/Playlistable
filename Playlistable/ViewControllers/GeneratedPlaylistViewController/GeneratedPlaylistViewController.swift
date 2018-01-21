@@ -14,6 +14,7 @@ import SVProgressHUD
 class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoreSubscriber {
   typealias StoreSubscriberStateType = AppState
   @IBOutlet var noPlaylistView: UIView!
+  @IBOutlet var noPlaylistViewLabel: UILabel!
   @IBOutlet var playlistView: UIView!
   @IBOutlet var playButton: UIButton!
   @IBOutlet var playlistTableView: UITableView!
@@ -42,10 +43,22 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    view.backgroundColor = UIColor.myDarkBlack
+    
+    noPlaylistView.backgroundColor = UIColor.clear
+    noPlaylistViewLabel.font = UIFont.myFont(withSize: 17)
+    noPlaylistViewLabel.textColor = UIColor.myWhite
+    
+    playlistView.backgroundColor = UIColor.clear
+    
+    playButton.setTitleColor(UIColor.myWhite, for: .normal)
+    playButton.titleLabel?.font = UIFont.myFont(withSize: 17)
     
     playlistTableView.delegate = self
     playlistTableView.dataSource = self
     playlistTableView.delaysContentTouches = false
+    playlistTableView.backgroundColor = UIColor.clear
+    playlistTableView.separatorStyle = .none
     
     playlistTableView.register(
       UINib(nibName: "GeneratedPlaylistTrackTableViewCell", bundle: nil),
@@ -121,5 +134,13 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
     return heightForFooterWithPlayerBar
+  }
+  
+  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    let view = UIView()
+    
+    view.backgroundColor = .clear
+    
+    return view
   }
 }

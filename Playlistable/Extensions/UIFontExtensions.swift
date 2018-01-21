@@ -11,6 +11,6 @@ import UIKit
 
 extension UIFont {
   static func myFont(withSize size: CGFloat) -> UIFont {
-    return UIFont(name: "", size: size)!
+    return UIFont(name: "CircularStd-Book", size: size)!
   }
 }

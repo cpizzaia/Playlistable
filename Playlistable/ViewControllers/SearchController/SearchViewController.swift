@@ -38,6 +38,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    view.backgroundColor = UIColor.myDarkBlack
+    
     searchBar.delegate = self
     searchResultsTableView.delegate = self
     searchResultsTableView.dataSource = self
@@ -49,6 +51,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     
     searchResultsTableView.showsVerticalScrollIndicator = false
     searchResultsTableView.separatorStyle = .none
+    searchResultsTableView.backgroundColor = UIColor.clear
+    
+    noResultsLabel.font = UIFont.myFont(withSize: 17)
+    noResultsLabel.textColor = UIColor.myWhite
+    
+    noResultsView.backgroundColor = UIColor.clear
+    
+    searchBar.barTintColor = UIColor.myLightBlack
+    searchBar.placeholder = "Search"
   }
   
   override func viewWillAppear(_ animated: Bool) {

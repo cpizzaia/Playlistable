@@ -26,7 +26,7 @@ class GeneratedPlaylistTrackTableViewCell: UITableViewCell {
     get {
       return _currentlyPlaying
     } set {
-      trackTitle.textColor = newValue ? .blue : .black
+      trackTitle.textColor = newValue ? .yellow : UIColor.myWhite
       _currentlyPlaying = newValue
     }
   }
@@ -52,7 +52,17 @@ class GeneratedPlaylistTrackTableViewCell: UITableViewCell {
       saveTrackButton.setTitle("-", for: .normal)
     }
     
+    styleCell()
+  }
+  
+  private func styleCell() {
+    trackTitle.font = UIFont.myFont(withSize: 17)
+    trackTitle.textColor = UIColor.myWhite
     
+    saveTrackButton.setTitleColor(UIColor.myWhite, for: .normal)
+    saveTrackButton.titleLabel?.font = UIFont.myFont(withSize: 23)
+    
+    backgroundColor = UIColor.clear
   }
   
 }

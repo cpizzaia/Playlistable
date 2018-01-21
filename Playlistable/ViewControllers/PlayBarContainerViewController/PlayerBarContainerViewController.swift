@@ -44,6 +44,13 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
     containerView.insertSubview(tabBarVC.view, at: 0)
     
     tabBarVC.didMove(toParentViewController: self)
+    
+    playBarView.backgroundColor = UIColor.myLightBlack
+    
+    playBarTitleLabel.font = UIFont.myFont(withSize: 17)
+    playBarTitleLabel.textColor = UIColor.myWhite
+    
+    durationBarView.backgroundColor = UIColor.myWhite
   }
   
   override func viewWillAppear(_ animated: Bool) {
