@@ -51,6 +51,7 @@
 		AC4C84EE201430B100C8A4E6 /* CircularStd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E6201430B100C8A4E6 /* CircularStd-Medium.otf */; };
 		AC4C84EF201430B100C8A4E6 /* CircularStd-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E7201430B100C8A4E6 /* CircularStd-BlackItalic.otf */; };
 		AC4C84F0201430B100C8A4E6 /* CircularStd-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E8201430B100C8A4E6 /* CircularStd-BookItalic.otf */; };
+		AC4C84F320146E8F00C8A4E6 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84F220146E8F00C8A4E6 /* BigButton.swift */; };
 		AC53C96F1FE37BA100664733 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC53C96E1FE37BA100664733 /* SearchViewController.xib */; };
 		AC53C9711FE37C6300664733 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53C9701FE37C6300664733 /* SearchViewController.swift */; };
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
@@ -137,6 +138,7 @@
 		AC4C84E6201430B100C8A4E6 /* CircularStd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Medium.otf"; sourceTree = "<group>"; };
 		AC4C84E7201430B100C8A4E6 /* CircularStd-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-BlackItalic.otf"; sourceTree = "<group>"; };
 		AC4C84E8201430B100C8A4E6 /* CircularStd-BookItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-BookItalic.otf"; sourceTree = "<group>"; };
+		AC4C84F220146E8F00C8A4E6 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		AC53C96E1FE37BA100664733 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		AC53C9701FE37C6300664733 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */,
+				AC4C84F120146E1400C8A4E6 /* UIButtons */,
 				AC4C84DF2014307C00C8A4E6 /* Resources */,
 				AC17B7F61FBE99900029AFB6 /* StateManagers */,
 				AC8AB6B01FA9649F00251F85 /* Factories */,
@@ -344,6 +347,14 @@
 				AC4C84E1201430B000C8A4E6 /* CircularStd-MediumItalic.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		AC4C84F120146E1400C8A4E6 /* UIButtons */ = {
+			isa = PBXGroup;
+			children = (
+				AC4C84F220146E8F00C8A4E6 /* BigButton.swift */,
+			);
+			path = UIButtons;
 			sourceTree = "<group>";
 		};
 		AC53C96D1FE37B8200664733 /* SearchController */ = {
@@ -741,6 +752,7 @@
 				ACF43252200C334000110B53 /* InspectAlbumActions.swift in Sources */,
 				AC11971B1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift in Sources */,
 				AC8AB6BC1FA9777D00251F85 /* ResourceActions.swift in Sources */,
+				AC4C84F320146E8F00C8A4E6 /* BigButton.swift in Sources */,
 				AC8AB6B41FA967ED00251F85 /* ArtistFactory.swift in Sources */,
 				AC11971F1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift in Sources */,
 				AC01487F1F9D907D00F9A732 /* URLExtensions.swift in Sources */,
