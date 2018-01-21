@@ -78,7 +78,7 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
     
     let item = items[indexPath.row]
     
-    cell.setupCellFor(item: item, action: nil)
+    cell.setupCellWithImage(forItem: item, action: nil)
     
     cell.seededCell = seeds?.isInSeeds(item: item) == true
     

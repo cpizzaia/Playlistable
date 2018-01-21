@@ -132,7 +132,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     let item = items[indexPath.row]
     
     if let album  = item as? Album {
-      cell.setupCellFor(item: item, action: {
+      cell.setupCellWithImage(forItem: item, action: {
         mainStore.dispatch(InspectAlbum(albumID: album.id))
         
         let vc = loadUIViewControllerFromNib(ItemWithTrackListViewController.self)
@@ -142,7 +142,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
         self.navigationController?.pushViewController(vc, animated: true)
       })
     } else {
-      cell.setupCellFor(item: item, action: nil)
+      cell.setupCellWithImage(forItem: item, action: nil)
     }
     
     

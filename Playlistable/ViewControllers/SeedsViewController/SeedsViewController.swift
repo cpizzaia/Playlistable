@@ -113,7 +113,7 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
     
     let item = Array(items)[indexPath.row]
     
-    cell.setupCellFor(item: item, action: nil)
+    cell.setupCellWithImage(forItem: item, action: nil)
     
     cell.isUserInteractionEnabled = false
     

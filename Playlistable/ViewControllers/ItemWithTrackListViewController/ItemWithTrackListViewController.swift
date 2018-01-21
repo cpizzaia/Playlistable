@@ -91,7 +91,7 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     
     let track = tracks[indexPath.row]
     
-    cell.setupCellFor(item: track, action: nil)
+    cell.setupCellWithoutImage(forItem: track, action: nil)
     
     cell.seededCell = seeds?.isInSeeds(item: track) == true
     

@@ -20,22 +20,28 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FeB-jx-h1r">
-                        <rect key="frame" x="10" y="11" width="87.5" height="87.5"/>
+                        <rect key="frame" x="10" y="11" width="87" height="88"/>
                         <constraints>
+                            <constraint firstAttribute="height" id="GJD-LX-VMZ"/>
                             <constraint firstAttribute="width" secondItem="FeB-jx-h1r" secondAttribute="height" multiplier="1:1" id="swC-5N-lHO"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="GJD-LX-VMZ"/>
+                            </mask>
+                        </variation>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BDf-hp-Z83">
-                        <rect key="frame" x="117.5" y="-1" width="270.5" height="110"/>
+                        <rect key="frame" x="117" y="0.0" width="271" height="109.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4b-1g-vFJ">
-                                <rect key="frame" x="0.0" y="45" width="216.5" height="20.5"/>
+                                <rect key="frame" x="0.0" y="45" width="217" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQF-W2-7J0">
-                                <rect key="frame" x="216.5" y="40" width="54" height="30"/>
+                                <rect key="frame" x="217" y="40" width="54" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="actionButtonTapped:" destination="Xxq-mb-g03" eventType="touchUpInside" id="889-3g-kNO"/>
@@ -66,6 +72,8 @@
             <connections>
                 <outlet property="actionButton" destination="gQF-W2-7J0" id="vH4-6Q-RLf"/>
                 <outlet property="itemImage" destination="FeB-jx-h1r" id="YgB-rt-8q2"/>
+                <outlet property="itemImageHeightRegularConstraint" destination="TWm-gg-wpv" id="WYh-tA-uXN"/>
+                <outlet property="itemImageHeightZeroConstraint" destination="GJD-LX-VMZ" id="cnN-5k-IaS"/>
                 <outlet property="titleLabel" destination="k4b-1g-vFJ" id="edW-dO-IZf"/>
             </connections>
             <point key="canvasLocation" x="80" y="224"/>
