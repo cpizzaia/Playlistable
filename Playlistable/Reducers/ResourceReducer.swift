@@ -52,13 +52,42 @@ func resourceReducer(action: Action, state: ResourceState?) -> ResourceState {
   
   switch action {
   case let action as ReceiveTracks:
-    action.tracks.forEach({ state.tracks[$0.id] = $0 })
+    action.tracks.forEach({ state = updateOrAdd(item: $0, toState: state) })
   case let action as ReceiveAlbums:
-    action.albums.forEach({ state.albums[$0.id] = $0 })
+    action.albums.forEach({ state = updateOrAdd(item: $0, toState: state)})
   case let action as ReceiveArtists:
-    action.artists.forEach({ state.artists[$0.id] = $0 })
+    action.artists.forEach({ state = updateOrAdd(item: $0, toState: state) })
   default: break
   }
   
   return state
+}
+
+fileprivate func updateOrAdd(item: Item, toState state: ResourceState) -> ResourceState {
+  var state = state
+  
+  switch item {
+  case let item as Track:
+    if shouldUpdate(item: item, forItemInState: state.tracks[item.id]) {
+      state.tracks[item.id] = item
+    }
+  case let item as Album:
+    if shouldUpdate(item: item, forItemInState: state.albums[item.id]) {
+      state.albums[item.id] = item
+    }
+  case let item as Artist:
+    if shouldUpdate(item: item, forItemInState: state.artists[item.id]) {
+      state.artists[item.id] = item
+    }
+  default:
+    break
+  }
+  
+  return state
+}
+
+fileprivate func shouldUpdate(item: Item, forItemInState itemInState: Item?) -> Bool {
+  guard let itemInState = itemInState else { return true }
+  
+  return itemInState.smallImageURL == nil
 }

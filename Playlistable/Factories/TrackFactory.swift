@@ -18,8 +18,7 @@ struct TrackFactory {
     guard
       let id = json["id"].string,
       let durationMS = json["duration_ms"].int,
-      let name = json["name"].string,
-      let previewURL = json["preview_url"].string else {
+      let name = json["name"].string else {
         return nil
     }
     
@@ -30,7 +29,7 @@ struct TrackFactory {
       images: ImageFactory.createImages(fromJSONArray: json["album"]["images"].array ?? []),
       durationMS: durationMS,
       name: name,
-      previewURL: previewURL
+      previewURL: json["preview_url"].string
     )
   }
 }

@@ -15,7 +15,7 @@ struct Track: Item {
   let images: [Image]
   let durationMS: Int
   let name: String
-  let previewURL: String
+  let previewURL: String?
   
   // BrowsableItem Properties
   var title: String {
