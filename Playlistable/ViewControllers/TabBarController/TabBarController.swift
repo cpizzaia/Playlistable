@@ -76,7 +76,7 @@ class TabBarController: UITabBarController, StoreSubscriber {
   
   private func setup(navigationController: UINavigationController) {
     navigationController.navigationBar.titleTextAttributes = [
-      NSAttributedStringKey.font: UIFont.myFont(withSize: 17),
+      NSAttributedStringKey.font: UIFont.myFontBold(withSize: 17),
       NSAttributedStringKey.foregroundColor: UIColor.myWhite
     ]
     
