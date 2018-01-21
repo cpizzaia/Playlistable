@@ -25,6 +25,7 @@ class TabBarController: UITabBarController, StoreSubscriber {
     
     tabBar.backgroundColor = UIColor.myLightBlack
     tabBar.barTintColor = UIColor.myLightBlack
+    tabBar.tintColor = UIColor.myWhite
   
     let tabOne = UINavigationController(rootViewController: loadUIViewControllerFromNib(GeneratedPlaylistViewController.self))
     
@@ -47,6 +48,10 @@ class TabBarController: UITabBarController, StoreSubscriber {
     viewControllers = [tabOne, tabTwo, tabThree]
     
     viewControllers?.forEach { self.setup(navigationController: $0 as! UINavigationController) }
+    
+    let navAppearance = UINavigationBar.appearance()
+    
+    navAppearance.tintColor = UIColor.myWhite
   }
   
   override func didReceiveMemoryWarning() {

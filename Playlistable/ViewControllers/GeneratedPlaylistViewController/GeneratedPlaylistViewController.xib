@@ -38,8 +38,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLN-KF-n8r">
                         <rect key="frame" x="-0.5" y="20" width="375" height="647"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSw-rK-SIH">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSw-rK-SIH" customClass="BigButton" customModule="Playlistable" customModuleProvider="target">
+                                <rect key="frame" x="84.5" y="0.0" width="206" height="48.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
@@ -47,7 +47,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jUM-Fh-aUO">
-                                <rect key="frame" x="0.5" y="52" width="375" height="595"/>
+                                <rect key="frame" x="0.5" y="48.5" width="375" height="598.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -55,12 +55,12 @@
                         <constraints>
                             <constraint firstItem="jUM-Fh-aUO" firstAttribute="width" secondItem="CLN-KF-n8r" secondAttribute="width" id="0bq-Gv-nTn"/>
                             <constraint firstItem="jUM-Fh-aUO" firstAttribute="top" secondItem="iSw-rK-SIH" secondAttribute="bottom" id="9ye-fI-0Zo"/>
-                            <constraint firstItem="iSw-rK-SIH" firstAttribute="height" secondItem="CLN-KF-n8r" secondAttribute="height" multiplier="0.08" id="ErE-YD-RsK"/>
+                            <constraint firstItem="iSw-rK-SIH" firstAttribute="height" secondItem="CLN-KF-n8r" secondAttribute="height" multiplier="0.075" id="ErE-YD-RsK"/>
                             <constraint firstItem="iSw-rK-SIH" firstAttribute="top" secondItem="CLN-KF-n8r" secondAttribute="top" id="HA7-6A-d6R"/>
                             <constraint firstItem="jUM-Fh-aUO" firstAttribute="centerX" secondItem="CLN-KF-n8r" secondAttribute="centerX" id="gae-HF-JNH"/>
                             <constraint firstAttribute="bottom" secondItem="jUM-Fh-aUO" secondAttribute="bottom" id="p9Z-da-6tv"/>
                             <constraint firstItem="iSw-rK-SIH" firstAttribute="centerX" secondItem="CLN-KF-n8r" secondAttribute="centerX" id="pXL-DL-xkw"/>
-                            <constraint firstItem="iSw-rK-SIH" firstAttribute="width" secondItem="CLN-KF-n8r" secondAttribute="width" id="yDI-bM-BhZ"/>
+                            <constraint firstItem="iSw-rK-SIH" firstAttribute="width" secondItem="CLN-KF-n8r" secondAttribute="width" multiplier="0.55" id="yDI-bM-BhZ"/>
                         </constraints>
                     </view>
                 </subviews>

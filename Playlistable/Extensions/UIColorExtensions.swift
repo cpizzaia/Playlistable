@@ -28,6 +28,12 @@ extension UIColor {
     }
   }
   
+  static var myAccent: UIColor {
+    get {
+      return UIColor(rgb: 0xE0AC00)
+    }
+  }
+  
   convenience init(red: Int, green: Int, blue: Int) {
     assert(red >= 0 && red <= 255, "Invalid red component")
     assert(green >= 0 && green <= 255, "Invalid green component")

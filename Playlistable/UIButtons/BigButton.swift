@@ -14,12 +14,12 @@ class BigButton: UIButton {
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    layer.cornerRadius = 10
+    layer.cornerRadius = frame.size.height / 2
     clipsToBounds = true
     
-    backgroundColor = UIColor.myWhite
-    titleLabel?.font = UIFont.myFont(withSize: 17)
+    backgroundColor = UIColor.myAccent
+    titleLabel?.font = UIFont.myFontBold(withSize: 17)
     
-    setTitleColor(UIColor.myDarkBlack, for: .normal)
+    setTitleColor(UIColor.myWhite, for: .normal)
   }
 }

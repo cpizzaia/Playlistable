@@ -13,4 +13,8 @@ extension UIFont {
   static func myFont(withSize size: CGFloat) -> UIFont {
     return UIFont(name: "CircularStd-Book", size: size)!
   }
+  
+  static func myFontBold(withSize size: CGFloat) -> UIFont {
+    return UIFont(name: "CircularStd-Bold", size: size)!
+  }
 }
