@@ -145,8 +145,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
       cell.setupCellWithImage(forItem: item, action: nil)
     }
     
-    
-    
     cell.seededCell = seeds?.isInSeeds(item: item) == true
     
     return cell

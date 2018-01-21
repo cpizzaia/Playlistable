@@ -41,6 +41,16 @@
 		AC36E6E81FE731370025BBE1 /* SeeAllSearchResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC36E6E71FE731370025BBE1 /* SeeAllSearchResultsViewController.xib */; };
 		AC4C84D72014046400C8A4E6 /* ItemWithTrackListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84D62014046400C8A4E6 /* ItemWithTrackListHeaderView.xib */; };
 		AC4C84DA2014050300C8A4E6 /* ItemWithTrackListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84D92014050300C8A4E6 /* ItemWithTrackListHeaderView.swift */; };
+		AC4C84DC2014293300C8A4E6 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84DB2014293300C8A4E6 /* UIColorExtensions.swift */; };
+		AC4C84DE20142C1800C8A4E6 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84DD20142C1800C8A4E6 /* UIFontExtensions.swift */; };
+		AC4C84E9201430B100C8A4E6 /* CircularStd-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E1201430B000C8A4E6 /* CircularStd-MediumItalic.otf */; };
+		AC4C84EA201430B100C8A4E6 /* CircularStd-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E2201430B000C8A4E6 /* CircularStd-BoldItalic.otf */; };
+		AC4C84EB201430B100C8A4E6 /* CircularStd-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E3201430B000C8A4E6 /* CircularStd-Bold.otf */; };
+		AC4C84EC201430B100C8A4E6 /* CircularStd-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E4201430B000C8A4E6 /* CircularStd-Book.otf */; };
+		AC4C84ED201430B100C8A4E6 /* CircularStd-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E5201430B000C8A4E6 /* CircularStd-Black.otf */; };
+		AC4C84EE201430B100C8A4E6 /* CircularStd-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E6201430B100C8A4E6 /* CircularStd-Medium.otf */; };
+		AC4C84EF201430B100C8A4E6 /* CircularStd-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E7201430B100C8A4E6 /* CircularStd-BlackItalic.otf */; };
+		AC4C84F0201430B100C8A4E6 /* CircularStd-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E8201430B100C8A4E6 /* CircularStd-BookItalic.otf */; };
 		AC53C96F1FE37BA100664733 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC53C96E1FE37BA100664733 /* SearchViewController.xib */; };
 		AC53C9711FE37C6300664733 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53C9701FE37C6300664733 /* SearchViewController.swift */; };
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
@@ -117,6 +127,16 @@
 		AC36E6E71FE731370025BBE1 /* SeeAllSearchResultsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeeAllSearchResultsViewController.xib; sourceTree = "<group>"; };
 		AC4C84D62014046400C8A4E6 /* ItemWithTrackListHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemWithTrackListHeaderView.xib; sourceTree = "<group>"; };
 		AC4C84D92014050300C8A4E6 /* ItemWithTrackListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWithTrackListHeaderView.swift; sourceTree = "<group>"; };
+		AC4C84DB2014293300C8A4E6 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		AC4C84DD20142C1800C8A4E6 /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
+		AC4C84E1201430B000C8A4E6 /* CircularStd-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-MediumItalic.otf"; sourceTree = "<group>"; };
+		AC4C84E2201430B000C8A4E6 /* CircularStd-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-BoldItalic.otf"; sourceTree = "<group>"; };
+		AC4C84E3201430B000C8A4E6 /* CircularStd-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Bold.otf"; sourceTree = "<group>"; };
+		AC4C84E4201430B000C8A4E6 /* CircularStd-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Book.otf"; sourceTree = "<group>"; };
+		AC4C84E5201430B000C8A4E6 /* CircularStd-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Black.otf"; sourceTree = "<group>"; };
+		AC4C84E6201430B100C8A4E6 /* CircularStd-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-Medium.otf"; sourceTree = "<group>"; };
+		AC4C84E7201430B100C8A4E6 /* CircularStd-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-BlackItalic.otf"; sourceTree = "<group>"; };
+		AC4C84E8201430B100C8A4E6 /* CircularStd-BookItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-BookItalic.otf"; sourceTree = "<group>"; };
 		AC53C96E1FE37BA100664733 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		AC53C9701FE37C6300664733 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -191,6 +211,8 @@
 				AC8C203F1FC9DA2F006FF1AC /* UIButtonExtensions.swift */,
 				AC5787181FDCAD860057D41A /* StringExtensions.swift */,
 				ACF43247200BF57E00110B53 /* UIImageExtensions.swift */,
+				AC4C84DB2014293300C8A4E6 /* UIColorExtensions.swift */,
+				AC4C84DD20142C1800C8A4E6 /* UIFontExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -217,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */,
+				AC4C84DF2014307C00C8A4E6 /* Resources */,
 				AC17B7F61FBE99900029AFB6 /* StateManagers */,
 				AC8AB6B01FA9649F00251F85 /* Factories */,
 				ACF43246200BEAB600110B53 /* GenericTableViewCells */,
@@ -298,6 +321,29 @@
 				AC4C84D92014050300C8A4E6 /* ItemWithTrackListHeaderView.swift */,
 			);
 			path = ItemWithTrackListHeaderView;
+			sourceTree = "<group>";
+		};
+		AC4C84DF2014307C00C8A4E6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AC4C84E02014308500C8A4E6 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AC4C84E02014308500C8A4E6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AC4C84E5201430B000C8A4E6 /* CircularStd-Black.otf */,
+				AC4C84E7201430B100C8A4E6 /* CircularStd-BlackItalic.otf */,
+				AC4C84E3201430B000C8A4E6 /* CircularStd-Bold.otf */,
+				AC4C84E2201430B000C8A4E6 /* CircularStd-BoldItalic.otf */,
+				AC4C84E4201430B000C8A4E6 /* CircularStd-Book.otf */,
+				AC4C84E8201430B100C8A4E6 /* CircularStd-BookItalic.otf */,
+				AC4C84E6201430B100C8A4E6 /* CircularStd-Medium.otf */,
+				AC4C84E1201430B000C8A4E6 /* CircularStd-MediumItalic.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		AC53C96D1FE37B8200664733 /* SearchController */ = {
@@ -555,15 +601,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC1197311FB956B1009D1646 /* PlayerBarContainerViewController.xib in Resources */,
+				AC4C84F0201430B100C8A4E6 /* CircularStd-BookItalic.otf in Resources */,
 				AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */,
 				ACD4B00D1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib in Resources */,
+				AC4C84E9201430B100C8A4E6 /* CircularStd-MediumItalic.otf in Resources */,
 				AC4C84D72014046400C8A4E6 /* ItemWithTrackListHeaderView.xib in Resources */,
 				ACF4324D200C136C00110B53 /* ItemWithTrackListViewController.xib in Resources */,
 				AC5787221FDE18140057D41A /* SeedsViewController.xib in Resources */,
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,
 				AC18FCC41FB3E95A0079AFC8 /* InspectAllTableViewCell.xib in Resources */,
+				AC4C84EB201430B100C8A4E6 /* CircularStd-Bold.otf in Resources */,
 				AC53C96F1FE37BA100664733 /* SearchViewController.xib in Resources */,
+				AC4C84EA201430B100C8A4E6 /* CircularStd-BoldItalic.otf in Resources */,
+				AC4C84ED201430B100C8A4E6 /* CircularStd-Black.otf in Resources */,
+				AC4C84EE201430B100C8A4E6 /* CircularStd-Medium.otf in Resources */,
+				AC4C84EF201430B100C8A4E6 /* CircularStd-BlackItalic.otf in Resources */,
 				AC11971D1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib in Resources */,
+				AC4C84EC201430B100C8A4E6 /* CircularStd-Book.otf in Resources */,
 				AC36E6E01FE5D9660025BBE1 /* SearchResultSectionHeaderView.xib in Resources */,
 				AC02D0D01F9CF5B3009ED193 /* Assets.xcassets in Resources */,
 				AC36E6E81FE731370025BBE1 /* SeeAllSearchResultsViewController.xib in Resources */,
@@ -673,6 +727,7 @@
 				AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */,
 				AC36E6E31FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift in Sources */,
 				AC36E6E61FE731090025BBE1 /* SeeAllSearchResultsViewController.swift in Sources */,
+				AC4C84DE20142C1800C8A4E6 /* UIFontExtensions.swift in Sources */,
 				ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */,
 				AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */,
 				AC83D6561FBD46D500E9D004 /* wrapInDispatchMiddleware.swift in Sources */,
@@ -682,6 +737,7 @@
 				AC8AB6B61FA968D500251F85 /* AlbumFactory.swift in Sources */,
 				ACAA1A441FB54A8B00F6B345 /* SeedsActions.swift in Sources */,
 				AC8AB6B81FA969C000251F85 /* ImageFactory.swift in Sources */,
+				AC4C84DC2014293300C8A4E6 /* UIColorExtensions.swift in Sources */,
 				ACF43252200C334000110B53 /* InspectAlbumActions.swift in Sources */,
 				AC11971B1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift in Sources */,
 				AC8AB6BC1FA9777D00251F85 /* ResourceActions.swift in Sources */,

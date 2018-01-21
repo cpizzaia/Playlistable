@@ -53,6 +53,8 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
       UINib(nibName: "InspectAllTableViewCell", bundle: nil),
       forCellReuseIdentifier: "seedsCell"
     )
+    
+    
   }
   
   override func viewWillAppear(_ animated: Bool) {

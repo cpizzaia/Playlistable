@@ -19,5 +19,4 @@ class ItemWithTrackListHeaderView: UIView {
       itemImage.image = UIImage.placeholder
     }
   }
-  
 }
