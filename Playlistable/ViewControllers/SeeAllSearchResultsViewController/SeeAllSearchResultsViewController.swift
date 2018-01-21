@@ -78,9 +78,21 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
     
     let item = items[indexPath.row]
     
-    cell.setupCellWithImage(forItem: item, action: nil)
-    
     cell.seededCell = seeds?.isInSeeds(item: item) == true
+    
+    if let album  = item as? Album {
+      cell.setupCellWithImage(forItem: item, action: {
+        mainStore.dispatch(InspectAlbum(albumID: album.id))
+        
+        let vc = loadUIViewControllerFromNib(ItemWithTrackListViewController.self)
+        
+        vc.itemType = .album
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+      })
+    } else {
+      cell.setupCellWithImage(forItem: item, action: nil)
+    }
     
     return cell
   }
