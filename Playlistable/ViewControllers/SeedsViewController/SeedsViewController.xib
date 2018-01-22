@@ -18,12 +18,12 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JSU-cd-Slf">
-                        <rect key="frame" x="0.0" y="90" width="375" height="437"/>
+                        <rect key="frame" x="0.0" y="90" width="375" height="430.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tableView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iLl-ir-mJk" customClass="BigButton" customModule="Playlistable" customModuleProvider="target">
-                        <rect key="frame" x="84.5" y="557" width="206" height="50"/>
-                        <state key="normal" title="Generate Playlist"/>
+                        <rect key="frame" x="84.5" y="550.5" width="206" height="56.5"/>
+                        <state key="normal" title="GENERATE"/>
                         <connections>
                             <action selector="generatePlaylistButtonTapped:" destination="it6-4U-JVr" eventType="touchUpInside" id="d7X-8z-fwU"/>
                         </connections>
@@ -38,7 +38,7 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="2zq-HP-mpX" firstAttribute="bottom" secondItem="iLl-ir-mJk" secondAttribute="bottom" constant="60" id="4QI-q1-noS"/>
-                    <constraint firstItem="iLl-ir-mJk" firstAttribute="height" secondItem="ReG-al-d15" secondAttribute="height" multiplier="0.075" id="7xy-mK-Hfg"/>
+                    <constraint firstItem="iLl-ir-mJk" firstAttribute="height" secondItem="ReG-al-d15" secondAttribute="height" multiplier="0.085" id="7xy-mK-Hfg"/>
                     <constraint firstItem="JSU-cd-Slf" firstAttribute="width" secondItem="ReG-al-d15" secondAttribute="width" id="DyR-Sr-gR3"/>
                     <constraint firstItem="iLl-ir-mJk" firstAttribute="width" secondItem="ReG-al-d15" secondAttribute="width" multiplier="0.55" id="ElU-Dy-cnV"/>
                     <constraint firstItem="JSU-cd-Slf" firstAttribute="centerX" secondItem="2zq-HP-mpX" secondAttribute="centerX" id="Jfa-cV-gKI"/>

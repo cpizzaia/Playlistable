@@ -52,6 +52,9 @@ class TabBarController: UITabBarController, StoreSubscriber {
     let navAppearance = UINavigationBar.appearance()
     
     navAppearance.tintColor = UIColor.myWhite
+    navAppearance.isTranslucent = false
+    navAppearance.setBackgroundImage(UIImage(), for: .default)
+    navAppearance.shadowImage = UIImage()
   }
   
   override func didReceiveMemoryWarning() {

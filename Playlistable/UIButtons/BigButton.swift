@@ -11,14 +11,17 @@ import UIKit
 
 class BigButton: UIButton {
   
+  private var styled = false
   override func layoutSubviews() {
     super.layoutSubviews()
+    if styled { return }
+    styled = true
     
     layer.cornerRadius = frame.size.height / 2
     clipsToBounds = true
     
     backgroundColor = UIColor.myAccent
-    titleLabel?.font = UIFont.myFontBold(withSize: 17)
+    titleLabel?.font = UIFont.myFontBold(withSize: 15)
     
     setTitleColor(UIColor.myWhite, for: .normal)
   }

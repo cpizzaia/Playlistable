@@ -16,20 +16,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   @IBOutlet var noPlaylistView: UIView!
   @IBOutlet var noPlaylistViewLabel: UILabel!
   @IBOutlet var playlistView: UIView!
-  @IBOutlet var playButton: UIButton!
   @IBOutlet var playlistTableView: UITableView!
-  
-  
-  @IBAction func playButtonTapped(_ sender: UIButton) {
-    guard let track = tracks.first else { return }
-    
-    mainStore.dispatch(playTrack(id: track.id))
-    
-    mainStore.dispatch(playQueue(
-      trackIDs: tracks.map { $0.id },
-      startingWithTrackID: track.id
-    ))
-  }
   
   var tracks = [Track]()
   var currentlyPlayingTrack: Track?
@@ -43,7 +30,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = UIColor.myDarkBlack
+    view.backgroundColor = UIColor.myLightBlack
     
     noPlaylistView.backgroundColor = UIColor.clear
     noPlaylistViewLabel.font = UIFont.myFont(withSize: 17)
@@ -51,19 +38,25 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     
     playlistView.backgroundColor = UIColor.clear
     
-    playButton.setTitleColor(UIColor.myWhite, for: .normal)
-    playButton.titleLabel?.font = UIFont.myFont(withSize: 17)
-    
     playlistTableView.delegate = self
     playlistTableView.dataSource = self
     playlistTableView.delaysContentTouches = false
-    playlistTableView.backgroundColor = UIColor.clear
+    playlistTableView.backgroundColor = UIColor.myDarkBlack
     playlistTableView.separatorStyle = .none
     
     playlistTableView.register(
       UINib(nibName: "GeneratedPlaylistTrackTableViewCell", bundle: nil),
       forCellReuseIdentifier: "generatedTrackCell"
     )
+    
+    // Adding view above section header to make color the same
+    var frame = playlistTableView.bounds
+    frame.origin.y = -frame.size.height
+    
+    let bgView = UIView(frame: frame)
+    bgView.backgroundColor = UIColor.myLightBlack
+    
+    playlistTableView.insertSubview(bgView, at: 0)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -130,6 +123,27 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 70
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let view = loadUIViewFromNib(GeneratedPlaylistHeaderView.self)
+    
+    view.setupView(action: {
+      guard let track = self.tracks.first else { return }
+  
+      mainStore.dispatch(playTrack(id: track.id))
+  
+      mainStore.dispatch(playQueue(
+        trackIDs: self.tracks.map { $0.id },
+        startingWithTrackID: track.id
+      ))
+    })
+    
+    return view
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return UIScreen.main.bounds.height * 0.075
   }
   
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
