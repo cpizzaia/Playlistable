@@ -47,6 +47,8 @@ func trackURI(fromID id: String) -> String {
   return "spotify:track:\(id)"
 }
 
-struct KeychainKeys {
-  static let playlistableSavedTracksPlaylistID = "playlistableSavedTracksPlaylistID"
+struct UserDefaultsKeys {
+  static let spotifyAuthToken = "spotifyAuthToken"
+  static let spotifyRefreshToken = "spotifyRefreshToken"
+  static let spotifyTokenExpirationTimeInterval = "spotifyTokenExpirationTimeInterval"
 }

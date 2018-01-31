@@ -11,11 +11,10 @@ import ReSwift
 import UIKit
 
 class TabBarController: UITabBarController, StoreSubscriber {
-  
-  var isAuthed = false
+  var authState: SpotifyAuthState?
   
   func newState(state: AppState) {
-    isAuthed = state.spotifyAuth.isAuthed
+    authState = state.spotifyAuth
   }
   
   typealias StoreSubscriberStateType = AppState
@@ -74,7 +73,9 @@ class TabBarController: UITabBarController, StoreSubscriber {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    if !isAuthed { mainStore.dispatch(oAuthSpotify()) }
+    guard let authState = authState else { return }
+    
+    if !authState.isAuthed { mainStore.dispatch(oAuthSpotify(authState: authState)) }
   }
   
   private func setup(navigationController: UINavigationController) {

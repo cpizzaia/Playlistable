@@ -19,11 +19,21 @@ struct InitializeOAuth: Action {
 
 struct RequestSpotifyAuth: APIRequestAction {}
 
+struct RequestSpotifyRefreshAuth: APIRequestAction {}
+
 struct ErrorSpotifyAuth: APIResponseFailureAction {
   let error: APIRequest.APIError
 }
 
+struct ErrorSpotifyRefreshAuth: APIResponseFailureAction {
+  let error: APIRequest.APIError
+}
+
 struct ReceiveSpotifyAuth: APIResponseSuccessAction {
+  let response: JSON
+}
+
+struct ReceiveSpotifyRefreshAuth: APIResponseSuccessAction {
   let response: JSON
 }
 
@@ -115,9 +125,14 @@ fileprivate var webURL: URL {
   }
 }
 
-func oAuthSpotify() -> Action {
+func oAuthSpotify(authState: SpotifyAuthState) -> Action {
   return WrapInDispatch { dispatch in
     dispatch(RequestSpotifyAuth())
+    
+    if authState.isRefreshable && authState.shouldRefresh {
+      dispatch(refreshSpotifyAuth(refreshToken: authState.refreshToken ?? ""))
+      return
+    }
     
     if hasSpotifyInstalled {
       log("Authing from spotify app")
@@ -130,6 +145,28 @@ func oAuthSpotify() -> Action {
       )
     }
   }
+}
+
+func refreshSpotifyAuth(refreshToken: String) -> Action {
+  return CallAPI(
+    method: .post,
+    headers: nil,
+    body: [
+      "refresh_token": refreshToken,
+      "grant_type": "refresh_token",
+      "client_id": clientID,
+      "client_secret": clientSecret
+    ],
+    bodyEncoding: URLEncoding.default,
+    types: APITypes(
+      requestAction: RequestSpotifyRefreshAuth.self,
+      successAction: ReceiveSpotifyRefreshAuth.self,
+      failureAction: ErrorSpotifyRefreshAuth.self
+    ),
+    url: "https://accounts.spotify.com/api/token",
+    success: nil,
+    failure: nil
+  )
 }
 
 func receiveSpotifyAuth(url: URL) -> Action? {
