@@ -26,7 +26,7 @@ class GeneratedPlaylistTrackTableViewCell: UITableViewCell {
     get {
       return _currentlyPlaying
     } set {
-      trackTitle.textColor = newValue ? .yellow : UIColor.myWhite
+      trackTitle.textColor = newValue ? UIColor.myAccent : UIColor.myWhite
       _currentlyPlaying = newValue
     }
   }
