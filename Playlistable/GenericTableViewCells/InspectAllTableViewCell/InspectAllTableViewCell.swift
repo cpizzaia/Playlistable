@@ -26,8 +26,10 @@ class InspectAllTableViewCell: UITableViewCell {
     get {
       return _seededCell
     } set {
-      backgroundColor = newValue ? UIColor.myAccent : .clear
-      _seededCell = newValue
+      DispatchQueue.main.async {
+        self.backgroundColor = newValue ? UIColor.myAccent : .clear
+        self._seededCell = newValue
+      }
     }
   }
   
