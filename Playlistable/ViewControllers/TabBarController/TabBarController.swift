@@ -75,7 +75,11 @@ class TabBarController: UITabBarController, StoreSubscriber {
     super.viewDidAppear(animated)
     guard let authState = authState else { return }
     
-    if !authState.isAuthed { mainStore.dispatch(oAuthSpotify(authState: authState)) }
+    if !authState.isAuthed {
+      mainStore.dispatch(oAuthSpotify(authState: authState))
+    } else {
+      mainStore.dispatch(postAuthAction(accessToken: authState.token ?? ""))
+    }
   }
   
   private func setup(navigationController: UINavigationController) {

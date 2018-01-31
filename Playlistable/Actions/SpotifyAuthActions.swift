@@ -148,25 +148,40 @@ func oAuthSpotify(authState: SpotifyAuthState) -> Action {
 }
 
 func refreshSpotifyAuth(refreshToken: String) -> Action {
-  return CallAPI(
-    method: .post,
-    headers: nil,
-    body: [
-      "refresh_token": refreshToken,
-      "grant_type": "refresh_token",
-      "client_id": clientID,
-      "client_secret": clientSecret
-    ],
-    bodyEncoding: URLEncoding.default,
-    types: APITypes(
-      requestAction: RequestSpotifyRefreshAuth.self,
-      successAction: ReceiveSpotifyRefreshAuth.self,
-      failureAction: ErrorSpotifyRefreshAuth.self
-    ),
-    url: "https://accounts.spotify.com/api/token",
-    success: nil,
-    failure: nil
-  )
+  return WrapInDispatch { dispatch in
+    dispatch(CallAPI(
+      method: .post,
+      headers: nil,
+      body: [
+        "refresh_token": refreshToken,
+        "grant_type": "refresh_token",
+        "client_id": clientID,
+        "client_secret": clientSecret
+      ],
+      bodyEncoding: URLEncoding.default,
+      types: APITypes(
+        requestAction: RequestSpotifyRefreshAuth.self,
+        successAction: ReceiveSpotifyRefreshAuth.self,
+        failureAction: ErrorSpotifyRefreshAuth.self
+      ),
+      url: "https://accounts.spotify.com/api/token",
+      success: { json in
+        guard let token = json["access_token"].string else { return }
+        
+        dispatch(postAuthAction(accessToken: token))
+    },
+      failure: nil
+    ))
+  }
+}
+
+func postAuthAction(accessToken: String) -> Action {
+  
+  return WrapInDispatch { dispatch in
+    dispatch(initializePlayer(clientID: clientID, accessToken: accessToken))
+    dispatch(getCurrentUser())
+  }
+  
 }
 
 func receiveSpotifyAuth(url: URL) -> Action? {
@@ -193,8 +208,7 @@ func receiveSpotifyAuth(url: URL) -> Action? {
       success: { json in
         guard let token = json["access_token"].string else { return }
         
-        dispatch(initializePlayer(clientID: clientID, accessToken: token))
-        dispatch(getCurrentUser())
+        dispatch(postAuthAction(accessToken: token))
     },
       failure: {}
     ))
