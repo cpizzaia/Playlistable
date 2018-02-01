@@ -84,7 +84,7 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
   case _ as RequestSpotifyAuth:
     state.isRequesting = true
     
-  case _ as ReceiveSpotifyRefreshAuth:
+  case _ as RequestSpotifyRefreshAuth:
     state.isRefreshing = true
     
   case let action as ReceiveSpotifyAuth:
