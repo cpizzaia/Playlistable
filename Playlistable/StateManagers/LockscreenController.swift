@@ -109,7 +109,7 @@ class LockScreenController: NSObject, StateManager {
         MPMediaItemPropertyPlaybackDuration: Double(track.durationMS) / 1000.0 as AnyObject,
         MPNowPlayingInfoPropertyPlaybackQueueIndex: 0 as AnyObject,
         MPNowPlayingInfoPropertyPlaybackQueueCount: 1 as AnyObject,
-        MPNowPlayingInfoPropertyElapsedPlaybackTime: 0 as AnyObject
+        MPNowPlayingInfoPropertyElapsedPlaybackTime: NSNumber(value: getCurrentPlayerPosition()) as AnyObject
       ]
       
       if let imageURL = track.mediumImageURL {

@@ -30,11 +30,20 @@ class TabBarController: UITabBarController, StoreSubscriber {
     
     tabOne.tabBarItem = UITabBarItem()
     tabOne.tabBarItem.title = "Playlist"
+    tabOne.tabBarItem.image = UIImage(named: "PlaylistTab")
+    tabOne.tabBarItem.selectedImage = UIImage(named: "PlaylistTab")
+    
     
     let tabTwo = UINavigationController(rootViewController: loadUIViewControllerFromNib(SeedsViewController.self))
     
     tabTwo.tabBarItem = UITabBarItem()
     tabTwo.tabBarItem.title = "Seeds"
+    tabTwo.tabBarItem.image = UIImage(named: "SeedsTab")
+    tabTwo.tabBarItem.selectedImage = UIImage(named: "SeedsTab")
+    
+    
+    
+    
     
     let tabThree = UINavigationController(rootViewController:
         loadUIViewControllerFromNib(SearchViewController.self)
@@ -42,6 +51,9 @@ class TabBarController: UITabBarController, StoreSubscriber {
     
     tabThree.tabBarItem = UITabBarItem()
     tabThree.tabBarItem.title = "Search"
+    tabThree.tabBarItem.image = UIImage(named: "SearchTab")
+    tabThree.tabBarItem.selectedImage = UIImage(named: "SearchTab")
+    
     
     
     viewControllers = [tabOne, tabTwo, tabThree]

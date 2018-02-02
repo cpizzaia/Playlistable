@@ -32,7 +32,7 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
       let track = state.resources.tracksFor(ids: [trackID]).first!
       playBarTitleLabel.text = track.name
       
-      animateDuration(startTime: 0, endTime: Double(track.durationMS) / 1000.0)
+      animateDuration(startTime: getCurrentPlayerPosition(), endTime: Double(track.durationMS) / 1000.0)
     }
   }
   

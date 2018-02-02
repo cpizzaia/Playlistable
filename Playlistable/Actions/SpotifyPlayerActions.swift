@@ -140,6 +140,11 @@ func resume() -> Action {
   }
 }
 
+// FIXME: Not sure how else to expose this, come back and rethink this later.
+func getCurrentPlayerPosition() -> TimeInterval {
+  return player.playbackState.position
+}
+
 fileprivate func id(fromURI uri: String) -> String {
   return String(uri.split(separator: ":").last!)
 }
