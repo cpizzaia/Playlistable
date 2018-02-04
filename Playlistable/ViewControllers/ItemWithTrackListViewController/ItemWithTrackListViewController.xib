@@ -23,10 +23,10 @@
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="0w8-dh-GwB" firstAttribute="centerY" secondItem="MvZ-nF-lLn" secondAttribute="centerY" id="Om0-rI-ogj"/>
-                    <constraint firstItem="0w8-dh-GwB" firstAttribute="width" secondItem="Nk0-7V-WC3" secondAttribute="width" id="Oyc-zl-u6A"/>
-                    <constraint firstItem="0w8-dh-GwB" firstAttribute="centerX" secondItem="MvZ-nF-lLn" secondAttribute="centerX" id="Qlc-hP-Cvl"/>
-                    <constraint firstItem="0w8-dh-GwB" firstAttribute="height" secondItem="Nk0-7V-WC3" secondAttribute="height" id="TgC-sv-rMu"/>
+                    <constraint firstItem="MvZ-nF-lLn" firstAttribute="top" secondItem="0w8-dh-GwB" secondAttribute="top" constant="10" id="O7G-qL-PiP"/>
+                    <constraint firstItem="MvZ-nF-lLn" firstAttribute="trailing" secondItem="0w8-dh-GwB" secondAttribute="trailing" constant="0.5" id="gWF-gY-6eB"/>
+                    <constraint firstItem="MvZ-nF-lLn" firstAttribute="leading" secondItem="0w8-dh-GwB" secondAttribute="leading" constant="0.5" id="hpA-dl-aBq"/>
+                    <constraint firstItem="0w8-dh-GwB" firstAttribute="bottom" secondItem="MvZ-nF-lLn" secondAttribute="bottom" constant="10" id="oJo-dX-YDA"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="MvZ-nF-lLn"/>
             </view>
