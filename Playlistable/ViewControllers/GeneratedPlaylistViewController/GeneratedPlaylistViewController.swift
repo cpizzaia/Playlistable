@@ -30,7 +30,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = UIColor.myLightBlack
+    view.backgroundColor = UIColor.myDarkBlack
     
     noPlaylistView.backgroundColor = UIColor.clear
     noPlaylistViewLabel.font = UIFont.myFont(withSize: 17)
