@@ -129,13 +129,13 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     let view = loadUIViewFromNib(GeneratedPlaylistHeaderView.self)
     
     view.setupView(action: {
-      guard let track = self.tracks.first else { return }
-  
-      mainStore.dispatch(playTrack(id: track.id))
+      let shuffledTrackIDs = self.tracks.map { $0.id }.shuffled()
+      
+      guard let firstTrackID = shuffledTrackIDs.first else { return }
   
       mainStore.dispatch(playQueue(
-        trackIDs: self.tracks.map { $0.id },
-        startingWithTrackID: track.id
+        trackIDs: shuffledTrackIDs,
+        startingWithTrackID: firstTrackID
       ))
     })
     

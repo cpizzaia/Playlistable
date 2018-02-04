@@ -79,6 +79,8 @@
 		ACBDF1431F9D3749001760D7 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1421F9D3749001760D7 /* AppReducer.swift */; };
 		ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */; };
 		ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */; };
+		ACC816682027C3A800A03946 /* MutableCollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */; };
+		ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816692027C3F500A03946 /* SequenceExtensions.swift */; };
 		ACD4B00D1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACD4B00C1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib */; };
 		ACD4B00F1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4B00E1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift */; };
 		ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */; };
@@ -168,6 +170,8 @@
 		ACBDF1421F9D3749001760D7 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthReducer.swift; sourceTree = "<group>"; };
 		ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingMiddlware.swift; sourceTree = "<group>"; };
+		ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableCollectionExtensions.swift; sourceTree = "<group>"; };
+		ACC816692027C3F500A03946 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		ACD4B00C1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneratedPlaylistTrackTableViewCell.xib; sourceTree = "<group>"; };
 		ACD4B00E1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedPlaylistTrackTableViewCell.swift; sourceTree = "<group>"; };
 		ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
@@ -219,6 +223,8 @@
 				ACF43247200BF57E00110B53 /* UIImageExtensions.swift */,
 				AC4C84DB2014293300C8A4E6 /* UIColorExtensions.swift */,
 				AC4C84DD20142C1800C8A4E6 /* UIFontExtensions.swift */,
+				ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */,
+				ACC816692027C3F500A03946 /* SequenceExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -747,9 +753,11 @@
 				AC36E6DA1FE593660025BBE1 /* SearchReducer.swift in Sources */,
 				AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */,
 				AC4C84F6201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift in Sources */,
+				ACC816682027C3A800A03946 /* MutableCollectionExtensions.swift in Sources */,
 				AC8C20401FC9DA2F006FF1AC /* UIButtonExtensions.swift in Sources */,
 				AC11972F1FB95686009D1646 /* PlayerBarContainerViewController.swift in Sources */,
 				ACBDF1401F9D172E001760D7 /* ConfigureStore.swift in Sources */,
+				ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */,
 				ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */,
 				AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */,
 				AC36E6E31FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift in Sources */,
