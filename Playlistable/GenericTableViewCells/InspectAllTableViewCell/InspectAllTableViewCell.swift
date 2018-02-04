@@ -88,7 +88,7 @@ class InspectAllTableViewCell: UITableViewCell {
     titleLabel.font = UIFont.myFont(withSize: 17)
     
     actionButton.setTitleColor(UIColor.myWhite, for: .normal)
-    actionButton.titleLabel?.font = UIFont.myFont(withSize: 17)
+    actionButton.titleLabel?.font = UIFont.myFontBold(withSize: 23)
     
     backgroundColor = UIColor.clear
   }
