@@ -60,6 +60,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     
     searchBar.barTintColor = UIColor.myLightBlack
     searchBar.placeholder = "Search"
+    
+    let cancelButtonAttributes: NSDictionary = [NSAttributedStringKey.foregroundColor: UIColor.myWhite]
+    
+    UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes as? [NSAttributedStringKey : Any], for: UIControlState.normal)
   }
   
   override func viewWillAppear(_ animated: Bool) {
