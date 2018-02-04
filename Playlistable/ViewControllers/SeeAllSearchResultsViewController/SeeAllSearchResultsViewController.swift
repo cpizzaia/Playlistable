@@ -116,6 +116,14 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
     return 70
   }
   
+  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    let view = UIView()
+    
+    view.backgroundColor = UIColor.myDarkBlack
+    
+    return view
+  }
+  
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
     return heightForFooterWithPlayerBar
   }
