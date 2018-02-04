@@ -30,16 +30,16 @@ class TabBarController: UITabBarController, StoreSubscriber {
     
     tabOne.tabBarItem = UITabBarItem()
     tabOne.tabBarItem.title = "Playlist"
-    tabOne.tabBarItem.image = UIImage(named: "PlaylistTab")
-    tabOne.tabBarItem.selectedImage = UIImage(named: "PlaylistTab")
+    tabOne.tabBarItem.image = UIImage(named: "PlaylistTab")?.resizeImageWith(targetSize: CGSize(width: tabBar.bounds.height - 20, height: tabBar.bounds.height))
+    tabOne.tabBarItem.selectedImage = UIImage(named: "PlaylistTab")?.resizeImageWith(targetSize: CGSize(width: tabBar.bounds.height - 20, height: tabBar.bounds.height))
     
     
     let tabTwo = UINavigationController(rootViewController: loadUIViewControllerFromNib(SeedsViewController.self))
     
     tabTwo.tabBarItem = UITabBarItem()
     tabTwo.tabBarItem.title = "Seeds"
-    tabTwo.tabBarItem.image = UIImage(named: "SeedsTab")
-    tabTwo.tabBarItem.selectedImage = UIImage(named: "SeedsTab")
+    tabTwo.tabBarItem.image = UIImage(named: "SeedsTab")?.resizeImageWith(targetSize: CGSize(width: tabBar.bounds.height - 20, height: tabBar.bounds.height))
+    tabTwo.tabBarItem.selectedImage = UIImage(named: "SeedsTab")?.resizeImageWith(targetSize: CGSize(width: tabBar.bounds.height - 20, height: tabBar.bounds.height))
     
     
     
@@ -51,8 +51,8 @@ class TabBarController: UITabBarController, StoreSubscriber {
     
     tabThree.tabBarItem = UITabBarItem()
     tabThree.tabBarItem.title = "Search"
-    tabThree.tabBarItem.image = UIImage(named: "SearchTab")
-    tabThree.tabBarItem.selectedImage = UIImage(named: "SearchTab")
+    tabThree.tabBarItem.image = UIImage(named: "SearchTab")?.resizeImageWith(targetSize: CGSize(width: tabBar.bounds.height - 20, height: tabBar.bounds.height))
+    tabThree.tabBarItem.selectedImage = UIImage(named: "SearchTab")?.resizeImageWith(targetSize: CGSize(width: tabBar.bounds.height - 20, height: tabBar.bounds.height))
     
     
     
