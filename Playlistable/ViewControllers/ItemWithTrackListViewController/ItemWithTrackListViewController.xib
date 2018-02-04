@@ -17,16 +17,16 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="0w8-dh-GwB">
-                        <rect key="frame" x="-0.5" y="10" width="375" height="667"/>
+                        <rect key="frame" x="-0.5" y="20" width="375" height="647"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </tableView>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="MvZ-nF-lLn" firstAttribute="top" secondItem="0w8-dh-GwB" secondAttribute="top" constant="10" id="O7G-qL-PiP"/>
-                    <constraint firstItem="MvZ-nF-lLn" firstAttribute="trailing" secondItem="0w8-dh-GwB" secondAttribute="trailing" constant="0.5" id="gWF-gY-6eB"/>
-                    <constraint firstItem="MvZ-nF-lLn" firstAttribute="leading" secondItem="0w8-dh-GwB" secondAttribute="leading" constant="0.5" id="hpA-dl-aBq"/>
-                    <constraint firstItem="0w8-dh-GwB" firstAttribute="bottom" secondItem="MvZ-nF-lLn" secondAttribute="bottom" constant="10" id="oJo-dX-YDA"/>
+                    <constraint firstItem="MvZ-nF-lLn" firstAttribute="top" secondItem="0w8-dh-GwB" secondAttribute="top" id="O7G-qL-PiP"/>
+                    <constraint firstItem="MvZ-nF-lLn" firstAttribute="trailing" secondItem="0w8-dh-GwB" secondAttribute="trailing" id="gWF-gY-6eB"/>
+                    <constraint firstItem="MvZ-nF-lLn" firstAttribute="leading" secondItem="0w8-dh-GwB" secondAttribute="leading" id="hpA-dl-aBq"/>
+                    <constraint firstItem="0w8-dh-GwB" firstAttribute="bottom" secondItem="MvZ-nF-lLn" secondAttribute="bottom" id="oJo-dX-YDA"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="MvZ-nF-lLn"/>
             </view>
