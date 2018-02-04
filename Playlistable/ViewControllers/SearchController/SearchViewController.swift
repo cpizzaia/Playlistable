@@ -245,5 +245,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
   
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
+    searchBar.setShowsCancelButton(false, animated: true)
   }
 }
