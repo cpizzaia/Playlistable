@@ -16,11 +16,18 @@ struct Track: Item {
   let durationMS: Int
   let name: String
   let previewURL: String?
+  let artistNames: [String]
   
   // BrowsableItem Properties
   var title: String {
     get {
       return name
+    }
+  }
+  
+  var subTitle: String? {
+    get {
+      return artistNames.joined(separator: " + ")
     }
   }
 }

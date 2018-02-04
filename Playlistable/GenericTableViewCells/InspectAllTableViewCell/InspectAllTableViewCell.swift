@@ -16,11 +16,13 @@ class InspectAllTableViewCell: UITableViewCell {
   
   
   @IBOutlet var titleLabel: UILabel!
+  @IBOutlet var subTitleLabel: UILabel!
   @IBOutlet var itemImage: UIImageView!
   @IBOutlet var actionButton: UIButton!
   @IBAction func actionButtonTapped(_ sender: UIButton) {
     action()
   }
+  
   
   var seededCell: Bool {
     get {
@@ -80,12 +82,22 @@ class InspectAllTableViewCell: UITableViewCell {
       actionButton.isEnabled = false
     }
     
+    if let subTitle = item.subTitle {
+      subTitleLabel.isHidden = false
+      subTitleLabel.text = subTitle
+    } else {
+      subTitleLabel.isHidden = true
+    }
+    
     styleCell()
   }
   
   private func styleCell() {
     titleLabel.textColor = UIColor.myWhite
     titleLabel.font = UIFont.myFont(withSize: 17)
+    
+    subTitleLabel.font = UIFont.myFont(withSize: 15)
+    subTitleLabel.textColor = UIColor.myDarkWhite
     
     actionButton.setTitleColor(UIColor.myWhite, for: .normal)
     actionButton.titleLabel?.font = UIFont.myFontBold(withSize: 23)

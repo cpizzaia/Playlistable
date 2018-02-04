@@ -29,7 +29,8 @@ struct TrackFactory {
       images: ImageFactory.createImages(fromJSONArray: json["album"]["images"].array ?? []),
       durationMS: durationMS,
       name: name,
-      previewURL: json["preview_url"].string
+      previewURL: json["preview_url"].string,
+      artistNames: json["artists"].array?.flatMap { $0["name"].string } ?? []
     )
   }
 }

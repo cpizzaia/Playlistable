@@ -19,4 +19,10 @@ struct Artist: Item {
       return name
     }
   }
+  
+  var subTitle: String? {
+    get {
+      return nil
+    }
+  }
 }

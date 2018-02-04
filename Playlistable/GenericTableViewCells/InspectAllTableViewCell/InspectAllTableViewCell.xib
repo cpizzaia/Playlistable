@@ -13,14 +13,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="110" id="Xxq-mb-g03" customClass="InspectAllTableViewCell" customModule="Playlistable" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="398" height="110"/>
+            <rect key="frame" x="0.0" y="0.0" width="526" height="110"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xxq-mb-g03" id="3wS-x8-EFQ">
-                <rect key="frame" x="0.0" y="0.0" width="398" height="109.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="526" height="109.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FeB-jx-h1r">
-                        <rect key="frame" x="10" y="11" width="87" height="88"/>
+                        <rect key="frame" x="10" y="11" width="88" height="87.5"/>
                         <constraints>
                             <constraint firstAttribute="height" id="GJD-LX-VMZ"/>
                             <constraint firstAttribute="width" secondItem="FeB-jx-h1r" secondAttribute="height" multiplier="1:1" id="swC-5N-lHO"/>
@@ -32,16 +32,33 @@
                         </variation>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BDf-hp-Z83">
-                        <rect key="frame" x="117" y="0.0" width="271" height="109.5"/>
+                        <rect key="frame" x="118" y="0.0" width="398" height="109.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4b-1g-vFJ">
-                                <rect key="frame" x="0.0" y="45" width="217" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rbA-ZC-new">
+                                <rect key="frame" x="0.0" y="34.5" width="318.5" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4b-1g-vFJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="318.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcb-cm-Z4d">
+                                        <rect key="frame" x="0.0" y="20.5" width="318.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="vcb-cm-Z4d" firstAttribute="leading" secondItem="rbA-ZC-new" secondAttribute="leading" id="3Ya-DQ-Vci"/>
+                                    <constraint firstItem="k4b-1g-vFJ" firstAttribute="leading" secondItem="rbA-ZC-new" secondAttribute="leading" id="BVH-se-F5H"/>
+                                    <constraint firstItem="vcb-cm-Z4d" firstAttribute="width" secondItem="rbA-ZC-new" secondAttribute="width" id="Fb9-P4-68y"/>
+                                    <constraint firstItem="k4b-1g-vFJ" firstAttribute="width" secondItem="rbA-ZC-new" secondAttribute="width" id="WSE-bU-1dg"/>
+                                </constraints>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQF-W2-7J0">
-                                <rect key="frame" x="217" y="40" width="54" height="30"/>
+                                <rect key="frame" x="318.5" y="40" width="79.5" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="actionButtonTapped:" destination="Xxq-mb-g03" eventType="touchUpInside" id="889-3g-kNO"/>
@@ -51,11 +68,11 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gQF-W2-7J0" firstAttribute="centerY" secondItem="BDf-hp-Z83" secondAttribute="centerY" id="BtG-Lr-8ZL"/>
-                            <constraint firstItem="k4b-1g-vFJ" firstAttribute="leading" secondItem="BDf-hp-Z83" secondAttribute="leading" id="HRi-PQ-wbR"/>
-                            <constraint firstItem="k4b-1g-vFJ" firstAttribute="centerY" secondItem="BDf-hp-Z83" secondAttribute="centerY" id="JWW-3U-xtw"/>
+                            <constraint firstItem="rbA-ZC-new" firstAttribute="leading" secondItem="BDf-hp-Z83" secondAttribute="leading" id="JBm-fO-22I"/>
+                            <constraint firstItem="rbA-ZC-new" firstAttribute="width" secondItem="BDf-hp-Z83" secondAttribute="width" multiplier="0.8" id="TwJ-ta-axe"/>
+                            <constraint firstItem="rbA-ZC-new" firstAttribute="centerY" secondItem="BDf-hp-Z83" secondAttribute="centerY" id="aYd-VY-SPC"/>
                             <constraint firstItem="gQF-W2-7J0" firstAttribute="width" secondItem="BDf-hp-Z83" secondAttribute="width" multiplier="0.2" id="foO-8a-4BV"/>
                             <constraint firstAttribute="trailing" secondItem="gQF-W2-7J0" secondAttribute="trailing" id="uj3-FL-DWu"/>
-                            <constraint firstItem="k4b-1g-vFJ" firstAttribute="width" secondItem="BDf-hp-Z83" secondAttribute="width" multiplier="0.8" id="xs7-jT-y4g"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -74,9 +91,10 @@
                 <outlet property="itemImage" destination="FeB-jx-h1r" id="YgB-rt-8q2"/>
                 <outlet property="itemImageHeightRegularConstraint" destination="TWm-gg-wpv" id="WYh-tA-uXN"/>
                 <outlet property="itemImageHeightZeroConstraint" destination="GJD-LX-VMZ" id="cnN-5k-IaS"/>
+                <outlet property="subTitleLabel" destination="vcb-cm-Z4d" id="2EE-9H-YiZ"/>
                 <outlet property="titleLabel" destination="k4b-1g-vFJ" id="edW-dO-IZf"/>
             </connections>
-            <point key="canvasLocation" x="80" y="224"/>
+            <point key="canvasLocation" x="144" y="224"/>
         </tableViewCell>
     </objects>
 </document>

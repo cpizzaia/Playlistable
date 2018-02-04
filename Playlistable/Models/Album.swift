@@ -14,11 +14,18 @@ struct Album: Item {
   let trackIDs: [String]
   let images: [Image]
   let name: String
+  let artistNames: [String]
   
   // BrowsableItem Properties
   var title: String {
     get {
       return name
+    }
+  }
+  
+  var subTitle: String? {
+    get {
+      return artistNames.joined(separator: " + ")
     }
   }
 }

@@ -10,6 +10,7 @@ import Foundation
 
 protocol Item {
   var title: String { get }
+  var subTitle: String? { get }
   var images: [Image] { get }
   var id: String { get }
 }
