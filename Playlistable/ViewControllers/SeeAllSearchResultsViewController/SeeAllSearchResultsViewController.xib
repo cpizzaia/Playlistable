@@ -23,10 +23,10 @@
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="IC3-cJ-4Sr" firstAttribute="height" secondItem="O4Q-0E-kGT" secondAttribute="height" id="eqx-FT-nsJ"/>
-                    <constraint firstItem="IC3-cJ-4Sr" firstAttribute="width" secondItem="O4Q-0E-kGT" secondAttribute="width" id="ex1-mR-SaR"/>
-                    <constraint firstItem="IC3-cJ-4Sr" firstAttribute="centerX" secondItem="A1R-OQ-TcM" secondAttribute="centerX" id="o0w-jI-mGE"/>
-                    <constraint firstItem="IC3-cJ-4Sr" firstAttribute="centerY" secondItem="A1R-OQ-TcM" secondAttribute="centerY" id="rfA-j0-aOg"/>
+                    <constraint firstItem="IC3-cJ-4Sr" firstAttribute="leading" secondItem="A1R-OQ-TcM" secondAttribute="leading" id="Gby-RL-38c"/>
+                    <constraint firstItem="A1R-OQ-TcM" firstAttribute="trailing" secondItem="IC3-cJ-4Sr" secondAttribute="trailing" id="Mah-bR-LNr"/>
+                    <constraint firstItem="A1R-OQ-TcM" firstAttribute="top" secondItem="IC3-cJ-4Sr" secondAttribute="top" constant="10" id="pOI-JN-vhJ"/>
+                    <constraint firstItem="IC3-cJ-4Sr" firstAttribute="bottom" secondItem="A1R-OQ-TcM" secondAttribute="bottom" constant="10" id="rKn-QL-ewC"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="A1R-OQ-TcM"/>
             </view>
