@@ -45,12 +45,16 @@ class GeneratedPlaylistTrackTableViewCell: UITableViewCell {
       trackImage.sd_setImage(with: mediumImageURL)
     }
     
-    switch actionType {
-    case .add:
-      saveTrackButton.setTitle("+", for: .normal)
-    case .remove:
-      saveTrackButton.setTitle("-", for: .normal)
-    }
+    // FIXME: Will add this back in later when I'm ready to implement saved tracks
+//    switch actionType {
+//    case .add:
+//      saveTrackButton.setTitle("+", for: .normal)
+//    case .remove:
+//      saveTrackButton.setTitle("-", for: .normal)
+//    }
+    
+    saveTrackButton.setTitle("", for: .normal)
+    saveTrackButton.isEnabled = false
     
     styleCell()
   }
@@ -60,7 +64,7 @@ class GeneratedPlaylistTrackTableViewCell: UITableViewCell {
     trackTitle.textColor = UIColor.myWhite
     
     saveTrackButton.setTitleColor(UIColor.myWhite, for: .normal)
-    saveTrackButton.titleLabel?.font = UIFont.myFont(withSize: 23)
+    saveTrackButton.titleLabel?.font = UIFont.myFontBold(withSize: 25)
     
     backgroundColor = UIColor.clear
   }
