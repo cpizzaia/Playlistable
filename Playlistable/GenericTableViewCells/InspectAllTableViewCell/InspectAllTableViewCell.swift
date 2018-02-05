@@ -35,9 +35,19 @@ class InspectAllTableViewCell: UITableViewCell {
     }
   }
   
+  var currentlyPlaying: Bool {
+    get {
+      return _currentlyPlaying
+    } set {
+      titleLabel.textColor = newValue ? UIColor.myAccent : UIColor.myWhite
+      _currentlyPlaying = newValue
+    }
+  }
+  
   var action = {}
   
   private var _seededCell = false
+  private var _currentlyPlaying = false
   
   func setupCellWithImage(forItem item: Item, action: (() -> ())?) {
     showImage()
@@ -88,6 +98,8 @@ class InspectAllTableViewCell: UITableViewCell {
     } else {
       subTitleLabel.isHidden = true
     }
+    
+    currentlyPlaying = false
     
     styleCell()
   }

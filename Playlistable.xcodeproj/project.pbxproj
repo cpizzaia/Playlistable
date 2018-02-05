@@ -81,8 +81,6 @@
 		ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */; };
 		ACC816682027C3A800A03946 /* MutableCollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */; };
 		ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816692027C3F500A03946 /* SequenceExtensions.swift */; };
-		ACD4B00D1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACD4B00C1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib */; };
-		ACD4B00F1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4B00E1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift */; };
 		ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */; };
 		ACF43248200BF57E00110B53 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF43247200BF57E00110B53 /* UIImageExtensions.swift */; };
 		ACF4324B200C132C00110B53 /* ItemWithTrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF4324A200C132C00110B53 /* ItemWithTrackListViewController.swift */; };
@@ -172,8 +170,6 @@
 		ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingMiddlware.swift; sourceTree = "<group>"; };
 		ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableCollectionExtensions.swift; sourceTree = "<group>"; };
 		ACC816692027C3F500A03946 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
-		ACD4B00C1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneratedPlaylistTrackTableViewCell.xib; sourceTree = "<group>"; };
-		ACD4B00E1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedPlaylistTrackTableViewCell.swift; sourceTree = "<group>"; };
 		ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
 		ACF43247200BF57E00110B53 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		ACF4324A200C132C00110B53 /* ItemWithTrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWithTrackListViewController.swift; sourceTree = "<group>"; };
@@ -449,7 +445,6 @@
 			isa = PBXGroup;
 			children = (
 				AC4C84F4201510C000C8A4E6 /* GeneratedPlaylistHeaderView */,
-				AC8C20481FC9E269006FF1AC /* GeneratedPlaylistTableViewCell */,
 				AC11971A1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift */,
 				AC11971C1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib */,
 			);
@@ -472,15 +467,6 @@
 				AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */,
 			);
 			path = InspectAllTableViewCell;
-			sourceTree = "<group>";
-		};
-		AC8C20481FC9E269006FF1AC /* GeneratedPlaylistTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				ACD4B00C1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib */,
-				ACD4B00E1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift */,
-			);
-			path = GeneratedPlaylistTableViewCell;
 			sourceTree = "<group>";
 		};
 		ACBDF1311F9CFC0F001760D7 /* Models */ = {
@@ -634,7 +620,6 @@
 				AC1197311FB956B1009D1646 /* PlayerBarContainerViewController.xib in Resources */,
 				AC4C84F0201430B100C8A4E6 /* CircularStd-BookItalic.otf in Resources */,
 				AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */,
-				ACD4B00D1FBAA25C00C955C2 /* GeneratedPlaylistTrackTableViewCell.xib in Resources */,
 				AC4C84E9201430B100C8A4E6 /* CircularStd-MediumItalic.otf in Resources */,
 				AC4C84D72014046400C8A4E6 /* ItemWithTrackListHeaderView.xib in Resources */,
 				ACF4324D200C136C00110B53 /* ItemWithTrackListViewController.xib in Resources */,
@@ -731,7 +716,6 @@
 			files = (
 				AC17B7FC1FBE9B390029AFB6 /* PlayerQueueController.swift in Sources */,
 				ACF4324F200C261F00110B53 /* InspectAlbumReducer.swift in Sources */,
-				ACD4B00F1FBAA27500C955C2 /* GeneratedPlaylistTrackTableViewCell.swift in Sources */,
 				AC01487B1F9D855D00F9A732 /* APIQueryParamsFormatter.swift in Sources */,
 				ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */,
 				AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */,

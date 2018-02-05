@@ -45,7 +45,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     playlistTableView.separatorStyle = .none
     
     playlistTableView.register(
-      UINib(nibName: "GeneratedPlaylistTrackTableViewCell", bundle: nil),
+      UINib(nibName: "InspectAllTableViewCell", bundle: nil),
       forCellReuseIdentifier: "generatedTrackCell"
     )
     
@@ -106,11 +106,11 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "generatedTrackCell") as! GeneratedPlaylistTrackTableViewCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "generatedTrackCell") as! InspectAllTableViewCell
     
     let track = tracks[indexPath.row]
     
-    cell.setupCell(forTrack: track, actionType: .add, action: {})
+    cell.setupCellWithImage(forItem: track, action: nil)
     
     cell.currentlyPlaying = track.id == currentlyPlayingTrack?.id
     
