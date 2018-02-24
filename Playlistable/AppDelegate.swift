@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     application.statusBarStyle = .lightContent
     
+    application.isStatusBarHidden = false
+    
     startStateManagers()
     
     return true
