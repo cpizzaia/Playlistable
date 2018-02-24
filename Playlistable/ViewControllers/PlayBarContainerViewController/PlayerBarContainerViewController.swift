@@ -17,6 +17,7 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   
   @IBOutlet var containerView: UIView!
   @IBOutlet var playBarView: UIView!
+  @IBOutlet var durationBarBackground: UIView!
   @IBOutlet var durationBarView: UIView!
   @IBOutlet var playBarTitleLabel: UILabel!
   @IBOutlet var durationWidthConstraint: NSLayoutConstraint!
@@ -47,10 +48,11 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
     
     playBarView.backgroundColor = UIColor.myLightBlack
     
-    playBarTitleLabel.font = UIFont.myFont(withSize: 17)
+    playBarTitleLabel.font = UIFont.myFont(withSize: 15)
     playBarTitleLabel.textColor = UIColor.myWhite
     
     durationBarView.backgroundColor = UIColor.myWhite
+    durationBarBackground.backgroundColor = UIColor.myLighterBlack
   }
   
   override func viewWillAppear(_ animated: Bool) {

@@ -40,6 +40,12 @@ extension UIColor {
     }
   }
   
+  static var myLighterBlack: UIColor { // so far only used for duration bar background
+    get {
+      return UIColor(rgb: 0x323232)
+    }
+  }
+  
   convenience init(red: Int, green: Int, blue: Int) {
     assert(red >= 0 && red <= 255, "Invalid red component")
     assert(green >= 0 && green <= 255, "Invalid green component")
