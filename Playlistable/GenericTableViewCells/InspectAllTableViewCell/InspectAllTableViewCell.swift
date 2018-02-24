@@ -114,6 +114,10 @@ class InspectAllTableViewCell: UITableViewCell {
     actionButton.setTitleColor(UIColor.myWhite, for: .normal)
     actionButton.titleLabel?.font = UIFont.myFontBold(withSize: 23)
     
+    itemImage.contentMode = .scaleAspectFill
+    itemImage.clipsToBounds = true
+    
+    
     backgroundColor = UIColor.clear
     selectionStyle = .none
   }
