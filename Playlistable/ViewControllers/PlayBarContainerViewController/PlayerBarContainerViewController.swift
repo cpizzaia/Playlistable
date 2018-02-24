@@ -30,7 +30,7 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
     
     if let trackID = state.spotifyPlayer.playingTrackID, state.spotifyPlayer.isPlaying {
       let track = state.resources.tracksFor(ids: [trackID]).first!
-      playBarTitleLabel.text = track.name
+      playBarTitleLabel.attributedText = "\(track.name) \u{2022} \(track.artistNames.first ?? "")".attributedStringForPartiallyColoredText(track.artistNames.first ?? "", with: UIColor.myDarkWhite)
       
       animateDuration(startTime: getCurrentPlayerPosition(), endTime: Double(track.durationMS) / 1000.0)
     }
