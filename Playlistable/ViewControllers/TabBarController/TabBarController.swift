@@ -25,6 +25,7 @@ class TabBarController: UITabBarController, StoreSubscriber {
     tabBar.backgroundColor = UIColor.myLightBlack
     tabBar.barTintColor = UIColor.myLightBlack
     tabBar.tintColor = UIColor.myWhite
+    tabBar.isTranslucent = false
   
     let tabOne = UINavigationController(rootViewController: loadUIViewControllerFromNib(GeneratedPlaylistViewController.self))
     

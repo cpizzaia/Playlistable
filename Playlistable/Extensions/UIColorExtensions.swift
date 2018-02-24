@@ -12,13 +12,13 @@ import UIKit
 extension UIColor {
   static var myDarkBlack: UIColor {
     get {
-      return UIColor(rgb: 0x1F2021)
+      return UIColor(rgb: 0x101010)
     }
   }
   
   static var myLightBlack: UIColor {
     get {
-      return UIColor(rgb: 0x323335)
+      return UIColor(rgb: 0x212121)
     }
   }
   
