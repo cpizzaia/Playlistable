@@ -114,8 +114,6 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     
     cell.currentlyPlaying = track.id == currentlyPlayingTrack?.id
     
-    cell.selectionStyle = .none
-    
     return cell
   }
   

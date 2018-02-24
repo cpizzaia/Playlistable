@@ -115,5 +115,6 @@ class InspectAllTableViewCell: UITableViewCell {
     actionButton.titleLabel?.font = UIFont.myFontBold(withSize: 23)
     
     backgroundColor = UIColor.clear
+    selectionStyle = .none
   }
 }
