@@ -29,7 +29,8 @@ class InspectAllTableViewCell: UITableViewCell {
       return _seededCell
     } set {
       DispatchQueue.main.async {
-        self.backgroundColor = newValue ? UIColor.myAccent : .clear
+        self.backgroundColor = newValue ? UIColor.myAccent.withAlphaComponent(0.5) : UIColor.clear
+    
         self._seededCell = newValue
       }
     }
@@ -48,6 +49,7 @@ class InspectAllTableViewCell: UITableViewCell {
   
   private var _seededCell = false
   private var _currentlyPlaying = false
+  private var innerGradient: CALayer?
   
   func setupCellWithImage(forItem item: Item, action: (() -> ())?) {
     showImage()
@@ -116,7 +118,6 @@ class InspectAllTableViewCell: UITableViewCell {
     
     itemImage.contentMode = .scaleAspectFill
     itemImage.clipsToBounds = true
-    
     
     backgroundColor = UIColor.clear
     selectionStyle = .none
