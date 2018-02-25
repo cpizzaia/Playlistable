@@ -123,9 +123,13 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
     
     let item = Array(items)[indexPath.row]
     
-    cell.setupCellWithImage(forItem: item, action: nil)
-    
-    cell.isUserInteractionEnabled = false
+    if seeds?.items.isEmpty == true {
+      cell.setupCellWithImage(forItem: item, action: nil)
+    } else {
+      cell.setupCellWithImage(forItem: item, actionSymbol: "x", action: {
+        mainStore.dispatch(RemoveSeed(item: item))
+      })
+    }
     
     return cell
   }

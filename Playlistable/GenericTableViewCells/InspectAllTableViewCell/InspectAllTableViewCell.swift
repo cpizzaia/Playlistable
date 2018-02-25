@@ -51,14 +51,14 @@ class InspectAllTableViewCell: UITableViewCell {
   private var _currentlyPlaying = false
   private var innerGradient: CALayer?
   
-  func setupCellWithImage(forItem item: Item, action: (() -> ())?) {
+  func setupCellWithImage(forItem item: Item, actionSymbol: String = ">", action: (() -> ())?) {
     showImage()
-    setupCell(forItem: item, action: action)
+    setupCell(forItem: item, actionSymbol: actionSymbol, action: action)
   }
   
-  func setupCellWithoutImage(forItem item: Item, action: (() -> ())?) {
+  func setupCellWithoutImage(forItem item: Item, actionSymbol: String = ">", action: (() -> ())?) {
     hideImage()
-    setupCell(forItem: item, action: action)
+    setupCell(forItem: item, actionSymbol: actionSymbol, action: action)
   }
   
   private func hideImage() {
@@ -75,7 +75,7 @@ class InspectAllTableViewCell: UITableViewCell {
     }
   }
   
-  private func setupCell(forItem item: Item, action: (() -> ())?) {
+  private func setupCell(forItem item: Item, actionSymbol: String, action: (() -> ())?) {
     self.action = action ?? {}
     titleLabel.text = item.title
     if let mediumImageURL = item.mediumImageURL {
@@ -87,7 +87,7 @@ class InspectAllTableViewCell: UITableViewCell {
     itemImage.contentMode = .scaleAspectFill
     
     if action != nil {
-      actionButton.setTitle(">", for: .normal)
+      actionButton.setTitle(actionSymbol, for: .normal)
       actionButton.isEnabled = true
     } else {
       actionButton.setTitle("", for: .normal)
