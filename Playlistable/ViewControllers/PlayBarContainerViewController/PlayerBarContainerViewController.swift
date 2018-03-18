@@ -21,12 +21,23 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   @IBOutlet var durationBarView: UIView!
   @IBOutlet var playBarTitleLabel: UILabel!
   @IBOutlet var durationWidthConstraint: NSLayoutConstraint!
+  @IBOutlet var playPauseButton: UIButton!
+  @IBAction func playPauseButtonPressed(_ sender: UIButton) {
+    if isPlaying {
+      mainStore.dispatch(pause())
+    } else {
+      mainStore.dispatch(resume())
+    }
+  }
   
   var isAnimatingDuration = false
   var endTime: Double?
+  var isPlaying = false
   
   func newState(state: AppState) {
-    playBarView.isHidden = !state.spotifyPlayer.isPlaying
+    isPlaying = state.spotifyPlayer.isPlaying
+    playBarView.isHidden = !isPlaying
+    setPlayPauseButtonImage(playing: isPlaying)
     isPlayerBarHidden = playBarView.isHidden
     
     if let trackID = state.spotifyPlayer.playingTrackID, state.spotifyPlayer.isPlaying {
@@ -89,6 +100,15 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
     }, completion: { finished in
       self.isAnimatingDuration = false
     })
+  }
+  
+  private func setPlayPauseButtonImage(playing: Bool) {
+    playPauseButton.setTitleColor(UIColor.myWhite, for: .normal)
     
+    if playing {
+      playPauseButton.setImage(UIImage(named: "roundedPause")?.withRenderingMode(.alwaysOriginal), for: .normal)
+    } else {
+      playPauseButton.setImage(UIImage(named: "roundedPlay")?.withRenderingMode(.alwaysOriginal), for: .normal)
+    }
   }
 }
