@@ -11,6 +11,8 @@ target 'Playlistable' do
   pod 'SDWebImage', '~>3.8'
   pod 'SVProgressHUD'
   pod 'Locksmith'
+  pod 'Fabric'
+  pod 'Crashlytics'
   # Pods for Playlistable
 
 end

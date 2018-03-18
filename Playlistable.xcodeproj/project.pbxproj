@@ -577,6 +577,7 @@
 				AC02D0C31F9CF5B3009ED193 /* Resources */,
 				EAD9FA501EE079C9B0C0BF76 /* [CP] Embed Pods Frameworks */,
 				43E69DF3BF9F28B80BC52E23 /* [CP] Copy Pods Resources */,
+				ACCE5199205F2CA1008877F2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -694,6 +695,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		ACCE5199205F2CA1008877F2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 50374cdef5f64433e4fe9313bf3d28057af8c726 90777b47615dd33dc721c0a1a1d9132cce456fb03fd0895021188de42e742d47";
 		};
 		EAD9FA501EE079C9B0C0BF76 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
