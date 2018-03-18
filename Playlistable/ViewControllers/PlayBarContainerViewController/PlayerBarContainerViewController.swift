@@ -33,18 +33,19 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   var isAnimatingDuration = false
   var endTime: Double?
   var isPlaying = false
+  var isDurationBarStopped = false
   
   func newState(state: AppState) {
     isPlaying = state.spotifyPlayer.isPlaying
-    playBarView.isHidden = !isPlaying
+    playBarView.isHidden = !isPlaying && !state.spotifyPlayer.isPaused
     setPlayPauseButtonImage(playing: isPlaying)
     isPlayerBarHidden = playBarView.isHidden
     
-    if let trackID = state.spotifyPlayer.playingTrackID, state.spotifyPlayer.isPlaying {
+    if let trackID = state.spotifyPlayer.playingTrackID {
       let track = state.resources.tracksFor(ids: [trackID]).first!
       playBarTitleLabel.attributedText = "\(track.name) \u{2022} \(track.artistNames.first ?? "")".attributedStringForPartiallyColoredText(track.artistNames.first ?? "", with: UIColor.myDarkWhite)
       
-      animateDuration(startTime: getCurrentPlayerPosition(), endTime: Double(track.durationMS) / 1000.0)
+      animateDuration(startTime: getCurrentPlayerPosition(), endTime: Double(track.durationMS) / 1000.0, isStopped: !isPlaying)
     }
   }
   
@@ -76,9 +77,10 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
     mainStore.unsubscribe(self)
   }
   
-  func animateDuration(startTime: Double, endTime: Double) {
-    if self.endTime == endTime { return }
+  func animateDuration(startTime: Double, endTime: Double, isStopped: Bool) {
+    if self.endTime == endTime && isStopped == isDurationBarStopped { return }
     self.endTime = endTime
+    isDurationBarStopped = isStopped
     
     durationBarView.layer.removeAllAnimations()
     
@@ -93,6 +95,8 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
     durationWidthConstraint.constant = fullWidth * CGFloat(1 - percentCompleted)
     
     view.layoutIfNeeded()
+    
+    if isStopped { return }
     
     UIView.animate(withDuration: timeLeft, delay: 0, options: .curveLinear, animations: {
       self.durationWidthConstraint.constant = 0
