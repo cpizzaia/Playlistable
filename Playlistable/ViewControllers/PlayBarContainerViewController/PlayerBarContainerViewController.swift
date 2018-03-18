@@ -37,7 +37,7 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   
   func newState(state: AppState) {
     isPlaying = state.spotifyPlayer.isPlaying
-    playBarView.isHidden = !isPlaying && !state.spotifyPlayer.isPaused
+    playBarView.isHidden = state.spotifyPlayer.playingTrackID == nil
     setPlayPauseButtonImage(playing: isPlaying)
     isPlayerBarHidden = playBarView.isHidden
     
