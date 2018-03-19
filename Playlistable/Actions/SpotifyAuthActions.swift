@@ -187,6 +187,10 @@ func postAuthAction(accessToken: String) -> Action {
 func receiveSpotifyAuth(url: URL) -> Action? {
   guard let code = url.queryParameters?["code"] else { return nil }
   
+  if let webview = UIViewController.currentViewController() as? SFSafariViewController {
+    webview.dismiss(animated: true, completion: nil)
+  }
+  
   return WrapInDispatch { dispatch in
     dispatch(CallAPI(
       method: .post,
