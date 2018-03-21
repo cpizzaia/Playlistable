@@ -11,7 +11,7 @@ import ReSwift
 import Alamofire
 import SwiftyJSON
 
-let apiMiddleware: Middleware<Any> = { dispatch, getState in
+let apiMiddleware: Middleware<AppState> = { dispatch, getState in
   return { next in
     return { action in
       guard let apiAction = action as? APIAction else { return next(action) }

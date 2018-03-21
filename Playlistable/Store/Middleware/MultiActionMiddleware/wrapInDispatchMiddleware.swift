@@ -9,7 +9,7 @@
 import Foundation
 import ReSwift
 
-let wrapInDispatchMiddleware: Middleware<Any> = { dispatch, getState in
+let wrapInDispatchMiddleware: Middleware<AppState> = { dispatch, getState in
   return { next in
     return { action in
       guard let wrappedAction = action as? WrapInDispatch else {
