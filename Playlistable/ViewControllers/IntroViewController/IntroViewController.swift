@@ -61,7 +61,6 @@ class IntroViewController: UIViewController, StoreSubscriber {
     descriptionText.textColor = UIColor.myWhite
     descriptionText.isUserInteractionEnabled = false
     descriptionText.isScrollEnabled = false
-//    descriptionText.setHeightForTextInside()
     descriptionText.layoutIfNeeded()
     
     loginButton.imageView?.contentMode = .scaleAspectFit
