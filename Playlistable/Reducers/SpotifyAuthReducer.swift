@@ -23,9 +23,11 @@ struct SpotifyAuthState {
     }
   }
   var userID: String?
-  var isInitializing: Bool
-  var isRequesting: Bool
-  var isRefreshing: Bool
+  var isInitializingOAuth: Bool
+  var isRequestingToken: Bool
+  var isRefreshingToken: Bool
+  var isRequestingUser: Bool
+  var isPremium: Bool?
   var expiresAt: TimeInterval? {
     didSet {
       guard let expiresAt = expiresAt else {
@@ -40,6 +42,8 @@ struct SpotifyAuthState {
       UserDefaults.standard.synchronize()
     }
   }
+  
+  // MARK: Computed Properties
   var isAuthed: Bool {
     get {
       return token != nil && !isExpired
@@ -71,9 +75,11 @@ fileprivate let initialSpotifyAuthState = SpotifyAuthState(
   token: UserDefaults.standard.string(forKey: UserDefaultsKeys.spotifyAuthToken),
   refreshToken: UserDefaults.standard.string(forKey: UserDefaultsKeys.spotifyRefreshToken),
   userID: nil,
-  isInitializing: false,
-  isRequesting: false,
-  isRefreshing: false,
+  isInitializingOAuth: false,
+  isRequestingToken: false,
+  isRefreshingToken: false,
+  isRequestingUser: false,
+  isPremium: nil,
   expiresAt: UserDefaults.standard.double(forKey: UserDefaultsKeys.spotifyTokenExpirationTimeInterval)
 )
 
@@ -82,10 +88,10 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
   
   switch action {
   case _ as RequestSpotifyAuth:
-    state.isRequesting = true
+    state.isRequestingToken = true
     
   case _ as RequestSpotifyRefreshAuth:
-    state.isRefreshing = true
+    state.isRefreshingToken = true
     
   case let action as ReceiveSpotifyAuth:
     state.token = action.response["access_token"].string
@@ -97,8 +103,8 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
       state.expiresAt = nil
     }
     
-    state.isRequesting = false
-    state.isInitializing = false
+    state.isRequestingToken = false
+    state.isInitializingOAuth = false
   
   case let action as ReceiveSpotifyRefreshAuth:
     state.token = action.response["access_token"].string
@@ -109,22 +115,26 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
       state.expiresAt = nil
     }
     
-    state.isRefreshing = false
-    state.isInitializing = false
+    state.isRefreshingToken = false
+    state.isInitializingOAuth = false
   
   case _ as ErrorSpotifyRefreshAuth:
-    state.isRefreshing = false
-    state.isInitializing = false
+    state.isRefreshingToken = false
+    state.isInitializingOAuth = false
     
   case _ as ErrorSpotifyAuth:
-    state.isRequesting = false
-    state.isInitializing = false
+    state.isRequestingToken = false
+    state.isInitializingOAuth = false
     
   case _ as InitializeOAuth:
-    state.isInitializing = true
+    state.isInitializingOAuth = true
+    
+  case _ as RequestCurrentUser:
+    state.isRequestingUser = true
     
   case let action as ReceiveCurrentUser:
     state.userID = action.response["id"].string
+    state.isPremium = action.response["product"].string == "premium"
     
   default:
     break

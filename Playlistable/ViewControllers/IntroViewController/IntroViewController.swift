@@ -22,6 +22,17 @@ class IntroViewController: UIViewController, StoreSubscriber {
   }
   
   private var spotifyAuthState: SpotifyAuthState?
+  private var hasSpotifyPremium: Bool? {
+    didSet {
+      if oldValue == false || hasSpotifyPremium != false { return }
+      
+      presentAlertView(
+        title: "Error",
+        message: "You must have Spotify Premium to login.",
+        completion: {}
+      )
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -43,11 +54,18 @@ class IntroViewController: UIViewController, StoreSubscriber {
   
   func newState(state: AppState) {
     spotifyAuthState = state.spotifyAuth
+    hasSpotifyPremium = spotifyAuthState?.isPremium
     
-    if spotifyAuthState?.isAuthed == true {
+    if spotifyAuthState?.isAuthed == true && spotifyAuthState?.userID != nil && hasSpotifyPremium == true {
       let vc = loadUIViewControllerFromNib(PlayerBarContainerViewController.self)
       
       present(vc, animated: true, completion: nil)
+      
+      return
+    }
+    
+    if spotifyAuthState?.isAuthed == true && spotifyAuthState?.userID == nil && !(spotifyAuthState?.isRequestingUser == true) {
+      mainStore.dispatch(getCurrentUser())
     }
   }
   

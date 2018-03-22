@@ -176,12 +176,7 @@ func refreshSpotifyAuth(refreshToken: String) -> Action {
 }
 
 func postAuthAction(accessToken: String) -> Action {
-  
-  return WrapInDispatch { dispatch in
-    dispatch(initializePlayer(clientID: clientID, accessToken: accessToken))
-    dispatch(getCurrentUser())
-  }
-  
+  return initializePlayer(clientID: clientID, accessToken: accessToken)
 }
 
 func receiveSpotifyAuth(url: URL) -> Action? {

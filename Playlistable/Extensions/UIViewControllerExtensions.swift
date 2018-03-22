@@ -73,6 +73,21 @@ extension UIViewController {
     }
   }
   
+  func presentAlertView(title: String, message: String, completion: @escaping () -> Void) {
+    
+    let alertViewController = UIAlertController(
+      title: title,
+      message: message,
+      preferredStyle: .alert
+    )
+    
+    alertViewController.addAction(
+      UIAlertAction.init(title: "OK", style: .default, handler: { _ in completion() })
+    )
+    
+    present(alertViewController, animated: true, completion: {})
+  }
+  
   func presentAlertView(title: String, message: String, successActionTitle: String, failureActionTitle: String, success: @escaping() -> (), failure: @escaping () -> ()) {
     let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
     
@@ -82,6 +97,6 @@ extension UIViewController {
     alertViewController.addAction(cancelAction)
     alertViewController.addAction(successAction)
     
-    self.present(alertViewController, animated: true, completion: {})
+    present(alertViewController, animated: true, completion: {})
   }
 }
