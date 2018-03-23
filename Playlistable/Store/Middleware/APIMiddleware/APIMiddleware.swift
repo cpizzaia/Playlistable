@@ -61,62 +61,14 @@ struct CallSpotifyAPI: APIAction {
     }) ?? ""
   }
 
-  init(endpoint: String, method: HTTPMethod, types: APITypes) {
+  init(endpoint: String, queryParams: QueryParams? = nil, method: HTTPMethod, body: Parameters? = nil, types: APITypes, success: ((JSON) -> Void)? = nil, failure: (() -> Void)? = nil) {
     self.endpoint = endpoint
     self.method = method
     self.types = types
-    headers = ["Authorization": "Bearer \(mainStore.state.spotifyAuth.token ?? "")"]
-    body = nil
-    bodyEncoding = JSONEncoding.default
-    queryParams = nil
-    success = nil
-    failure = nil
-  }
-
-  init(endpoint: String, method: HTTPMethod, types: APITypes, success: ((JSON) -> Void)?, failure: (() -> Void)?) {
-    self.endpoint = endpoint
-    self.method = method
-    self.types = types
-    headers = ["Authorization": "Bearer \(mainStore.state.spotifyAuth.token ?? "")"]
-    body = nil
-    bodyEncoding = JSONEncoding.default
-    queryParams = nil
-    self.success = success
-    self.failure = failure
-  }
-
-  init(endpoint: String, queryParams: QueryParams, method: HTTPMethod, types: APITypes) {
-    self.endpoint = endpoint
-    self.method = method
-    self.types = types
-    self.queryParams = queryParams
-    headers = ["Authorization": "Bearer \(mainStore.state.spotifyAuth.token ?? "")"]
-    body = nil
-    bodyEncoding = JSONEncoding.default
-    success = nil
-    failure = nil
-  }
-
-  init(endpoint: String, method: HTTPMethod, body: Parameters, types: APITypes, success: ((JSON) -> Void)?, failure: (() -> Void)?) {
-    self.endpoint = endpoint
-    self.method = method
-    self.types = types
-    self.queryParams = nil
     headers = ["Authorization": "Bearer \(mainStore.state.spotifyAuth.token ?? "")"]
     self.body = body
     bodyEncoding = JSONEncoding.default
-    self.success = success
-    self.failure = failure
-  }
-
-  init(endpoint: String, queryParams: QueryParams, method: HTTPMethod, types: APITypes, success: ((JSON) -> Void)?, failure: (() -> Void)?) {
-    self.endpoint = endpoint
-    self.method = method
-    self.types = types
     self.queryParams = queryParams
-    headers = ["Authorization": "Bearer \(mainStore.state.spotifyAuth.token ?? "")"]
-    body = nil
-    bodyEncoding = JSONEncoding.default
     self.success = success
     self.failure = failure
   }
