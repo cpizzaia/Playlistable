@@ -10,5 +10,5 @@ import Foundation
 import SwiftyJSON
 
 struct SpotifyResponseParser {
-  
+
 }

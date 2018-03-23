@@ -17,20 +17,14 @@ protocol Item {
 
 extension Item {
   var largeImageURL: URL? {
-    get {
-      return images.first(where: { $0.height >= 640 })?.url ?? mediumImageURL ?? smallImageURL
-    }
+    return images.first(where: { $0.height >= 640 })?.url ?? mediumImageURL ?? smallImageURL
   }
-  
+
   var mediumImageURL: URL? {
-    get {
-      return images.first(where: { $0.height >= 300 && $0.height < 640 })?.url ?? smallImageURL
-    }
+    return images.first(where: { $0.height >= 300 && $0.height < 640 })?.url ?? smallImageURL
   }
-  
+
   var smallImageURL: URL? {
-    get {
-      return images.first(where: {$0.height <= 64 })?.url
-    }
+    return images.first(where: {$0.height <= 64 })?.url
   }
 }

@@ -11,7 +11,7 @@ import UIKit
 
 class ItemWithTrackListHeaderView: UIView {
   @IBOutlet var itemImage: UIImageView!
-  
+
   func setup(forItem item: Item) {
     if let imageURL = item.largeImageURL {
       itemImage.sd_setImage(with: imageURL, placeholderImage: UIImage.placeholder)

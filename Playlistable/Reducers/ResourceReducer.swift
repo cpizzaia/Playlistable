@@ -13,27 +13,27 @@ struct ResourceState {
   typealias TrackID = String
   typealias AlbumID = String
   typealias ArtistID = String
-  
+
   var tracks: [TrackID: Track]
   var albums: [AlbumID: Album]
   var artists: [ArtistID: Artist]
-  
+
   func tracksFor(ids: [TrackID]) -> [Track] {
     return ids.flatMap { id in
       return tracks[id]
     }
   }
-  
+
   func albumFor(id: AlbumID) -> Album? {
     return albums[id]
   }
-  
+
   func albumsFor(ids: [AlbumID]) -> [Album] {
     return ids.flatMap { id in
       return albums[id]
     }
   }
-  
+
   func artistsFor(ids: [ArtistID]) -> [Artist] {
     return ids.flatMap { id in
       return artists[id]
@@ -41,7 +41,7 @@ struct ResourceState {
   }
 }
 
-fileprivate let initialResourceState = ResourceState(
+private let initialResourceState = ResourceState(
   tracks: [:],
   albums: [:],
   artists: [:]
@@ -49,7 +49,7 @@ fileprivate let initialResourceState = ResourceState(
 
 func resourceReducer(action: Action, state: ResourceState?) -> ResourceState {
   var state = state ?? initialResourceState
-  
+
   switch action {
   case let action as ResourceActions.ReceiveTracks:
     action.tracks.forEach({ state = updateOrAdd(item: $0, toState: state) })
@@ -59,13 +59,13 @@ func resourceReducer(action: Action, state: ResourceState?) -> ResourceState {
     action.artists.forEach({ state = updateOrAdd(item: $0, toState: state) })
   default: break
   }
-  
+
   return state
 }
 
-fileprivate func updateOrAdd(item: Item, toState state: ResourceState) -> ResourceState {
+private func updateOrAdd(item: Item, toState state: ResourceState) -> ResourceState {
   var state = state
-  
+
   switch item {
   case let item as Track:
     if shouldUpdate(item: item, forItemInState: state.tracks[item.id]) {
@@ -82,12 +82,12 @@ fileprivate func updateOrAdd(item: Item, toState state: ResourceState) -> Resour
   default:
     break
   }
-  
+
   return state
 }
 
-fileprivate func shouldUpdate(item: Item, forItemInState itemInState: Item?) -> Bool {
+private func shouldUpdate(item: Item, forItemInState itemInState: Item?) -> Bool {
   guard let itemInState = itemInState else { return true }
-  
+
   return itemInState.smallImageURL == nil
 }

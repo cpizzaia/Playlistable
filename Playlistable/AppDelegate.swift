@@ -16,48 +16,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    
+
     Fabric.with([Crashlytics.self])
 
     DispatchQueue.global().async {
       try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
-      
+
       try? AVAudioSession.sharedInstance().setActive(true)
     }
-    
+
     window = UIWindow(frame: UIScreen.main.bounds)
-    
+
     if mainStore.state.spotifyAuth.isRefreshable {
       window?.rootViewController = loadUIViewControllerFromNib(PlayerBarContainerViewController.self)
     } else {
       window?.rootViewController = loadUIViewControllerFromNib(IntroViewController.self)
     }
-    
+
     window?.makeKeyAndVisible()
-    
+
     application.statusBarStyle = .lightContent
-    
+
     application.isStatusBarHidden = false
-    
+
     startStateManagers()
-    
+
     return true
   }
-  
-  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+
+  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
 
     if let action = SpotifyAuthActions.receiveSpotifyAuth(url: url) {
       mainStore.dispatch(action)
     }
-    
+
     return true
   }
-  
+
   private func startStateManagers() {
     LockScreenController.start()
     PlayerQueueController.start()
   }
 }
-

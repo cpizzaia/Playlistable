@@ -11,10 +11,10 @@ import UIKit
 
 extension UIFont {
   static func myFont(withSize size: CGFloat) -> UIFont {
-    return UIFont(name: "CircularStd-Book", size: size)!
+    return UIFont(name: "CircularStd-Book", size: size) ?? UIFont()
   }
-  
+
   static func myFontBold(withSize size: CGFloat) -> UIFont {
-    return UIFont(name: "CircularStd-Bold", size: size)!
+    return UIFont(name: "CircularStd-Bold", size: size) ?? UIFont()
   }
 }

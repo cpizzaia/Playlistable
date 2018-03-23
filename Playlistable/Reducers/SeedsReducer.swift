@@ -10,21 +10,18 @@ import Foundation
 import ReSwift
 
 struct SeedsState {
-  typealias ID = String
-  var items: [ID: Item]
-  
+  var items: [String: Item]
+
   var isFull: Bool {
-    get {
-      return items.count >= 5
-    }
+    return items.count >= 5
   }
-  
+
   func isInSeeds(item: Item) -> Bool {
     return items[item.id] != nil
   }
 }
 
-fileprivate let initialSeedsState = SeedsState(items: [:])
+private let initialSeedsState = SeedsState(items: [:])
 
 func seedsReducer(action: Action, state: SeedsState?) -> SeedsState {
   var state = state ?? initialSeedsState
@@ -39,6 +36,6 @@ func seedsReducer(action: Action, state: SeedsState?) -> SeedsState {
   default:
     break
   }
-  
+
   return state
 }

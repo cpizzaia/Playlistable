@@ -12,17 +12,13 @@ struct Artist: Item {
   let id: String
   let images: [Image]
   let name: String
-  
+
   // BrowsableItem Properties
   var title: String {
-    get {
-      return name
-    }
+    return name
   }
-  
+
   var subTitle: String? {
-    get {
-      return nil
-    }
+    return nil
   }
 }

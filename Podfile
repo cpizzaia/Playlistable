@@ -13,6 +13,7 @@ target 'Playlistable' do
   pod 'Locksmith'
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'SwiftLint'
   # Pods for Playlistable
 
 end

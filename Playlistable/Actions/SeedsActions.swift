@@ -13,11 +13,11 @@ enum SeedsActions {
   struct AddSeed: Action {
     let item: Item
   }
-  
+
   struct RemoveSeed: Action {
     let item: Item
   }
-  
+
   struct GeneratedFromSeeds: Action {
     let seeds: SeedsState
   }

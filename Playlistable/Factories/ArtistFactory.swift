@@ -13,15 +13,14 @@ struct ArtistFactory {
   static func createArtists(fromJSONArray jsonArray: [JSON]) -> [Artist] {
     return jsonArray.flatMap({ createArtist(fromJSON: $0) })
   }
-  
+
   static func createArtist(fromJSON json: JSON) -> Artist? {
     guard
       let id = json["id"].string,
       let name = json["name"].string else {
         return nil
     }
-    
-    
+
     return Artist(
       id: id,
       images: ImageFactory.createImages(fromJSONArray: json["images"].array ?? []),

@@ -13,7 +13,7 @@ extension Dictionary {
     var result = Dictionary()
     self.forEach({ (key, value) in result[key] = value })
     dictionary.forEach({ (key, value) in result[key] = value })
-    
+
     return result
   }
 }

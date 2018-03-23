@@ -17,7 +17,7 @@ struct SearchState {
   var isRequesting: Bool
 }
 
-fileprivate let initialSearchState = SearchState(
+private let initialSearchState = SearchState(
   query: nil,
   trackIDs: [],
   artistIDs: [],
@@ -27,7 +27,7 @@ fileprivate let initialSearchState = SearchState(
 
 func searchReducer(action: Action, state: SearchState?) -> SearchState {
   var state = state ?? initialSearchState
-  
+
   switch action {
   case _ as SearchActions.RequestSearch:
     state.isRequesting = true
@@ -36,11 +36,11 @@ func searchReducer(action: Action, state: SearchState?) -> SearchState {
     state.artistIDs = action.response["artists"]["items"].array?.flatMap {
       $0["id"].string
     } ?? []
-    
+
     state.albumIDs = action.response["albums"]["items"].array?.flatMap {
       $0["id"].string
     } ?? []
-    
+
     state.trackIDs = action.response["tracks"]["items"].array?.flatMap {
       $0["id"].string
     } ?? []
@@ -51,6 +51,6 @@ func searchReducer(action: Action, state: SearchState?) -> SearchState {
   default:
     break
   }
-  
+
   return state
 }

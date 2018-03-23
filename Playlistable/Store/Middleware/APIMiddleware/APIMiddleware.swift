@@ -15,15 +15,15 @@ let apiMiddleware: Middleware<AppState> = { dispatch, getState in
   return { next in
     return { action in
       guard let apiAction = action as? APIAction else { return next(action) }
-      
+
       next(apiAction.types.requestAction.init())
-      
+
       APIRequest.shared.request(params: translateToRequestParams(apiAction: apiAction, next: next))
     }
   }
 }
 
-fileprivate func translateToRequestParams(apiAction: APIAction, next: @escaping DispatchFunction) -> APIRequest.RequestParams {
+private func translateToRequestParams(apiAction: APIAction, next: @escaping DispatchFunction) -> APIRequest.RequestParams {
   return APIRequest.RequestParams(
     url: apiAction.url,
     method: apiAction.method,
@@ -50,21 +50,17 @@ struct CallSpotifyAPI: APIAction {
   let queryParams: QueryParams?
   let bodyEncoding: ParameterEncoding
   let types: APITypes
-  let success: ((JSON) -> ())?
-  let failure: (() -> ())?
+  let success: ((JSON) -> Void)?
+  let failure: (() -> Void)?
   var url: String {
-    get {
-      return "https://api.spotify.com" + endpoint + queryString
-    }
+    return "https://api.spotify.com" + endpoint + queryString
   }
   private var queryString: String {
-    get {
-      return queryParams?.reduce("?", { result, keyValue in
-        return result + "&\(keyValue.key)=\(keyValue.value)"
-      }) ?? ""
-    }
+    return queryParams?.reduce("?", { result, keyValue in
+      return result + "&\(keyValue.key)=\(keyValue.value)"
+    }) ?? ""
   }
-  
+
   init(endpoint: String, method: HTTPMethod, types: APITypes) {
     self.endpoint = endpoint
     self.method = method
@@ -76,8 +72,8 @@ struct CallSpotifyAPI: APIAction {
     success = nil
     failure = nil
   }
-  
-  init(endpoint: String, method: HTTPMethod, types: APITypes, success: ((JSON) -> ())?,  failure: (() -> ())?) {
+
+  init(endpoint: String, method: HTTPMethod, types: APITypes, success: ((JSON) -> Void)?, failure: (() -> Void)?) {
     self.endpoint = endpoint
     self.method = method
     self.types = types
@@ -88,7 +84,7 @@ struct CallSpotifyAPI: APIAction {
     self.success = success
     self.failure = failure
   }
-  
+
   init(endpoint: String, queryParams: QueryParams, method: HTTPMethod, types: APITypes) {
     self.endpoint = endpoint
     self.method = method
@@ -100,8 +96,8 @@ struct CallSpotifyAPI: APIAction {
     success = nil
     failure = nil
   }
-  
-  init(endpoint: String, method: HTTPMethod, body: Parameters, types: APITypes, success: ((JSON) -> ())?, failure: (() -> ())?) {
+
+  init(endpoint: String, method: HTTPMethod, body: Parameters, types: APITypes, success: ((JSON) -> Void)?, failure: (() -> Void)?) {
     self.endpoint = endpoint
     self.method = method
     self.types = types
@@ -112,8 +108,8 @@ struct CallSpotifyAPI: APIAction {
     self.success = success
     self.failure = failure
   }
-  
-  init(endpoint: String, queryParams: QueryParams, method: HTTPMethod, types: APITypes, success: ((JSON) -> ())?, failure: (() -> ())?) {
+
+  init(endpoint: String, queryParams: QueryParams, method: HTTPMethod, types: APITypes, success: ((JSON) -> Void)?, failure: (() -> Void)?) {
     self.endpoint = endpoint
     self.method = method
     self.types = types
@@ -133,8 +129,8 @@ struct CallAPI: APIAction {
   let bodyEncoding: ParameterEncoding
   let types: APITypes
   let url: String
-  let success: ((JSON) -> ())?
-  let failure: (() -> ())?
+  let success: ((JSON) -> Void)?
+  let failure: (() -> Void)?
 }
 
 protocol APIAction: Action {
@@ -144,8 +140,8 @@ protocol APIAction: Action {
   var bodyEncoding: ParameterEncoding { get }
   var types: APITypes { get }
   var url: String { get }
-  var success: ((JSON) -> ())? { get }
-  var failure: (() -> ())? { get }
+  var success: ((JSON) -> Void)? { get }
+  var failure: (() -> Void)? { get }
 }
 
 typealias QueryParams = [String: String]

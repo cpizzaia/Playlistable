@@ -34,7 +34,7 @@ struct SpotifyAuthState {
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.spotifyTokenExpirationTimeInterval)
         return
       }
-      
+
       UserDefaults.standard.set(
         expiresAt,
         forKey: UserDefaultsKeys.spotifyTokenExpirationTimeInterval
@@ -42,36 +42,28 @@ struct SpotifyAuthState {
       UserDefaults.standard.synchronize()
     }
   }
-  
+
   // MARK: Computed Properties
   var isAuthed: Bool {
-    get {
-      return token != nil && !isExpired
-    }
+    return token != nil && !isExpired
   }
-  
+
   var shouldRefresh: Bool {
-    get {
-      return isExpired && isRefreshable
-    }
+    return isExpired && isRefreshable
   }
-  
+
   var isRefreshable: Bool {
-    get {
-      return refreshToken != nil
-    }
+    return refreshToken != nil
   }
-  
+
   var isExpired: Bool {
-    get {
-      guard let expiresAt = expiresAt else { return true }
-      
-      return Date().timeIntervalSince1970 > expiresAt
-    }
+    guard let expiresAt = expiresAt else { return true }
+
+    return Date().timeIntervalSince1970 > expiresAt
   }
 }
 
-fileprivate let initialSpotifyAuthState = SpotifyAuthState(
+private let initialSpotifyAuthState = SpotifyAuthState(
   token: UserDefaults.standard.string(forKey: UserDefaultsKeys.spotifyAuthToken),
   refreshToken: UserDefaults.standard.string(forKey: UserDefaultsKeys.spotifyRefreshToken),
   userID: nil,
@@ -85,60 +77,60 @@ fileprivate let initialSpotifyAuthState = SpotifyAuthState(
 
 func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuthState {
   var state = state ?? initialSpotifyAuthState
-  
+
   switch action {
   case _ as SpotifyAuthActions.RequestSpotifyAuth:
     state.isRequestingToken = true
-    
+
   case _ as SpotifyAuthActions.RequestSpotifyRefreshAuth:
     state.isRefreshingToken = true
-    
+
   case let action as SpotifyAuthActions.ReceiveSpotifyAuth:
     state.token = action.response["access_token"].string
     state.refreshToken = action.response["refresh_token"].string
-    
+
     if let expiresIn = action.response["expires_in"].double {
       state.expiresAt = expiresIn + Date().timeIntervalSince1970
     } else {
       state.expiresAt = nil
     }
-    
+
     state.isRequestingToken = false
     state.isInitializingOAuth = false
-  
+
   case let action as SpotifyAuthActions.ReceiveSpotifyRefreshAuth:
     state.token = action.response["access_token"].string
-    
+
     if let expiresIn = action.response["expires_in"].double {
       state.expiresAt = expiresIn + Date().timeIntervalSince1970
     } else {
       state.expiresAt = nil
     }
-    
+
     state.isRefreshingToken = false
     state.isInitializingOAuth = false
-  
+
   case _ as SpotifyAuthActions.ErrorSpotifyRefreshAuth:
     state.isRefreshingToken = false
     state.isInitializingOAuth = false
-    
+
   case _ as SpotifyAuthActions.ErrorSpotifyAuth:
     state.isRequestingToken = false
     state.isInitializingOAuth = false
-    
+
   case _ as SpotifyAuthActions.InitializeOAuth:
     state.isInitializingOAuth = true
-    
+
   case _ as SpotifyAuthActions.RequestCurrentUser:
     state.isRequestingUser = true
-    
+
   case let action as SpotifyAuthActions.ReceiveCurrentUser:
     state.userID = action.response["id"].string
     state.isPremium = action.response["product"].string == "premium"
-    
+
   default:
     break
   }
-  
+
   return state
 }

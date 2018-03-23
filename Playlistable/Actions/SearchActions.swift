@@ -18,11 +18,11 @@ enum SearchActions {
   struct ErrorSearch: APIResponseFailureAction {
     let error: APIRequest.APIError
   }
-  
+
   struct StoreQuery: Action {
     let query: String
   }
-  
+
   static func search(query: String) -> Action {
     return WrapInDispatch { dispatch in
       dispatch(CallSpotifyAPI(
@@ -37,7 +37,7 @@ enum SearchActions {
           successAction: ReceiveSearch.self,
           failureAction: ErrorSearch.self
         ),
-        success: { json in
+        success: { _ in
           dispatch(StoreQuery(query: query))
       },
         failure: nil

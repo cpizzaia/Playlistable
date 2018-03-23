@@ -13,12 +13,12 @@ struct AlbumFactory {
   static func createAlbums(fromJSONArray jsonArray: [JSON]) -> [Album] {
     return jsonArray.flatMap({ createAlbum(fromJSON: $0) })
   }
-  
+
   static func createAlbum(fromJSON json: JSON) -> Album? {
     guard let id = json["id"].string, let name = json["name"].string else {
       return nil
     }
-    
+
     return Album(
       id: id,
       artistIDs: [],

@@ -15,7 +15,7 @@ struct InspectAlbumState {
   var isRequestingTracks: Bool
 }
 
-fileprivate let initialState = InspectAlbumState(
+private let initialState = InspectAlbumState(
   albumID: nil,
   trackIDs: [],
   isRequestingTracks: false
@@ -23,7 +23,7 @@ fileprivate let initialState = InspectAlbumState(
 
 func inspectAlbumReducer(action: Action, state: InspectAlbumState?) -> InspectAlbumState {
   var state = state ?? initialState
-  
+
   switch action {
   case let action as InspectAlbumActions.InspectAlbum:
     state.albumID = action.albumID
@@ -39,6 +39,6 @@ func inspectAlbumReducer(action: Action, state: InspectAlbumState?) -> InspectAl
   default:
     break
   }
-  
+
   return state
 }

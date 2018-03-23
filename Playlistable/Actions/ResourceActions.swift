@@ -9,18 +9,16 @@
 import Foundation
 import ReSwift
 
-
 enum ResourceActions {
   struct ReceiveTracks: Action {
     let tracks: [Track]
   }
-  
+
   struct ReceiveAlbums: Action {
     let albums: [Album]
   }
-  
+
   struct ReceiveArtists: Action {
     let artists: [Artist]
   }
 }
-

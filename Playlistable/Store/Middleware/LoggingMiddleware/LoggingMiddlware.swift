@@ -13,7 +13,7 @@ let loggingMiddleware: Middleware<AppState> = { dispatch, getState in
   return { next in
     return { action in
       log("\(String(describing: type(of: action)))")
-      
+
       next(action)
     }
   }

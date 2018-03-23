@@ -16,6 +16,7 @@ PODS:
   - Spotify-iOS-SDK/Metadata (0.25.0)
   - Spotify-iOS-SDK/Playback (0.25.0)
   - SVProgressHUD (2.2.2)
+  - SwiftLint (0.25.0)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.8)
   - Spotify-iOS-SDK (= 0.25)
   - SVProgressHUD
+  - SwiftLint
   - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -38,8 +40,9 @@ SPEC CHECKSUMS:
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   Spotify-iOS-SDK: 58d4092b225578623dd17029f3c7e7042ac3ef6e
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
+  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 72c9e98fd1f927dbe523ae3c378e76396a77ccc1
+PODFILE CHECKSUM: ebb08dac263bcbc3c5563de58c3f6a34835336e0
 
 COCOAPODS: 1.3.1

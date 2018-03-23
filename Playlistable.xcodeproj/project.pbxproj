@@ -574,6 +574,7 @@
 				AC02D0C31F9CF5B3009ED193 /* Resources */,
 				EAD9FA501EE079C9B0C0BF76 /* [CP] Embed Pods Frameworks */,
 				43E69DF3BF9F28B80BC52E23 /* [CP] Copy Pods Resources */,
+				AC669B52206487BC006ACD3F /* ShellScript */,
 				ACCE5199205F2CA1008877F2 /* ShellScript */,
 			);
 			buildRules = (
@@ -692,6 +693,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Playlistable/Pods-Playlistable-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		AC669B52206487BC006ACD3F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		ACCE5199205F2CA1008877F2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

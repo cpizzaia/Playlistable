@@ -15,17 +15,13 @@ struct Album: Item {
   let images: [Image]
   let name: String
   let artistNames: [String]
-  
+
   // BrowsableItem Properties
   var title: String {
-    get {
-      return name
-    }
+    return name
   }
-  
+
   var subTitle: String? {
-    get {
-      return artistNames.joined(separator: " + ")
-    }
+    return artistNames.joined(separator: " + ")
   }
 }

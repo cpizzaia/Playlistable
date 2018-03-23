@@ -14,7 +14,7 @@ enum InspectAlbumActions {
   struct InspectAlbum: Action {
     let albumID: String
   }
-  
+
   struct RequestAlbumTracks: APIRequestAction {}
   struct ReceiveAlbumTracks: APIResponseSuccessAction {
     var response: JSON
@@ -22,7 +22,7 @@ enum InspectAlbumActions {
   struct ErrorAlbumTracks: APIResponseFailureAction {
     var error: APIRequest.APIError
   }
-  
+
   static func getAlbumTracks(album: Album) -> Action {
     return CallSpotifyAPI(
       endpoint: "/v1/albums/\(album.id)/tracks",

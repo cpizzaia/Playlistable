@@ -15,11 +15,11 @@ struct GeneratedPlaylistState {
   var seedsUsed: SeedsState?
 }
 
-fileprivate let initialGeneratedPlaylistState = GeneratedPlaylistState(trackIDs: [], isGenerating: false, seedsUsed: nil)
+private let initialGeneratedPlaylistState = GeneratedPlaylistState(trackIDs: [], isGenerating: false, seedsUsed: nil)
 
 func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) -> GeneratedPlaylistState {
   var state = state ?? initialGeneratedPlaylistState
-  
+
   switch action {
   case _ as GeneratePlaylistActions.RequestGeneratePlaylist:
     state.isGenerating = true
@@ -33,6 +33,6 @@ func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) ->
   default:
     break
   }
-  
+
   return state
 }

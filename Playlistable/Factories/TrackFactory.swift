@@ -13,7 +13,7 @@ struct TrackFactory {
   static func createTracks(fromJSONArray jsonArray: [JSON]) -> [Track] {
     return jsonArray.flatMap({ createTrack(fromJSON: $0) })
   }
-  
+
   static func createTrack(fromJSON json: JSON) -> Track? {
     guard
       let id = json["id"].string,
@@ -21,7 +21,7 @@ struct TrackFactory {
       let name = json["name"].string else {
         return nil
     }
-    
+
     return Track(
       id: id,
       albumID: "",

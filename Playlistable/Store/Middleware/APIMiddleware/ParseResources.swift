@@ -10,17 +10,17 @@ import Foundation
 import SwiftyJSON
 import ReSwift
 
-fileprivate struct ResourceType {
+private struct ResourceType {
   static let artist = "artist"
   static let track = "track"
   static let album = "album"
 }
 
-fileprivate struct ResourceCollection {
+private struct ResourceCollection {
   let artists: [JSON]
   let albums: [JSON]
   let tracks: [JSON]
-  
+
   func merged(withCollection collection: ResourceCollection) -> ResourceCollection {
     return ResourceCollection(
       artists: artists + collection.artists,
@@ -32,7 +32,7 @@ fileprivate struct ResourceCollection {
 
 func parseResources(fromJSON json: JSON, next: @escaping DispatchFunction) {
   let resources = gatherResources(fromJSON: json)
-  
+
   next(ResourceActions.ReceiveTracks(tracks:
     TrackFactory.createTracks(fromJSONArray: resources.tracks))
   )
@@ -44,22 +44,22 @@ func parseResources(fromJSON json: JSON, next: @escaping DispatchFunction) {
   )
 }
 
-fileprivate func gatherResources(fromJSON json: JSON) -> ResourceCollection {
+private func gatherResources(fromJSON json: JSON) -> ResourceCollection {
   var resources = ResourceCollection(artists: [], albums: [], tracks: [])
-  
+
   json.forEach { key, value in
     if let type = value.string, key == "type" {
       resources = parse(type: type, fromJSON: json).merged(withCollection: resources)
     }
-    
+
     resources = gatherResources(fromJSON: value).merged(withCollection: resources)
   }
-  
+
   return resources
 }
 
-fileprivate func parse(type: String, fromJSON json: JSON) -> ResourceCollection {
-  switch (type) {
+private func parse(type: String, fromJSON json: JSON) -> ResourceCollection {
+  switch type {
   case ResourceType.artist:
     return ResourceCollection(artists: [json], albums: [], tracks: [])
   case ResourceType.album:

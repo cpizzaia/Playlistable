@@ -1,0 +1,12 @@
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+force_unwrapping:
+  severity: error
+enabled_rules:
+  - force_unwrapping
+disabled_rules:
+  - line_length
+  - identifier_name
+  - function_parameter_count
+  - todo
+  - cyclomatic_complexity
