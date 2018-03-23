@@ -41,24 +41,24 @@ class LockScreenController: NSObject, StateManager {
   
   @objc func nextTrackCommand() {
     guard let currentTrack = currentTrack else { return }
-    guard let action = playTrack(inQueue: currentQueue, afterTrackID: currentTrack.id) else { return }
+    guard let action = SpotifyPlayerActions.playTrack(inQueue: currentQueue, afterTrackID: currentTrack.id) else { return }
     
     mainStore.dispatch(action)
   }
   
   @objc func previousTrackCommand() {
     guard let currentTrack = currentTrack else { return }
-    guard let action = playTrack(inQueue: currentQueue, beforeTrackID: currentTrack.id) else { return }
+    guard let action = SpotifyPlayerActions.playTrack(inQueue: currentQueue, beforeTrackID: currentTrack.id) else { return }
     
     mainStore.dispatch(action)
   }
   
   @objc func playCommand() {
-    mainStore.dispatch(resume())
+    mainStore.dispatch(SpotifyPlayerActions.resume())
   }
   
   @objc func pauseCommand() {
-    mainStore.dispatch(pause())
+    mainStore.dispatch(SpotifyPlayerActions.pause())
   }
   
   func newState(state: AppState) {
@@ -109,7 +109,7 @@ class LockScreenController: NSObject, StateManager {
         MPMediaItemPropertyPlaybackDuration: Double(track.durationMS) / 1000.0 as AnyObject,
         MPNowPlayingInfoPropertyPlaybackQueueIndex: 0 as AnyObject,
         MPNowPlayingInfoPropertyPlaybackQueueCount: 1 as AnyObject,
-        MPNowPlayingInfoPropertyElapsedPlaybackTime: NSNumber(value: getCurrentPlayerPosition()) as AnyObject
+        MPNowPlayingInfoPropertyElapsedPlaybackTime: NSNumber(value: SpotifyPlayerActions.getCurrentPlayerPosition()) as AnyObject
       ]
       
       if let imageURL = track.mediumImageURL {

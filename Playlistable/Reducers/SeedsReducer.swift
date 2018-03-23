@@ -29,12 +29,12 @@ fileprivate let initialSeedsState = SeedsState(items: [:])
 func seedsReducer(action: Action, state: SeedsState?) -> SeedsState {
   var state = state ?? initialSeedsState
   switch action {
-  case let action as AddSeed:
+  case let action as SeedsActions.AddSeed:
     if state.isFull { break }
     state.items[action.item.id] = action.item
-  case let action as RemoveSeed:
+  case let action as SeedsActions.RemoveSeed:
     state.items.removeValue(forKey: action.item.id)
-  case _ as GeneratedFromSeeds:
+  case _ as SeedsActions.GeneratedFromSeeds:
     state.items = [:]
   default:
     break

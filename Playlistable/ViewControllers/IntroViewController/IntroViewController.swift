@@ -18,7 +18,7 @@ class IntroViewController: UIViewController, StoreSubscriber {
   @IBOutlet var loginButton: UIButton!
   @IBAction func loginButtonPressed(_ sender: UIButton) {
     guard let auth = spotifyAuthState else { return }
-    mainStore.dispatch(oAuthSpotify(authState: auth))
+    mainStore.dispatch(SpotifyAuthActions.oAuthSpotify(authState: auth))
   }
   
   private var spotifyAuthState: SpotifyAuthState?
@@ -65,7 +65,7 @@ class IntroViewController: UIViewController, StoreSubscriber {
     }
     
     if spotifyAuthState?.isAuthed == true && spotifyAuthState?.userID == nil && !(spotifyAuthState?.isRequestingUser == true) {
-      mainStore.dispatch(getCurrentUser())
+      mainStore.dispatch(SpotifyAuthActions.getCurrentUser())
     }
   }
   

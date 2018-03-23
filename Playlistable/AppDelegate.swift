@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 
-    if let action = receiveSpotifyAuth(url: url) {
+    if let action = SpotifyAuthActions.receiveSpotifyAuth(url: url) {
       mainStore.dispatch(action)
     }
     

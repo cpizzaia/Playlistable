@@ -24,9 +24,9 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   @IBOutlet var playPauseButton: UIButton!
   @IBAction func playPauseButtonPressed(_ sender: UIButton) {
     if isPlaying {
-      mainStore.dispatch(pause())
+      mainStore.dispatch(SpotifyPlayerActions.pause())
     } else {
-      mainStore.dispatch(resume())
+      mainStore.dispatch(SpotifyPlayerActions.resume())
     }
   }
   
@@ -45,7 +45,7 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
       let track = state.resources.tracksFor(ids: [trackID]).first!
       playBarTitleLabel.attributedText = "\(track.name) \u{2022} \(track.artistNames.first ?? "")".attributedStringForPartiallyColoredText(track.artistNames.first ?? "", with: UIColor.myDarkWhite)
       
-      animateDuration(startTime: getCurrentPlayerPosition(), endTime: Double(track.durationMS) / 1000.0, isStopped: !isPlaying)
+      animateDuration(startTime: SpotifyPlayerActions.getCurrentPlayerPosition(), endTime: Double(track.durationMS) / 1000.0, isStopped: !isPlaying)
     }
   }
   

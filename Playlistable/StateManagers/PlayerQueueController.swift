@@ -28,7 +28,7 @@ class PlayerQueueController: StateManager {
     
     guard shouldPlayNextTrack(state: state.spotifyPlayer) else { return }
     
-    if let action = playTrack(inQueue: spotifyPlayerState.queueTrackIDs, afterTrackID: currentTrackID) {
+    if let action = SpotifyPlayerActions.playTrack(inQueue: spotifyPlayerState.queueTrackIDs, afterTrackID: currentTrackID) {
       mainStore.dispatch(action)
     }
   }

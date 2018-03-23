@@ -87,13 +87,13 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
   var state = state ?? initialSpotifyAuthState
   
   switch action {
-  case _ as RequestSpotifyAuth:
+  case _ as SpotifyAuthActions.RequestSpotifyAuth:
     state.isRequestingToken = true
     
-  case _ as RequestSpotifyRefreshAuth:
+  case _ as SpotifyAuthActions.RequestSpotifyRefreshAuth:
     state.isRefreshingToken = true
     
-  case let action as ReceiveSpotifyAuth:
+  case let action as SpotifyAuthActions.ReceiveSpotifyAuth:
     state.token = action.response["access_token"].string
     state.refreshToken = action.response["refresh_token"].string
     
@@ -106,7 +106,7 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
     state.isRequestingToken = false
     state.isInitializingOAuth = false
   
-  case let action as ReceiveSpotifyRefreshAuth:
+  case let action as SpotifyAuthActions.ReceiveSpotifyRefreshAuth:
     state.token = action.response["access_token"].string
     
     if let expiresIn = action.response["expires_in"].double {
@@ -118,21 +118,21 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
     state.isRefreshingToken = false
     state.isInitializingOAuth = false
   
-  case _ as ErrorSpotifyRefreshAuth:
+  case _ as SpotifyAuthActions.ErrorSpotifyRefreshAuth:
     state.isRefreshingToken = false
     state.isInitializingOAuth = false
     
-  case _ as ErrorSpotifyAuth:
+  case _ as SpotifyAuthActions.ErrorSpotifyAuth:
     state.isRequestingToken = false
     state.isInitializingOAuth = false
     
-  case _ as InitializeOAuth:
+  case _ as SpotifyAuthActions.InitializeOAuth:
     state.isInitializingOAuth = true
     
-  case _ as RequestCurrentUser:
+  case _ as SpotifyAuthActions.RequestCurrentUser:
     state.isRequestingUser = true
     
-  case let action as ReceiveCurrentUser:
+  case let action as SpotifyAuthActions.ReceiveCurrentUser:
     state.userID = action.response["id"].string
     state.isPremium = action.response["product"].string == "premium"
     

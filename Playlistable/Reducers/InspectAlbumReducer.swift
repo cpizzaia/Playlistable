@@ -25,16 +25,16 @@ func inspectAlbumReducer(action: Action, state: InspectAlbumState?) -> InspectAl
   var state = state ?? initialState
   
   switch action {
-  case let action as InspectAlbum:
+  case let action as InspectAlbumActions.InspectAlbum:
     state.albumID = action.albumID
     state.trackIDs = []
     state.isRequestingTracks = false
-  case _ as RequestAlbumTracks:
+  case _ as InspectAlbumActions.RequestAlbumTracks:
     state.isRequestingTracks = true
-  case let action as ReceiveAlbumTracks:
+  case let action as InspectAlbumActions.ReceiveAlbumTracks:
     state.isRequestingTracks = false
     state.trackIDs = action.response["items"].array?.flatMap { $0["id"].string } ?? []
-  case _ as ErrorAlbumTracks:
+  case _ as InspectAlbumActions.ErrorAlbumTracks:
     state.isRequestingTracks = false
   default:
     break

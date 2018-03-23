@@ -13,38 +13,6 @@ import ReSwift
 import SwiftyJSON
 import SafariServices
 
-struct InitializeOAuth: Action {
-  let isInitializing = true
-}
-
-struct RequestSpotifyAuth: APIRequestAction {}
-
-struct RequestSpotifyRefreshAuth: APIRequestAction {}
-
-struct ErrorSpotifyAuth: APIResponseFailureAction {
-  let error: APIRequest.APIError
-}
-
-struct ErrorSpotifyRefreshAuth: APIResponseFailureAction {
-  let error: APIRequest.APIError
-}
-
-struct ReceiveSpotifyAuth: APIResponseSuccessAction {
-  let response: JSON
-}
-
-struct ReceiveSpotifyRefreshAuth: APIResponseSuccessAction {
-  let response: JSON
-}
-
-struct RequestCurrentUser: APIRequestAction {}
-struct ReceiveCurrentUser: APIResponseSuccessAction {
-  let response: JSON
-}
-struct ErrorCurrentUser: APIResponseFailureAction {
-  let error: APIRequest.APIError
-}
-
 fileprivate var hasSpotifyInstalled: Bool {
   get {
     return SPTAuth.supportsApplicationAuthentication()
@@ -125,108 +93,142 @@ fileprivate var webURL: URL {
   }
 }
 
-func oAuthSpotify(authState: SpotifyAuthState) -> Action {
-  return WrapInDispatch { dispatch in
-    dispatch(RequestSpotifyAuth())
-    
-    if authState.isRefreshable && authState.shouldRefresh {
-      dispatch(refreshSpotifyAuth(refreshToken: authState.refreshToken ?? ""))
-      return
-    }
-    
-    if hasSpotifyInstalled {
-      log("Authing from spotify app")
-      UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
-    } else {
-      log("Authing from webview")
-      UIViewController.currentViewController()?.present(
-        SFSafariViewController(url: webURL),
-        animated: true
-      )
-    }
-  }
-}
-
-func refreshSpotifyAuth(refreshToken: String) -> Action {
-  return WrapInDispatch { dispatch in
-    dispatch(CallAPI(
-      method: .post,
-      headers: nil,
-      body: [
-        "refresh_token": refreshToken,
-        "grant_type": "refresh_token",
-        "client_id": clientID,
-        "client_secret": clientSecret
-      ],
-      bodyEncoding: URLEncoding.default,
-      types: APITypes(
-        requestAction: RequestSpotifyRefreshAuth.self,
-        successAction: ReceiveSpotifyRefreshAuth.self,
-        failureAction: ErrorSpotifyRefreshAuth.self
-      ),
-      url: "https://accounts.spotify.com/api/token",
-      success: { json in
-        guard let token = json["access_token"].string else { return }
-        
-        dispatch(postAuthAction(accessToken: token))
-    },
-      failure: nil
-    ))
-  }
-}
-
-func postAuthAction(accessToken: String) -> Action {
-  return initializePlayer(clientID: clientID, accessToken: accessToken)
-}
-
-func receiveSpotifyAuth(url: URL) -> Action? {
-  guard let code = url.queryParameters?["code"] else { return nil }
-  
-  if let webview = UIViewController.currentViewController() as? SFSafariViewController {
-    webview.dismiss(animated: true, completion: nil)
+enum SpotifyAuthActions {
+  struct InitializeOAuth: Action {
+    let isInitializing = true
   }
   
-  return WrapInDispatch { dispatch in
-    dispatch(CallAPI(
-      method: .post,
-      headers: nil,
-      body: [
-        "grant_type": "authorization_code",
-        "code": code,
-        "redirect_uri": redirectURI,
-        "client_id": clientID,
-        "client_secret": clientSecret
-      ],
-      bodyEncoding: URLEncoding.default,
-      types: APITypes(
-        requestAction: RequestSpotifyAuth.self,
-        successAction: ReceiveSpotifyAuth.self,
-        failureAction: ErrorSpotifyAuth.self
-      ),
-      url: "https://accounts.spotify.com/api/token",
-      success: { json in
-        guard let token = json["access_token"].string else { return }
-        
-        dispatch(postAuthAction(accessToken: token))
-    },
-      failure: {}
-    ))
+  struct RequestSpotifyAuth: APIRequestAction {}
+  
+  struct RequestSpotifyRefreshAuth: APIRequestAction {}
+  
+  struct ErrorSpotifyAuth: APIResponseFailureAction {
+    let error: APIRequest.APIError
   }
-}
-
-func getCurrentUser() -> Action {
-  return WrapInDispatch { dispatch in
-    dispatch(CallSpotifyAPI(
-      endpoint: "/v1/me",
-      method: .get,
-      types: APITypes(
-        requestAction: RequestCurrentUser.self,
-        successAction: ReceiveCurrentUser.self,
-        failureAction: ErrorCurrentUser.self
-      ),
-      success: { json in
-    },
-      failure: nil
-    ))
+  
+  struct ErrorSpotifyRefreshAuth: APIResponseFailureAction {
+    let error: APIRequest.APIError
+  }
+  
+  struct ReceiveSpotifyAuth: APIResponseSuccessAction {
+    let response: JSON
+  }
+  
+  struct ReceiveSpotifyRefreshAuth: APIResponseSuccessAction {
+    let response: JSON
+  }
+  
+  struct RequestCurrentUser: APIRequestAction {}
+  struct ReceiveCurrentUser: APIResponseSuccessAction {
+    let response: JSON
+  }
+  struct ErrorCurrentUser: APIResponseFailureAction {
+    let error: APIRequest.APIError
+  }
+  
+  static func oAuthSpotify(authState: SpotifyAuthState) -> Action {
+    return WrapInDispatch { dispatch in
+      dispatch(RequestSpotifyAuth())
+      
+      if authState.isRefreshable && authState.shouldRefresh {
+        dispatch(refreshSpotifyAuth(refreshToken: authState.refreshToken ?? ""))
+        return
+      }
+      
+      if hasSpotifyInstalled {
+        log("Authing from spotify app")
+        UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+      } else {
+        log("Authing from webview")
+        UIViewController.currentViewController()?.present(
+          SFSafariViewController(url: webURL),
+          animated: true
+        )
+      }
+    }
+  }
+  
+  static func refreshSpotifyAuth(refreshToken: String) -> Action {
+    return WrapInDispatch { dispatch in
+      dispatch(CallAPI(
+        method: .post,
+        headers: nil,
+        body: [
+          "refresh_token": refreshToken,
+          "grant_type": "refresh_token",
+          "client_id": clientID,
+          "client_secret": clientSecret
+        ],
+        bodyEncoding: URLEncoding.default,
+        types: APITypes(
+          requestAction: RequestSpotifyRefreshAuth.self,
+          successAction: ReceiveSpotifyRefreshAuth.self,
+          failureAction: ErrorSpotifyRefreshAuth.self
+        ),
+        url: "https://accounts.spotify.com/api/token",
+        success: { json in
+          guard let token = json["access_token"].string else { return }
+          
+          dispatch(postAuthAction(accessToken: token))
+      },
+        failure: nil
+      ))
+    }
+  }
+  
+  static func postAuthAction(accessToken: String) -> Action {
+    return SpotifyPlayerActions.initializePlayer(clientID: clientID, accessToken: accessToken)
+  }
+  
+  static func receiveSpotifyAuth(url: URL) -> Action? {
+    guard let code = url.queryParameters?["code"] else { return nil }
+    
+    if let webview = UIViewController.currentViewController() as? SFSafariViewController {
+      webview.dismiss(animated: true, completion: nil)
+    }
+    
+    return WrapInDispatch { dispatch in
+      dispatch(CallAPI(
+        method: .post,
+        headers: nil,
+        body: [
+          "grant_type": "authorization_code",
+          "code": code,
+          "redirect_uri": redirectURI,
+          "client_id": clientID,
+          "client_secret": clientSecret
+        ],
+        bodyEncoding: URLEncoding.default,
+        types: APITypes(
+          requestAction: RequestSpotifyAuth.self,
+          successAction: ReceiveSpotifyAuth.self,
+          failureAction: ErrorSpotifyAuth.self
+        ),
+        url: "https://accounts.spotify.com/api/token",
+        success: { json in
+          guard let token = json["access_token"].string else { return }
+          
+          dispatch(postAuthAction(accessToken: token))
+      },
+        failure: {}
+      ))
+    }
+  }
+  
+  static func getCurrentUser() -> Action {
+    return WrapInDispatch { dispatch in
+      dispatch(CallSpotifyAPI(
+        endpoint: "/v1/me",
+        method: .get,
+        types: APITypes(
+          requestAction: RequestCurrentUser.self,
+          successAction: ReceiveCurrentUser.self,
+          failureAction: ErrorCurrentUser.self
+        ),
+        success: { json in
+      },
+        failure: nil
+      ))
+    }
   }
 }

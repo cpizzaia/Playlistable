@@ -89,9 +89,9 @@ class TabBarController: UITabBarController, StoreSubscriber {
     guard let authState = authState else { return }
     
     if !authState.isAuthed {
-      mainStore.dispatch(oAuthSpotify(authState: authState))
+      mainStore.dispatch(SpotifyAuthActions.oAuthSpotify(authState: authState))
     } else {
-      mainStore.dispatch(postAuthAction(accessToken: authState.token ?? ""))
+      mainStore.dispatch(SpotifyAuthActions.postAuthAction(accessToken: authState.token ?? ""))
     }
   }
   

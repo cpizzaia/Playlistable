@@ -51,11 +51,11 @@ func resourceReducer(action: Action, state: ResourceState?) -> ResourceState {
   var state = state ?? initialResourceState
   
   switch action {
-  case let action as ReceiveTracks:
+  case let action as ResourceActions.ReceiveTracks:
     action.tracks.forEach({ state = updateOrAdd(item: $0, toState: state) })
-  case let action as ReceiveAlbums:
+  case let action as ResourceActions.ReceiveAlbums:
     action.albums.forEach({ state = updateOrAdd(item: $0, toState: state)})
-  case let action as ReceiveArtists:
+  case let action as ResourceActions.ReceiveArtists:
     action.artists.forEach({ state = updateOrAdd(item: $0, toState: state) })
   default: break
   }

@@ -85,7 +85,7 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
     guard let seeds = seeds else { return }
     
     generateFunction = {
-      mainStore.dispatch(generatePlaylist(fromSeeds: seeds))
+      mainStore.dispatch(GeneratePlaylistActions.generatePlaylist(fromSeeds: seeds))
     }
     
     generatePlaylistButton.isHidden = seeds.items.isEmpty
@@ -127,7 +127,7 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
       cell.setupCellWithImage(forItem: item, action: nil)
     } else {
       cell.setupCellWithImage(forItem: item, actionSymbol: "x", action: {
-        mainStore.dispatch(RemoveSeed(item: item))
+        mainStore.dispatch(SeedsActions.RemoveSeed(item: item))
       })
     }
     

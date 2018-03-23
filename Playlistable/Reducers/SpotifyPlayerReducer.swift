@@ -66,26 +66,26 @@ func spotifyPlayerReducer(action: Action, state: SpotifyPlayerState?) -> Spotify
   var state = state ?? initialSpotifyPlayerState
   
   switch action {
-  case _ as InitializedPlayer:
+  case _ as SpotifyPlayerActions.InitializedPlayer:
     state.isInitialized = true
-  case _ as PlayTrack:
+  case _ as SpotifyPlayerActions.PlayTrack:
     state.isStartingToPlay = true
-  case let action as PlayingTrack:
+  case let action as SpotifyPlayerActions.PlayingTrack:
     state.playingTrackID = action.trackID
     state.isPlaying = true
     state.isStartingToPlay = false
     state.isPaused = false
-  case _ as StoppedPlaying:
+  case _ as SpotifyPlayerActions.StoppedPlaying:
     state.isPlaying = false
-  case let action as PlayQueue:
+  case let action as SpotifyPlayerActions.PlayQueue:
     state.queueTrackIDs = action.trackIDs
-  case _ as Paused:
+  case _ as SpotifyPlayerActions.Paused:
     state.isPaused = true
     state.isPlaying = false
     state.isPausing = false
-  case _ as Pausing:
+  case _ as SpotifyPlayerActions.Pausing:
     state.isPausing = true
-  case _ as Resumed:
+  case _ as SpotifyPlayerActions.Resumed:
     state.isPlaying = true
     state.isPaused = false
   default:

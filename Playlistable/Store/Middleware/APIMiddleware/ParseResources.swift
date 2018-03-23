@@ -33,13 +33,13 @@ fileprivate struct ResourceCollection {
 func parseResources(fromJSON json: JSON, next: @escaping DispatchFunction) {
   let resources = gatherResources(fromJSON: json)
   
-  next(ReceiveTracks(tracks:
+  next(ResourceActions.ReceiveTracks(tracks:
     TrackFactory.createTracks(fromJSONArray: resources.tracks))
   )
-  next(ReceiveAlbums(albums:
+  next(ResourceActions.ReceiveAlbums(albums:
     AlbumFactory.createAlbums(fromJSONArray: resources.albums))
   )
-  next(ReceiveArtists(artists:
+  next(ResourceActions.ReceiveArtists(artists:
     ArtistFactory.createArtists(fromJSONArray: resources.artists))
   )
 }

@@ -80,7 +80,7 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
       tracks = state.resources.tracksFor(ids: state.inspectAlbum.trackIDs)
     } else if !state.inspectAlbum.isRequestingTracks {
       tracks = []
-      mainStore.dispatch(getAlbumTracks(album: album))
+      mainStore.dispatch(InspectAlbumActions.getAlbumTracks(album: album))
     }
   }
   
@@ -109,9 +109,9 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     let track = tracks[indexPath.row]
     
     if seeds?.isInSeeds(item: track) == true {
-      mainStore.dispatch(RemoveSeed(item: track))
+      mainStore.dispatch(SeedsActions.RemoveSeed(item: track))
     } else {
-      mainStore.dispatch(AddSeed(item: track))
+      mainStore.dispatch(SeedsActions.AddSeed(item: track))
     }
   }
   

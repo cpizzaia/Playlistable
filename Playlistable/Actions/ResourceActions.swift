@@ -9,14 +9,18 @@
 import Foundation
 import ReSwift
 
-struct ReceiveTracks: Action {
-  let tracks: [Track]
+
+enum ResourceActions {
+  struct ReceiveTracks: Action {
+    let tracks: [Track]
+  }
+  
+  struct ReceiveAlbums: Action {
+    let albums: [Album]
+  }
+  
+  struct ReceiveArtists: Action {
+    let artists: [Artist]
+  }
 }
 
-struct ReceiveAlbums: Action {
-  let albums: [Album]
-}
-
-struct ReceiveArtists: Action {
-  let artists: [Artist]
-}

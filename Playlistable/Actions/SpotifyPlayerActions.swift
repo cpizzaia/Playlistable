@@ -12,137 +12,138 @@ import Spotify
 
 fileprivate let player = SPTAudioStreamingController.sharedInstance()!
 
-struct StartedPlayer: Action {}
-
-struct LoggedInPlayer: Action {}
-
-struct StartPlayerFailed: Action {}
-
-struct InitializedPlayer: Action {}
-
-struct PlayQueue: Action {
-  let trackIDs: [String]
+enum SpotifyPlayerActions {
+  struct StartedPlayer: Action {}
+  
+  struct LoggedInPlayer: Action {}
+  
+  struct StartPlayerFailed: Action {}
+  
+  struct InitializedPlayer: Action {}
+  
+  struct PlayQueue: Action {
+    let trackIDs: [String]
+  }
+  
+  struct PlayTrack: Action {
+    let trackID: String
+  }
+  
+  struct PlayingTrack: Action {
+    let trackID: String
+  }
+  
+  struct StoppedPlaying: Action {
+    let trackID: String
+  }
+  
+  struct Pausing: Action {}
+  struct Paused: Action {}
+  struct FailedToPause: Action {}
+  
+  struct Resuming: Action {}
+  struct Resumed: Action {}
+  struct FailedToResume: Action {}
+  
+  static func initializePlayer(clientID: String, accessToken: String) -> Action {
+    return WrapInDispatch { dispatch in
+      player.delegate = streamingDelegate
+      player.playbackDelegate = playbackDelegate
+      dispatch(startPlayer(clientID: clientID))
+      loginPlayer(accessToken: accessToken)
+      dispatch(InitializedPlayer())
+    }
+  }
+  
+  static func playTrack(id: String) -> Action {
+    player.playSpotifyURI(
+      trackURI(fromID: id),
+      startingWith: 0,
+      startingWithPosition: 0,
+      callback: { error in
+        
+    })
+    
+    return PlayTrack(trackID: id)
+  }
+  
+  static func playQueue(trackIDs: [String], startingWithTrackID trackID: String) -> Action {
+    return WrapInDispatch { dispatch in
+      dispatch(PlayQueue(trackIDs: trackIDs))
+      
+      dispatch(playTrack(id: trackID))
+    }
+  }
+  
+  static func playTrack(inQueue queue: [String], afterTrackID trackID: String) -> Action? {
+    guard let currentTrackIndex = queue.index(of: trackID) else { return nil }
+    let nextTrackIndex = queue.index(after: currentTrackIndex)
+    
+    if nextTrackIndex <= queue.endIndex {
+      return playTrack(id: queue[nextTrackIndex])
+    } else {
+      return nil
+    }
+  }
+  
+  static func playTrack(inQueue queue: [String], beforeTrackID trackID: String) -> Action? {
+    guard let currentTrackIndex = queue.index(of: trackID) else { return nil }
+    let nextTrackIndex = queue.index(before: currentTrackIndex)
+    
+    if nextTrackIndex >= queue.startIndex {
+      return playTrack(id: queue[nextTrackIndex])
+    } else {
+      return nil
+    }
+  }
+  
+  static func pause() -> Action {
+    return WrapInDispatch { dispatch in
+      dispatch(Pausing())
+      
+      player.setIsPlaying(false, callback: { error in
+        if error != nil {
+          dispatch(FailedToPause())
+        } else {
+          
+        }
+      })
+    }
+  }
+  
+  static func resume() -> Action {
+    return WrapInDispatch { dispatch in
+      dispatch(Resuming())
+      
+      player.setIsPlaying(true, callback: { error in
+        if error != nil {
+          dispatch(FailedToResume())
+        } else {
+          
+        }
+      })
+    }
+  }
+  
+  // FIXME: Not sure how else to expose this, come back and rethink this later.
+  static func getCurrentPlayerPosition() -> TimeInterval {
+    return player.playbackState.position
+  }
 }
-
-struct PlayTrack: Action {
-  let trackID: String
-}
-
-struct PlayingTrack: Action {
-  let trackID: String
-}
-
-struct StoppedPlaying: Action {
-  let trackID: String
-}
-
-struct Pausing: Action {}
-struct Paused: Action {}
-struct FailedToPause: Action {}
-
-struct Resuming: Action {}
-struct Resumed: Action {}
-struct FailedToResume: Action {}
-
 
 fileprivate func startPlayer(clientID: String) -> Action {
   
   do {
     try player.start(withClientId: clientID)
   } catch {
-    return StartPlayerFailed()
+    return SpotifyPlayerActions.StartPlayerFailed()
   }
   
-  return StartedPlayer()
+  return SpotifyPlayerActions.StartedPlayer()
 }
 
 fileprivate func loginPlayer(accessToken: String) {
   player.login(withAccessToken: accessToken)
-}
-
-func initializePlayer(clientID: String, accessToken: String) -> Action {
-  return WrapInDispatch { dispatch in
-    player.delegate = streamingDelegate
-    player.playbackDelegate = playbackDelegate
-    dispatch(startPlayer(clientID: clientID))
-    loginPlayer(accessToken: accessToken)
-    dispatch(InitializedPlayer())
-  }
-}
-
-func playTrack(id: String) -> Action {
-  player.playSpotifyURI(
-    trackURI(fromID: id),
-    startingWith: 0,
-    startingWithPosition: 0,
-    callback: { error in
-    
-  })
-  
-  return PlayTrack(trackID: id)
-}
-
-func playQueue(trackIDs: [String], startingWithTrackID trackID: String) -> Action {
-  return WrapInDispatch { dispatch in
-    dispatch(PlayQueue(trackIDs: trackIDs))
-    
-    dispatch(playTrack(id: trackID))
-  }
-}
-
-func playTrack(inQueue queue: [String], afterTrackID trackID: String) -> Action? {
-  guard let currentTrackIndex = queue.index(of: trackID) else { return nil }
-  let nextTrackIndex = queue.index(after: currentTrackIndex)
-  
-  if nextTrackIndex <= queue.endIndex {
-    return playTrack(id: queue[nextTrackIndex])
-  } else {
-    return nil
-  }
-}
-
-func playTrack(inQueue queue: [String], beforeTrackID trackID: String) -> Action? {
-  guard let currentTrackIndex = queue.index(of: trackID) else { return nil }
-  let nextTrackIndex = queue.index(before: currentTrackIndex)
-  
-  if nextTrackIndex >= queue.startIndex {
-    return playTrack(id: queue[nextTrackIndex])
-  } else {
-    return nil
-  }
-}
-
-func pause() -> Action {
-  return WrapInDispatch { dispatch in
-    dispatch(Pausing())
-    
-    player.setIsPlaying(false, callback: { error in
-      if error != nil {
-        dispatch(FailedToPause())
-      } else {
-        
-      }
-    })
-  }
-}
-
-func resume() -> Action {
-  return WrapInDispatch { dispatch in
-    dispatch(Resuming())
-    
-    player.setIsPlaying(true, callback: { error in
-      if error != nil {
-        dispatch(FailedToResume())
-      } else {
-        
-      }
-    })
-  }
-}
-
-// FIXME: Not sure how else to expose this, come back and rethink this later.
-func getCurrentPlayerPosition() -> TimeInterval {
-  return player.playbackState.position
 }
 
 fileprivate func id(fromURI uri: String) -> String {
@@ -154,7 +155,7 @@ fileprivate let playbackDelegate = PlaybackDelegate()
 
 fileprivate class StreamingDelegate: NSObject, SPTAudioStreamingDelegate {
   func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
-    mainStore.dispatch(LoggedInPlayer())
+    mainStore.dispatch(SpotifyPlayerActions.LoggedInPlayer())
   }
   
   func audioStreamingDidLogout(_ audioStreaming: SPTAudioStreamingController!) {
@@ -220,9 +221,9 @@ fileprivate class PlaybackDelegate: NSObject, SPTAudioStreamingPlaybackDelegate 
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didReceive event: SpPlaybackEvent) {
     switch event {
     case SPPlaybackNotifyPlay:
-      mainStore.dispatch(Resumed())
+      mainStore.dispatch(SpotifyPlayerActions.Resumed())
     case SPPlaybackNotifyPause:
-      mainStore.dispatch(Paused())
+      mainStore.dispatch(SpotifyPlayerActions.Paused())
     default:
       break
     }
@@ -233,11 +234,11 @@ fileprivate class PlaybackDelegate: NSObject, SPTAudioStreamingPlaybackDelegate 
   }
   
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
-    mainStore.dispatch(StoppedPlaying(trackID: id(fromURI: trackUri)))
+    mainStore.dispatch(SpotifyPlayerActions.StoppedPlaying(trackID: id(fromURI: trackUri)))
   }
   
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStartPlayingTrack trackUri: String!) {
-    mainStore.dispatch(PlayingTrack(trackID: id(fromURI: trackUri)))
+    mainStore.dispatch(SpotifyPlayerActions.PlayingTrack(trackID: id(fromURI: trackUri)))
   }
   
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePlaybackStatus isPlaying: Bool) {

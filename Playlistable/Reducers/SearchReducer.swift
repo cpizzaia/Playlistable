@@ -29,9 +29,9 @@ func searchReducer(action: Action, state: SearchState?) -> SearchState {
   var state = state ?? initialSearchState
   
   switch action {
-  case _ as RequestSearch:
+  case _ as SearchActions.RequestSearch:
     state.isRequesting = true
-  case let action as ReceiveSearch:
+  case let action as SearchActions.ReceiveSearch:
     state.isRequesting = false
     state.artistIDs = action.response["artists"]["items"].array?.flatMap {
       $0["id"].string
@@ -44,9 +44,9 @@ func searchReducer(action: Action, state: SearchState?) -> SearchState {
     state.trackIDs = action.response["tracks"]["items"].array?.flatMap {
       $0["id"].string
     } ?? []
-  case _ as ErrorSearch:
+  case _ as SearchActions.ErrorSearch:
     state.isRequesting = false
-  case let action as StoreQuery:
+  case let action as SearchActions.StoreQuery:
     state.query = action.query
   default:
     break

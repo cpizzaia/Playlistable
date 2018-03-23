@@ -118,7 +118,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    mainStore.dispatch(playQueue(trackIDs: tracks.map { $0.id }, startingWithTrackID: tracks[indexPath.row].id))
+    mainStore.dispatch(SpotifyPlayerActions.playQueue(trackIDs: tracks.map { $0.id }, startingWithTrackID: tracks[indexPath.row].id))
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -133,7 +133,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
       
       guard let firstTrackID = shuffledTrackIDs.first else { return }
   
-      mainStore.dispatch(playQueue(
+      mainStore.dispatch(SpotifyPlayerActions.playQueue(
         trackIDs: shuffledTrackIDs,
         startingWithTrackID: firstTrackID
       ))

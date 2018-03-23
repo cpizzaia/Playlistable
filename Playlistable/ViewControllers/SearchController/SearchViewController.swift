@@ -148,7 +148,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     
     if let album  = item as? Album {
       cell.setupCellWithImage(forItem: item, action: {
-        mainStore.dispatch(InspectAlbum(albumID: album.id))
+        mainStore.dispatch(InspectAlbumActions.InspectAlbum(albumID: album.id))
         
         let vc = loadUIViewControllerFromNib(ItemWithTrackListViewController.self)
         
@@ -223,9 +223,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     }
     
     if seeds?.isInSeeds(item: item) == true {
-      mainStore.dispatch(RemoveSeed(item: item))
+      mainStore.dispatch(SeedsActions.RemoveSeed(item: item))
     } else {
-      mainStore.dispatch(AddSeed(item: item))
+      mainStore.dispatch(SeedsActions.AddSeed(item: item))
     }
   }
   
@@ -236,7 +236,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
   // MARK: UISearchBar Methods
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     guard let query = searchBar.text else { return }
-    mainStore.dispatch(search(query: query))
+    mainStore.dispatch(SearchActions.search(query: query))
     
     searchBar.showsCancelButton = false
     searchBar.resignFirstResponder()

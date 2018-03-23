@@ -87,7 +87,7 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
     
     if let album  = item as? Album {
       cell.setupCellWithImage(forItem: item, action: {
-        mainStore.dispatch(InspectAlbum(albumID: album.id))
+        mainStore.dispatch(InspectAlbumActions.InspectAlbum(albumID: album.id))
         
         let vc = loadUIViewControllerFromNib(ItemWithTrackListViewController.self)
         
@@ -106,9 +106,9 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
     let item = items[indexPath.row]
     
     if seeds?.isInSeeds(item: item) == true {
-      mainStore.dispatch(RemoveSeed(item: item))
+      mainStore.dispatch(SeedsActions.RemoveSeed(item: item))
     } else {
-      mainStore.dispatch(AddSeed(item: item))
+      mainStore.dispatch(SeedsActions.AddSeed(item: item))
     }
   }
   
