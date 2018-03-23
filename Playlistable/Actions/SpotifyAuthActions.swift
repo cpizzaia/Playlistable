@@ -150,8 +150,8 @@ enum SpotifyAuthActions {
           failureAction: ErrorSpotifyRefreshAuth.self
         ),
         url: "https://accounts.spotify.com/api/token",
-        success: { json in
-          guard let token = json["access_token"].string else { return }
+        success: { newState in
+          guard let token = newState.spotifyAuth.token else { return }
 
           dispatch(postAuthAction(accessToken: token))
       },
@@ -189,8 +189,8 @@ enum SpotifyAuthActions {
           failureAction: ErrorSpotifyAuth.self
         ),
         url: "https://accounts.spotify.com/api/token",
-        success: { json in
-          guard let token = json["access_token"].string else { return }
+        success: { newState in
+          guard let token = newState.spotifyAuth.token else { return }
 
           dispatch(postAuthAction(accessToken: token))
       },
