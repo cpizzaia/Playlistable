@@ -116,7 +116,9 @@ class LockScreenController: NSObject, StateManager {
         let data = try? Data(contentsOf: imageURL)
         let image = UIImage(data: data ?? Data()) ?? UIImage()
 
-        info[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(image: image)
+        info[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { _ -> UIImage in
+          return image
+        })
       }
 
       self.infoCenter.nowPlayingInfo = info
