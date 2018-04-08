@@ -19,7 +19,7 @@ struct ResourceState {
   var artists: [ArtistID: Artist]
 
   func tracksFor(ids: [TrackID]) -> [Track] {
-    return ids.flatMap { id in
+    return ids.compactMap { id in
       return tracks[id]
     }
   }
@@ -29,13 +29,13 @@ struct ResourceState {
   }
 
   func albumsFor(ids: [AlbumID]) -> [Album] {
-    return ids.flatMap { id in
+    return ids.compactMap { id in
       return albums[id]
     }
   }
 
   func artistsFor(ids: [ArtistID]) -> [Artist] {
-    return ids.flatMap { id in
+    return ids.compactMap { id in
       return artists[id]
     }
   }

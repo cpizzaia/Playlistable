@@ -11,7 +11,7 @@ import SwiftyJSON
 
 struct ImageFactory {
   static func createImages(fromJSONArray jsonArray: [JSON]) -> [Image] {
-    return jsonArray.flatMap({ createImage(fromJSON: $0) })
+    return jsonArray.compactMap({ createImage(fromJSON: $0) })
   }
 
   static func createImage(fromJSON json: JSON) -> Image? {

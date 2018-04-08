@@ -25,7 +25,7 @@ func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) ->
     state.isGenerating = true
   case let action as GeneratePlaylistActions.ReceiveGeneratePlaylist:
     state.isGenerating = false
-    state.trackIDs = action.response["tracks"].array?.flatMap({ $0["id"].string }) ?? []
+    state.trackIDs = action.response["tracks"].array?.compactMap({ $0["id"].string }) ?? []
   case let action as SeedsActions.GeneratedFromSeeds:
     state.seedsUsed = action.seeds
   case _ as GeneratePlaylistActions.ErrorGeneratePlaylist:

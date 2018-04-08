@@ -11,7 +11,7 @@ import SwiftyJSON
 
 struct TrackFactory {
   static func createTracks(fromJSONArray jsonArray: [JSON]) -> [Track] {
-    return jsonArray.flatMap({ createTrack(fromJSON: $0) })
+    return jsonArray.compactMap({ createTrack(fromJSON: $0) })
   }
 
   static func createTrack(fromJSON json: JSON) -> Track? {
@@ -30,7 +30,7 @@ struct TrackFactory {
       durationMS: durationMS,
       name: name,
       previewURL: json["preview_url"].string,
-      artistNames: json["artists"].array?.flatMap { $0["name"].string } ?? []
+      artistNames: json["artists"].array?.compactMap { $0["name"].string } ?? []
     )
   }
 }

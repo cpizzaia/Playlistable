@@ -33,7 +33,7 @@ func inspectAlbumReducer(action: Action, state: InspectAlbumState?) -> InspectAl
     state.isRequestingTracks = true
   case let action as InspectAlbumActions.ReceiveAlbumTracks:
     state.isRequestingTracks = false
-    state.trackIDs = action.response["items"].array?.flatMap { $0["id"].string } ?? []
+    state.trackIDs = action.response["items"].array?.compactMap { $0["id"].string } ?? []
   case _ as InspectAlbumActions.ErrorAlbumTracks:
     state.isRequestingTracks = false
   default:

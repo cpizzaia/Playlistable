@@ -11,7 +11,7 @@ import SwiftyJSON
 
 struct AlbumFactory {
   static func createAlbums(fromJSONArray jsonArray: [JSON]) -> [Album] {
-    return jsonArray.flatMap({ createAlbum(fromJSON: $0) })
+    return jsonArray.compactMap({ createAlbum(fromJSON: $0) })
   }
 
   static func createAlbum(fromJSON json: JSON) -> Album? {
@@ -22,10 +22,10 @@ struct AlbumFactory {
     return Album(
       id: id,
       artistIDs: [],
-      trackIDs: json["tracks"]["items"].array?.flatMap { $0["id"].string } ?? [],
+      trackIDs: json["tracks"]["items"].array?.compactMap { $0["id"].string } ?? [],
       images: ImageFactory.createImages(fromJSONArray: json["images"].array ?? []),
       name: name,
-      artistNames: json["artists"].array?.flatMap { $0["name"].string } ?? []
+      artistNames: json["artists"].array?.compactMap { $0["name"].string } ?? []
     )
   }
 }

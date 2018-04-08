@@ -11,7 +11,7 @@ import SwiftyJSON
 
 struct ArtistFactory {
   static func createArtists(fromJSONArray jsonArray: [JSON]) -> [Artist] {
-    return jsonArray.flatMap({ createArtist(fromJSON: $0) })
+    return jsonArray.compactMap({ createArtist(fromJSON: $0) })
   }
 
   static func createArtist(fromJSON json: JSON) -> Artist? {

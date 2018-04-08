@@ -33,15 +33,15 @@ func searchReducer(action: Action, state: SearchState?) -> SearchState {
     state.isRequesting = true
   case let action as SearchActions.ReceiveSearch:
     state.isRequesting = false
-    state.artistIDs = action.response["artists"]["items"].array?.flatMap {
+    state.artistIDs = action.response["artists"]["items"].array?.compactMap {
       $0["id"].string
     } ?? []
 
-    state.albumIDs = action.response["albums"]["items"].array?.flatMap {
+    state.albumIDs = action.response["albums"]["items"].array?.compactMap {
       $0["id"].string
     } ?? []
 
-    state.trackIDs = action.response["tracks"]["items"].array?.flatMap {
+    state.trackIDs = action.response["tracks"]["items"].array?.compactMap {
       $0["id"].string
     } ?? []
   case _ as SearchActions.ErrorSearch:

@@ -64,7 +64,7 @@ enum GeneratePlaylistActions {
 }
 
 private func getIDs<T: Item>(forType type: T.Type, fromSeeds seeds: SeedsState) -> [String] {
-  return seeds.items.flatMap { _, value in
+  return seeds.items.compactMap { _, value in
     return (value as? T)?.id
   }
 }
