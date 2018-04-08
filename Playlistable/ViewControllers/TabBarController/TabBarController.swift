@@ -63,6 +63,8 @@ class TabBarController: UITabBarController, StoreSubscriber {
     navAppearance.isTranslucent = false
     navAppearance.setBackgroundImage(UIImage(), for: .default)
     navAppearance.shadowImage = UIImage()
+
+    selectedIndex = 2
   }
 
   override func didReceiveMemoryWarning() {
