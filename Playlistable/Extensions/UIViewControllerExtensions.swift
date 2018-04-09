@@ -73,6 +73,21 @@ extension UIViewController {
     }
   }
 
+  func presentSeedsFullAlert() {
+    presentAlertView(
+      title: "Selected Items Full",
+      message: "Press OK to continue to generating a playlist or cancel to go back and remove items.",
+      successActionTitle: "OK",
+      failureActionTitle: "Cancel",
+      success: {
+        DispatchQueue.main.async {
+          self.tabBarController?.selectedIndex = 1
+        }
+    },
+      failure: {}
+    )
+  }
+
   func presentAlertView(title: String, message: String, completion: @escaping () -> Void) {
 
     let alertViewController = UIAlertController(

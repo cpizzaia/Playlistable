@@ -223,6 +223,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     if seeds?.isInSeeds(item: item) == true {
       mainStore.dispatch(SeedsActions.RemoveSeed(item: item))
     } else {
+      if seeds?.isFull == true {
+        presentSeedsFullAlert()
+        return
+      }
+
       mainStore.dispatch(SeedsActions.AddSeed(item: item))
     }
   }

@@ -111,6 +111,11 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     if seeds?.isInSeeds(item: track) == true {
       mainStore.dispatch(SeedsActions.RemoveSeed(item: track))
     } else {
+      if seeds?.isFull == true {
+        presentSeedsFullAlert()
+        return
+      }
+
       mainStore.dispatch(SeedsActions.AddSeed(item: track))
     }
   }
