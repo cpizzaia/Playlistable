@@ -35,11 +35,11 @@ private func translateToRequestParams(apiAction: APIAction, next: @escaping Disp
       next(apiAction.types.successAction.init(response: data))
       guard let state = getState() else { return }
       apiAction.success?(state)
-  },
+    },
     failure: { error in
       next(apiAction.types.failureAction.init(error: error))
       apiAction.failure?()
-  }
+    }
   )
 }
 

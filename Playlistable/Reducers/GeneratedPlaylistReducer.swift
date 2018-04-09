@@ -10,9 +10,28 @@ import Foundation
 import ReSwift
 
 struct GeneratedPlaylistState {
-  var trackIDs: [String]
+  var trackIDs: [String] {
+    didSet { // Storing them for when someone quits out of the app
+      UserDefaults.standard.set(trackIDs, forKey: UserDefaultsKeys.storedPlaylistTrackIDs)
+    }
+  }
   var isGenerating: Bool
-  var seedsUsed: SeedsState?
+  var seedsUsed: SeedsState? {
+    didSet { // Storing them for when someone quits out of the app
+      guard let seedsUsed = seedsUsed else { return }
+
+      let artistIDs = seedsUsed.items.compactMap { key, value in
+        return value is Artist ? key : nil
+      }
+
+      let trackIDs = seedsUsed.items.compactMap { key, value in
+        return value is Track ? key : nil
+      }
+
+      UserDefaults.standard.set(artistIDs, forKey: UserDefaultsKeys.storedArtistSeedIDs)
+      UserDefaults.standard.set(trackIDs, forKey: UserDefaultsKeys.storedTrackSeedIDs)
+    }
+  }
 }
 
 private let initialGeneratedPlaylistState = GeneratedPlaylistState(trackIDs: [], isGenerating: false, seedsUsed: nil)
@@ -30,6 +49,10 @@ func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) ->
     state.seedsUsed = action.seeds
   case _ as GeneratePlaylistActions.ErrorGeneratePlaylist:
     state.isGenerating = false
+  case let action as GeneratePlaylistActions.ReceiveStoredSeedsState:
+    state.seedsUsed = action.seeds
+  case let action as GeneratePlaylistActions.ReceiveStoredPlaylistTracks:
+    state.trackIDs = action.response["tracks"].array?.compactMap({ $0["id"].string }) ?? []
   default:
     break
   }

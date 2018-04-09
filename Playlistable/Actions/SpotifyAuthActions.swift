@@ -161,7 +161,13 @@ enum SpotifyAuthActions {
   }
 
   static func postAuthAction(accessToken: String) -> Action {
-    return SpotifyPlayerActions.initializePlayer(clientID: clientID, accessToken: accessToken)
+    return WrapInDispatch { dispatch in
+      dispatch(SpotifyPlayerActions.initializePlayer(clientID: clientID, accessToken: accessToken))
+
+      if let action = GeneratePlaylistActions.reloadPlaylistFromStorage() {
+        dispatch(action)
+      }
+    }
   }
 
   static func receiveSpotifyAuth(url: URL) -> Action? {

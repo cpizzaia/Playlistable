@@ -45,7 +45,10 @@ func trackURI(fromID id: String) -> String {
 }
 
 struct UserDefaultsKeys {
-  static let spotifyAuthToken = "spotifyAuthToken"
-  static let spotifyRefreshToken = "spotifyRefreshToken"
-  static let spotifyTokenExpirationTimeInterval = "spotifyTokenExpirationTimeInterval"
+  static let spotifyAuthToken = "spotifyAuthToken" // String
+  static let spotifyRefreshToken = "spotifyRefreshToken" // String
+  static let spotifyTokenExpirationTimeInterval = "spotifyTokenExpirationTimeInterval" // Double
+  static let storedPlaylistTrackIDs = "storedPlaylistTrackIDs" // [String]
+  static let storedArtistSeedIDs = "storedArtistSeedIDs" // [String]
+  static let storedTrackSeedIDs = "storedTrackSeedIDs" // [String]
 }

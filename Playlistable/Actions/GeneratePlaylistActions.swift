@@ -21,6 +21,40 @@ enum GeneratePlaylistActions {
     let error: APIRequest.APIError
   }
 
+  struct RequestStoredPlaylistTracks: APIRequestAction {}
+
+  struct ReceiveStoredPlaylistTracks: APIResponseSuccessAction {
+    let response: JSON
+  }
+
+  struct ErrorStoredPlaylistTracks: APIResponseFailureAction {
+    let error: APIRequest.APIError
+  }
+
+  struct RequestStoredSeedTracks: APIRequestAction {}
+
+  struct ReceiveStoredSeedTracks: APIResponseSuccessAction {
+    let response: JSON
+  }
+
+  struct ErrorStoredSeedTracks: APIResponseFailureAction {
+    let error: APIRequest.APIError
+  }
+
+  struct RequestStoredSeedArtists: APIRequestAction {}
+
+  struct ReceiveStoredSeedArtists: APIResponseSuccessAction {
+    let response: JSON
+  }
+
+  struct ErrorStoredSeedArtists: APIResponseFailureAction {
+    let error: APIRequest.APIError
+  }
+
+  struct ReceiveStoredSeedsState: Action {
+    let seeds: SeedsState
+  }
+
   static func generatePlaylist(fromSeeds seeds: SeedsState) -> Action {
     let trackIDs = getIDs(forType: Track.self, fromSeeds: seeds)
     let artistIDs = getIDs(forType: Artist.self, fromSeeds: seeds)
@@ -59,7 +93,81 @@ enum GeneratePlaylistActions {
         failure: {}
       ))
     }
+  }
 
+  static func reloadPlaylistFromStorage() -> Action? {
+    guard
+      let playlistTrackIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.storedPlaylistTrackIDs) as? [String],
+      let seedTrackIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.storedTrackSeedIDs) as? [String],
+      let seedArtistIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.storedArtistSeedIDs) as? [String]
+      else { return nil }
+
+    return WrapInDispatch { dispatch in
+
+      var seedItems = [String: Item]()
+      let group = DispatchGroup()
+
+      dispatch(
+        CallSpotifyAPI(
+          endpoint: "/v1/tracks",
+          queryParams: ["ids": playlistTrackIDs.joined(separator: ",")],
+          method: .get,
+          types: APITypes(
+            requestAction: RequestStoredPlaylistTracks.self,
+            successAction: ReceiveStoredPlaylistTracks.self,
+            failureAction: ErrorStoredPlaylistTracks.self
+          )
+        )
+      )
+
+      group.enter()
+      dispatch(
+        CallSpotifyAPI(
+          endpoint: "/v1/tracks",
+          queryParams: ["ids": seedTrackIDs.joined(separator: ",")],
+          method: .get,
+          types: APITypes(
+            requestAction: RequestStoredSeedTracks.self,
+            successAction: ReceiveStoredSeedTracks.self,
+            failureAction: ErrorStoredSeedTracks.self
+          ),
+          success: { state in
+            state.resources.tracksFor(ids: seedTrackIDs).forEach { track in
+              seedItems[track.id] = track
+            }
+
+            group.leave()
+          },
+          failure: group.leave
+        )
+      )
+
+      group.enter()
+      dispatch(
+        CallSpotifyAPI(
+          endpoint: "/v1/artists",
+          queryParams: ["ids": seedArtistIDs.joined(separator: ",")],
+          method: .get,
+          types: APITypes(
+            requestAction: RequestStoredSeedArtists.self,
+            successAction: ReceiveStoredSeedArtists.self,
+            failureAction: ErrorStoredSeedArtists.self
+          ),
+          success: { state in
+            state.resources.artistsFor(ids: seedArtistIDs).forEach { artist in
+              seedItems[artist.id] = artist
+            }
+
+            group.leave()
+          },
+          failure: group.leave
+        )
+      )
+
+      group.notify(queue: .main) {
+        dispatch(ReceiveStoredSeedsState(seeds: SeedsState(items: seedItems)))
+      }
+    }
   }
 }
 
