@@ -110,7 +110,10 @@ enum GeneratePlaylistActions {
       dispatch(
         CallSpotifyAPI(
           endpoint: "/v1/tracks",
-          queryParams: ["ids": playlistTrackIDs.joined(separator: ",")],
+          batchedQueryParams: playlistTrackIDs.chunked(by: 50).map { ids in
+            return ["ids": ids.joined(separator: ",")]
+          },
+          batchedJSONKey: "tracks",
           method: .get,
           types: APITypes(
             requestAction: RequestStoredPlaylistTracks.self,

@@ -69,6 +69,7 @@
 		AC8AB6BC1FA9777D00251F85 /* ResourceActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */; };
 		AC8C20401FC9DA2F006FF1AC /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C203F1FC9DA2F006FF1AC /* UIButtonExtensions.swift */; };
 		ACA09EA51F9D556800220E8B /* APIMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA09EA41F9D556800220E8B /* APIMiddleware.swift */; };
+		ACA3BF09207B280A008C0876 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3BF08207B280A008C0876 /* ArrayExtensions.swift */; };
 		ACAA1A421FB548F700F6B345 /* SeedsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA1A411FB548F700F6B345 /* SeedsReducer.swift */; };
 		ACAA1A441FB54A8B00F6B345 /* SeedsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA1A431FB54A8B00F6B345 /* SeedsActions.swift */; };
 		ACBDF1331F9CFC23001760D7 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1321F9CFC23001760D7 /* Artist.swift */; };
@@ -160,6 +161,7 @@
 		AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceActions.swift; sourceTree = "<group>"; };
 		AC8C203F1FC9DA2F006FF1AC /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		ACA09EA41F9D556800220E8B /* APIMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMiddleware.swift; sourceTree = "<group>"; };
+		ACA3BF08207B280A008C0876 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		ACAA1A411FB548F700F6B345 /* SeedsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsReducer.swift; sourceTree = "<group>"; };
 		ACAA1A431FB54A8B00F6B345 /* SeedsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsActions.swift; sourceTree = "<group>"; };
 		ACBDF1321F9CFC23001760D7 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				AC4C84DD20142C1800C8A4E6 /* UIFontExtensions.swift */,
 				ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */,
 				ACC816692027C3F500A03946 /* SequenceExtensions.swift */,
+				ACA3BF08207B280A008C0876 /* ArrayExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 				AC36E6DC1FE5942A0025BBE1 /* SearchActions.swift in Sources */,
 				AC8AB6BA1FA9760F00251F85 /* ResourceReducer.swift in Sources */,
 				AC8AB6B61FA968D500251F85 /* AlbumFactory.swift in Sources */,
+				ACA3BF09207B280A008C0876 /* ArrayExtensions.swift in Sources */,
 				ACAA1A441FB54A8B00F6B345 /* SeedsActions.swift in Sources */,
 				AC8AB6B81FA969C000251F85 /* ImageFactory.swift in Sources */,
 				AC4C84DC2014293300C8A4E6 /* UIColorExtensions.swift in Sources */,
