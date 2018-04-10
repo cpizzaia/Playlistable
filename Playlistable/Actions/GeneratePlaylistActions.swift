@@ -107,65 +107,71 @@ enum GeneratePlaylistActions {
       var seedItems = [String: Item]()
       let group = DispatchGroup()
 
-      dispatch(
-        CallSpotifyAPI(
-          endpoint: "/v1/tracks",
-          batchedQueryParams: playlistTrackIDs.chunked(by: 50).map { ids in
-            return ["ids": ids.joined(separator: ",")]
-          },
-          batchedJSONKey: "tracks",
-          method: .get,
-          types: APITypes(
-            requestAction: RequestStoredPlaylistTracks.self,
-            successAction: ReceiveStoredPlaylistTracks.self,
-            failureAction: ErrorStoredPlaylistTracks.self
+      if !playlistTrackIDs.isEmpty {
+        dispatch(
+          CallSpotifyAPI(
+            endpoint: "/v1/tracks",
+            batchedQueryParams: playlistTrackIDs.chunked(by: 50).map { ids in
+              return ["ids": ids.joined(separator: ",")]
+            },
+            batchedJSONKey: "tracks",
+            method: .get,
+            types: APITypes(
+              requestAction: RequestStoredPlaylistTracks.self,
+              successAction: ReceiveStoredPlaylistTracks.self,
+              failureAction: ErrorStoredPlaylistTracks.self
+            )
           )
         )
-      )
+      }
 
-      group.enter()
-      dispatch(
-        CallSpotifyAPI(
-          endpoint: "/v1/tracks",
-          queryParams: ["ids": seedTrackIDs.joined(separator: ",")],
-          method: .get,
-          types: APITypes(
-            requestAction: RequestStoredSeedTracks.self,
-            successAction: ReceiveStoredSeedTracks.self,
-            failureAction: ErrorStoredSeedTracks.self
-          ),
-          success: { state in
-            state.resources.tracksFor(ids: seedTrackIDs).forEach { track in
-              seedItems[track.id] = track
-            }
+      if !seedTrackIDs.isEmpty {
+        group.enter()
+        dispatch(
+          CallSpotifyAPI(
+            endpoint: "/v1/tracks",
+            queryParams: ["ids": seedTrackIDs.joined(separator: ",")],
+            method: .get,
+            types: APITypes(
+              requestAction: RequestStoredSeedTracks.self,
+              successAction: ReceiveStoredSeedTracks.self,
+              failureAction: ErrorStoredSeedTracks.self
+            ),
+            success: { state in
+              state.resources.tracksFor(ids: seedTrackIDs).forEach { track in
+                seedItems[track.id] = track
+              }
 
-            group.leave()
+              group.leave()
           },
-          failure: group.leave
+            failure: group.leave
+          )
         )
-      )
+      }
 
-      group.enter()
-      dispatch(
-        CallSpotifyAPI(
-          endpoint: "/v1/artists",
-          queryParams: ["ids": seedArtistIDs.joined(separator: ",")],
-          method: .get,
-          types: APITypes(
-            requestAction: RequestStoredSeedArtists.self,
-            successAction: ReceiveStoredSeedArtists.self,
-            failureAction: ErrorStoredSeedArtists.self
-          ),
-          success: { state in
-            state.resources.artistsFor(ids: seedArtistIDs).forEach { artist in
-              seedItems[artist.id] = artist
-            }
+      if !seedArtistIDs.isEmpty {
+        group.enter()
+        dispatch(
+          CallSpotifyAPI(
+            endpoint: "/v1/artists",
+            queryParams: ["ids": seedArtistIDs.joined(separator: ",")],
+            method: .get,
+            types: APITypes(
+              requestAction: RequestStoredSeedArtists.self,
+              successAction: ReceiveStoredSeedArtists.self,
+              failureAction: ErrorStoredSeedArtists.self
+            ),
+            success: { state in
+              state.resources.artistsFor(ids: seedArtistIDs).forEach { artist in
+                seedItems[artist.id] = artist
+              }
 
-            group.leave()
+              group.leave()
           },
-          failure: group.leave
+            failure: group.leave
+          )
         )
-      )
+      }
 
       group.notify(queue: .main) {
         dispatch(ReceiveStoredSeedsState(seeds: SeedsState(items: seedItems)))
