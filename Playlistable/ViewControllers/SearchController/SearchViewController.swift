@@ -95,7 +95,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     searchResultsTableView.isHidden = noResults
     noResultsView.isHidden = !noResults
     searchResultsTableView.reloadData()
-    noResultsLabel.text = state.search.query == nil ? "Your search results will appear here" : "Your search had no results"
+    noResultsLabel.text = state.search.query == nil ? "Start by searching for your favorite music" : "Your search had no results"
   }
 
   private func getResourceFor(section: Int) -> [Item]? {
