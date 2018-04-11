@@ -32,9 +32,10 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   var isAnimatingDuration = false
   var endTime: Double?
   var isPlaying = false
-  var isDurationBarStopped = false
+  var state: AppState?
 
   func newState(state: AppState) {
+    self.state = state
     isPlaying = state.spotifyPlayer.isPlaying
     playBarView.isHidden = state.spotifyPlayer.playingTrackID == nil
     setPlayPauseButtonImage(playing: isPlaying)
@@ -46,6 +47,11 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
 
       animateDuration(startTime: SpotifyPlayerActions.getCurrentPlayerPosition(), endTime: Double(track.durationMS) / 1000.0, isStopped: !isPlaying)
     }
+  }
+
+  @objc func enteredForeground() {
+    guard let state = state else { return }
+    newState(state: state)
   }
 
   override func viewDidLoad() {
@@ -69,21 +75,31 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     mainStore.subscribe(self)
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(enteredForeground),
+      name: Notification.Name.UIApplicationWillEnterForeground,
+      object: nil
+    )
   }
 
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     mainStore.unsubscribe(self)
+
+    NotificationCenter.default.removeObserver(
+      self,
+      name: Notification.Name.UIApplicationWillEnterForeground,
+      object: nil
+    )
   }
 
   func animateDuration(startTime: Double, endTime: Double, isStopped: Bool) {
-    if self.endTime == endTime && isStopped == isDurationBarStopped { return }
+    if isAnimatingDuration && !isStopped && self.endTime == endTime { return }
     self.endTime = endTime
-    isDurationBarStopped = isStopped
 
     durationBarView.layer.removeAllAnimations()
-
-    isAnimatingDuration = true
 
     let percentCompleted = startTime / endTime
     let timeLeft = endTime - startTime
@@ -95,6 +111,8 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
     view.layoutIfNeeded()
 
     if isStopped { return }
+
+    isAnimatingDuration = true
 
     UIView.animate(withDuration: timeLeft, delay: 0, options: .curveLinear, animations: {
       self.durationWidthConstraint.constant = 0
