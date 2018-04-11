@@ -64,7 +64,14 @@ class TabBarController: UITabBarController, StoreSubscriber {
     navAppearance.setBackgroundImage(UIImage(), for: .default)
     navAppearance.shadowImage = UIImage()
 
-    selectedIndex = 2
+    // FIXME: Bit of an anti pattern here cause we are accessing state outside of the store
+    // rethink and fix when you get a chance
+    let storedPlaylistIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.storedPlaylistTrackIDs) as? [String] ?? []
+    if !storedPlaylistIDs.isEmpty {
+      selectedIndex = 0
+    } else {
+      selectedIndex = 2
+    }
   }
 
   override func didReceiveMemoryWarning() {
