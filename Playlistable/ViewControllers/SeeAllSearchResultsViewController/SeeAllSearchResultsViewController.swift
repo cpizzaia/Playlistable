@@ -105,6 +105,11 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let item = items[indexPath.row]
 
+    guard item is Track || item is Artist else {
+      tableView.deselectRow(at: indexPath, animated: false)
+      return
+    }
+
     if seeds?.isInSeeds(item: item) == true {
       mainStore.dispatch(SeedsActions.RemoveSeed(item: item))
     } else {
