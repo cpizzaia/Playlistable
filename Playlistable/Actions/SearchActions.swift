@@ -24,7 +24,7 @@ enum SearchActions {
   }
 
   static func search(query: String) -> Action {
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
       dispatch(CallSpotifyAPI(
         endpoint: "/v1/search",
         queryParams: [

@@ -12,5 +12,10 @@ import ReSwift
 let mainStore = Store<AppState>(
   reducer: appReducer,
   state: nil,
-  middleware: [wrapInDispatchMiddleware, apiMiddleware, loggingMiddleware]
+  middleware: [
+    wrapInDispatchMiddleware,
+    spotifyTokenRefreshMiddleware,
+    apiMiddleware,
+    loggingMiddleware
+  ]
 )

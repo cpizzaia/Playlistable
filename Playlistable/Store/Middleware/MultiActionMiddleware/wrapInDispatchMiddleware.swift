@@ -20,11 +20,11 @@ let wrapInDispatchMiddleware: Middleware<AppState> = { dispatch, getState in
       // FIXME: Wrapped actions can return other wrapped actions and we need can't call
       // next on it cause it will still be wrapped, so we just use the stores dispatch
       // to repeat for now.
-      wrappedAction.body(mainStore.dispatch)
+      wrappedAction.body(mainStore.dispatch, getState)
     }
   }
 }
 
 struct WrapInDispatch: Action {
-  let body: (@escaping DispatchFunction) -> Void
+  let body: (@escaping DispatchFunction, () -> AppState?) -> Void
 }

@@ -46,7 +46,7 @@ enum SpotifyPlayerActions {
   struct FailedToResume: Action {}
 
   static func initializePlayer(clientID: String, accessToken: String) -> Action {
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
       player.delegate = streamingDelegate
       player.playbackDelegate = playbackDelegate
       dispatch(startPlayer(clientID: clientID))
@@ -68,7 +68,7 @@ enum SpotifyPlayerActions {
   }
 
   static func playQueue(trackIDs: [String], startingWithTrackID trackID: String) -> Action {
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
       dispatch(PlayQueue(trackIDs: trackIDs))
 
       dispatch(playTrack(id: trackID))
@@ -98,7 +98,7 @@ enum SpotifyPlayerActions {
   }
 
   static func pause() -> Action {
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
       dispatch(Pausing())
 
       player.setIsPlaying(false, callback: { error in
@@ -112,7 +112,7 @@ enum SpotifyPlayerActions {
   }
 
   static func resume() -> Action {
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
       dispatch(Resuming())
 
       player.setIsPlaying(true, callback: { error in

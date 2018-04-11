@@ -109,11 +109,15 @@ enum SpotifyAuthActions {
   }
 
   static func oAuthSpotify(authState: SpotifyAuthState) -> Action {
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
       dispatch(RequestSpotifyAuth())
 
       if authState.isRefreshable && authState.shouldRefresh {
-        dispatch(refreshSpotifyAuth(refreshToken: authState.refreshToken ?? ""))
+        dispatch(
+          refreshSpotifyAuthAndInitPlayer(
+            refreshToken: authState.refreshToken ?? ""
+          )
+        )
         return
       }
 
@@ -132,8 +136,22 @@ enum SpotifyAuthActions {
     }
   }
 
-  static func refreshSpotifyAuth(refreshToken: String) -> Action {
-    return WrapInDispatch { dispatch in
+  static func refreshSpotifyAuthAndInitPlayer(refreshToken: String) -> Action {
+    return WrapInDispatch { dispatch, _ in
+      dispatch(refreshSpotifyAuth(
+        refreshToken: refreshToken,
+        success: { newState in
+          guard let token = newState.spotifyAuth.token else { return }
+
+          dispatch(postAuthAction(accessToken: token))
+        },
+        failure: {}
+      ))
+    }
+  }
+
+  static func refreshSpotifyAuth(refreshToken: String, success: @escaping (AppState) -> Void, failure: @escaping () -> Void) -> Action {
+    return WrapInDispatch { dispatch, _ in
       dispatch(CallAPI(
         method: .post,
         headers: nil,
@@ -150,18 +168,14 @@ enum SpotifyAuthActions {
           failureAction: ErrorSpotifyRefreshAuth.self
         ),
         url: "https://accounts.spotify.com/api/token",
-        success: { newState in
-          guard let token = newState.spotifyAuth.token else { return }
-
-          dispatch(postAuthAction(accessToken: token))
-      },
-        failure: nil
+        success: success,
+        failure: failure
       ))
     }
   }
 
   static func postAuthAction(accessToken: String) -> Action {
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
       dispatch(SpotifyPlayerActions.initializePlayer(clientID: clientID, accessToken: accessToken))
 
       if let action = GeneratePlaylistActions.reloadPlaylistFromStorage() {
@@ -177,7 +191,7 @@ enum SpotifyAuthActions {
       webview.dismiss(animated: true, completion: nil)
     }
 
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
       dispatch(CallAPI(
         method: .post,
         headers: nil,
@@ -206,7 +220,7 @@ enum SpotifyAuthActions {
   }
 
   static func getCurrentUser() -> Action {
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
       dispatch(CallSpotifyAPI(
         endpoint: "/v1/me",
         method: .get,

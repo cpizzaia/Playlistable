@@ -77,7 +77,7 @@ enum GeneratePlaylistActions {
       queryParams = queryParams.union(["seed_albums": albumIDs.joined(separator: ",")])
     }
 
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
       dispatch(CallSpotifyAPI(
         endpoint: "/v1/recommendations",
         queryParams: queryParams,
@@ -102,7 +102,7 @@ enum GeneratePlaylistActions {
       let seedArtistIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.storedArtistSeedIDs) as? [String]
       else { return nil }
 
-    return WrapInDispatch { dispatch in
+    return WrapInDispatch { dispatch, _ in
 
       var seedItems = [String: Item]()
       let group = DispatchGroup()
