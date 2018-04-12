@@ -32,6 +32,7 @@
 		AC18FCC41FB3E95A0079AFC8 /* InspectAllTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC18FCC31FB3E95A0079AFC8 /* InspectAllTableViewCell.xib */; };
 		AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */; };
 		AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC71FB412A20079AFC8 /* Item.swift */; };
+		AC3259BA207F001C008AB997 /* QueryParamMarketInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3259B9207F001C008AB997 /* QueryParamMarketInjector.swift */; };
 		AC3268951FAFC3A9000AA05B /* ParseResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3268941FAFC3A9000AA05B /* ParseResources.swift */; };
 		AC36E6DA1FE593660025BBE1 /* SearchReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6D91FE593660025BBE1 /* SearchReducer.swift */; };
 		AC36E6DC1FE5942A0025BBE1 /* SearchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6DB1FE5942A0025BBE1 /* SearchActions.swift */; };
@@ -125,6 +126,7 @@
 		AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectAllTableViewCell.swift; sourceTree = "<group>"; };
 		AC18FCC71FB412A20079AFC8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Playlistable.entitlements; sourceTree = "<group>"; };
+		AC3259B9207F001C008AB997 /* QueryParamMarketInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParamMarketInjector.swift; sourceTree = "<group>"; };
 		AC3268941FAFC3A9000AA05B /* ParseResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResources.swift; sourceTree = "<group>"; };
 		AC36E6D91FE593660025BBE1 /* SearchReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReducer.swift; sourceTree = "<group>"; };
 		AC36E6DB1FE5942A0025BBE1 /* SearchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActions.swift; sourceTree = "<group>"; };
@@ -303,6 +305,14 @@
 				AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */,
 			);
 			path = StateManagers;
+			sourceTree = "<group>";
+		};
+		AC3259B8207F0001008AB997 /* QueryParamMarketInjector */ = {
+			isa = PBXGroup;
+			children = (
+				AC3259B9207F001C008AB997 /* QueryParamMarketInjector.swift */,
+			);
+			path = QueryParamMarketInjector;
 			sourceTree = "<group>";
 		};
 		AC3268931FAFC382000AA05B /* APIMiddleware */ = {
@@ -540,6 +550,7 @@
 		ACBDF14B1F9D53F4001760D7 /* Middleware */ = {
 			isa = PBXGroup;
 			children = (
+				AC3259B8207F0001008AB997 /* QueryParamMarketInjector */,
 				ACB19DDA207D9DB800F1771A /* SpotifyRefreshMiddleware */,
 				AC83D6541FBD46BB00E9D004 /* MultiActionMiddleware */,
 				AC83D6531FBD46AA00E9D004 /* LoggingMiddleware */,
@@ -777,6 +788,7 @@
 				ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */,
 				AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */,
 				AC0148791F9D80C100F9A732 /* UIViewControllerExtensions.swift in Sources */,
+				AC3259BA207F001C008AB997 /* QueryParamMarketInjector.swift in Sources */,
 				AC8AB6B21FA964B300251F85 /* TrackFactory.swift in Sources */,
 				AC02D0DC1F9CF73B009ED193 /* APIRequest.swift in Sources */,
 				AC0148761F9D700200F9A732 /* SpotifyAuthActions.swift in Sources */,

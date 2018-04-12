@@ -136,7 +136,11 @@ struct CallSpotifyAPI: APIAction {
   }
   private var queryString: String {
     return queryParams?.reduce("?", { result, keyValue in
-      return result + "&\(keyValue.key)=\(keyValue.value)"
+      if result == "?" {
+        return (result ?? "") + "\(keyValue.key)=\(keyValue.value)"
+      } else {
+        return (result ?? "") + "&\(keyValue.key)=\(keyValue.value)"
+      }
     }) ?? ""
   }
 

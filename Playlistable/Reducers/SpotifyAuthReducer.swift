@@ -23,6 +23,7 @@ struct SpotifyAuthState {
     }
   }
   var userID: String?
+  var market: String?
   var isInitializingOAuth: Bool
   var isRequestingToken: Bool
   var isRefreshingToken: Bool
@@ -67,6 +68,7 @@ private let initialSpotifyAuthState = SpotifyAuthState(
   token: UserDefaults.standard.string(forKey: UserDefaultsKeys.spotifyAuthToken),
   refreshToken: UserDefaults.standard.string(forKey: UserDefaultsKeys.spotifyRefreshToken),
   userID: nil,
+  market: nil,
   isInitializingOAuth: false,
   isRequestingToken: false,
   isRefreshingToken: false,
@@ -126,6 +128,7 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
 
   case let action as SpotifyAuthActions.ReceiveCurrentUser:
     state.userID = action.response["id"].string
+    state.market = action.response["country"].string
     state.isPremium = action.response["product"].string == "premium"
 
   default:

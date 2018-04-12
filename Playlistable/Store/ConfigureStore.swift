@@ -15,6 +15,7 @@ let mainStore = Store<AppState>(
   middleware: [
     wrapInDispatchMiddleware,
     spotifyTokenRefreshMiddleware,
+    queryParamMarketInjector,
     apiMiddleware,
     loggingMiddleware
   ]
