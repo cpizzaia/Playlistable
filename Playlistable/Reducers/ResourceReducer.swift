@@ -89,5 +89,5 @@ private func updateOrAdd(item: Item, toState state: ResourceState) -> ResourceSt
 private func shouldUpdate(item: Item, forItemInState itemInState: Item?) -> Bool {
   guard let itemInState = itemInState else { return true }
 
-  return itemInState.smallImageURL == nil
+  return !itemInState.hasImages
 }
