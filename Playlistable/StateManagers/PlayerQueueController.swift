@@ -8,6 +8,7 @@
 
 import Foundation
 import ReSwift
+import AVFoundation
 
 class PlayerQueueController: StateManager {
   typealias StoreSubscriberStateType = AppState
@@ -17,12 +18,24 @@ class PlayerQueueController: StateManager {
     instance = PlayerQueueController()
   }
 
+  private var isPlaying = false
+  private var handlingAudioInterruption = false
+
   private init() {
     mainStore.subscribe(self)
+
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(handleAudioInterruption),
+      name: Notification.Name.AVAudioSessionInterruption,
+      object: nil
+    )
   }
 
   func newState(state: AppState) {
     let spotifyPlayerState = state.spotifyPlayer
+
+    isPlaying = state.spotifyPlayer.isPlaying
 
     guard let currentTrackID = spotifyPlayerState.playingTrackID else { return }
 
@@ -38,5 +51,34 @@ class PlayerQueueController: StateManager {
       state.isPlayingQueue &&
       !state.isStartingToPlay &&
       !state.isPausing && !state.isPaused
+  }
+
+  @objc private func handleAudioInterruption(notification: Notification) {
+    guard let info = notification.userInfo,
+      let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
+      let type = AVAudioSessionInterruptionType(rawValue: typeValue) else {
+        return
+    }
+
+    switch type {
+    case .began:
+      handleAudioInterruptionStarted()
+    case .ended:
+      handleAudioInterruptionEnded()
+    }
+  }
+
+  private func handleAudioInterruptionStarted() {
+    if isPlaying {
+      handlingAudioInterruption = true
+      mainStore.dispatch(SpotifyPlayerActions.pause())
+    }
+  }
+
+  private func handleAudioInterruptionEnded() {
+    if handlingAudioInterruption {
+      handlingAudioInterruption = false
+      mainStore.dispatch(SpotifyPlayerActions.resume())
+    }
   }
 }
