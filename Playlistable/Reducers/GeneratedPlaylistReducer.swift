@@ -16,6 +16,7 @@ struct GeneratedPlaylistState {
     }
   }
   var isGenerating: Bool
+  var playlistID: String?
   var seedsUsed: SeedsState? {
     didSet { // Storing them for when someone quits out of the app
       guard let seedsUsed = seedsUsed else { return }
@@ -34,25 +35,32 @@ struct GeneratedPlaylistState {
   }
 }
 
-private let initialGeneratedPlaylistState = GeneratedPlaylistState(trackIDs: [], isGenerating: false, seedsUsed: nil)
+private let initialGeneratedPlaylistState = GeneratedPlaylistState(
+  trackIDs: [],
+  isGenerating: false,
+  playlistID: nil,
+  seedsUsed: nil
+)
 
 func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) -> GeneratedPlaylistState {
   var state = state ?? initialGeneratedPlaylistState
 
   switch action {
-  case _ as GeneratePlaylistActions.RequestGeneratePlaylist:
+  case _ as GeneratePlaylistActions.RequestTracksFromSeeds:
     state.isGenerating = true
-  case let action as GeneratePlaylistActions.ReceiveGeneratePlaylist:
+  case let action as GeneratePlaylistActions.ReceiveTracksFromSeeds:
     state.isGenerating = false
     state.trackIDs = action.response["tracks"].array?.compactMap({ $0["id"].string }) ?? []
   case let action as SeedsActions.GeneratedFromSeeds:
     state.seedsUsed = action.seeds
-  case _ as GeneratePlaylistActions.ErrorGeneratePlaylist:
+  case _ as GeneratePlaylistActions.ErrorTracksFromSeeds:
     state.isGenerating = false
   case let action as GeneratePlaylistActions.ReceiveStoredSeedsState:
     state.seedsUsed = action.seeds
   case let action as GeneratePlaylistActions.ReceiveStoredPlaylistTracks:
     state.trackIDs = action.response["tracks"].array?.compactMap({ $0["id"].string }) ?? []
+  case let action as GeneratePlaylistActions.ReceiveCreatePlaylist:
+    state.playlistID = action.response["id"].string
   default:
     break
   }

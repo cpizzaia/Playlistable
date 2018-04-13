@@ -11,13 +11,13 @@ import SwiftyJSON
 import ReSwift
 
 enum GeneratePlaylistActions {
-  struct RequestGeneratePlaylist: APIRequestAction {}
+  struct RequestTracksFromSeeds: APIRequestAction {}
 
-  struct ReceiveGeneratePlaylist: APIResponseSuccessAction {
+  struct ReceiveTracksFromSeeds: APIResponseSuccessAction {
     let response: JSON
   }
 
-  struct ErrorGeneratePlaylist: APIResponseFailureAction {
+  struct ErrorTracksFromSeeds: APIResponseFailureAction {
     let error: APIRequest.APIError
   }
 
@@ -55,7 +55,27 @@ enum GeneratePlaylistActions {
     let seeds: SeedsState
   }
 
-  static func generatePlaylist(fromSeeds seeds: SeedsState) -> Action {
+  struct RequestCreatePlaylist: APIRequestAction {}
+
+  struct ReceiveCreatePlaylist: APIResponseSuccessAction {
+    let response: JSON
+  }
+
+  struct ErrorCreatePlaylist: APIResponseFailureAction {
+    let error: APIRequest.APIError
+  }
+
+  struct RequestAddTracksToPlaylist: APIRequestAction {}
+
+  struct ReceiveAddTracksToPlaylist: APIResponseSuccessAction {
+    let response: JSON
+  }
+
+  struct ErrorAddTracksToPlaylist: APIResponseFailureAction {
+    let error: APIRequest.APIError
+  }
+
+  static func generateTracks(fromSeeds seeds: SeedsState, success: @escaping (AppState) -> Void, failure: @escaping () -> Void) -> Action {
     let trackIDs = getIDs(forType: Track.self, fromSeeds: seeds)
     let artistIDs = getIDs(forType: Artist.self, fromSeeds: seeds)
     let albumIDs = getIDs(forType: Album.self, fromSeeds: seeds)
@@ -83,15 +103,37 @@ enum GeneratePlaylistActions {
         queryParams: queryParams,
         method: .get,
         types: APITypes(
-          requestAction: RequestGeneratePlaylist.self,
-          successAction: ReceiveGeneratePlaylist.self,
-          failureAction: ErrorGeneratePlaylist.self
+          requestAction: RequestTracksFromSeeds.self,
+          successAction: ReceiveTracksFromSeeds.self,
+          failureAction: ErrorTracksFromSeeds.self
         ),
-        success: { _ in
-          dispatch(SeedsActions.GeneratedFromSeeds(seeds: seeds))
-      },
-        failure: {}
+        success: success,
+        failure: failure
       ))
+    }
+  }
+
+  static func generatePlaylist(fromSeeds seedsState: SeedsState) -> Action {
+    return WrapInDispatch { dispatch, getState in
+      dispatch(generateTracks(fromSeeds: seedsState, success: { state in
+        guard let userID = state.spotifyAuth.userID else { return }
+
+        dispatch(createGeneratedPlaylist(userID: userID, success: { state in
+          guard let playlistID = state.generatedPlaylist.playlistID else { return }
+
+          dispatch(
+            addTracksToPlaylist(
+              trackIDs: state.generatedPlaylist.trackIDs,
+              userID: userID,
+              playlistID: playlistID,
+              success: { _ in
+                dispatch(SeedsActions.GeneratedFromSeeds(seeds: seedsState))
+            },
+              failure: {}
+            )
+          )
+        }, failure: {}))
+      }, failure: {}))
     }
   }
 
@@ -177,6 +219,36 @@ enum GeneratePlaylistActions {
         dispatch(ReceiveStoredSeedsState(seeds: SeedsState(items: seedItems)))
       }
     }
+  }
+
+  static func createGeneratedPlaylist(userID: String, success: @escaping (AppState) -> Void, failure: @escaping () -> Void) -> Action {
+    return CallSpotifyAPI(
+      endpoint: "/v1/users/\(userID)/playlists",
+      method: .post,
+      body: ["name": "Playlistable"],
+      types: APITypes(
+        requestAction: RequestCreatePlaylist.self,
+        successAction: ReceiveCreatePlaylist.self,
+        failureAction: ErrorCreatePlaylist.self
+      ),
+      success: success,
+      failure: failure
+    )
+  }
+
+  static func addTracksToPlaylist(trackIDs: [String], userID: String, playlistID: String, success: @escaping (AppState) -> Void, failure: @escaping () -> Void) -> Action {
+    return CallSpotifyAPI(
+      endpoint: "/v1/users/\(userID)/playlists/\(playlistID)/tracks",
+      method: .post,
+      body: ["uris": trackIDs.map(trackURI)],
+      types: APITypes(
+        requestAction: RequestCreatePlaylist.self,
+        successAction: ReceiveCreatePlaylist.self,
+        failureAction: ErrorCreatePlaylist.self
+      ),
+      success: success,
+      failure: failure
+    )
   }
 }
 
