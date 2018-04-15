@@ -75,6 +75,9 @@ enum GeneratePlaylistActions {
     let error: APIRequest.APIError
   }
 
+  struct GeneratingPlaylist: Action {}
+  struct GeneratedPlaylist: Action {}
+
   static func generateTracks(fromSeeds seeds: SeedsState, success: @escaping (AppState) -> Void, failure: @escaping () -> Void) -> Action {
     let trackIDs = getIDs(forType: Track.self, fromSeeds: seeds)
     let artistIDs = getIDs(forType: Artist.self, fromSeeds: seeds)
@@ -114,7 +117,9 @@ enum GeneratePlaylistActions {
   }
 
   static func generatePlaylist(fromSeeds seedsState: SeedsState) -> Action {
-    return WrapInDispatch { dispatch, getState in
+    return WrapInDispatch { dispatch, _ in
+      dispatch(GeneratingPlaylist())
+
       dispatch(generateTracks(fromSeeds: seedsState, success: { state in
         guard let userID = state.spotifyAuth.userID else { return }
 
@@ -123,11 +128,12 @@ enum GeneratePlaylistActions {
 
           dispatch(
             addTracksToPlaylist(
-              trackIDs: state.generatedPlaylist.trackIDs,
+              trackIDs: state.generatedPlaylist.trackIDsGeneratedFromSeeds,
               userID: userID,
               playlistID: playlistID,
               success: { _ in
                 dispatch(SeedsActions.GeneratedFromSeeds(seeds: seedsState))
+                dispatch(GeneratedPlaylist())
             },
               failure: {}
             )
@@ -237,18 +243,33 @@ enum GeneratePlaylistActions {
   }
 
   static func addTracksToPlaylist(trackIDs: [String], userID: String, playlistID: String, success: @escaping (AppState) -> Void, failure: @escaping () -> Void) -> Action {
-    return CallSpotifyAPI(
-      endpoint: "/v1/users/\(userID)/playlists/\(playlistID)/tracks",
-      method: .post,
-      body: ["uris": trackIDs.map(trackURI)],
-      types: APITypes(
-        requestAction: RequestCreatePlaylist.self,
-        successAction: ReceiveCreatePlaylist.self,
-        failureAction: ErrorCreatePlaylist.self
-      ),
-      success: success,
-      failure: failure
-    )
+    return WrapInDispatch { dispatch, getState in
+      dispatch(CallSpotifyAPI(
+        endpoint: "/v1/users/\(userID)/playlists/\(playlistID)/tracks",
+        method: .post,
+        body: ["uris": trackIDs.map(trackURI)],
+        types: APITypes(
+          requestAction: RequestAddTracksToPlaylist.self,
+          successAction: ReceiveAddTracksToPlaylist.self,
+          failureAction: ErrorAddTracksToPlaylist.self
+        ),
+        success: { newState in
+          guard let playlist = newState.resources.playlistFor(id: playlistID) else { return }
+
+          dispatch(ResourceActions.UpdatePlaylist(
+            playlist: Playlist(
+              trackIDs: playlist.trackIDs + trackIDs,
+              name: playlist.name,
+              id: playlist.id,
+              images: playlist.images
+            )
+          ))
+          guard let state = getState() else { return }
+          success(state)
+      },
+        failure: failure
+      ))
+    }
   }
 }
 

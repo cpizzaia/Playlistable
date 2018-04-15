@@ -26,5 +26,5 @@ let wrapInDispatchMiddleware: Middleware<AppState> = { dispatch, getState in
 }
 
 struct WrapInDispatch: Action {
-  let body: (@escaping DispatchFunction, () -> AppState?) -> Void
+  let body: (@escaping DispatchFunction, @escaping () -> AppState?) -> Void
 }

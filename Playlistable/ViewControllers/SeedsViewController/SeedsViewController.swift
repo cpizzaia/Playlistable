@@ -83,7 +83,7 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
     guard let seeds = seeds else { return }
 
     generateFunction = {
-      mainStore.dispatch(GeneratePlaylistActions.generateTracks(fromSeeds: seeds))
+      mainStore.dispatch(GeneratePlaylistActions.generatePlaylist(fromSeeds: seeds))
     }
 
     generatePlaylistButton.isHidden = seeds.items.isEmpty

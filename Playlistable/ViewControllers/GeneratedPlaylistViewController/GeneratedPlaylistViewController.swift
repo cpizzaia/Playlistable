@@ -72,7 +72,9 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
 
   func newState(state: AppState) {
-    tracks = state.resources.tracksFor(ids: state.generatedPlaylist.trackIDs)
+    if let playlistID = state.generatedPlaylist.playlistID, let playlist = state.resources.playlistFor(id: playlistID) {
+      tracks = state.resources.tracksFor(ids: playlist.trackIDs)
+    }
 
     if let playingTrackID = state.spotifyPlayer.playingTrackID {
       currentlyPlayingTrack = state.resources.tracks[playingTrackID]

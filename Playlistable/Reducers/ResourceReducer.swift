@@ -13,15 +13,19 @@ struct ResourceState {
   typealias TrackID = String
   typealias AlbumID = String
   typealias ArtistID = String
+  typealias PlaylistID = String
 
   var tracks: [TrackID: Track]
   var albums: [AlbumID: Album]
   var artists: [ArtistID: Artist]
+  var playlists: [PlaylistID: Playlist]
+
+  func trackFor(id: TrackID) -> Track? {
+    return tracks[id]
+  }
 
   func tracksFor(ids: [TrackID]) -> [Track] {
-    return ids.compactMap { id in
-      return tracks[id]
-    }
+    return ids.compactMap(trackFor)
   }
 
   func albumFor(id: AlbumID) -> Album? {
@@ -29,22 +33,31 @@ struct ResourceState {
   }
 
   func albumsFor(ids: [AlbumID]) -> [Album] {
-    return ids.compactMap { id in
-      return albums[id]
-    }
+    return ids.compactMap(albumFor)
+  }
+
+  func artistFor(id: ArtistID) -> Artist? {
+    return artists[id]
   }
 
   func artistsFor(ids: [ArtistID]) -> [Artist] {
-    return ids.compactMap { id in
-      return artists[id]
-    }
+    return ids.compactMap(artistFor)
+  }
+
+  func playlistFor(id: PlaylistID) -> Playlist? {
+    return playlists[id]
+  }
+
+  func playlistsFor(ids: [PlaylistID]) -> [Playlist] {
+    return ids.compactMap(playlistFor)
   }
 }
 
 private let initialResourceState = ResourceState(
   tracks: [:],
   albums: [:],
-  artists: [:]
+  artists: [:],
+  playlists: [:]
 )
 
 func resourceReducer(action: Action, state: ResourceState?) -> ResourceState {
@@ -57,6 +70,10 @@ func resourceReducer(action: Action, state: ResourceState?) -> ResourceState {
     action.albums.forEach({ state = updateOrAdd(item: $0, toState: state)})
   case let action as ResourceActions.ReceiveArtists:
     action.artists.forEach({ state = updateOrAdd(item: $0, toState: state) })
+  case let action as ResourceActions.ReceivePlaylists:
+    action.playlists.forEach({ state = updateOrAdd(item: $0, toState: state) })
+  case let action as ResourceActions.UpdatePlaylist:
+    state.playlists[action.playlist.id] = action.playlist
   default: break
   }
 
@@ -78,6 +95,10 @@ private func updateOrAdd(item: Item, toState state: ResourceState) -> ResourceSt
   case let item as Artist:
     if shouldUpdate(item: item, forItemInState: state.artists[item.id]) {
       state.artists[item.id] = item
+    }
+  case let item as Playlist:
+    if shouldUpdate(item: item, forItemInState: state.playlists[item.id]) {
+      state.playlists[item.id] = item
     }
   default:
     break

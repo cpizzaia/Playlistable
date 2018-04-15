@@ -10,12 +10,8 @@ import Foundation
 import ReSwift
 
 struct GeneratedPlaylistState {
-  var trackIDs: [String] {
-    didSet { // Storing them for when someone quits out of the app
-      UserDefaults.standard.set(trackIDs, forKey: UserDefaultsKeys.storedPlaylistTrackIDs)
-    }
-  }
   var isGenerating: Bool
+  var trackIDsGeneratedFromSeeds: [String]
   var playlistID: String?
   var seedsUsed: SeedsState? {
     didSet { // Storing them for when someone quits out of the app
@@ -36,8 +32,8 @@ struct GeneratedPlaylistState {
 }
 
 private let initialGeneratedPlaylistState = GeneratedPlaylistState(
-  trackIDs: [],
   isGenerating: false,
+  trackIDsGeneratedFromSeeds: [],
   playlistID: nil,
   seedsUsed: nil
 )
@@ -46,19 +42,14 @@ func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) ->
   var state = state ?? initialGeneratedPlaylistState
 
   switch action {
-  case _ as GeneratePlaylistActions.RequestTracksFromSeeds:
-    state.isGenerating = true
   case let action as GeneratePlaylistActions.ReceiveTracksFromSeeds:
+    state.trackIDsGeneratedFromSeeds = action.response["tracks"].array?.compactMap({ $0["id"].string }) ?? []
+  case _ as GeneratePlaylistActions.GeneratingPlaylist:
+    state.isGenerating = true
+  case _ as GeneratePlaylistActions.GeneratedPlaylist:
     state.isGenerating = false
-    state.trackIDs = action.response["tracks"].array?.compactMap({ $0["id"].string }) ?? []
   case let action as SeedsActions.GeneratedFromSeeds:
     state.seedsUsed = action.seeds
-  case _ as GeneratePlaylistActions.ErrorTracksFromSeeds:
-    state.isGenerating = false
-  case let action as GeneratePlaylistActions.ReceiveStoredSeedsState:
-    state.seedsUsed = action.seeds
-  case let action as GeneratePlaylistActions.ReceiveStoredPlaylistTracks:
-    state.trackIDs = action.response["tracks"].array?.compactMap({ $0["id"].string }) ?? []
   case let action as GeneratePlaylistActions.ReceiveCreatePlaylist:
     state.playlistID = action.response["id"].string
   default:

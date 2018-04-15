@@ -21,4 +21,12 @@ enum ResourceActions {
   struct ReceiveArtists: Action {
     let artists: [Artist]
   }
+
+  struct ReceivePlaylists: Action {
+    let playlists: [Playlist]
+  }
+
+  struct UpdatePlaylist: Action {
+    let playlist: Playlist
+  }
 }
