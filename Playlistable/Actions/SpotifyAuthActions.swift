@@ -177,11 +177,15 @@ enum SpotifyAuthActions {
   static func postAuthAction(accessToken: String) -> Action {
     return WrapInDispatch { dispatch, _ in
       dispatch(SpotifyPlayerActions.initializePlayer(clientID: clientID, accessToken: accessToken))
-      dispatch(SpotifyAuthActions.getCurrentUser())
+      dispatch(
+        SpotifyAuthActions.getCurrentUser(success: { newState in
+          guard let userID = newState.spotifyAuth.userID else { return }
 
-      if let action = GeneratePlaylistActions.reloadPlaylistFromStorage() {
-        dispatch(action)
-      }
+          if let action = GeneratePlaylistActions.reloadPlaylistFromStorage(userID: userID) {
+            dispatch(action)
+          }
+        }, failure: {})
+      )
     }
   }
 
@@ -220,7 +224,7 @@ enum SpotifyAuthActions {
     }
   }
 
-  static func getCurrentUser() -> Action {
+  static func getCurrentUser(success: @escaping (AppState) -> Void, failure: @escaping () -> Void) -> Action {
     return WrapInDispatch { dispatch, _ in
       dispatch(CallSpotifyAPI(
         endpoint: "/v1/me",
@@ -230,9 +234,8 @@ enum SpotifyAuthActions {
           successAction: ReceiveCurrentUser.self,
           failureAction: ErrorCurrentUser.self
         ),
-        success: { _ in
-      },
-        failure: nil
+        success: success,
+        failure: failure
       ))
     }
   }

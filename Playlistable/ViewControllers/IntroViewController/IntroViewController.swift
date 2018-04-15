@@ -65,7 +65,7 @@ class IntroViewController: UIViewController, StoreSubscriber {
     }
 
     if spotifyAuthState?.isAuthed == true && spotifyAuthState?.userID == nil && !(spotifyAuthState?.isRequestingUser == true) {
-      mainStore.dispatch(SpotifyAuthActions.getCurrentUser())
+      mainStore.dispatch(SpotifyAuthActions.getCurrentUser(success: { _ in }, failure: {}))
     }
   }
 

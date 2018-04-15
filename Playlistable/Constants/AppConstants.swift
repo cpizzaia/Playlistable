@@ -48,17 +48,8 @@ func playlistURI(fromID id: String) -> String {
   return "spotify:playlist:\(id)"
 }
 
-func rand<T>(_ min: T, _ max: T) -> T where T : BinaryInteger {
+func rand<T>(_ min: T, _ max: T) -> T where T: BinaryInteger {
   let _min = min + 1
   let difference = max - _min
   return T(arc4random_uniform(UInt32(difference))) + _min
-}
-
-struct UserDefaultsKeys {
-  static let spotifyAuthToken = "spotifyAuthToken" // String
-  static let spotifyRefreshToken = "spotifyRefreshToken" // String
-  static let spotifyTokenExpirationTimeInterval = "spotifyTokenExpirationTimeInterval" // Double
-  static let storedPlaylistTrackIDs = "storedPlaylistTrackIDs" // [String]
-  static let storedArtistSeedIDs = "storedArtistSeedIDs" // [String]
-  static let storedTrackSeedIDs = "storedTrackSeedIDs" // [String]
 }

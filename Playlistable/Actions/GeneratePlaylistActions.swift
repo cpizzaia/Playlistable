@@ -74,6 +74,14 @@ enum GeneratePlaylistActions {
   struct GeneratingPlaylist: Action {}
   struct GeneratedPlaylist: Action {}
 
+  struct RequestStoredPlaylist: APIRequestAction {}
+  struct ReceiveStoredPlaylist: APIResponseSuccessAction {
+    let response: JSON
+  }
+  struct ErrorStoredPlaylist: APIResponseFailureAction {
+    let error: APIRequest.APIError
+  }
+
   static func generateTracks(fromSeeds seeds: SeedsState, success: @escaping (AppState) -> Void, failure: @escaping () -> Void) -> Action {
     let trackIDs = getIDs(forType: Track.self, fromSeeds: seeds)
     let artistIDs = getIDs(forType: Artist.self, fromSeeds: seeds)
@@ -141,11 +149,11 @@ enum GeneratePlaylistActions {
     }
   }
 
-  static func reloadPlaylistFromStorage() -> Action? {
+  static func reloadPlaylistFromStorage(userID: String) -> Action? {
     guard
-      let playlistTrackIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.storedPlaylistTrackIDs) as? [String],
-      let seedTrackIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.storedTrackSeedIDs) as? [String],
-      let seedArtistIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.storedArtistSeedIDs) as? [String]
+      let playlistID = UserDefaults.standard.storedGeneratedPlaylistID,
+      let seedTrackIDs = UserDefaults.standard.storedTrackSeedIDs,
+      let seedArtistIDs = UserDefaults.standard.storedArtistSeedIDs
       else { return nil }
 
     return WrapInDispatch { dispatch, _ in
@@ -153,23 +161,7 @@ enum GeneratePlaylistActions {
       var seedItems = [String: Item]()
       let group = DispatchGroup()
 
-      if !playlistTrackIDs.isEmpty {
-        dispatch(
-          CallSpotifyAPI(
-            endpoint: "/v1/tracks",
-            batchedQueryParams: playlistTrackIDs.chunked(by: 50).map { ids in
-              return ["ids": ids.joined(separator: ",")]
-            },
-            batchedJSONKey: "tracks",
-            method: .get,
-            types: APITypes(
-              requestAction: RequestStoredPlaylistTracks.self,
-              successAction: ReceiveStoredPlaylistTracks.self,
-              failureAction: ErrorStoredPlaylistTracks.self
-            )
-          )
-        )
-      }
+      dispatch(getStoredPlaylist(playlistID: playlistID, playlistOwnerID: userID))
 
       if !seedTrackIDs.isEmpty {
         group.enter()
@@ -278,6 +270,18 @@ enum GeneratePlaylistActions {
         requestAction: RequestUnfollowPlaylist.self,
         successAction: ReceiveUnfollowPlaylist.self,
         failureAction: ErrorUnfollowPlaylist.self
+      )
+    )
+  }
+
+  static func getStoredPlaylist(playlistID: String, playlistOwnerID: String) -> Action {
+    return CallSpotifyAPI(
+      endpoint: "/v1/users/\(playlistOwnerID)/playlists/\(playlistID)",
+      method: .get,
+      types: APITypes(
+        requestAction: RequestStoredPlaylist.self,
+        successAction: ReceiveStoredPlaylist.self,
+        failureAction: ErrorStoredPlaylist.self
       )
     )
   }

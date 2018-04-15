@@ -12,7 +12,13 @@ import ReSwift
 struct GeneratedPlaylistState {
   var isGenerating: Bool
   var trackIDsGeneratedFromSeeds: [String]
-  var playlistID: String?
+  var playlistID: String? {
+    didSet {
+      if playlistID == nil { return }
+
+      UserDefaults.standard.storedGeneratedPlaylistID = playlistID
+    }
+  }
   var seedsUsed: SeedsState? {
     didSet { // Storing them for when someone quits out of the app
       guard let seedsUsed = seedsUsed else { return }
@@ -25,8 +31,8 @@ struct GeneratedPlaylistState {
         return value is Track ? key : nil
       }
 
-      UserDefaults.standard.set(artistIDs, forKey: UserDefaultsKeys.storedArtistSeedIDs)
-      UserDefaults.standard.set(trackIDs, forKey: UserDefaultsKeys.storedTrackSeedIDs)
+      UserDefaults.standard.storedArtistSeedIDs = artistIDs
+      UserDefaults.standard.storedTrackSeedIDs = trackIDs
     }
   }
 }
@@ -52,6 +58,10 @@ func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) ->
     state.seedsUsed = action.seeds
   case let action as GeneratePlaylistActions.ReceiveCreatePlaylist:
     state.playlistID = action.response["id"].string
+  case let action as GeneratePlaylistActions.ReceiveStoredPlaylist:
+    state.playlistID = action.response["id"].string
+  case let action as GeneratePlaylistActions.ReceiveStoredSeedsState:
+    state.seedsUsed = action.seeds
   default:
     break
   }

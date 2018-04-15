@@ -12,14 +12,12 @@ import ReSwift
 struct SpotifyAuthState {
   var token: String? {
     didSet {
-      UserDefaults.standard.set(token, forKey: UserDefaultsKeys.spotifyAuthToken)
-      UserDefaults.standard.synchronize()
+      UserDefaults.standard.spotifyAuthToken = token
     }
   }
   var refreshToken: String? {
     didSet {
-      UserDefaults.standard.set(refreshToken, forKey: UserDefaultsKeys.spotifyRefreshToken)
-      UserDefaults.standard.synchronize()
+      UserDefaults.standard.spotifyRefreshToken = refreshToken
     }
   }
   var userID: String?
@@ -31,16 +29,7 @@ struct SpotifyAuthState {
   var isPremium: Bool?
   var expiresAt: TimeInterval? {
     didSet {
-      guard let expiresAt = expiresAt else {
-        UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.spotifyTokenExpirationTimeInterval)
-        return
-      }
-
-      UserDefaults.standard.set(
-        expiresAt,
-        forKey: UserDefaultsKeys.spotifyTokenExpirationTimeInterval
-      )
-      UserDefaults.standard.synchronize()
+      UserDefaults.standard.spotifyTokenExpirationTimeInterval = expiresAt
     }
   }
 
@@ -65,8 +54,8 @@ struct SpotifyAuthState {
 }
 
 private let initialSpotifyAuthState = SpotifyAuthState(
-  token: UserDefaults.standard.string(forKey: UserDefaultsKeys.spotifyAuthToken),
-  refreshToken: UserDefaults.standard.string(forKey: UserDefaultsKeys.spotifyRefreshToken),
+  token: UserDefaults.standard.spotifyAuthToken,
+  refreshToken: UserDefaults.standard.spotifyRefreshToken,
   userID: nil,
   market: nil,
   isInitializingOAuth: false,
@@ -74,7 +63,7 @@ private let initialSpotifyAuthState = SpotifyAuthState(
   isRefreshingToken: false,
   isRequestingUser: false,
   isPremium: nil,
-  expiresAt: UserDefaults.standard.double(forKey: UserDefaultsKeys.spotifyTokenExpirationTimeInterval)
+  expiresAt: UserDefaults.standard.spotifyTokenExpirationTimeInterval
 )
 
 func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuthState {

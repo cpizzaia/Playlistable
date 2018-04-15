@@ -66,8 +66,7 @@ class TabBarController: UITabBarController, StoreSubscriber {
 
     // FIXME: Bit of an anti pattern here cause we are accessing state outside of the store
     // rethink and fix when you get a chance
-    let storedPlaylistIDs = UserDefaults.standard.value(forKey: UserDefaultsKeys.storedPlaylistTrackIDs) as? [String] ?? []
-    if !storedPlaylistIDs.isEmpty {
+    if UserDefaults.standard.storedGeneratedPlaylistID != nil {
       selectedIndex = 0
     } else {
       selectedIndex = 2
