@@ -40,17 +40,11 @@ class LockScreenController: NSObject, StateManager {
   }
 
   @objc func nextTrackCommand() {
-    guard let currentTrack = currentTrack else { return }
-    guard let action = SpotifyPlayerActions.playTrack(inQueue: currentQueue, afterTrackID: currentTrack.id) else { return }
-
-    mainStore.dispatch(action)
+    mainStore.dispatch(SpotifyPlayerActions.skipToNextTrack())
   }
 
   @objc func previousTrackCommand() {
-    guard let currentTrack = currentTrack else { return }
-    guard let action = SpotifyPlayerActions.playTrack(inQueue: currentQueue, beforeTrackID: currentTrack.id) else { return }
-
-    mainStore.dispatch(action)
+    mainStore.dispatch(SpotifyPlayerActions.skipToPreviousTrack())
   }
 
   @objc func playCommand() {
@@ -62,11 +56,13 @@ class LockScreenController: NSObject, StateManager {
   }
 
   func newState(state: AppState) {
-    guard let currentPlayingTrack = state.spotifyPlayer.playingTrackID else { return }
-    guard let track = state.resources.tracksFor(ids: [currentPlayingTrack]).first else { return }
+    guard
+      let trackID = state.spotifyPlayer.playingTrackID,
+      let track = state.resources.trackFor(id: trackID)
+    else { return }
 
-    commandCenter.nextTrackCommand.isEnabled = isNextTrackCommandEnabled(state: state.spotifyPlayer)
-    commandCenter.previousTrackCommand.isEnabled = isPreviousTrackCommandEnabled(state: state.spotifyPlayer)
+    commandCenter.nextTrackCommand.isEnabled = isNextTrackCommandEnabled(state: state)
+    commandCenter.previousTrackCommand.isEnabled = isPreviousTrackCommandEnabled(state: state)
 
     commandCenter.playCommand.isEnabled = isPlayCommanedEnabled(state: state.spotifyPlayer)
     commandCenter.pauseCommand.isEnabled = isPauseCommanedEnabled(state: state.spotifyPlayer)
@@ -74,16 +70,28 @@ class LockScreenController: NSObject, StateManager {
     guard currentTrack?.id != track.id else { return }
 
     currentTrack = track
-    currentQueue = state.spotifyPlayer.queueTrackIDs
+
     updateNowPlayingInfo(forTrack: track)
   }
 
-  private func isNextTrackCommandEnabled(state: SpotifyPlayerState) -> Bool {
-    return state.isPlayingTrackInQueue && !state.isPlayingLastTrackInQueue
+  private func isNextTrackCommandEnabled(state: AppState) -> Bool {
+    guard
+      let playlistID =  state.generatedPlaylist.playlistID,
+      let playlist = state.resources.playlistFor(id: playlistID),
+      let trackID = state.spotifyPlayer.playingTrackID
+    else { return false }
+
+    return playlist.trackIDs.index(of: trackID) != playlist.trackIDs.endIndex - 1
   }
 
-  private func isPreviousTrackCommandEnabled(state: SpotifyPlayerState) -> Bool {
-    return state.isPlayingTrackInQueue && !state.isPlayingFirstTrackInQueue
+  private func isPreviousTrackCommandEnabled(state: AppState) -> Bool {
+    guard
+      let playlistID =  state.generatedPlaylist.playlistID,
+      let playlist = state.resources.playlistFor(id: playlistID),
+      let trackID = state.spotifyPlayer.playingTrackID
+      else { return false }
+
+    return playlist.trackIDs.index(of: trackID) != playlist.trackIDs.startIndex
   }
 
   private func isPlayCommanedEnabled(state: SpotifyPlayerState) -> Bool {

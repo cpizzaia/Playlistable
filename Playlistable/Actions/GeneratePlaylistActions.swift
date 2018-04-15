@@ -12,41 +12,33 @@ import ReSwift
 
 enum GeneratePlaylistActions {
   struct RequestTracksFromSeeds: APIRequestAction {}
-
   struct ReceiveTracksFromSeeds: APIResponseSuccessAction {
     let response: JSON
   }
-
   struct ErrorTracksFromSeeds: APIResponseFailureAction {
     let error: APIRequest.APIError
   }
 
   struct RequestStoredPlaylistTracks: APIRequestAction {}
-
   struct ReceiveStoredPlaylistTracks: APIResponseSuccessAction {
     let response: JSON
   }
-
   struct ErrorStoredPlaylistTracks: APIResponseFailureAction {
     let error: APIRequest.APIError
   }
 
   struct RequestStoredSeedTracks: APIRequestAction {}
-
   struct ReceiveStoredSeedTracks: APIResponseSuccessAction {
     let response: JSON
   }
-
   struct ErrorStoredSeedTracks: APIResponseFailureAction {
     let error: APIRequest.APIError
   }
 
   struct RequestStoredSeedArtists: APIRequestAction {}
-
   struct ReceiveStoredSeedArtists: APIResponseSuccessAction {
     let response: JSON
   }
-
   struct ErrorStoredSeedArtists: APIResponseFailureAction {
     let error: APIRequest.APIError
   }
@@ -56,22 +48,26 @@ enum GeneratePlaylistActions {
   }
 
   struct RequestCreatePlaylist: APIRequestAction {}
-
   struct ReceiveCreatePlaylist: APIResponseSuccessAction {
     let response: JSON
   }
-
   struct ErrorCreatePlaylist: APIResponseFailureAction {
     let error: APIRequest.APIError
   }
 
   struct RequestAddTracksToPlaylist: APIRequestAction {}
-
   struct ReceiveAddTracksToPlaylist: APIResponseSuccessAction {
     let response: JSON
   }
-
   struct ErrorAddTracksToPlaylist: APIResponseFailureAction {
+    let error: APIRequest.APIError
+  }
+
+  struct RequestUnfollowPlaylist: APIRequestAction {}
+  struct ReceiveUnfollowPlaylist: APIResponseSuccessAction {
+    let response: JSON
+  }
+  struct ErrorUnfollowPlaylist: APIResponseFailureAction {
     let error: APIRequest.APIError
   }
 
@@ -125,6 +121,8 @@ enum GeneratePlaylistActions {
 
         dispatch(createGeneratedPlaylist(userID: userID, success: { state in
           guard let playlistID = state.generatedPlaylist.playlistID else { return }
+
+          dispatch(unfollowPlaylist(playlistID: playlistID, playlistOwnerID: userID))
 
           dispatch(
             addTracksToPlaylist(
@@ -270,6 +268,18 @@ enum GeneratePlaylistActions {
         failure: failure
       ))
     }
+  }
+
+  static func unfollowPlaylist(playlistID: String, playlistOwnerID: String) -> Action {
+    return CallSpotifyAPI(
+      endpoint: "/v1/users/\(playlistOwnerID)/playlists/\(playlistID)/followers",
+      method: .delete,
+      types: APITypes(
+        requestAction: RequestUnfollowPlaylist.self,
+        successAction: ReceiveUnfollowPlaylist.self,
+        failureAction: ErrorUnfollowPlaylist.self
+      )
+    )
   }
 }
 

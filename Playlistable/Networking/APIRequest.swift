@@ -23,6 +23,10 @@ class APIRequest {
     let statusCode: Int
     let headers: Headers
     let body: Body
+
+    var successful: Bool {
+      return statusCode < 400
+    }
   }
 
   typealias Headers = JSON
@@ -50,13 +54,13 @@ class APIRequest {
       parameters: params.body,
       encoding: params.encoding,
       headers: params.headers
-      ).validate().responseJSON(completionHandler: { response in
+      ).validate().response(completionHandler: { response in
         self.handle(response: response, params: params)
       })
   }
 
   // MARK: Private Methods
-  private func handle(response: DataResponse<Any>, params: RequestParams) {
+  private func handle(response: DefaultDataResponse, params: RequestParams) {
 
     let apiResponse = Response(
       statusCode: response.response?.statusCode ?? 400,
@@ -64,15 +68,14 @@ class APIRequest {
       body: JSON(data: response.data ?? Data())
     )
 
-    switch response.result {
-    case .success:
-      log("SUCCESS: \(params.url)")
-      params.success(apiResponse.body)
-
-    case .failure:
+    if !apiResponse.successful {
       log("FAILURE: \(params.url)")
       params.failure(self.errorFrom(response: apiResponse))
+      return
     }
+
+    log("SUCCESS: \(params.url)")
+    params.success(apiResponse.body)
   }
 
   private func errorFrom(response: Response) -> APIError {

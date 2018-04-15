@@ -16,30 +16,6 @@ struct SpotifyPlayerState {
   var isStartingToPlay: Bool
   var isPausing: Bool
   var isPaused: Bool
-  var queueTrackIDs: [String]
-
-  // MARK: Selectors
-  var isPlayingQueue: Bool {
-    return !queueTrackIDs.isEmpty
-  }
-
-  var positionOfCurrentTrackInQueue: Int? {
-    guard let trackID = playingTrackID else { return nil }
-    return queueTrackIDs.index(of: trackID)
-  }
-
-  var isPlayingTrackInQueue: Bool {
-    return positionOfCurrentTrackInQueue != nil
-  }
-
-  var isPlayingFirstTrackInQueue: Bool {
-    return positionOfCurrentTrackInQueue == queueTrackIDs.startIndex
-  }
-
-  var isPlayingLastTrackInQueue: Bool {
-    guard let currentPosition = positionOfCurrentTrackInQueue else { return false }
-    return currentPosition - 1 == queueTrackIDs.endIndex
-  }
 }
 
 private let initialSpotifyPlayerState = SpotifyPlayerState(
@@ -48,8 +24,7 @@ private let initialSpotifyPlayerState = SpotifyPlayerState(
   isPlaying: false,
   isStartingToPlay: false,
   isPausing: false,
-  isPaused: false,
-  queueTrackIDs: []
+  isPaused: false
 )
 
 func spotifyPlayerReducer(action: Action, state: SpotifyPlayerState?) -> SpotifyPlayerState {
@@ -58,8 +33,12 @@ func spotifyPlayerReducer(action: Action, state: SpotifyPlayerState?) -> Spotify
   switch action {
   case _ as SpotifyPlayerActions.InitializedPlayer:
     state.isInitialized = true
-  case _ as SpotifyPlayerActions.PlayTrack:
+  case _ as SpotifyPlayerActions.PlayPlaylist:
     state.isStartingToPlay = true
+  case _ as SpotifyPlayerActions.PlayingPlaylist:
+    state.isStartingToPlay = false
+  case _ as SpotifyPlayerActions.ErrorPlayingPlaylist:
+    state.isStartingToPlay = false
   case let action as SpotifyPlayerActions.PlayingTrack:
     state.playingTrackID = action.trackID
     state.isPlaying = true
@@ -67,8 +46,6 @@ func spotifyPlayerReducer(action: Action, state: SpotifyPlayerState?) -> Spotify
     state.isPaused = false
   case _ as SpotifyPlayerActions.StoppedPlaying:
     state.isPlaying = false
-  case let action as SpotifyPlayerActions.PlayQueue:
-    state.queueTrackIDs = action.trackIDs
   case _ as SpotifyPlayerActions.Paused:
     state.isPaused = true
     state.isPlaying = false

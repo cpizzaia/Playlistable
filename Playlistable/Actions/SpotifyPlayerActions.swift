@@ -21,13 +21,27 @@ enum SpotifyPlayerActions {
 
   struct InitializedPlayer: Action {}
 
-  struct PlayQueue: Action {
-    let trackIDs: [String]
+  struct PlayPlaylist: Action {
+    let playlistID: String
+  }
+  struct PlayingPlaylist: Action {
+    let playlistID: String
+  }
+  struct ErrorPlayingPlaylist: Action {
+    let playlistID: String
   }
 
-  struct PlayTrack: Action {
-    let trackID: String
-  }
+  struct SkippingToNextTrack: Action {}
+  struct SkippedToNextTrack: Action {}
+  struct ErrorSkippingToNextTrack: Action {}
+
+  struct SkippingToPreviousTrack: Action {}
+  struct SkippedToPreviousTrack: Action {}
+  struct ErrorSkippingToPreviousTrack: Action {}
+
+  struct SettingShuffle: Action {}
+  struct SetShuffle: Action {}
+  struct ErrorSettingShuffle: Action {}
 
   struct PlayingTrack: Action {
     let trackID: String
@@ -55,45 +69,78 @@ enum SpotifyPlayerActions {
     }
   }
 
-  static func playTrack(id: String) -> Action {
-    player.playSpotifyURI(
-      trackURI(fromID: id),
-      startingWith: 0,
-      startingWithPosition: 0,
-      callback: { _ in
-
-    })
-
-    return PlayTrack(trackID: id)
-  }
-
-  static func playQueue(trackIDs: [String], startingWithTrackID trackID: String) -> Action {
+  static func playPlaylist(id: String, startingWithTrack position: Int, shouldShuffle: Bool) -> Action {
     return WrapInDispatch { dispatch, _ in
-      dispatch(PlayQueue(trackIDs: trackIDs))
+      if player.playbackState?.isShuffling != shouldShuffle {
+        dispatch(setShuffle(shouldShuffle))
+      }
 
-      dispatch(playTrack(id: trackID))
+      player.playSpotifyURI(
+        playlistURI(fromID: id),
+        startingWith: UInt(position),
+        startingWithPosition: 0,
+        callback: { error in
+          if error != nil {
+            dispatch(ErrorPlayingPlaylist(playlistID: id))
+            return
+          }
+
+          dispatch(PlayingPlaylist(playlistID: id))
+        }
+      )
+
+      dispatch(PlayPlaylist(playlistID: id))
     }
   }
 
-  static func playTrack(inQueue queue: [String], afterTrackID trackID: String) -> Action? {
-    guard let currentTrackIndex = queue.index(of: trackID) else { return nil }
-    let nextTrackIndex = queue.index(after: currentTrackIndex)
+  static func setShuffle(_ value: Bool) -> Action {
+    // setting is playing to become active device,
+    // cause we can't set shuffle without being the active device
+    if player.playbackState?.isActiveDevice != true {
+      player.setIsPlaying(true, callback: { _ in })
+    }
 
-    if nextTrackIndex <= queue.endIndex {
-      return playTrack(id: queue[nextTrackIndex])
-    } else {
-      return nil
+    return WrapInDispatch { dispatch, _ in
+      player.setShuffle(value) { error in
+        if error != nil {
+          dispatch(ErrorSettingShuffle())
+          return
+        }
+
+        dispatch(SetShuffle())
+      }
+
+      dispatch(SettingShuffle())
     }
   }
 
-  static func playTrack(inQueue queue: [String], beforeTrackID trackID: String) -> Action? {
-    guard let currentTrackIndex = queue.index(of: trackID) else { return nil }
-    let nextTrackIndex = queue.index(before: currentTrackIndex)
+  static func skipToNextTrack() -> Action {
+    return WrapInDispatch { dispatch, _ in
+      player.skipNext { error in
+        if error != nil {
+          dispatch(ErrorSkippingToNextTrack())
+          return
+        }
 
-    if nextTrackIndex >= queue.startIndex {
-      return playTrack(id: queue[nextTrackIndex])
-    } else {
-      return nil
+        dispatch(SkippedToNextTrack())
+      }
+
+      dispatch(SkippingToNextTrack())
+    }
+  }
+
+  static func skipToPreviousTrack() -> Action {
+    return WrapInDispatch { dispatch, _ in
+      player.skipPrevious { error in
+        if error != nil {
+          dispatch(ErrorSkippingToPreviousTrack())
+          return
+        }
+
+        dispatch(SkippedToPreviousTrack())
+      }
+
+      dispatch(SkippingToPreviousTrack())
     }
   }
 

@@ -23,6 +23,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   var noTracks: Bool {
     return tracks.isEmpty
   }
+  var playlistID: String?
 
   var userID: String?
 
@@ -72,7 +73,9 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
 
   func newState(state: AppState) {
-    if let playlistID = state.generatedPlaylist.playlistID, let playlist = state.resources.playlistFor(id: playlistID) {
+    playlistID = state.generatedPlaylist.playlistID
+
+    if let playlistID = playlistID, let playlist = state.resources.playlistFor(id: playlistID) {
       tracks = state.resources.tracksFor(ids: playlist.trackIDs)
     }
 
@@ -116,7 +119,13 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    mainStore.dispatch(SpotifyPlayerActions.playQueue(trackIDs: tracks.map { $0.id }, startingWithTrackID: tracks[indexPath.row].id))
+    guard let playlistID = playlistID else { return }
+
+    mainStore.dispatch(SpotifyPlayerActions.playPlaylist(
+      id: playlistID,
+      startingWithTrack: indexPath.row,
+      shouldShuffle: false
+    ))
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -127,13 +136,13 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     let view = loadUIViewFromNib(GeneratedPlaylistHeaderView.self)
 
     view.setupView(action: {
-      let shuffledTrackIDs = self.tracks.map { $0.id }.shuffled()
+      guard
+        let playlistID = self.playlistID else { return }
 
-      guard let firstTrackID = shuffledTrackIDs.first else { return }
-
-      mainStore.dispatch(SpotifyPlayerActions.playQueue(
-        trackIDs: shuffledTrackIDs,
-        startingWithTrackID: firstTrackID
+      mainStore.dispatch(SpotifyPlayerActions.playPlaylist(
+        id: playlistID,
+        startingWithTrack: rand(self.tracks.startIndex, self.tracks.endIndex - 1),
+        shouldShuffle: true
       ))
     })
 

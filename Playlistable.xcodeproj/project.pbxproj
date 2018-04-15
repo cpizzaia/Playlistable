@@ -27,7 +27,6 @@
 		AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC16D73F1FA02CA300CAAD13 /* TabBarController.xib */; };
 		AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7411FA02D3500CAAD13 /* TabBarController.swift */; };
 		AC17B7FA1FBE9ACA0029AFB6 /* LockscreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */; };
-		AC17B7FC1FBE9B390029AFB6 /* PlayerQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7FB1FBE9B390029AFB6 /* PlayerQueueController.swift */; };
 		AC17B7FE1FBE9C3F0029AFB6 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */; };
 		AC18FCC41FB3E95A0079AFC8 /* InspectAllTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC18FCC31FB3E95A0079AFC8 /* InspectAllTableViewCell.xib */; };
 		AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */; };
@@ -122,7 +121,6 @@
 		AC16D73F1FA02CA300CAAD13 /* TabBarController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabBarController.xib; sourceTree = "<group>"; };
 		AC16D7411FA02D3500CAAD13 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockscreenController.swift; sourceTree = "<group>"; };
-		AC17B7FB1FBE9B390029AFB6 /* PlayerQueueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerQueueController.swift; sourceTree = "<group>"; };
 		AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		AC18FCC31FB3E95A0079AFC8 /* InspectAllTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InspectAllTableViewCell.xib; sourceTree = "<group>"; };
 		AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectAllTableViewCell.swift; sourceTree = "<group>"; };
@@ -305,7 +303,6 @@
 			isa = PBXGroup;
 			children = (
 				AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */,
-				AC17B7FB1FBE9B390029AFB6 /* PlayerQueueController.swift */,
 				AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */,
 			);
 			path = StateManagers;
@@ -788,7 +785,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC17B7FC1FBE9B390029AFB6 /* PlayerQueueController.swift in Sources */,
 				ACF4324F200C261F00110B53 /* InspectAlbumReducer.swift in Sources */,
 				AC01487B1F9D855D00F9A732 /* APIQueryParamsFormatter.swift in Sources */,
 				ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */,
