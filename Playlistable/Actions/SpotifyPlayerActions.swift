@@ -59,6 +59,13 @@ enum SpotifyPlayerActions {
   struct Resumed: Action {}
   struct FailedToResume: Action {}
 
+  struct NewPreviousTrack: Action {
+    let trackID: String?
+  }
+  struct NewNextTrack: Action {
+    let trackID: String?
+  }
+
   static func initializePlayer(clientID: String, accessToken: String) -> Action {
     return WrapInDispatch { dispatch, _ in
       player.delegate = streamingDelegate
@@ -292,7 +299,17 @@ private class PlaybackDelegate: NSObject, SPTAudioStreamingPlaybackDelegate {
   }
 
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChange metadata: SPTPlaybackMetadata!) {
+    if let nextTrackURI = metadata?.nextTrack?.uri {
+      mainStore.dispatch(SpotifyPlayerActions.NewNextTrack(trackID: id(fromURI: nextTrackURI)))
+    } else {
+      mainStore.dispatch(SpotifyPlayerActions.NewNextTrack(trackID: nil))
+    }
 
+    if let previousTrackURI = metadata?.prevTrack?.uri {
+      mainStore.dispatch(SpotifyPlayerActions.NewPreviousTrack(trackID: id(fromURI: previousTrackURI)))
+    } else {
+      mainStore.dispatch(SpotifyPlayerActions.NewPreviousTrack(trackID: nil))
+    }
   }
 
   func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didChangePosition position: TimeInterval) {

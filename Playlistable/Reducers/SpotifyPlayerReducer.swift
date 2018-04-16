@@ -12,6 +12,8 @@ import ReSwift
 struct SpotifyPlayerState {
   var isInitialized: Bool
   var playingTrackID: String?
+  var nextTrackID: String?
+  var previousTrackID: String?
   var isPlaying: Bool
   var isStartingToPlay: Bool
   var isPausing: Bool
@@ -21,6 +23,8 @@ struct SpotifyPlayerState {
 private let initialSpotifyPlayerState = SpotifyPlayerState(
   isInitialized: false,
   playingTrackID: nil,
+  nextTrackID: nil,
+  previousTrackID: nil,
   isPlaying: false,
   isStartingToPlay: false,
   isPausing: false,
@@ -55,6 +59,10 @@ func spotifyPlayerReducer(action: Action, state: SpotifyPlayerState?) -> Spotify
   case _ as SpotifyPlayerActions.Resumed:
     state.isPlaying = true
     state.isPaused = false
+  case let action as SpotifyPlayerActions.NewNextTrack:
+    state.nextTrackID = action.trackID
+  case let action as SpotifyPlayerActions.NewPreviousTrack:
+    state.previousTrackID = action.trackID
   default:
     break
   }

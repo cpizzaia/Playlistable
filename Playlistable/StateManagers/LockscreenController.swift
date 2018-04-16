@@ -75,23 +75,11 @@ class LockScreenController: NSObject, StateManager {
   }
 
   private func isNextTrackCommandEnabled(state: AppState) -> Bool {
-    guard
-      let playlistID =  state.generatedPlaylist.playlistID,
-      let playlist = state.resources.playlistFor(id: playlistID),
-      let trackID = state.spotifyPlayer.playingTrackID
-    else { return false }
-
-    return playlist.trackIDs.index(of: trackID) != playlist.trackIDs.endIndex - 1
+    return state.spotifyPlayer.nextTrackID != nil
   }
 
   private func isPreviousTrackCommandEnabled(state: AppState) -> Bool {
-    guard
-      let playlistID =  state.generatedPlaylist.playlistID,
-      let playlist = state.resources.playlistFor(id: playlistID),
-      let trackID = state.spotifyPlayer.playingTrackID
-      else { return false }
-
-    return playlist.trackIDs.index(of: trackID) != playlist.trackIDs.startIndex
+    return state.spotifyPlayer.previousTrackID != nil
   }
 
   private func isPlayCommanedEnabled(state: SpotifyPlayerState) -> Bool {
