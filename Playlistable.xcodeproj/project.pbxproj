@@ -62,6 +62,7 @@
 		AC74DCB520830326009F0C2E /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCB420830326009F0C2E /* Playlist.swift */; };
 		AC74DCB72083042C009F0C2E /* PlaylistFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCB62083042C009F0C2E /* PlaylistFactory.swift */; };
 		AC74DCBB2084046B009F0C2E /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCBA2084046B009F0C2E /* UserDefaultsExtensions.swift */; };
+		AC74DCBD20844105009F0C2E /* AudioInterruptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCBC20844105009F0C2E /* AudioInterruptionController.swift */; };
 		AC83D6561FBD46D500E9D004 /* wrapInDispatchMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC83D6551FBD46D500E9D004 /* wrapInDispatchMiddleware.swift */; };
 		AC8AB6AF1FA9641B00251F85 /* SpotifyResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AE1FA9641B00251F85 /* SpotifyResponseParser.swift */; };
 		AC8AB6B21FA964B300251F85 /* TrackFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6B11FA964B300251F85 /* TrackFactory.swift */; };
@@ -158,6 +159,7 @@
 		AC74DCB420830326009F0C2E /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		AC74DCB62083042C009F0C2E /* PlaylistFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistFactory.swift; sourceTree = "<group>"; };
 		AC74DCBA2084046B009F0C2E /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
+		AC74DCBC20844105009F0C2E /* AudioInterruptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioInterruptionController.swift; sourceTree = "<group>"; };
 		AC83D6551FBD46D500E9D004 /* wrapInDispatchMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wrapInDispatchMiddleware.swift; sourceTree = "<group>"; };
 		AC8AB6AE1FA9641B00251F85 /* SpotifyResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponseParser.swift; sourceTree = "<group>"; };
 		AC8AB6B11FA964B300251F85 /* TrackFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackFactory.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 			children = (
 				AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */,
 				AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */,
+				AC74DCBC20844105009F0C2E /* AudioInterruptionController.swift */,
 			);
 			path = StateManagers;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				AC0148791F9D80C100F9A732 /* UIViewControllerExtensions.swift in Sources */,
 				AC3259BA207F001C008AB997 /* QueryParamMarketInjector.swift in Sources */,
 				AC8AB6B21FA964B300251F85 /* TrackFactory.swift in Sources */,
+				AC74DCBD20844105009F0C2E /* AudioInterruptionController.swift in Sources */,
 				AC74DCBB2084046B009F0C2E /* UserDefaultsExtensions.swift in Sources */,
 				AC02D0DC1F9CF73B009ED193 /* APIRequest.swift in Sources */,
 				AC0148761F9D700200F9A732 /* SpotifyAuthActions.swift in Sources */,

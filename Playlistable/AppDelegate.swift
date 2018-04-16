@@ -56,5 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   private func startStateManagers() {
     LockScreenController.start()
+    AudioInterruptionController.start()
   }
 }
