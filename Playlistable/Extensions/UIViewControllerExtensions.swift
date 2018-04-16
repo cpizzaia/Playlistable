@@ -88,6 +88,10 @@ extension UIViewController {
     )
   }
 
+  func presentSavePlaylistAlert() {
+
+  }
+
   func presentAlertView(title: String, message: String, completion: @escaping () -> Void) {
 
     let alertViewController = UIAlertController(
@@ -103,7 +107,7 @@ extension UIViewController {
     present(alertViewController, animated: true, completion: {})
   }
 
-  func presentAlertView(title: String, message: String, successActionTitle: String, failureActionTitle: String, success: @escaping() -> Void, failure: @escaping () -> Void) {
+  func presentAlertView(title: String, message: String, successActionTitle: String, failureActionTitle: String, success: @escaping () -> Void, failure: @escaping () -> Void) {
     let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
     let successAction = UIAlertAction(title: successActionTitle, style: .default, handler: { _ in success() })
@@ -111,6 +115,24 @@ extension UIViewController {
 
     alertViewController.addAction(cancelAction)
     alertViewController.addAction(successAction)
+
+    present(alertViewController, animated: true, completion: {})
+  }
+
+  func presentAlertViewWithTextInput(title: String, message: String, successActionTitle: String, failureActionTitle: String, success: @escaping (String) -> Void, failure: @escaping () -> Void) {
+    let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+    let successAction = UIAlertAction(title: successActionTitle, style: .default, handler: { _ in
+      guard let text = alertViewController.textFields?.first?.text else { return }
+
+      success(text)
+    })
+    let cancelAction = UIAlertAction(title: failureActionTitle, style: .default, handler: { _ in failure() })
+
+    alertViewController.addAction(cancelAction)
+    alertViewController.addAction(successAction)
+
+    alertViewController.addTextField(configurationHandler: nil)
 
     present(alertViewController, animated: true, completion: {})
   }

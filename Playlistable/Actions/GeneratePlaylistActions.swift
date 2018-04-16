@@ -47,11 +47,11 @@ enum GeneratePlaylistActions {
     let seeds: SeedsState
   }
 
-  struct RequestCreatePlaylist: APIRequestAction {}
-  struct ReceiveCreatePlaylist: APIResponseSuccessAction {
+  struct RequestCreateGeneratedPlaylist: APIRequestAction {}
+  struct ReceiveCreateGeneratedPlaylist: APIResponseSuccessAction {
     let response: JSON
   }
-  struct ErrorCreatePlaylist: APIResponseFailureAction {
+  struct ErrorCreateGeneratedPlaylist: APIResponseFailureAction {
     let error: APIRequest.APIError
   }
 
@@ -82,7 +82,7 @@ enum GeneratePlaylistActions {
     let error: APIRequest.APIError
   }
 
-  static func generateTracks(fromSeeds seeds: SeedsState, success: @escaping (AppState) -> Void, failure: @escaping () -> Void) -> Action {
+  static func generateTracks(fromSeeds seeds: SeedsState, success: @escaping (JSON) -> Void, failure: @escaping () -> Void) -> Action {
     let trackIDs = getIDs(forType: Track.self, fromSeeds: seeds)
     let artistIDs = getIDs(forType: Artist.self, fromSeeds: seeds)
     let albumIDs = getIDs(forType: Album.self, fromSeeds: seeds)
@@ -121,20 +121,20 @@ enum GeneratePlaylistActions {
   }
 
   static func generatePlaylist(fromSeeds seedsState: SeedsState) -> Action {
-    return WrapInDispatch { dispatch, _ in
+    return WrapInDispatch { dispatch, getState in
       dispatch(GeneratingPlaylist())
 
-      dispatch(generateTracks(fromSeeds: seedsState, success: { state in
-        guard let userID = state.spotifyAuth.userID else { return }
+      dispatch(generateTracks(fromSeeds: seedsState, success: { _ in
+        guard let userID = getState()?.spotifyAuth.userID else { return }
 
-        dispatch(createGeneratedPlaylist(userID: userID, success: { state in
-          guard let playlistID = state.generatedPlaylist.playlistID else { return }
+        dispatch(createGeneratedPlaylist(userID: userID, success: { _ in
+          guard let playlistID = getState()?.generatedPlaylist.playlistID else { return }
 
           dispatch(unfollowPlaylist(playlistID: playlistID, playlistOwnerID: userID))
 
           dispatch(
             addTracksToPlaylist(
-              trackIDs: state.generatedPlaylist.trackIDsGeneratedFromSeeds,
+              trackIDs: getState()?.generatedPlaylist.trackIDsGeneratedFromSeeds ?? [],
               userID: userID,
               playlistID: playlistID,
               success: { _ in
@@ -156,7 +156,7 @@ enum GeneratePlaylistActions {
       let seedArtistIDs = UserDefaults.standard.storedArtistSeedIDs
       else { return nil }
 
-    return WrapInDispatch { dispatch, _ in
+    return WrapInDispatch { dispatch, getState in
 
       var seedItems = [String: Item]()
       let group = DispatchGroup()
@@ -175,7 +175,9 @@ enum GeneratePlaylistActions {
               successAction: ReceiveStoredSeedTracks.self,
               failureAction: ErrorStoredSeedTracks.self
             ),
-            success: { state in
+            success: { _ in
+              guard let state = getState() else { return }
+
               state.resources.tracksFor(ids: seedTrackIDs).forEach { track in
                 seedItems[track.id] = track
               }
@@ -199,8 +201,8 @@ enum GeneratePlaylistActions {
               successAction: ReceiveStoredSeedArtists.self,
               failureAction: ErrorStoredSeedArtists.self
             ),
-            success: { state in
-              state.resources.artistsFor(ids: seedArtistIDs).forEach { artist in
+            success: { _ in
+              getState()?.resources.artistsFor(ids: seedArtistIDs).forEach { artist in
                 seedItems[artist.id] = artist
               }
 
@@ -217,16 +219,44 @@ enum GeneratePlaylistActions {
     }
   }
 
-  static func createGeneratedPlaylist(userID: String, success: @escaping (AppState) -> Void, failure: @escaping () -> Void) -> Action {
+  static func createGeneratedPlaylist(userID: String, success: @escaping (JSON) -> Void, failure: @escaping () -> Void) -> Action {
+    return createPlaylist(
+      userID: userID,
+      name: "Playlistable",
+      types: APITypes(
+        requestAction: RequestCreateGeneratedPlaylist.self,
+        successAction: ReceiveCreateGeneratedPlaylist.self,
+        failureAction: ErrorCreateGeneratedPlaylist.self
+      ),
+      success: success,
+      failure: failure
+    )
+  }
+
+  static func createSavedPlaylist(userID: String, name: String, trackIDs: [String], success: @escaping () -> Void, failure: @escaping () -> Void) -> Action {
+    return WrapInDispatch { dispatch, _ in
+      dispatch(createPlaylist(
+        userID: userID,
+        name: name,
+        types: nil,
+        success: { json in
+          guard let playlistID = json["id"].string else { return }
+
+          dispatch(addTracksToPlaylist(trackIDs: trackIDs, userID: userID, playlistID: playlistID, success: { _ in
+            success()
+          }, failure: failure))
+        },
+        failure: failure
+      ))
+    }
+  }
+
+  private static func createPlaylist(userID: String, name: String, types: APITypes?, success: @escaping (JSON) -> Void, failure: @escaping () -> Void) -> Action {
     return CallSpotifyAPI(
       endpoint: "/v1/users/\(userID)/playlists",
       method: .post,
-      body: ["name": "Playlistable"],
-      types: APITypes(
-        requestAction: RequestCreatePlaylist.self,
-        successAction: ReceiveCreatePlaylist.self,
-        failureAction: ErrorCreatePlaylist.self
-      ),
+      body: ["name": name],
+      types: types,
       success: success,
       failure: failure
     )
@@ -243,8 +273,8 @@ enum GeneratePlaylistActions {
           successAction: ReceiveAddTracksToPlaylist.self,
           failureAction: ErrorAddTracksToPlaylist.self
         ),
-        success: { newState in
-          guard let playlist = newState.resources.playlistFor(id: playlistID) else { return }
+        success: { _ in
+          guard let playlist = getState()?.resources.playlistFor(id: playlistID) else { return }
 
           dispatch(ResourceActions.UpdatePlaylist(
             playlist: Playlist(

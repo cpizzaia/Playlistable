@@ -16,27 +16,30 @@ let apiMiddleware: Middleware<AppState> = { dispatch, getState in
     return { action in
       guard let apiAction = action as? APIAction else { return next(action) }
 
-      next(apiAction.types.requestAction.init())
-
-      if
-        let spotifyAPIAction = apiAction as? CallSpotifyAPI,
-        let batchedQueryParams = spotifyAPIAction.batchedQueryParams,
-        let batchedJSONKey = spotifyAPIAction.batchedJSONKey {
-
-        // FIXME: There's a smarter cleaner way to make batched requests
-        // I just can't think of it right now
-        makeBatchApiRequest(
-          apiAction: spotifyAPIAction,
-          batchedQueryParams: batchedQueryParams,
-          batchedJSONKey: batchedJSONKey,
-          next: next,
-          getState: getState
-        )
-
-        return
+      if let types = apiAction.types {
+        next(types.requestAction.init())
       }
 
-      makeAPIRequest(apiAction: apiAction, next: next, getState: getState)
+      APIRequest.shared.request(
+        params: translateToRequestParams(
+          apiAction: apiAction,
+          next: next,
+          getState: getState,
+          success: { data in
+            if let types = apiAction.types {
+              next(types.successAction.init(response: data))
+            }
+
+            apiAction.success?(data)
+          }, failure: { error in
+            if let types = apiAction.types {
+              next(types.failureAction.init(error: error))
+            }
+
+            apiAction.failure?()
+          }
+        )
+      )
     }
   }
 }
@@ -58,78 +61,15 @@ private func translateToRequestParams(apiAction: APIAction, next: @escaping Disp
   )
 }
 
-private func makeAPIRequest(apiAction: APIAction, next: @escaping DispatchFunction, getState: @escaping () -> AppState?) {
-  APIRequest.shared.request(
-    params: translateToRequestParams(
-      apiAction: apiAction,
-      next: next,
-      getState: getState,
-      success: { data in
-        next(apiAction.types.successAction.init(response: data))
-        guard let state = getState() else { return }
-        apiAction.success?(state)
-      }, failure: { error in
-        next(apiAction.types.failureAction.init(error: error))
-        apiAction.failure?()
-      }
-    )
-  )
-}
-
-private func makeBatchApiRequest(apiAction: CallSpotifyAPI, batchedQueryParams: [QueryParams], batchedJSONKey: String, next: @escaping DispatchFunction, getState: @escaping () -> AppState?) {
-  let group = DispatchGroup()
-
-  var combinedJSON = [JSON]()
-
-  batchedQueryParams.forEach { queryParams in
-    let newAPIAction = CallSpotifyAPI(
-      endpoint: apiAction.endpoint,
-      queryParams: queryParams,
-      method: apiAction.method,
-      body: apiAction.body,
-      types: apiAction.types,
-      success: apiAction.success,
-      failure: apiAction.failure
-    )
-
-    group.enter()
-
-    APIRequest.shared.request(params:
-      translateToRequestParams(
-        apiAction: newAPIAction,
-        next: next,
-        getState: getState,
-        success: { json in
-
-          combinedJSON += json[batchedJSONKey].array ?? []
-
-          group.leave()
-        },
-        failure: { _ in
-          group.leave()
-        }
-      )
-    )
-  }
-
-  group.notify(queue: .main) {
-    next(apiAction.types.successAction.init(response: JSON([batchedJSONKey: combinedJSON])))
-    guard let state = getState() else { return }
-    apiAction.success?(state)
-  }
-}
-
 struct CallSpotifyAPI: APIAction {
   let endpoint: String
   let method: HTTPMethod
   let headers: HTTPHeaders?
   let body: Parameters?
   let queryParams: QueryParams?
-  let batchedQueryParams: [QueryParams]? // Only used in batch requests
-  let batchedJSONKey: String? // Only used in batch requests
   let bodyEncoding: ParameterEncoding
-  let types: APITypes
-  let success: ((AppState) -> Void)?
+  let types: APITypes?
+  let success: ((JSON) -> Void)?
   let failure: (() -> Void)?
   var url: String {
     return "https://api.spotify.com" + endpoint + queryString
@@ -144,7 +84,7 @@ struct CallSpotifyAPI: APIAction {
     }) ?? ""
   }
 
-  init(endpoint: String, queryParams: QueryParams? = nil, batchedQueryParams: [QueryParams]? = nil, batchedJSONKey: String? = nil, method: HTTPMethod, body: Parameters? = nil, types: APITypes, success: ((AppState) -> Void)? = nil, failure: (() -> Void)? = nil) {
+  init(endpoint: String, queryParams: QueryParams? = nil, method: HTTPMethod, body: Parameters? = nil, types: APITypes? = nil, success: ((JSON) -> Void)? = nil, failure: (() -> Void)? = nil) {
     self.endpoint = endpoint
     self.method = method
     self.types = types
@@ -152,8 +92,6 @@ struct CallSpotifyAPI: APIAction {
     self.body = body
     bodyEncoding = JSONEncoding.default
     self.queryParams = queryParams
-    self.batchedQueryParams = batchedQueryParams
-    self.batchedJSONKey = batchedJSONKey
     self.success = success
     self.failure = failure
   }
@@ -164,9 +102,9 @@ struct CallAPI: APIAction {
   let headers: HTTPHeaders?
   let body: Parameters?
   let bodyEncoding: ParameterEncoding
-  let types: APITypes
+  let types: APITypes?
   let url: String
-  let success: ((AppState) -> Void)?
+  let success: ((JSON) -> Void)?
   let failure: (() -> Void)?
 }
 
@@ -175,9 +113,9 @@ protocol APIAction: Action {
   var headers: HTTPHeaders? { get }
   var body: Parameters? { get }
   var bodyEncoding: ParameterEncoding { get }
-  var types: APITypes { get }
+  var types: APITypes? { get }
   var url: String { get }
-  var success: ((AppState) -> Void)? { get }
+  var success: ((JSON) -> Void)? { get }
   var failure: (() -> Void)? { get }
 }
 

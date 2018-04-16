@@ -56,7 +56,7 @@ func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) ->
     state.isGenerating = false
   case let action as SeedsActions.GeneratedFromSeeds:
     state.seedsUsed = action.seeds
-  case let action as GeneratePlaylistActions.ReceiveCreatePlaylist:
+  case let action as GeneratePlaylistActions.ReceiveCreateGeneratedPlaylist:
     state.playlistID = action.response["id"].string
   case let action as GeneratePlaylistActions.ReceiveStoredPlaylist:
     state.playlistID = action.response["id"].string

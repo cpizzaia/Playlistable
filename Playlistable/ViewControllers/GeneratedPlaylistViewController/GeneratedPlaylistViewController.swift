@@ -98,7 +98,50 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
 
     userID = state.spotifyAuth.userID
 
+    if noTracks {
+      navigationItem.setLeftBarButton(nil, animated: false)
+    } else if navigationItem.leftBarButtonItem == nil {
+
+      let leftNavigatorButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(savePlaylist))
+
+      leftNavigatorButton.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.myFont(withSize: 17)], for: .normal)
+
+      navigationItem.setLeftBarButton(leftNavigatorButton, animated: true)
+    }
+
     playlistTableView.reloadData()
+  }
+
+  @objc private func savePlaylist() {
+    presentAlertViewWithTextInput(
+      title: "Save Playlist",
+      message: "Enter a name for your playlist",
+      successActionTitle: "OK",
+      failureActionTitle: "Cancel",
+      success: { playlistName in
+        guard let userID = self.userID else { return }
+        mainStore.dispatch(GeneratePlaylistActions.createSavedPlaylist(
+          userID: userID,
+          name: playlistName,
+          trackIDs: self.tracks.map { $0.id },
+          success: {
+            self.presentAlertView(
+              title: "Save Successful",
+              message: "Your playlist has been saved to your Spotify, it may take some time to appear",
+              completion: {}
+            )
+          },
+          failure: {
+            self.presentAlertView(
+              title: "Save Failed",
+              message: "Please try again",
+              completion: {}
+            )
+          }
+        ))
+      },
+      failure: {}
+    )
   }
 
   // MARK: Table View Methods

@@ -22,8 +22,6 @@ let queryParamMarketInjector: Middleware<AppState> = { dispatch, getState in
         queryParams: spotifyApiAction.queryParams?.union(
           ["market": getState()?.spotifyAuth.market ?? ""]
         ),
-        batchedQueryParams: spotifyApiAction.batchedQueryParams,
-        batchedJSONKey: spotifyApiAction.batchedJSONKey,
         method: spotifyApiAction.method,
         body: spotifyApiAction.body,
         types: spotifyApiAction.types,
