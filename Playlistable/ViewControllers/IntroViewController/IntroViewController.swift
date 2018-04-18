@@ -70,9 +70,7 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
     )
   }
 
-  func newProps(props: Props) {
-    self.props = props
-
+  func didReceiveNewProps(props: Props) {
     if props.isAuthed && !props.doesNotHaveUser && props.hasPremium {
       let vc = loadUIViewControllerFromNib(PlayerBarContainerViewController.self)
 

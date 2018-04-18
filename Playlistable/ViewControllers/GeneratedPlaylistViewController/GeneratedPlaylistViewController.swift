@@ -102,7 +102,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     )
   }
 
-  func newProps(props: Props) {
+  func didReceiveNewProps(props: Props) {
 
     noPlaylistView.isHidden = !props.noTracks
     playlistView.isHidden = props.noTracks

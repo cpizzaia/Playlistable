@@ -85,9 +85,7 @@ class SeedsViewController: UIViewController, MyStoreSubscriber, UITableViewDeleg
     return Props(seeds: state.seeds, generatedPlaylistSeeds: state.generatedPlaylist.seedsUsed)
   }
 
-  func newProps(props: SeedsViewController.Props) {
-    self.props = props
-
+  func didReceiveNewProps(props: Props) {
     generateFunction = {
       mainStore.dispatch(GeneratePlaylistActions.generatePlaylist(fromSeeds: props.seeds))
     }

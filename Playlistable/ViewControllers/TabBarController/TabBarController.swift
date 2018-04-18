@@ -17,8 +17,8 @@ class TabBarController: UITabBarController, MyStoreSubscriber {
     let currentState: AppState
   }
 
-  func newProps(props: Props) {
-    self.props = props
+  func didReceiveNewProps(props: Props) {
+
   }
 
   func mapStateToProps(state: AppState) -> TabBarController.Props {

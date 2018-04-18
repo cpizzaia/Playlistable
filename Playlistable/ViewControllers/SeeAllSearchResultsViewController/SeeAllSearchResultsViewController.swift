@@ -76,9 +76,7 @@ class SeeAllSearchResultsViewController: UIViewController, MyStoreSubscriber, UI
     return Props(items: items, seeds: state.seeds)
   }
 
-  func newProps(props: Props) {
-    self.props = props
-
+  func didReceiveNewProps(props: Props) {
     resultsTableView.reloadData()
   }
 

@@ -55,8 +55,7 @@ class PlayerBarContainerViewController: UIViewController, MyStoreSubscriber {
     )
   }
 
-  func newProps(props: Props) {
-    self.props = props
+  func didReceiveNewProps(props: Props) {
     playBarView.isHidden = props.playingTrack == nil
     setPlayPauseButtonImage(playing: props.isPlaying)
     isPlayerBarHidden = playBarView.isHidden

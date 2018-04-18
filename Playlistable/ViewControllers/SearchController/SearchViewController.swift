@@ -94,8 +94,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     )
   }
 
-  func newProps(props: Props) {
-    self.props = props
+  func didReceiveNewProps(props: Props) {
     searchResultsTableView.isHidden = true
     noResultsView.isHidden = false
 

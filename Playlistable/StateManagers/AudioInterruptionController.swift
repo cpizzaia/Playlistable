@@ -31,8 +31,8 @@ class AudioInterruptionController: StateManager {
     return Props(playerIsPlaying: state.spotifyPlayer.isPlaying)
   }
 
-  func newProps(props: Props) {
-    self.props = props
+  func didReceiveNewProps(props: Props) {
+
   }
 
   private init() {

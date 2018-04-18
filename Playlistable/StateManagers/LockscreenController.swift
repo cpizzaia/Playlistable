@@ -84,7 +84,7 @@ class LockScreenController: NSObject, StateManager {
     )
   }
 
-  func newProps(props: LockScreenController.Props) {
+  func didReceiveNewProps(props: LockScreenController.Props) {
     commandCenter.nextTrackCommand.isEnabled = isNextTrackCommandEnabled(props: props)
     commandCenter.previousTrackCommand.isEnabled = isPreviousTrackCommandEnabled(props: props)
 

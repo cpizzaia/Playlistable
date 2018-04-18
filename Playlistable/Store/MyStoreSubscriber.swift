@@ -16,12 +16,15 @@ protocol MyStoreSubscriber: StoreSubscriber {
 
   func mapStateToProps(state: StoreSubscriberStateType) -> Props
 
-  func newProps(props: Props)
+  func didReceiveNewProps(props: Props)
 }
 
 extension MyStoreSubscriber {
   func newState(state: StoreSubscriberStateType) {
-    newProps(props: mapStateToProps(state: state))
-  }
+    self.props = mapStateToProps(state: state)
 
+    if let props = props {
+      didReceiveNewProps(props: props)
+    }
+  }
 }

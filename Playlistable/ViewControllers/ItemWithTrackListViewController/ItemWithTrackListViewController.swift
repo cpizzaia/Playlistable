@@ -63,9 +63,7 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     return mapStateForAlbum(state: state)
   }
 
-  func newProps(props: Props) {
-    self.props = props
-
+  func didReceiveNewProps(props: Props) {
     switch itemType {
     case .some(.album):
       newPropsForAlbum(props: props)
