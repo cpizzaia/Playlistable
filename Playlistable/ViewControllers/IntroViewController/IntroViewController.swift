@@ -10,8 +10,15 @@ import Foundation
 import UIKit
 import ReSwift
 
-class IntroViewController: UIViewController, StoreSubscriber {
+class IntroViewController: UIViewController, MyStoreSubscriber {
   typealias StoreSubscriberStateType = AppState
+
+  struct Props {
+    let isAuthed: Bool
+    let hasPremium: Bool
+    let doesNotHaveUser: Bool
+    let isRequestingUser: Bool
+  }
 
   @IBOutlet var descriptionText: UITextView!
   @IBOutlet var titleLabel: UILabel!
@@ -20,6 +27,8 @@ class IntroViewController: UIViewController, StoreSubscriber {
     guard let auth = spotifyAuthState else { return }
     mainStore.dispatch(SpotifyAuthActions.oAuthSpotify(authState: auth))
   }
+
+  var props: Props?
 
   private var spotifyAuthState: SpotifyAuthState?
   private var hasSpotifyPremium: Bool? {
@@ -52,11 +61,19 @@ class IntroViewController: UIViewController, StoreSubscriber {
     mainStore.unsubscribe(self)
   }
 
-  func newState(state: AppState) {
-    spotifyAuthState = state.spotifyAuth
-    hasSpotifyPremium = spotifyAuthState?.isPremium
+  func mapStateToProps(state: AppState) -> Props {
+    return Props(
+      isAuthed: state.spotifyAuth.isAuthed,
+      hasPremium: state.spotifyAuth.isPremium == true,
+      doesNotHaveUser: state.spotifyAuth.userID == nil,
+      isRequestingUser: state.spotifyAuth.isRequestingUser
+    )
+  }
 
-    if spotifyAuthState?.isAuthed == true && spotifyAuthState?.userID != nil && hasSpotifyPremium == true {
+  func newProps(props: Props) {
+    self.props = props
+
+    if props.isAuthed && !props.doesNotHaveUser && props.hasPremium {
       let vc = loadUIViewControllerFromNib(PlayerBarContainerViewController.self)
 
       present(vc, animated: true, completion: nil)
@@ -64,7 +81,7 @@ class IntroViewController: UIViewController, StoreSubscriber {
       return
     }
 
-    if spotifyAuthState?.isAuthed == true && spotifyAuthState?.userID == nil && !(spotifyAuthState?.isRequestingUser == true) {
+    if props.isAuthed && props.doesNotHaveUser && !props.isRequestingUser {
       mainStore.dispatch(SpotifyAuthActions.getCurrentUser(success: { _ in }, failure: {}))
     }
   }

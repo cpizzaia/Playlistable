@@ -11,12 +11,21 @@ import ReSwift
 import MediaPlayer
 
 class LockScreenController: NSObject, StateManager {
+  var props: Props?
+
   typealias StoreSubscriberStateType = AppState
+
+  struct Props {
+    let isPlaying: Bool
+    let isPaused: Bool
+    let nextTrackExists: Bool
+    let previousTrackExists: Bool
+    let currentTrack: Track?
+  }
+
   private static var instance: LockScreenController?
   private let commandCenter = MPRemoteCommandCenter.shared()
   private let infoCenter = MPNowPlayingInfoCenter.default()
-  private var currentTrack: Track?
-  private var currentQueue = [String]()
 
   static func start() {
     instance = LockScreenController()
@@ -55,39 +64,54 @@ class LockScreenController: NSObject, StateManager {
     mainStore.dispatch(SpotifyPlayerActions.pause())
   }
 
-  func newState(state: AppState) {
-    guard
-      let trackID = state.spotifyPlayer.playingTrackID,
+  func mapStateToProps(state: AppState) -> Props {
+    let currentTrack: Track?
+
+    if let trackID = state.spotifyPlayer.playingTrackID,
       let track = state.resources.trackFor(id: trackID)
-    else { return }
+    {
+      currentTrack = track
+    } else {
+      currentTrack = nil
+    }
 
-    commandCenter.nextTrackCommand.isEnabled = isNextTrackCommandEnabled(state: state)
-    commandCenter.previousTrackCommand.isEnabled = isPreviousTrackCommandEnabled(state: state)
+    return Props(
+      isPlaying: state.spotifyPlayer.isPlaying,
+      isPaused: state.spotifyPlayer.isPaused,
+      nextTrackExists: state.spotifyPlayer.nextTrackID != nil,
+      previousTrackExists: state.spotifyPlayer.previousTrackID != nil,
+      currentTrack: currentTrack
+    )
+  }
 
-    commandCenter.playCommand.isEnabled = isPlayCommanedEnabled(state: state.spotifyPlayer)
-    commandCenter.pauseCommand.isEnabled = isPauseCommanedEnabled(state: state.spotifyPlayer)
+  func newProps(props: LockScreenController.Props) {
+    commandCenter.nextTrackCommand.isEnabled = isNextTrackCommandEnabled(props: props)
+    commandCenter.previousTrackCommand.isEnabled = isPreviousTrackCommandEnabled(props: props)
 
-    guard currentTrack?.id != track.id else { return }
+    commandCenter.playCommand.isEnabled = isPlayCommanedEnabled(props: props)
+    commandCenter.pauseCommand.isEnabled = isPauseCommanedEnabled(props: props)
 
-    currentTrack = track
+    guard self.props?.currentTrack?.id != props.currentTrack?.id else { return }
+
+    guard let track = props.currentTrack else { return }
 
     updateNowPlayingInfo(forTrack: track)
   }
 
-  private func isNextTrackCommandEnabled(state: AppState) -> Bool {
-    return state.spotifyPlayer.nextTrackID != nil
+  private func isNextTrackCommandEnabled(props: Props) -> Bool {
+    return props.nextTrackExists
   }
 
-  private func isPreviousTrackCommandEnabled(state: AppState) -> Bool {
-    return state.spotifyPlayer.previousTrackID != nil
+  private func isPreviousTrackCommandEnabled(props: Props) -> Bool {
+    return props.previousTrackExists
   }
 
-  private func isPlayCommanedEnabled(state: SpotifyPlayerState) -> Bool {
-    return !state.isPlaying
+  private func isPlayCommanedEnabled(props: Props) -> Bool {
+    return !props.isPlaying
   }
 
-  private func isPauseCommanedEnabled(state: SpotifyPlayerState) -> Bool {
-    return !state.isPaused
+  private func isPauseCommanedEnabled(props: Props) -> Bool {
+    return !props.isPaused
   }
 
   private func updateNowPlayingInfo(forTrack track: Track) {

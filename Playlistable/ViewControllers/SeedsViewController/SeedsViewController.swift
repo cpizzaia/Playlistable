@@ -10,9 +10,25 @@ import Foundation
 import UIKit
 import ReSwift
 
-class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegate, UITableViewDataSource {
+class SeedsViewController: UIViewController, MyStoreSubscriber, UITableViewDelegate, UITableViewDataSource {
 
   typealias StoreSubscriberStateType = AppState
+
+  struct Props {
+    let seeds: SeedsState
+    let generatedPlaylistSeeds: SeedsState?
+    var currentSeeds: SeedsState? {
+      if seeds.items.isEmpty == false {
+        return seeds
+      }
+
+      if generatedPlaylistSeeds?.items.isEmpty == false {
+        return generatedPlaylistSeeds
+      }
+
+      return nil
+    }
+  }
 
   @IBOutlet var seedsTableView: UITableView!
   @IBOutlet var titleLabel: UILabel!
@@ -23,19 +39,7 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
     tabBarController?.selectedIndex = 0
   }
 
-  var seeds: SeedsState?
-  var generatedPlaylistSeeds: SeedsState?
-  var currentSeeds: SeedsState? {
-    if seeds?.items.isEmpty == false {
-      return seeds
-    }
-
-    if generatedPlaylistSeeds?.items.isEmpty == false {
-      return generatedPlaylistSeeds
-    }
-
-    return nil
-  }
+  var props: Props?
 
   var generateFunction = {}
 
@@ -77,16 +81,18 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
     mainStore.unsubscribe(self)
   }
 
-  func newState(state: AppState) {
-    seeds = state.seeds
-    generatedPlaylistSeeds = state.generatedPlaylist.seedsUsed
-    guard let seeds = seeds else { return }
+  func mapStateToProps(state: AppState) -> SeedsViewController.Props {
+    return Props(seeds: state.seeds, generatedPlaylistSeeds: state.generatedPlaylist.seedsUsed)
+  }
+
+  func newProps(props: SeedsViewController.Props) {
+    self.props = props
 
     generateFunction = {
-      mainStore.dispatch(GeneratePlaylistActions.generatePlaylist(fromSeeds: seeds))
+      mainStore.dispatch(GeneratePlaylistActions.generatePlaylist(fromSeeds: props.seeds))
     }
 
-    generatePlaylistButton.isHidden = seeds.items.isEmpty
+    generatePlaylistButton.isHidden = props.seeds.items.isEmpty
 
     setTitleLabel()
 
@@ -96,9 +102,9 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
   private func setTitleLabel() {
     titleLabel.text = "You have selected the following items"
 
-    if seeds?.items.isEmpty == true {
+    if props?.seeds.items.isEmpty == true {
 
-      if generatedPlaylistSeeds?.items.isEmpty == false {
+      if props?.generatedPlaylistSeeds?.items.isEmpty == false {
         titleLabel.text = "Generated a playlist using these items"
       } else {
         titleLabel.text = "Your selected items will appear here"
@@ -109,17 +115,17 @@ class SeedsViewController: UIViewController, StoreSubscriber, UITableViewDelegat
 
   // MARK: UITableView Methods
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return currentSeeds?.items.count ?? 0
+    return props?.currentSeeds?.items.count ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "seedsCell") as? InspectAllTableViewCell else { return UITableViewCell() }
 
-    guard let items = currentSeeds?.items.values else { return cell }
+    guard let items = props?.currentSeeds?.items.values else { return cell }
 
     let item = Array(items)[indexPath.row]
 
-    if seeds?.items.isEmpty == true {
+    if props?.seeds.items.isEmpty == true {
       cell.setupCellWithImage(forItem: item, action: nil)
     } else {
       cell.setupCellWithImage(forItem: item, actionSymbol: "x", action: {

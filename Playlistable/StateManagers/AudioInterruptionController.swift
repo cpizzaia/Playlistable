@@ -10,19 +10,29 @@ import Foundation
 import AVFoundation
 
 class AudioInterruptionController: StateManager {
+
   typealias StoreSubscriberStateType = AppState
+
+  struct Props {
+    let playerIsPlaying: Bool
+  }
 
   private static var instance: AudioInterruptionController?
 
-  private var playerIsPlaying = false
+  var props: AudioInterruptionController.Props?
+
   private var playerWasPlaying = false
 
   static func start() {
     instance = AudioInterruptionController()
   }
 
-  func newState(state: AppState) {
-    playerIsPlaying = state.spotifyPlayer.isPlaying
+  func mapStateToProps(state: AppState) -> Props {
+    return Props(playerIsPlaying: state.spotifyPlayer.isPlaying)
+  }
+
+  func newProps(props: Props) {
+    self.props = props
   }
 
   private init() {
@@ -53,9 +63,9 @@ class AudioInterruptionController: StateManager {
   }
 
   private func handleInterruptionStarted() {
-    playerWasPlaying = playerIsPlaying
+    playerWasPlaying = props?.playerIsPlaying == true
 
-    if playerIsPlaying {
+    if props?.playerIsPlaying == true {
       mainStore.dispatch(SpotifyPlayerActions.pause())
     }
   }

@@ -10,9 +10,15 @@ import Foundation
 import UIKit
 import ReSwift
 
-class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
+class PlayerBarContainerViewController: UIViewController, MyStoreSubscriber {
 
   typealias StoreSubscriberStateType = AppState
+
+  struct Props {
+    let currentState: AppState
+    let isPlaying: Bool
+    let playingTrack: Track?
+  }
 
   @IBOutlet var containerView: UIView!
   @IBOutlet var playBarView: UIView!
@@ -22,7 +28,7 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
   @IBOutlet var durationWidthConstraint: NSLayoutConstraint!
   @IBOutlet var playPauseButton: UIButton!
   @IBAction func playPauseButtonPressed(_ sender: UIButton) {
-    if isPlaying {
+    if props?.isPlaying == true {
       mainStore.dispatch(SpotifyPlayerActions.pause())
     } else {
       mainStore.dispatch(SpotifyPlayerActions.resume())
@@ -31,26 +37,39 @@ class PlayerBarContainerViewController: UIViewController, StoreSubscriber {
 
   var isAnimatingDuration = false
   var endTime: Double?
-  var isPlaying = false
-  var state: AppState?
+  var props: Props?
 
-  func newState(state: AppState) {
-    self.state = state
-    isPlaying = state.spotifyPlayer.isPlaying
-    playBarView.isHidden = state.spotifyPlayer.playingTrackID == nil
-    setPlayPauseButtonImage(playing: isPlaying)
-    isPlayerBarHidden = playBarView.isHidden
+  func mapStateToProps(state: AppState) -> PlayerBarContainerViewController.Props {
+    let playingTrack: Track?
 
     if let trackID = state.spotifyPlayer.playingTrackID {
-      guard let track = state.resources.tracksFor(ids: [trackID]).first else { return }
+      playingTrack = state.resources.trackFor(id: trackID)
+    } else {
+      playingTrack = nil
+    }
+
+    return Props(
+      currentState: state,
+      isPlaying: state.spotifyPlayer.isPlaying,
+      playingTrack: playingTrack
+    )
+  }
+
+  func newProps(props: Props) {
+    self.props = props
+    playBarView.isHidden = props.playingTrack == nil
+    setPlayPauseButtonImage(playing: props.isPlaying)
+    isPlayerBarHidden = playBarView.isHidden
+
+    if let track = props.playingTrack {
       playBarTitleLabel.attributedText = "\(track.name) \u{2022} \(track.artistNames.first ?? "")".attributedStringForPartiallyColoredText(track.artistNames.first ?? "", with: UIColor.myDarkWhite)
 
-      animateDuration(startTime: SpotifyPlayerActions.getCurrentPlayerPosition(), endTime: Double(track.durationMS) / 1000.0, isStopped: !isPlaying)
+      animateDuration(startTime: SpotifyPlayerActions.getCurrentPlayerPosition(), endTime: Double(track.durationMS) / 1000.0, isStopped: !props.isPlaying)
     }
   }
 
   @objc func enteredForeground() {
-    guard let state = state else { return }
+    guard let state = props?.currentState else { return }
     newState(state: state)
   }
 

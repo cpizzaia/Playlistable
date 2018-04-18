@@ -10,8 +10,12 @@ import Foundation
 import UIKit
 import ReSwift
 
-class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITableViewDelegate, UITableViewDataSource {
+class SeeAllSearchResultsViewController: UIViewController, MyStoreSubscriber, UITableViewDelegate, UITableViewDataSource {
   typealias StoreSubscriberStateType = AppState
+  struct Props {
+    let items: [Item]
+    let seeds: SeedsState
+  }
 
   @IBOutlet var resultsTableView: UITableView!
 
@@ -23,10 +27,9 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
 
   // MARK: Public Properties
   var type: ControllerType?
+  var props: Props?
 
   // MARK: Private Properties
-  private var items = [Item]()
-  private var seeds: SeedsState?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -56,8 +59,8 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
     mainStore.unsubscribe(self)
   }
 
-  func newState(state: AppState) {
-    seeds = state.seeds
+  func mapStateToProps(state: AppState) -> SeeAllSearchResultsViewController.Props {
+    var items = [Item]()
 
     switch type {
     case .some(.artists):
@@ -70,20 +73,28 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
       break
     }
 
+    return Props(items: items, seeds: state.seeds)
+  }
+
+  func newProps(props: Props) {
+    self.props = props
+
     resultsTableView.reloadData()
   }
 
   // MARK: UITableViewMethods
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return items.count
+    return props?.items.count ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "searchResultCell") as? InspectAllTableViewCell else { return UITableViewCell() }
 
+    guard let items = props?.items else { return cell }
+
     let item = items[indexPath.row]
 
-    cell.seededCell = seeds?.isInSeeds(item: item) == true
+    cell.seededCell = props?.seeds.isInSeeds(item: item) == true
 
     if let album  = item as? Album {
       cell.setupCellWithImage(forItem: item, action: {
@@ -103,6 +114,8 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let items = props?.items else { return }
+
     let item = items[indexPath.row]
 
     guard item is Track || item is Artist else {
@@ -110,10 +123,10 @@ class SeeAllSearchResultsViewController: UIViewController, StoreSubscriber, UITa
       return
     }
 
-    if seeds?.isInSeeds(item: item) == true {
+    if props?.seeds.isInSeeds(item: item) == true {
       mainStore.dispatch(SeedsActions.RemoveSeed(item: item))
     } else {
-      if seeds?.isFull == true {
+      if props?.seeds.isFull == true {
         presentSeedsFullAlert()
         return
       }

@@ -10,14 +10,22 @@ import Foundation
 import ReSwift
 import UIKit
 
-class TabBarController: UITabBarController, StoreSubscriber {
-  var state: AppState?
+class TabBarController: UITabBarController, MyStoreSubscriber {
+  typealias StoreSubscriberStateType = AppState
 
-  func newState(state: AppState) {
-    self.state = state
+  struct Props {
+    let currentState: AppState
   }
 
-  typealias StoreSubscriberStateType = AppState
+  func newProps(props: Props) {
+    self.props = props
+  }
+
+  func mapStateToProps(state: AppState) -> TabBarController.Props {
+    return Props(currentState: state)
+  }
+
+  var props: Props?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -90,7 +98,7 @@ class TabBarController: UITabBarController, StoreSubscriber {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    guard let state = state else { return }
+    guard let state = props?.currentState else { return }
 
     if !state.spotifyAuth.isAuthed {
       mainStore.dispatch(SpotifyAuthActions.oAuthSpotify(authState: state.spotifyAuth))

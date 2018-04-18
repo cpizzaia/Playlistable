@@ -11,21 +11,26 @@ import UIKit
 import ReSwift
 import SVProgressHUD
 
-class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoreSubscriber {
+class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MyStoreSubscriber {
   typealias StoreSubscriberStateType = AppState
+
+  struct Props {
+    let tracks: [Track]
+    let currentlyPlayingTrack: Track?
+    var noTracks: Bool {
+      return tracks.isEmpty
+    }
+    let playlistID: String?
+    let userID: String?
+    let isGenerating: Bool
+  }
+
   @IBOutlet var noPlaylistView: UIView!
   @IBOutlet var noPlaylistViewLabel: UILabel!
   @IBOutlet var playlistView: UIView!
   @IBOutlet var playlistTableView: UITableView!
 
-  var tracks = [Track]()
-  var currentlyPlayingTrack: Track?
-  var noTracks: Bool {
-    return tracks.isEmpty
-  }
-  var playlistID: String?
-
-  var userID: String?
+  var props: Props?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -72,11 +77,14 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     mainStore.unsubscribe(self)
   }
 
-  func newState(state: AppState) {
-    playlistID = state.generatedPlaylist.playlistID
+  func mapStateToProps(state: AppState) -> GeneratedPlaylistViewController.Props {
+    let tracks: [Track]
+    let currentlyPlayingTrack: Track?
 
-    if let playlistID = playlistID, let playlist = state.resources.playlistFor(id: playlistID) {
+    if let playlistID = state.generatedPlaylist.playlistID, let playlist = state.resources.playlistFor(id: playlistID) {
       tracks = state.resources.tracksFor(ids: playlist.trackIDs)
+    } else {
+      tracks = []
     }
 
     if let playingTrackID = state.spotifyPlayer.playingTrackID {
@@ -85,10 +93,21 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
       currentlyPlayingTrack = nil
     }
 
-    noPlaylistView.isHidden = !noTracks
-    playlistView.isHidden = noTracks
+    return Props(
+      tracks: tracks,
+      currentlyPlayingTrack: currentlyPlayingTrack,
+      playlistID: state.generatedPlaylist.playlistID,
+      userID: state.spotifyAuth.userID,
+      isGenerating: state.generatedPlaylist.isGenerating
+    )
+  }
 
-    if state.generatedPlaylist.isGenerating {
+  func newProps(props: Props) {
+
+    noPlaylistView.isHidden = !props.noTracks
+    playlistView.isHidden = props.noTracks
+
+    if props.isGenerating {
       noPlaylistView.isHidden = true
       playlistView.isHidden = true
       SVProgressHUD.show()
@@ -96,9 +115,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
       SVProgressHUD.dismiss()
     }
 
-    userID = state.spotifyAuth.userID
-
-    if noTracks {
+    if props.noTracks {
       navigationItem.setLeftBarButton(nil, animated: false)
     } else if navigationItem.leftBarButtonItem == nil {
 
@@ -119,11 +136,11 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
       successActionTitle: "OK",
       failureActionTitle: "Cancel",
       success: { playlistName in
-        guard let userID = self.userID else { return }
+        guard let userID = self.props?.userID else { return }
         mainStore.dispatch(GeneratePlaylistActions.createSavedPlaylist(
           userID: userID,
           name: playlistName,
-          trackIDs: self.tracks.map { $0.id },
+          trackIDs: self.props?.tracks.map { $0.id } ?? [],
           success: {
             self.presentAlertView(
               title: "Save Successful",
@@ -146,23 +163,25 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
 
   // MARK: Table View Methods
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tracks.count
+    return props?.tracks.count ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "generatedTrackCell") as? InspectAllTableViewCell else { return UITableViewCell() }
 
+    guard let tracks = props?.tracks else { return cell }
+
     let track = tracks[indexPath.row]
 
     cell.setupCellWithImage(forItem: track, action: nil)
 
-    cell.currentlyPlaying = track.id == currentlyPlayingTrack?.id
+    cell.currentlyPlaying = track.id == props?.currentlyPlayingTrack?.id
 
     return cell
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let playlistID = playlistID else { return }
+    guard let playlistID = props?.playlistID else { return }
 
     mainStore.dispatch(SpotifyPlayerActions.playPlaylist(
       id: playlistID,
@@ -180,11 +199,13 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
 
     view.setupView(action: {
       guard
-        let playlistID = self.playlistID else { return }
+        let props = self.props,
+        let playlistID = props.playlistID
+      else { return }
 
       mainStore.dispatch(SpotifyPlayerActions.playPlaylist(
         id: playlistID,
-        startingWithTrack: rand(self.tracks.startIndex, self.tracks.endIndex - 1),
+        startingWithTrack: rand(props.tracks.startIndex, props.tracks.endIndex - 1),
         shouldShuffle: true
       ))
     })

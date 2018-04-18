@@ -10,8 +10,14 @@ import Foundation
 import UIKit
 import ReSwift
 
-class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, StoreSubscriber {
+class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MyStoreSubscriber {
   typealias StoreSubscriberStateType = AppState
+
+  struct Props {
+    let item: Item?
+    let tracks: [Track]
+    let seeds: SeedsState
+  }
 
   enum ItemType {
     case album
@@ -19,10 +25,8 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
 
   @IBOutlet var trackListTableView: UITableView!
 
-  var item: Item?
   var itemType: ItemType?
-  var tracks = [Track]()
-  var seeds: SeedsState?
+  var props: Props?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,48 +59,67 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     mainStore.unsubscribe(self)
   }
 
-  func newState(state: AppState) {
-    seeds = state.seeds
+  func mapStateToProps(state: AppState) -> ItemWithTrackListViewController.Props {
+    return mapStateForAlbum(state: state)
+  }
+
+  func newProps(props: Props) {
+    self.props = props
 
     switch itemType {
     case .some(.album):
-      newStateForAlbum(state: state)
+      newPropsForAlbum(props: props)
     default:
-      tracks = []
-      item = nil
+      break
     }
 
-    title = item?.title
+    title = props.item?.title
 
     trackListTableView.reloadData()
+    
   }
 
-  func newStateForAlbum(state: AppState) {
-    guard let albumID = state.inspectAlbum.albumID else { return }
-    guard let album = state.resources.albumFor(id: albumID) else { return }
-    item = album
+  func newPropsForAlbum(props: Props) {
+    guard let item = props.item as? Album else { return }
+
+    if props.tracks.isEmpty {
+      mainStore.dispatch(InspectAlbumActions.getAlbumTracks(album: item))
+    }
+  }
+
+  func mapStateForAlbum(state: AppState) -> Props {
+    guard
+      let albumID = state.inspectAlbum.albumID,
+      let album = state.resources.albumFor(id: albumID)
+      else {
+        return Props(item: nil, tracks: [], seeds: state.seeds)
+    }
 
     if !state.inspectAlbum.trackIDs.isEmpty {
-      tracks = state.resources.tracksFor(ids: state.inspectAlbum.trackIDs)
+      let tracks = state.resources.tracksFor(ids: state.inspectAlbum.trackIDs)
+      return Props(item: album, tracks: tracks, seeds: state.seeds)
     } else if !state.inspectAlbum.isRequestingTracks {
-      tracks = []
-      mainStore.dispatch(InspectAlbumActions.getAlbumTracks(album: album))
+      return Props(item: album, tracks: [], seeds: state.seeds)
     }
+
+    return Props(item: nil, tracks: [], seeds: state.seeds)
   }
 
   // MARK: UITableViewDelegate Methods
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return tracks.count
+    return props?.tracks.count ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "trackListCell") as? InspectAllTableViewCell else { return UITableViewCell() }
 
+    guard let tracks = props?.tracks else { return cell }
+
     let track = tracks[indexPath.row]
 
     cell.setupCellWithoutImage(forItem: track, action: nil)
 
-    cell.seededCell = seeds?.isInSeeds(item: track) == true
+    cell.seededCell = props?.seeds.isInSeeds(item: track) == true
 
     return cell
   }
@@ -106,12 +129,14 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let tracks = props?.tracks else { return }
+
     let track = tracks[indexPath.row]
 
-    if seeds?.isInSeeds(item: track) == true {
+    if props?.seeds.isInSeeds(item: track) == true {
       mainStore.dispatch(SeedsActions.RemoveSeed(item: track))
     } else {
-      if seeds?.isFull == true {
+      if props?.seeds.isFull == true {
         presentSeedsFullAlert()
         return
       }
@@ -121,7 +146,7 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
   }
 
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    guard let item = item else { return nil }
+    guard let item = props?.item else { return nil }
 
     let view = loadUIViewFromNib(ItemWithTrackListHeaderView.self)
 

@@ -10,15 +10,21 @@ import Foundation
 import UIKit
 import ReSwift
 
-class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscriber, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscriber, UITableViewDelegate, UITableViewDataSource {
   typealias StoreSubscriberStateType = AppState
+
+  struct Props {
+    let searchData: SearchCollection
+    let seeds: SeedsState
+    let searchQuery: String?
+  }
 
   @IBOutlet var noResultsView: UIView!
   @IBOutlet var noResultsLabel: UILabel!
   @IBOutlet var searchBar: UISearchBar!
   @IBOutlet var searchResultsTableView: UITableView!
 
-  private struct SearchCollection {
+  struct SearchCollection {
     let artists: [Artist]
     let tracks: [Track]
     let albums: [Album]
@@ -28,10 +34,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     }
   }
 
-  var seeds: SeedsState?
-
-  private var searchData = SearchCollection(artists: [], tracks: [], albums: [])
-  private var sections = [Int: [Item]]()
+  var props: Props?
+  var sections = [Int: [Item]]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -78,24 +82,29 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     mainStore.unsubscribe(self)
   }
 
-  func newState(state: AppState) {
+  func mapStateToProps(state: AppState) -> SearchViewController.Props {
+    return Props(
+      searchData: SearchCollection(
+        artists: state.resources.artistsFor(ids: state.search.artistIDs),
+        tracks: state.resources.tracksFor(ids: state.search.trackIDs),
+        albums: state.resources.albumsFor(ids: state.search.albumIDs)
+      ),
+      seeds: state.seeds,
+      searchQuery: state.search.query
+    )
+  }
+
+  func newProps(props: Props) {
+    self.props = props
     searchResultsTableView.isHidden = true
     noResultsView.isHidden = false
 
-    seeds = state.seeds
-
-    searchData = SearchCollection(
-      artists: state.resources.artistsFor(ids: state.search.artistIDs),
-      tracks: state.resources.tracksFor(ids: state.search.trackIDs),
-      albums: state.resources.albumsFor(ids: state.search.albumIDs)
-    )
-
-    let noResults = searchData.isEmpty
+    let noResults = props.searchData.isEmpty
 
     searchResultsTableView.isHidden = noResults
     noResultsView.isHidden = !noResults
     searchResultsTableView.reloadData()
-    noResultsLabel.text = state.search.query == nil ? "Start by searching for your favorite music" : "Your search had no results"
+    noResultsLabel.text = props.searchQuery == nil ? "Start by searching for your favorite music" : "Your search had no results"
   }
 
   private func getResourceFor(section: Int) -> [Item]? {
@@ -117,18 +126,18 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
     var count = 0
     sections = [:]
 
-    if !searchData.tracks.isEmpty {
-      sections[count] = searchData.tracks
+    if !(props?.searchData.tracks.isEmpty == true) {
+      sections[count] = props?.searchData.tracks ?? []
       count += 1
     }
 
-    if !searchData.artists.isEmpty {
-      sections[count] = searchData.artists
+    if !(props?.searchData.artists.isEmpty == true) {
+      sections[count] = props?.searchData.artists ?? []
       count += 1
     }
 
-    if !searchData.albums.isEmpty {
-      sections[count] = searchData.albums
+    if !(props?.searchData.albums.isEmpty == true) {
+      sections[count] = props?.searchData.albums ?? []
       count += 1
     }
 
@@ -158,7 +167,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
       cell.setupCellWithImage(forItem: item, action: nil)
     }
 
-    cell.seededCell = seeds?.isInSeeds(item: item) == true
+    cell.seededCell = props?.seeds.isInSeeds(item: item) == true
 
     return cell
   }
@@ -220,10 +229,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate, StoreSubscrib
       return
     }
 
-    if seeds?.isInSeeds(item: item) == true {
+    if props?.seeds.isInSeeds(item: item) == true {
       mainStore.dispatch(SeedsActions.RemoveSeed(item: item))
     } else {
-      if seeds?.isFull == true {
+      if props?.seeds.isFull == true {
         presentSeedsFullAlert()
         return
       }

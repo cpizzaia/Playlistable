@@ -9,6 +9,6 @@
 import Foundation
 import ReSwift
 
-protocol StateManager: StoreSubscriber {
+protocol StateManager: MyStoreSubscriber {
   static func start()
 }
