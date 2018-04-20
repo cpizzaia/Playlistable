@@ -14,7 +14,8 @@ class TabBarController: UITabBarController, MyStoreSubscriber {
   typealias StoreSubscriberStateType = AppState
 
   struct Props {
-    let currentState: AppState
+    let playerIsInitialized: Bool
+    let spotifyAuthState: SpotifyAuthState
   }
 
   func didReceiveNewProps(props: Props) {
@@ -22,7 +23,10 @@ class TabBarController: UITabBarController, MyStoreSubscriber {
   }
 
   func mapStateToProps(state: AppState) -> TabBarController.Props {
-    return Props(currentState: state)
+    return Props(
+      playerIsInitialized: state.spotifyPlayer.isInitialized,
+      spotifyAuthState: state.spotifyAuth
+    )
   }
 
   var props: Props?
@@ -98,15 +102,15 @@ class TabBarController: UITabBarController, MyStoreSubscriber {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    guard let state = props?.currentState else { return }
+    guard let props = props else { return }
 
-    if !state.spotifyAuth.isAuthed {
-      mainStore.dispatch(SpotifyAuthActions.oAuthSpotify(authState: state.spotifyAuth))
+    if !props.spotifyAuthState.isAuthed {
+      mainStore.dispatch(SpotifyAuthActions.oAuthSpotify(authState: props.spotifyAuthState))
       return
     }
 
-    if !state.spotifyPlayer.isInitialized {
-      mainStore.dispatch(SpotifyAuthActions.postAuthAction(accessToken: state.spotifyAuth.token ?? ""))
+    if !props.playerIsInitialized {
+      mainStore.dispatch(SpotifyAuthActions.postAuthAction(accessToken: props.spotifyAuthState.token ?? ""))
     }
   }
 

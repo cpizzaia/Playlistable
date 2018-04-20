@@ -68,8 +68,7 @@ class LockScreenController: NSObject, StateManager {
     let currentTrack: Track?
 
     if let trackID = state.spotifyPlayer.playingTrackID,
-      let track = state.resources.trackFor(id: trackID)
-    {
+      let track = state.resources.trackFor(id: trackID) {
       currentTrack = track
     } else {
       currentTrack = nil

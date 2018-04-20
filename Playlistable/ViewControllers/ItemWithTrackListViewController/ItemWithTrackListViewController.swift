@@ -74,7 +74,6 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     title = props.item?.title
 
     trackListTableView.reloadData()
-    
   }
 
   func newPropsForAlbum(props: Props) {
