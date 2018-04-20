@@ -14,23 +14,22 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
   typealias StoreSubscriberStateType = AppState
 
   struct Props {
-    let isAuthed: Bool
     let hasPremium: Bool
     let doesNotHaveUser: Bool
     let isRequestingUser: Bool
+    let spotifyAuthState: SpotifyAuthState
   }
 
   @IBOutlet var descriptionText: UITextView!
   @IBOutlet var titleLabel: UILabel!
   @IBOutlet var loginButton: UIButton!
   @IBAction func loginButtonPressed(_ sender: UIButton) {
-    guard let auth = spotifyAuthState else { return }
+    guard let auth = props?.spotifyAuthState else { return }
     mainStore.dispatch(SpotifyAuthActions.oAuthSpotify(authState: auth))
   }
 
   var props: Props?
 
-  private var spotifyAuthState: SpotifyAuthState?
   private var hasSpotifyPremium: Bool? {
     didSet {
       if oldValue == false || hasSpotifyPremium != false { return }
@@ -63,15 +62,15 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
 
   func mapStateToProps(state: AppState) -> Props {
     return Props(
-      isAuthed: state.spotifyAuth.isAuthed,
       hasPremium: state.spotifyAuth.isPremium == true,
       doesNotHaveUser: state.spotifyAuth.userID == nil,
-      isRequestingUser: state.spotifyAuth.isRequestingUser
+      isRequestingUser: state.spotifyAuth.isRequestingUser,
+      spotifyAuthState: state.spotifyAuth
     )
   }
 
   func didReceiveNewProps(props: Props) {
-    if props.isAuthed && !props.doesNotHaveUser && props.hasPremium {
+    if props.spotifyAuthState.isAuthed && !props.doesNotHaveUser && props.hasPremium {
       let vc = loadUIViewControllerFromNib(PlayerBarContainerViewController.self)
 
       present(vc, animated: true, completion: nil)
@@ -79,7 +78,7 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
       return
     }
 
-    if props.isAuthed && props.doesNotHaveUser && !props.isRequestingUser {
+    if props.spotifyAuthState.isAuthed && props.doesNotHaveUser && !props.isRequestingUser {
       mainStore.dispatch(SpotifyAuthActions.getCurrentUser(success: { _ in }, failure: {}))
     }
   }
