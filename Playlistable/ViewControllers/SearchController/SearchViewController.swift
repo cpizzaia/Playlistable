@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import ReSwift
+import SVProgressHUD
 
 class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscriber, UITableViewDelegate, UITableViewDataSource {
   typealias StoreSubscriberStateType = AppState
@@ -16,7 +17,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
   struct Props {
     let searchData: SearchCollection
     let seeds: SeedsState
-    let searchQuery: String?
+    let query: String?
+    let isRequesting: Bool
   }
 
   @IBOutlet var noResultsView: UIView!
@@ -36,6 +38,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
 
   var props: Props?
   var sections = [Int: [Item]]()
+  var searchTimer: Timer?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -83,14 +86,28 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
   }
 
   func mapStateToProps(state: AppState) -> SearchViewController.Props {
+    guard let query = state.search.currentQuery, let searchResults = state.search.querySearchResults[query] else {
+      return Props(
+        searchData: SearchCollection(
+          artists: [],
+          tracks: [],
+          albums: []
+          ),
+        seeds: state.seeds,
+        query: nil,
+        isRequesting: state.search.isRequesting(query: state.search.currentQuery ?? "")
+      )
+    }
+
     return Props(
       searchData: SearchCollection(
-        artists: state.resources.artistsFor(ids: state.search.artistIDs),
-        tracks: state.resources.tracksFor(ids: state.search.trackIDs),
-        albums: state.resources.albumsFor(ids: state.search.albumIDs)
+        artists: state.resources.artistsFor(ids: searchResults.artistIDs),
+        tracks: state.resources.tracksFor(ids: searchResults.trackIDs),
+        albums: state.resources.albumsFor(ids: searchResults.albumIDs)
       ),
       seeds: state.seeds,
-      searchQuery: state.search.query
+      query: query,
+      isRequesting: state.search.isRequesting(query: query)
     )
   }
 
@@ -103,7 +120,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     searchResultsTableView.isHidden = noResults
     noResultsView.isHidden = !noResults
     searchResultsTableView.reloadData()
-    noResultsLabel.text = props.searchQuery == nil ? "Start by searching for your favorite music" : "Your search had no results"
+    noResultsLabel.text = props.query == nil ? "Start by searching for your favorite music" : "Your search had no results"
+    props.isRequesting ? SVProgressHUD.show() : SVProgressHUD.dismiss()
   }
 
   private func getResourceFor(section: Int) -> [Item]? {
@@ -261,5 +279,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
   func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
     searchBar.resignFirstResponder()
     searchBar.setShowsCancelButton(false, animated: true)
+  }
+
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    searchTimer?.invalidate()
+
+    if searchText == "" { return }
+
+    searchTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in
+      mainStore.dispatch(SearchActions.search(query: searchText))
+    })
   }
 }

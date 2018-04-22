@@ -10,44 +10,52 @@ import Foundation
 import ReSwift
 
 struct SearchState {
-  var query: String?
-  var trackIDs: [String]
-  var artistIDs: [String]
-  var albumIDs: [String]
-  var isRequesting: Bool
+  var querySearchResults: [String: SearchResults]
+  var isRequesting: [String: Bool]
+  var currentQuery: String?
+  func isRequesting(query: String) -> Bool {
+    return isRequesting[query] == true
+  }
+}
+
+struct SearchResults {
+  let trackIDs: [String]
+  let artistIDs: [String]
+  let albumIDs: [String]
 }
 
 private let initialSearchState = SearchState(
-  query: nil,
-  trackIDs: [],
-  artistIDs: [],
-  albumIDs: [],
-  isRequesting: false
+  querySearchResults: [:],
+  isRequesting: [:],
+  currentQuery: nil
 )
 
 func searchReducer(action: Action, state: SearchState?) -> SearchState {
   var state = state ?? initialSearchState
 
   switch action {
-  case _ as SearchActions.RequestSearch:
-    state.isRequesting = true
-  case let action as SearchActions.ReceiveSearch:
-    state.isRequesting = false
-    state.artistIDs = action.response["artists"]["items"].array?.compactMap {
-      $0["id"].string
-    } ?? []
+  case let action as SearchActions.RequestQueryResults:
+    state.isRequesting[action.query] = true
+  case let action as SearchActions.ReceiveQueryResults:
+    state.isRequesting[action.query] = false
 
-    state.albumIDs = action.response["albums"]["items"].array?.compactMap {
-      $0["id"].string
-    } ?? []
+    let searchResults = SearchResults(
+      trackIDs: action.response["tracks"]["items"].array?.compactMap {
+        $0["id"].string
+        } ?? [],
+      artistIDs: action.response["artists"]["items"].array?.compactMap {
+        $0["id"].string
+        } ?? [],
+      albumIDs: action.response["albums"]["items"].array?.compactMap {
+        $0["id"].string
+        } ?? []
+    )
 
-    state.trackIDs = action.response["tracks"]["items"].array?.compactMap {
-      $0["id"].string
-    } ?? []
-  case _ as SearchActions.ErrorSearch:
-    state.isRequesting = false
-  case let action as SearchActions.StoreQuery:
-    state.query = action.query
+    state.querySearchResults[action.query] = searchResults
+  case let action as SearchActions.ErrorQueryResults:
+    state.isRequesting[action.query] = false
+  case let action as SearchActions.StoreCurrentQuery:
+    state.currentQuery = action.query
   default:
     break
   }

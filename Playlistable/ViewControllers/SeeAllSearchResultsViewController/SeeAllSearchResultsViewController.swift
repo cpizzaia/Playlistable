@@ -62,13 +62,17 @@ class SeeAllSearchResultsViewController: UIViewController, MyStoreSubscriber, UI
   func mapStateToProps(state: AppState) -> SeeAllSearchResultsViewController.Props {
     var items = [Item]()
 
+    guard let currentQuery = state.search.currentQuery, let searchResults = state.search.querySearchResults[currentQuery] else {
+      return Props(items: items, seeds: state.seeds)
+    }
+
     switch type {
     case .some(.artists):
-      items = state.resources.artistsFor(ids: state.search.artistIDs)
+      items = state.resources.artistsFor(ids: searchResults.artistIDs)
     case .some(.tracks):
-      items = state.resources.tracksFor(ids: state.search.trackIDs)
+      items = state.resources.tracksFor(ids: searchResults.trackIDs)
     case .some(.albums):
-      items = state.resources.albumsFor(ids: state.search.albumIDs)
+      items = state.resources.albumsFor(ids: searchResults.albumIDs)
     default:
       break
     }

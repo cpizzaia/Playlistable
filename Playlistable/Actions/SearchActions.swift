@@ -11,20 +11,26 @@ import ReSwift
 import SwiftyJSON
 
 enum SearchActions {
-  struct RequestSearch: APIRequestAction {}
-  struct ReceiveSearch: APIResponseSuccessAction {
+  struct RequestQueryResults: Action {
+    let query: String
+  }
+  struct ReceiveQueryResults: Action {
+    let query: String
     let response: JSON
   }
-  struct ErrorSearch: APIResponseFailureAction {
-    let error: APIRequest.APIError
+  struct ErrorQueryResults: Action {
+    let query: String
   }
-
-  struct StoreQuery: Action {
+  struct StoreCurrentQuery: Action {
     let query: String
   }
 
   static func search(query: String) -> Action {
     return WrapInDispatch { dispatch, _ in
+      dispatch(StoreCurrentQuery(query: query))
+
+      dispatch(RequestQueryResults(query: query))
+
       dispatch(CallSpotifyAPI(
         endpoint: "/v1/search",
         queryParams: [
@@ -32,15 +38,13 @@ enum SearchActions {
           "type": "track,artist,album"
         ],
         method: .get,
-        types: APITypes(
-          requestAction: RequestSearch.self,
-          successAction: ReceiveSearch.self,
-          failureAction: ErrorSearch.self
-        ),
-        success: { _ in
-          dispatch(StoreQuery(query: query))
-      },
-        failure: nil
+        types: nil,
+        success: { response in
+          dispatch(ReceiveQueryResults(query: query, response: response))
+        },
+        failure: {
+          dispatch(ErrorQueryResults(query: query))
+        }
       ))
     }
   }
