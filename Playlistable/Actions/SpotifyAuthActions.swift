@@ -186,6 +186,7 @@ enum SpotifyAuthActions {
           }
         }, failure: {})
       )
+      dispatch(SpotifyPlayerActions.setHighBitrate())
     }
   }
 

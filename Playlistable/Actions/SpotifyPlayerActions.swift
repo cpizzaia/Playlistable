@@ -21,6 +21,16 @@ enum SpotifyPlayerActions {
 
   struct InitializedPlayer: Action {}
 
+  struct SettingBitrate: Action {
+    let bitrate: SPTBitrate
+  }
+  struct SetBitrate: Action {
+    let bitrate: SPTBitrate
+  }
+  struct ErrorSettingBitrate: Action {
+    let bitrate: SPTBitrate
+  }
+
   struct PlayPlaylist: Action {
     let playlistID: String
   }
@@ -172,9 +182,24 @@ enum SpotifyPlayerActions {
       player.setIsPlaying(true, callback: { error in
         if error != nil {
           dispatch(FailedToResume())
-        } else {
-
         }
+      })
+    }
+  }
+
+  static func setHighBitrate() -> Action {
+    return WrapInDispatch { dispatch, _ in
+      let bitrate = SPTBitrate.high
+
+      dispatch(SettingBitrate(bitrate: bitrate))
+
+      player.setTargetBitrate(bitrate, callback: { error in
+        if error != nil {
+          dispatch(ErrorSettingBitrate(bitrate: bitrate))
+          return
+        }
+
+        dispatch(SetBitrate(bitrate: bitrate))
       })
     }
   }
