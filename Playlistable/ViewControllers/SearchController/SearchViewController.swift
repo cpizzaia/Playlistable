@@ -265,6 +265,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
   // MARK: UISearchBar Methods
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     guard let query = searchBar.text else { return }
+
+    searchTimer?.invalidate()
+
     mainStore.dispatch(SearchActions.search(query: query))
 
     searchBar.showsCancelButton = false

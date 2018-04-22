@@ -67,9 +67,8 @@ class LockScreenController: NSObject, StateManager {
   func mapStateToProps(state: AppState) -> Props {
     let currentTrack: Track?
 
-    if let trackID = state.spotifyPlayer.playingTrackID,
-      let track = state.resources.trackFor(id: trackID) {
-      currentTrack = track
+    if let trackID = state.spotifyPlayer.playingTrackID {
+      currentTrack = state.resources.trackFor(id: trackID)
     } else {
       currentTrack = nil
     }
@@ -89,8 +88,6 @@ class LockScreenController: NSObject, StateManager {
 
     commandCenter.playCommand.isEnabled = isPlayCommanedEnabled(props: props)
     commandCenter.pauseCommand.isEnabled = isPauseCommanedEnabled(props: props)
-
-    guard self.props?.currentTrack?.id != props.currentTrack?.id else { return }
 
     guard let track = props.currentTrack else { return }
 
