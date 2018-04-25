@@ -48,6 +48,7 @@ class InspectAllTableViewCell: UITableViewCell {
   private var _seededCell = false
   private var _currentlyPlaying = false
   private var innerGradient: CALayer?
+  private var currentImageURL: URL?
 
   func setupCellWithImage(forItem item: Item, actionSymbol: String = ">", action: (() -> Void)?) {
     showImage()
@@ -77,9 +78,13 @@ class InspectAllTableViewCell: UITableViewCell {
     self.action = action ?? {}
     titleLabel.text = item.title
     if let mediumImageURL = item.mediumImageURL {
-      itemImage.sd_setImage(with: mediumImageURL)
+      if currentImageURL != mediumImageURL {
+        itemImage.sd_setImage(with: mediumImageURL)
+        currentImageURL = mediumImageURL
+      }
     } else {
       itemImage.image = UIImage.placeholder
+      currentImageURL = nil
     }
 
     itemImage.contentMode = .scaleAspectFill
