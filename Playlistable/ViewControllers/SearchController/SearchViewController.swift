@@ -289,7 +289,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
 
     if searchText == "" { return }
 
-    searchTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false, block: { _ in
+    searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
       mainStore.dispatch(SearchActions.search(query: searchText))
     })
   }
