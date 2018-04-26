@@ -122,7 +122,7 @@ class InspectAllTableViewCell: UITableViewCell {
     itemImage.contentMode = .scaleAspectFill
     itemImage.clipsToBounds = true
 
-    backgroundColor = UIColor.clear
+    backgroundColor = seededCell ? UIColor.myAccent.withAlphaComponent(0.5) : UIColor.clear
     selectionStyle = .none
   }
 }

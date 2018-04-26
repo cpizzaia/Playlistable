@@ -189,7 +189,7 @@ enum SpotifyPlayerActions {
 
   static func setHighBitrate() -> Action {
     return WrapInDispatch { dispatch, _ in
-      let bitrate = SPTBitrate.high
+      let bitrate = SPTBitrate.normal
 
       dispatch(SettingBitrate(bitrate: bitrate))
 
