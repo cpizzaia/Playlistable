@@ -14,6 +14,7 @@ target 'Playlistable' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'SwiftLint'
+  pod 'EasyTipView', :git => 'git@github.com:cpizzaia/EasyTipView.git', :commit => '9c7feebc54b063d2f4d01690574204ecb75b4505'
   # Pods for Playlistable
 
 end

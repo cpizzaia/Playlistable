@@ -13,6 +13,16 @@ struct SearchState {
   var querySearchResults: [String: SearchResults]
   var isRequesting: [String: Bool]
   var currentQuery: String?
+  var hasSeenSearchTip: Bool {
+    didSet {
+      UserDefaults.standard.hasSeenSearchTip = hasSeenSearchTip
+    }
+  }
+  var hasSeenSelectTip: Bool {
+    didSet {
+      UserDefaults.standard.hasSeenSelectTip = hasSeenSelectTip
+    }
+  }
   func isRequesting(query: String) -> Bool {
     return isRequesting[query] == true
   }
@@ -27,7 +37,9 @@ struct SearchResults {
 private let initialSearchState = SearchState(
   querySearchResults: [:],
   isRequesting: [:],
-  currentQuery: nil
+  currentQuery: nil,
+  hasSeenSearchTip: UserDefaults.standard.hasSeenSearchTip,
+  hasSeenSelectTip: UserDefaults.standard.hasSeenSelectTip
 )
 
 func searchReducer(action: Action, state: SearchState?) -> SearchState {
@@ -56,6 +68,10 @@ func searchReducer(action: Action, state: SearchState?) -> SearchState {
     state.isRequesting[action.query] = false
   case let action as SearchActions.StoreCurrentQuery:
     state.currentQuery = action.query
+  case _ as SearchActions.SawSearchTip:
+    state.hasSeenSearchTip = true
+  case _ as SearchActions.SawSelectTip:
+    state.hasSeenSelectTip = true
   default:
     break
   }

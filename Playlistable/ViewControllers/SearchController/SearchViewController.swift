@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import ReSwift
 import SVProgressHUD
+import EasyTipView
 
 class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscriber, UITableViewDelegate, UITableViewDataSource {
   typealias StoreSubscriberStateType = AppState
@@ -19,6 +20,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     let seeds: SeedsState
     let query: String?
     let isRequesting: Bool
+    let hasSeenSearchTip: Bool
+    let hasSeenSelectTip: Bool
   }
 
   @IBOutlet var noResultsView: UIView!
@@ -39,6 +42,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
   var props: Props?
   var sections = [Int: [Item]]()
   var searchTimer: Timer?
+  let searchTip = EasyTipView(text: "Start by searching for your favorite music.")
+  let selectTip = EasyTipView(text: "Tap a song or artist to select it, you can select up to 5 total of any combination. When you are finished go to the Seeds tab to generate your Playlist.")
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -83,6 +88,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     super.viewWillDisappear(animated)
 
     mainStore.unsubscribe(self)
+    searchTip.dismiss()
+    selectTip.dismiss()
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+    if props?.hasSeenSearchTip == true { return }
+
+    searchTip.show(forView: searchBar)
+    mainStore.dispatch(SearchActions.SawSearchTip())
   }
 
   func mapStateToProps(state: AppState) -> SearchViewController.Props {
@@ -95,7 +111,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
           ),
         seeds: state.seeds,
         query: nil,
-        isRequesting: state.search.isRequesting(query: state.search.currentQuery ?? "")
+        isRequesting: state.search.isRequesting(query: state.search.currentQuery ?? ""),
+        hasSeenSearchTip: state.search.hasSeenSearchTip,
+        hasSeenSelectTip: state.search.hasSeenSelectTip
       )
     }
 
@@ -107,7 +125,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
       ),
       seeds: state.seeds,
       query: query,
-      isRequesting: state.search.isRequesting(query: query)
+      isRequesting: state.search.isRequesting(query: query),
+      hasSeenSearchTip: state.search.hasSeenSearchTip,
+      hasSeenSelectTip: state.search.hasSeenSelectTip
     )
   }
 
@@ -122,6 +142,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     searchResultsTableView.reloadData()
     noResultsLabel.text = props.query == nil ? "Start by searching for your favorite music" : "Your search had no results"
     props.isRequesting ? SVProgressHUD.show() : SVProgressHUD.dismiss()
+
+    if !noResults && !props.hasSeenSelectTip {
+      selectTip.show(forView: searchResultsTableView)
+      mainStore.dispatch(SearchActions.SawSelectTip())
+    }
   }
 
   private func getResourceFor(section: Int) -> [Item]? {
@@ -255,6 +280,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
       }
 
       mainStore.dispatch(SeedsActions.AddSeed(item: item))
+      selectTip.dismiss()
     }
   }
 
@@ -276,6 +302,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
 
   func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
     searchBar.showsCancelButton = true
+    searchTip.dismiss()
     return true
   }
 

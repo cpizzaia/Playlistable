@@ -25,6 +25,9 @@ enum SearchActions {
     let query: String
   }
 
+  struct SawSearchTip: Action {}
+  struct SawSelectTip: Action {}
+
   static func search(query: String) -> Action {
     return WrapInDispatch { dispatch, _ in
       dispatch(StoreCurrentQuery(query: query))

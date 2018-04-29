@@ -15,6 +15,8 @@ private struct UserDefaultsKeys {
   static let storedGeneratedPlaylistID = "storedGeneratedPlaylistID" // [String]
   static let storedArtistSeedIDs = "storedArtistSeedIDs" // [String]
   static let storedTrackSeedIDs = "storedTrackSeedIDs" // [String]
+  static let hasSeenSearchTip = "hasSeenSearchTip" // Bool
+  static let hasSeenSelectTip = "hasSeenSelectTip" // Bool
 }
 
 extension UserDefaults {
@@ -68,6 +70,24 @@ extension UserDefaults {
       return value(forKey: UserDefaultsKeys.storedTrackSeedIDs) as? [String]
     } set {
       set(newValue, forKey: UserDefaultsKeys.storedTrackSeedIDs)
+      synchronize()
+    }
+  }
+
+  var hasSeenSearchTip: Bool {
+    get {
+      return value(forKey: UserDefaultsKeys.hasSeenSearchTip) as? Bool ?? false
+    } set {
+      set(newValue, forKey: UserDefaultsKeys.hasSeenSearchTip)
+      synchronize()
+    }
+  }
+
+  var hasSeenSelectTip: Bool {
+    get {
+      return value(forKey: UserDefaultsKeys.hasSeenSelectTip) as? Bool ?? false
+    } set {
+      set(newValue, forKey: UserDefaultsKeys.hasSeenSelectTip)
       synchronize()
     }
   }

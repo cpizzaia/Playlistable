@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import Fabric
 import Crashlytics
+import EasyTipView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,13 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-    Fabric.with([Crashlytics.self])
-
-    DispatchQueue.global().async {
-      try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
-
-      try? AVAudioSession.sharedInstance().setActive(true)
-    }
+    configureApp()
 
     window = UIWindow(frame: UIScreen.main.bounds)
 
@@ -57,5 +52,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private func startStateManagers() {
     LockScreenController.start()
     AudioInterruptionController.start()
+  }
+
+  private func configureApp() {
+    Fabric.with([Crashlytics.self])
+
+    DispatchQueue.global().async {
+      try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
+
+      try? AVAudioSession.sharedInstance().setActive(true)
+    }
+
+    var preferences = EasyTipView.Preferences()
+
+    preferences.drawing.font = UIFont.myFont(withSize: 17)
+    preferences.drawing.backgroundColor = UIColor.myLighterBlack
+    preferences.drawing.foregroundColor = UIColor.myWhite
+
+    EasyTipView.globalPreferences = preferences
   }
 }
