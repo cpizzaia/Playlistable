@@ -78,7 +78,7 @@ class TabBarController: UITabBarController, MyStoreSubscriber {
 
     // FIXME: Bit of an anti pattern here cause we are accessing state outside of the store
     // rethink and fix when you get a chance
-    if UserDefaults.standard.storedGeneratedPlaylistID != nil {
+    if MyUserDefaults.storedGeneratedPlaylistID != nil {
       selectedIndex = 0
     } else {
       selectedIndex = 2

@@ -151,9 +151,9 @@ enum GeneratePlaylistActions {
 
   static func reloadPlaylistFromStorage(userID: String) -> Action? {
     guard
-      let playlistID = UserDefaults.standard.storedGeneratedPlaylistID,
-      let seedTrackIDs = UserDefaults.standard.storedTrackSeedIDs,
-      let seedArtistIDs = UserDefaults.standard.storedArtistSeedIDs
+      let playlistID = MyUserDefaults.storedGeneratedPlaylistID,
+      let seedTrackIDs = MyUserDefaults.storedTrackSeedIDs,
+      let seedArtistIDs = MyUserDefaults.storedArtistSeedIDs
       else { return nil }
 
     return WrapInDispatch { dispatch, getState in

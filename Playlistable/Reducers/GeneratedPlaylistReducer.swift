@@ -16,7 +16,7 @@ struct GeneratedPlaylistState {
     didSet {
       if playlistID == nil { return }
 
-      UserDefaults.standard.storedGeneratedPlaylistID = playlistID
+      MyUserDefaults.storedGeneratedPlaylistID = playlistID
     }
   }
   var seedsUsed: SeedsState? {
@@ -31,8 +31,8 @@ struct GeneratedPlaylistState {
         return value is Track ? key : nil
       }
 
-      UserDefaults.standard.storedArtistSeedIDs = artistIDs
-      UserDefaults.standard.storedTrackSeedIDs = trackIDs
+      MyUserDefaults.storedArtistSeedIDs = artistIDs
+      MyUserDefaults.storedTrackSeedIDs = trackIDs
     }
   }
 }

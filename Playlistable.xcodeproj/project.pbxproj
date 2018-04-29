@@ -62,7 +62,6 @@
 		AC5787221FDE18140057D41A /* SeedsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC5787211FDE18140057D41A /* SeedsViewController.xib */; };
 		AC74DCB520830326009F0C2E /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCB420830326009F0C2E /* Playlist.swift */; };
 		AC74DCB72083042C009F0C2E /* PlaylistFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCB62083042C009F0C2E /* PlaylistFactory.swift */; };
-		AC74DCBB2084046B009F0C2E /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCBA2084046B009F0C2E /* UserDefaultsExtensions.swift */; };
 		AC74DCBD20844105009F0C2E /* AudioInterruptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCBC20844105009F0C2E /* AudioInterruptionController.swift */; };
 		AC83D6561FBD46D500E9D004 /* wrapInDispatchMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC83D6551FBD46D500E9D004 /* wrapInDispatchMiddleware.swift */; };
 		AC8AB6AF1FA9641B00251F85 /* SpotifyResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6AE1FA9641B00251F85 /* SpotifyResponseParser.swift */; };
@@ -91,6 +90,7 @@
 		ACCE5194205F11C6008877F2 /* IntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCE5193205F11C6008877F2 /* IntroViewController.xib */; };
 		ACCE5196205F11DE008877F2 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE5195205F11DE008877F2 /* IntroViewController.swift */; };
 		ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */; };
+		ACEC1E1720962CDD009CC83C /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC1E1620962CDD009CC83C /* MyUserDefaults.swift */; };
 		ACF43248200BF57E00110B53 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF43247200BF57E00110B53 /* UIImageExtensions.swift */; };
 		ACF4324B200C132C00110B53 /* ItemWithTrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF4324A200C132C00110B53 /* ItemWithTrackListViewController.swift */; };
 		ACF4324D200C136C00110B53 /* ItemWithTrackListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACF4324C200C136C00110B53 /* ItemWithTrackListViewController.xib */; };
@@ -160,7 +160,6 @@
 		AC5787211FDE18140057D41A /* SeedsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SeedsViewController.xib; sourceTree = "<group>"; };
 		AC74DCB420830326009F0C2E /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		AC74DCB62083042C009F0C2E /* PlaylistFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistFactory.swift; sourceTree = "<group>"; };
-		AC74DCBA2084046B009F0C2E /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
 		AC74DCBC20844105009F0C2E /* AudioInterruptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioInterruptionController.swift; sourceTree = "<group>"; };
 		AC83D6551FBD46D500E9D004 /* wrapInDispatchMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wrapInDispatchMiddleware.swift; sourceTree = "<group>"; };
 		AC8AB6AE1FA9641B00251F85 /* SpotifyResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponseParser.swift; sourceTree = "<group>"; };
@@ -189,6 +188,7 @@
 		ACCE5193205F11C6008877F2 /* IntroViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroViewController.xib; sourceTree = "<group>"; };
 		ACCE5195205F11DE008877F2 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
+		ACEC1E1620962CDD009CC83C /* MyUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserDefaults.swift; sourceTree = "<group>"; };
 		ACF43247200BF57E00110B53 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		ACF4324A200C132C00110B53 /* ItemWithTrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWithTrackListViewController.swift; sourceTree = "<group>"; };
 		ACF4324C200C136C00110B53 /* ItemWithTrackListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemWithTrackListViewController.xib; sourceTree = "<group>"; };
@@ -240,7 +240,6 @@
 				ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */,
 				ACC816692027C3F500A03946 /* SequenceExtensions.swift */,
 				ACA3BF08207B280A008C0876 /* ArrayExtensions.swift */,
-				AC74DCBA2084046B009F0C2E /* UserDefaultsExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -266,6 +265,7 @@
 		AC02D0C71F9CF5B3009ED193 /* Playlistable */ = {
 			isa = PBXGroup;
 			children = (
+				ACEC1E1520962CAC009CC83C /* Services */,
 				AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */,
 				AC4C84F120146E1400C8A4E6 /* UIButtons */,
 				AC4C84DF2014307C00C8A4E6 /* Resources */,
@@ -580,6 +580,14 @@
 			path = IntroViewController;
 			sourceTree = "<group>";
 		};
+		ACEC1E1520962CAC009CC83C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ACEC1E1620962CDD009CC83C /* MyUserDefaults.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		ACF43246200BEAB600110B53 /* GenericTableViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,11 +808,11 @@
 				AC01487B1F9D855D00F9A732 /* APIQueryParamsFormatter.swift in Sources */,
 				ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */,
 				AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */,
+				ACEC1E1720962CDD009CC83C /* MyUserDefaults.swift in Sources */,
 				AC0148791F9D80C100F9A732 /* UIViewControllerExtensions.swift in Sources */,
 				AC3259BA207F001C008AB997 /* QueryParamMarketInjector.swift in Sources */,
 				AC8AB6B21FA964B300251F85 /* TrackFactory.swift in Sources */,
 				AC74DCBD20844105009F0C2E /* AudioInterruptionController.swift in Sources */,
-				AC74DCBB2084046B009F0C2E /* UserDefaultsExtensions.swift in Sources */,
 				AC02D0DC1F9CF73B009ED193 /* APIRequest.swift in Sources */,
 				AC0148761F9D700200F9A732 /* SpotifyAuthActions.swift in Sources */,
 				AC4C84DA2014050300C8A4E6 /* ItemWithTrackListHeaderView.swift in Sources */,

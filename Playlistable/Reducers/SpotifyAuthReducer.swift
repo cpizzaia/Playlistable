@@ -12,12 +12,12 @@ import ReSwift
 struct SpotifyAuthState {
   var token: String? {
     didSet {
-      UserDefaults.standard.spotifyAuthToken = token
+      MyUserDefaults.spotifyAuthToken = token
     }
   }
   var refreshToken: String? {
     didSet {
-      UserDefaults.standard.spotifyRefreshToken = refreshToken
+      MyUserDefaults.spotifyRefreshToken = refreshToken
     }
   }
   var userID: String?
@@ -29,7 +29,7 @@ struct SpotifyAuthState {
   var isPremium: Bool?
   var expiresAt: TimeInterval? {
     didSet {
-      UserDefaults.standard.spotifyTokenExpirationTimeInterval = expiresAt
+      MyUserDefaults.spotifyTokenExpirationTimeInterval = expiresAt
     }
   }
 
@@ -54,8 +54,8 @@ struct SpotifyAuthState {
 }
 
 private let initialSpotifyAuthState = SpotifyAuthState(
-  token: UserDefaults.standard.spotifyAuthToken,
-  refreshToken: UserDefaults.standard.spotifyRefreshToken,
+  token: MyUserDefaults.spotifyAuthToken,
+  refreshToken: MyUserDefaults.spotifyRefreshToken,
   userID: nil,
   market: nil,
   isInitializingOAuth: false,
@@ -63,7 +63,7 @@ private let initialSpotifyAuthState = SpotifyAuthState(
   isRefreshingToken: false,
   isRequestingUser: false,
   isPremium: nil,
-  expiresAt: UserDefaults.standard.spotifyTokenExpirationTimeInterval
+  expiresAt: MyUserDefaults.spotifyTokenExpirationTimeInterval
 )
 
 func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuthState {
