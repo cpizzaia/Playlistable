@@ -20,6 +20,7 @@ class PlayerBarContainerViewController: UIViewController, MyStoreSubscriber {
     let playingTrack: Track?
   }
 
+  @IBOutlet var arrowImageView: UIImageView!
   @IBOutlet var containerView: UIView!
   @IBOutlet var playBarView: UIView!
   @IBOutlet var durationBarBackground: UIView!
@@ -74,6 +75,8 @@ class PlayerBarContainerViewController: UIViewController, MyStoreSubscriber {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    arrowImageView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
 
     let tabBarVC = loadUIViewControllerFromNib(TabBarController.self)
     addChildViewController(tabBarVC)
