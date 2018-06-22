@@ -17,15 +17,14 @@ struct PlaylistFactory {
   static func createPlaylist(fromJSON json: JSON) -> Playlist? {
     guard
       let id = json["id"].string,
-      let tracks = json["tracks"]["items"].array,
-      let name = json["name"].string
+      let tracks = json["tracks"]["items"].array
     else {
       return nil
     }
 
     return Playlist(
       trackIDs: tracks.compactMap { $0["track"]["id"].string },
-      name: name,
+      name: json["name"].string ?? "",
       id: id,
       images: ImageFactory.createImages(fromJSONArray: json["images"].array ?? [])
     )
