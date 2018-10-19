@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.5.1)
   - Crashlytics (3.10.1):
     - Fabric (~> 1.7.5)
-  - EasyTipView (1.1.0)
+  - EasyTipView (2.0.0)
   - Fabric (1.7.5)
   - Locksmith (4.0.0)
   - ReSwift (4.0.0)
@@ -24,7 +24,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.5)
   - Crashlytics (= 3.10.1)
-  - "EasyTipView (from `git@github.com:cpizzaia/EasyTipView.git`, commit `9c7feebc54b063d2f4d01690574204ecb75b4505`)"
+  - EasyTipView (= 2.0.0)
   - Fabric (= 1.7.5)
   - Locksmith (= 4.0.0)
   - ReSwift (= 4.0.0)
@@ -39,6 +39,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Crashlytics
+    - EasyTipView
     - Fabric
     - Locksmith
     - ReSwift
@@ -49,20 +50,10 @@ SPEC REPOS:
     - SwiftLint
     - SwiftyJSON
 
-EXTERNAL SOURCES:
-  EasyTipView:
-    :commit: 9c7feebc54b063d2f4d01690574204ecb75b4505
-    :git: "git@github.com:cpizzaia/EasyTipView.git"
-
-CHECKOUT OPTIONS:
-  EasyTipView:
-    :commit: 9c7feebc54b063d2f4d01690574204ecb75b4505
-    :git: "git@github.com:cpizzaia/EasyTipView.git"
-
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
-  EasyTipView: 236dda1a58f9a15bd39f11d84347e6b8643a744c
+  EasyTipView: f24313ded34b20c6e63811e218016ee3baaa7ee5
   Fabric: ae7146a5f505ea370a1e44820b4b1dc8890e2890
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
@@ -73,6 +64,6 @@ SPEC CHECKSUMS:
   SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: cb4b075275ef4c066471e7f312e0102b1b840c2a
+PODFILE CHECKSUM: dc6668b321c5361ab85a031d0974aae1d36efef1
 
 COCOAPODS: 1.5.0
