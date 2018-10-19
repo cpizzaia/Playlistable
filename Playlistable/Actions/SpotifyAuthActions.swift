@@ -124,7 +124,7 @@ enum SpotifyAuthActions {
       if hasSpotifyInstalled {
         log("Authing from spotify app")
         guard let appURL = appURL else { return }
-        UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+        UIApplication.shared.open(appURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
       } else {
         log("Authing from webview")
         guard let webURL = webURL else { return }
@@ -243,4 +243,9 @@ enum SpotifyAuthActions {
       ))
     }
   }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

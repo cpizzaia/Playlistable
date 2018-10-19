@@ -41,7 +41,7 @@ class AudioInterruptionController: StateManager {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(handleInterruption),
-      name: Notification.Name.AVAudioSessionInterruption,
+      name: AVAudioSession.interruptionNotification,
       object: nil
     )
   }
@@ -49,7 +49,7 @@ class AudioInterruptionController: StateManager {
   @objc private func handleInterruption(notification: Notification) {
     guard let info = notification.userInfo,
       let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
-      let type = AVAudioSessionInterruptionType(rawValue: typeValue) else {
+      let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
         return
     }
 

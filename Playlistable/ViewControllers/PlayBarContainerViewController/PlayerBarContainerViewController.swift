@@ -76,10 +76,10 @@ class PlayerBarContainerViewController: UIViewController, MyStoreSubscriber {
     super.viewDidLoad()
 
     let tabBarVC = loadUIViewControllerFromNib(TabBarController.self)
-    addChildViewController(tabBarVC)
+    addChild(tabBarVC)
     containerView.insertSubview(tabBarVC.view, at: 0)
 
-    tabBarVC.didMove(toParentViewController: self)
+    tabBarVC.didMove(toParent: self)
 
     playBarView.backgroundColor = UIColor.myLightBlack
 
@@ -97,7 +97,7 @@ class PlayerBarContainerViewController: UIViewController, MyStoreSubscriber {
     NotificationCenter.default.addObserver(
       self,
       selector: #selector(enteredForeground),
-      name: Notification.Name.UIApplicationWillEnterForeground,
+      name: UIApplication.willEnterForegroundNotification,
       object: nil
     )
   }
@@ -108,7 +108,7 @@ class PlayerBarContainerViewController: UIViewController, MyStoreSubscriber {
 
     NotificationCenter.default.removeObserver(
       self,
-      name: Notification.Name.UIApplicationWillEnterForeground,
+      name: UIApplication.willEnterForegroundNotification,
       object: nil
     )
   }

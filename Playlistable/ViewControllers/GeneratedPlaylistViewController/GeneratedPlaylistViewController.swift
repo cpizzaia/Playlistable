@@ -121,7 +121,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
 
       let leftNavigatorButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(savePlaylist))
 
-      leftNavigatorButton.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.myFont(withSize: 17)], for: .normal)
+      leftNavigatorButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.myFont(withSize: 17)], for: .normal)
 
       navigationItem.setLeftBarButton(leftNavigatorButton, animated: true)
     }
