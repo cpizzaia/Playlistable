@@ -9,6 +9,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - SnapKit (4.0.1)
   - Spotify-iOS-SDK (0.25.0):
     - Spotify-iOS-SDK/Authentication (= 0.25.0)
     - Spotify-iOS-SDK/Metadata (= 0.25.0)
@@ -22,26 +23,41 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
-  - Crashlytics
-  - EasyTipView (from `git@github.com:cpizzaia/EasyTipView.git`, commit `9c7feebc54b063d2f4d01690574204ecb75b4505`)
-  - Fabric
-  - Locksmith
-  - ReSwift
+  - Crashlytics (= 3.10.1)
+  - "EasyTipView (from `git@github.com:cpizzaia/EasyTipView.git`, commit `9c7feebc54b063d2f4d01690574204ecb75b4505`)"
+  - Fabric (= 1.7.5)
+  - Locksmith (= 4.0.0)
+  - ReSwift (= 4.0.0)
   - SDWebImage (~> 3.8)
+  - SnapKit (= 4.0.1)
   - Spotify-iOS-SDK (= 0.25)
-  - SVProgressHUD
-  - SwiftLint
-  - SwiftyJSON
+  - SVProgressHUD (= 2.2.2)
+  - SwiftLint (= 0.25.0)
+  - SwiftyJSON (= 3.1.4)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Crashlytics
+    - Fabric
+    - Locksmith
+    - ReSwift
+    - SDWebImage
+    - SnapKit
+    - Spotify-iOS-SDK
+    - SVProgressHUD
+    - SwiftLint
+    - SwiftyJSON
 
 EXTERNAL SOURCES:
   EasyTipView:
     :commit: 9c7feebc54b063d2f4d01690574204ecb75b4505
-    :git: git@github.com:cpizzaia/EasyTipView.git
+    :git: "git@github.com:cpizzaia/EasyTipView.git"
 
 CHECKOUT OPTIONS:
   EasyTipView:
     :commit: 9c7feebc54b063d2f4d01690574204ecb75b4505
-    :git: git@github.com:cpizzaia/EasyTipView.git
+    :git: "git@github.com:cpizzaia/EasyTipView.git"
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
@@ -51,11 +67,12 @@ SPEC CHECKSUMS:
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   ReSwift: f058ef13b46ae5f463f10605ccbbb7fb04424d8d
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   Spotify-iOS-SDK: 58d4092b225578623dd17029f3c7e7042ac3ef6e
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 9e6b131bcedf19a72cb9e098cb34f2a0598ec348
+PODFILE CHECKSUM: cb4b075275ef4c066471e7f312e0102b1b840c2a
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.0
