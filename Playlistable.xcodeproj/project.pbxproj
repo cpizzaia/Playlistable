@@ -87,7 +87,6 @@
 		ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */; };
 		ACC816682027C3A800A03946 /* MutableCollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */; };
 		ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816692027C3F500A03946 /* SequenceExtensions.swift */; };
-		ACCE5194205F11C6008877F2 /* IntroViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACCE5193205F11C6008877F2 /* IntroViewController.xib */; };
 		ACCE5196205F11DE008877F2 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE5195205F11DE008877F2 /* IntroViewController.swift */; };
 		ACEA2F2A1FAFF14F001615F8 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */; };
 		ACEC1E1720962CDD009CC83C /* MyUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC1E1620962CDD009CC83C /* MyUserDefaults.swift */; };
@@ -185,7 +184,6 @@
 		ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingMiddlware.swift; sourceTree = "<group>"; };
 		ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableCollectionExtensions.swift; sourceTree = "<group>"; };
 		ACC816692027C3F500A03946 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
-		ACCE5193205F11C6008877F2 /* IntroViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroViewController.xib; sourceTree = "<group>"; };
 		ACCE5195205F11DE008877F2 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		ACEA2F291FAFF14F001615F8 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
 		ACEC1E1620962CDD009CC83C /* MyUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserDefaults.swift; sourceTree = "<group>"; };
@@ -422,7 +420,7 @@
 		AC6271A11F9EDB9B002B068B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				ACCE5192205F1186008877F2 /* IntroViewController */,
+				ACCE5195205F11DE008877F2 /* IntroViewController.swift */,
 				ACF43249200C12EF00110B53 /* ItemWithTrackListViewController */,
 				AC36E6E41FE730E70025BBE1 /* SeeAllSearchResultsViewController */,
 				AC53C96D1FE37B8200664733 /* SearchController */,
@@ -571,15 +569,6 @@
 			path = Middleware;
 			sourceTree = "<group>";
 		};
-		ACCE5192205F1186008877F2 /* IntroViewController */ = {
-			isa = PBXGroup;
-			children = (
-				ACCE5193205F11C6008877F2 /* IntroViewController.xib */,
-				ACCE5195205F11DE008877F2 /* IntroViewController.swift */,
-			);
-			path = IntroViewController;
-			sourceTree = "<group>";
-		};
 		ACEC1E1520962CAC009CC83C /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -685,7 +674,6 @@
 				AC4C84D72014046400C8A4E6 /* ItemWithTrackListHeaderView.xib in Resources */,
 				ACF4324D200C136C00110B53 /* ItemWithTrackListViewController.xib in Resources */,
 				AC5787221FDE18140057D41A /* SeedsViewController.xib in Resources */,
-				ACCE5194205F11C6008877F2 /* IntroViewController.xib in Resources */,
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,
 				AC18FCC41FB3E95A0079AFC8 /* InspectAllTableViewCell.xib in Resources */,
 				AC4C84EB201430B100C8A4E6 /* CircularStd-Bold.otf in Resources */,

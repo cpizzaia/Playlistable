@@ -18,3 +18,13 @@ target 'Playlistable' do
   pod 'SnapKit', '4.0.1'
   # Pods for Playlistable
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if ['EasyTipView'].include? target.name
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.1'
+      end
+    end
+  end
+end
