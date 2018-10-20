@@ -65,5 +65,6 @@ class SearchResultSectionHeaderView: UIView {
 
     actionButton.titleLabel?.font = UIFont.myFontBold(withSize: 17)
     actionButton.setTitleColor(UIColor.myWhite, for: .normal)
+    actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
   }
 }

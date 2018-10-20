@@ -54,7 +54,6 @@
 		AC4C84F320146E8F00C8A4E6 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84F220146E8F00C8A4E6 /* BigButton.swift */; };
 		AC4C84F6201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84F5201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift */; };
 		AC4C84F82015111000C8A4E6 /* GeneratedPlaylistHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84F72015111000C8A4E6 /* GeneratedPlaylistHeaderView.xib */; };
-		AC53C96F1FE37BA100664733 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC53C96E1FE37BA100664733 /* SearchViewController.xib */; };
 		AC53C9711FE37C6300664733 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53C9701FE37C6300664733 /* SearchViewController.swift */; };
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
 		AC5787201FDE17F00057D41A /* SeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57871F1FDE17F00057D41A /* SeedsViewController.swift */; };
@@ -151,7 +150,6 @@
 		AC4C84F220146E8F00C8A4E6 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		AC4C84F5201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedPlaylistHeaderView.swift; sourceTree = "<group>"; };
 		AC4C84F72015111000C8A4E6 /* GeneratedPlaylistHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneratedPlaylistHeaderView.xib; sourceTree = "<group>"; };
-		AC53C96E1FE37BA100664733 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		AC53C9701FE37C6300664733 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AC57871F1FDE17F00057D41A /* SeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsViewController.swift; sourceTree = "<group>"; };
@@ -393,7 +391,6 @@
 			isa = PBXGroup;
 			children = (
 				AC36E6E21FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift */,
-				AC53C96E1FE37BA100664733 /* SearchViewController.xib */,
 				AC53C9701FE37C6300664733 /* SearchViewController.swift */,
 				AC98D98E217AAC5C009EF80D /* NoSearchResultsView.swift */,
 			);
@@ -669,7 +666,6 @@
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,
 				AC18FCC41FB3E95A0079AFC8 /* InspectAllTableViewCell.xib in Resources */,
 				AC4C84EB201430B100C8A4E6 /* CircularStd-Bold.otf in Resources */,
-				AC53C96F1FE37BA100664733 /* SearchViewController.xib in Resources */,
 				AC4C84EA201430B100C8A4E6 /* CircularStd-BoldItalic.otf in Resources */,
 				AC4C84ED201430B100C8A4E6 /* CircularStd-Black.otf in Resources */,
 				AC4C84EE201430B100C8A4E6 /* CircularStd-Medium.otf in Resources */,

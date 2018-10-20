@@ -24,9 +24,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     let hasSeenSelectTip: Bool
   }
 
-  @IBOutlet var searchBar: UISearchBar!
-  @IBOutlet var searchResultsTableView: UITableView!
-
   struct SearchCollection {
     let artists: [Artist]
     let tracks: [Track]
@@ -45,33 +42,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
 
   // MARK: Private Properties
   private let noResultsView = NoSearchResultsView()
+  private let searchResultsTableView = UITableView(frame: .zero, style: .grouped)
+  private let searchBar = UISearchBar()
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  init() {
+    super.init(nibName: nil, bundle: nil)
 
-    view.backgroundColor = UIColor.myDarkBlack
+    setupViews()
+  }
 
-    searchBar.delegate = self
-    searchResultsTableView.delegate = self
-    searchResultsTableView.dataSource = self
-
-    searchResultsTableView.register(
-      UINib(nibName: "InspectAllTableViewCell", bundle: nil),
-      forCellReuseIdentifier: "searchCell"
-    )
-
-    searchResultsTableView.showsVerticalScrollIndicator = false
-    searchResultsTableView.separatorStyle = .none
-    searchResultsTableView.backgroundColor = UIColor.clear
-
-    searchBar.barTintColor = UIColor.myLightBlack
-    searchBar.placeholder = "Search"
-
-    let cancelButtonAttributes: NSDictionary = [NSAttributedString.Key.foregroundColor: UIColor.myWhite]
-
-    UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes as? [NSAttributedString.Key: Any], for: UIControl.State.normal)
-
-    setupNoResultsView()
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -147,6 +128,51 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
       selectTip.show(forView: searchResultsTableView)
       mainStore.dispatch(SearchActions.SawSelectTip())
     }
+  }
+
+  // MARK: Private Methods
+  private func setupViews() {
+    view.backgroundColor = UIColor.myDarkBlack
+    setupSearchBar()
+    setupTableView()
+    setupNoResultsView()
+  }
+
+  private func setupSearchBar() {
+    view.addSubview(searchBar)
+
+    searchBar.snp.makeConstraints { make in
+      make.width.equalTo(view)
+      make.top.equalTo(view).offset(20)
+    }
+
+    searchBar.delegate = self
+
+    searchBar.barTintColor = UIColor.myLightBlack
+    searchBar.placeholder = "Search"
+
+    let cancelButtonAttributes: NSDictionary = [NSAttributedString.Key.foregroundColor: UIColor.myWhite]
+
+    UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes as? [NSAttributedString.Key: Any], for: UIControl.State.normal)
+  }
+
+  private func setupTableView() {
+    view.addSubview(searchResultsTableView)
+
+    searchResultsTableView.snp.makeConstraints { make in
+      make.trailing.leading.bottom.equalTo(view)
+      make.top.equalTo(searchBar.snp.bottom)
+    }
+
+    searchResultsTableView.showsVerticalScrollIndicator = false
+    searchResultsTableView.separatorStyle = .none
+    searchResultsTableView.backgroundColor = UIColor.clear
+    searchResultsTableView.delegate = self
+    searchResultsTableView.dataSource = self
+    searchResultsTableView.register(
+      UINib(nibName: "InspectAllTableViewCell", bundle: nil),
+      forCellReuseIdentifier: "searchCell"
+    )
   }
 
   private func setupNoResultsView() {

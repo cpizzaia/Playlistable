@@ -53,9 +53,7 @@ class TabBarController: UITabBarController, MyStoreSubscriber {
     tabTwo.tabBarItem.image = UIImage(named: "SeedsTab")?.resizeImageWith(targetSize: CGSize(width: tabBar.bounds.height - 20, height: tabBar.bounds.height))
     tabTwo.tabBarItem.selectedImage = UIImage(named: "SeedsTab")?.resizeImageWith(targetSize: CGSize(width: tabBar.bounds.height - 20, height: tabBar.bounds.height))
 
-    let tabThree = UINavigationController(rootViewController:
-        loadUIViewControllerFromNib(SearchViewController.self)
-    )
+    let tabThree = UINavigationController(rootViewController: SearchViewController())
 
     tabThree.tabBarItem = UITabBarItem()
     tabThree.tabBarItem.title = "Search"
