@@ -24,8 +24,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     let hasSeenSelectTip: Bool
   }
 
-  @IBOutlet var noResultsView: UIView!
-  @IBOutlet var noResultsLabel: UILabel!
   @IBOutlet var searchBar: UISearchBar!
   @IBOutlet var searchResultsTableView: UITableView!
 
@@ -45,6 +43,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
   let searchTip = EasyTipView(text: "Start by searching for your favorite music.")
   let selectTip = EasyTipView(text: "Tap a song or artist to select it, you can select up to 5 total of any combination. When you are finished go to the Seeds tab to generate your Playlist.")
 
+  // MARK: Private Properties
+  private let noResultsView = NoSearchResultsView()
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -63,17 +64,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     searchResultsTableView.separatorStyle = .none
     searchResultsTableView.backgroundColor = UIColor.clear
 
-    noResultsLabel.font = UIFont.myFont(withSize: 17)
-    noResultsLabel.textColor = UIColor.myWhite
-
-    noResultsView.backgroundColor = UIColor.clear
-
     searchBar.barTintColor = UIColor.myLightBlack
     searchBar.placeholder = "Search"
 
     let cancelButtonAttributes: NSDictionary = [NSAttributedString.Key.foregroundColor: UIColor.myWhite]
 
     UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes as? [NSAttributedString.Key: Any], for: UIControl.State.normal)
+
+    setupNoResultsView()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -140,12 +138,22 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     searchResultsTableView.isHidden = noResults
     noResultsView.isHidden = !noResults
     searchResultsTableView.reloadData()
-    noResultsLabel.text = props.query == nil ? "Start by searching for your favorite music" : "Your search had no results"
+
+    props.query == nil ? noResultsView.switchToHasntSearched() : noResultsView.switchToHasSearched()
+
     props.isRequesting ? SVProgressHUD.show() : SVProgressHUD.dismiss()
 
     if !noResults && !props.hasSeenSelectTip {
       selectTip.show(forView: searchResultsTableView)
       mainStore.dispatch(SearchActions.SawSelectTip())
+    }
+  }
+
+  private func setupNoResultsView() {
+    view.addSubview(noResultsView)
+
+    noResultsView.snp.makeConstraints { make in
+      make.edges.equalTo(searchResultsTableView)
     }
   }
 

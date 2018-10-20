@@ -71,6 +71,7 @@
 		AC8AB6BA1FA9760F00251F85 /* ResourceReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6B91FA9760F00251F85 /* ResourceReducer.swift */; };
 		AC8AB6BC1FA9777D00251F85 /* ResourceActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */; };
 		AC8C20401FC9DA2F006FF1AC /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C203F1FC9DA2F006FF1AC /* UIButtonExtensions.swift */; };
+		AC98D98F217AAC5C009EF80D /* NoSearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC98D98E217AAC5C009EF80D /* NoSearchResultsView.swift */; };
 		ACA09EA51F9D556800220E8B /* APIMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA09EA41F9D556800220E8B /* APIMiddleware.swift */; };
 		ACA3BF09207B280A008C0876 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3BF08207B280A008C0876 /* ArrayExtensions.swift */; };
 		ACAA1A421FB548F700F6B345 /* SeedsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA1A411FB548F700F6B345 /* SeedsReducer.swift */; };
@@ -167,6 +168,7 @@
 		AC8AB6B91FA9760F00251F85 /* ResourceReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceReducer.swift; sourceTree = "<group>"; };
 		AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceActions.swift; sourceTree = "<group>"; };
 		AC8C203F1FC9DA2F006FF1AC /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		AC98D98E217AAC5C009EF80D /* NoSearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSearchResultsView.swift; sourceTree = "<group>"; };
 		ACA09EA41F9D556800220E8B /* APIMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMiddleware.swift; sourceTree = "<group>"; };
 		ACA3BF08207B280A008C0876 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		ACAA1A411FB548F700F6B345 /* SeedsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsReducer.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 				AC36E6E21FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift */,
 				AC53C96E1FE37BA100664733 /* SearchViewController.xib */,
 				AC53C9701FE37C6300664733 /* SearchViewController.swift */,
+				AC98D98E217AAC5C009EF80D /* NoSearchResultsView.swift */,
 			);
 			path = SearchController;
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				AC01487B1F9D855D00F9A732 /* APIQueryParamsFormatter.swift in Sources */,
 				ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */,
 				AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */,
+				AC98D98F217AAC5C009EF80D /* NoSearchResultsView.swift in Sources */,
 				ACEC1E1720962CDD009CC83C /* MyUserDefaults.swift in Sources */,
 				AC0148791F9D80C100F9A732 /* UIViewControllerExtensions.swift in Sources */,
 				AC3259BA207F001C008AB997 /* QueryParamMarketInjector.swift in Sources */,
