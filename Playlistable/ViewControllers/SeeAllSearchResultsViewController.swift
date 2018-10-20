@@ -17,8 +17,6 @@ class SeeAllSearchResultsViewController: UIViewController, MyStoreSubscriber, UI
     let seeds: SeedsState
   }
 
-  @IBOutlet var resultsTableView: UITableView!
-
   enum ControllerType {
     case artists
     case tracks
@@ -26,25 +24,23 @@ class SeeAllSearchResultsViewController: UIViewController, MyStoreSubscriber, UI
   }
 
   // MARK: Public Properties
-  var type: ControllerType?
   var props: Props?
 
   // MARK: Private Properties
+  private let tableView = UITableView(frame: .zero, style: .grouped)
+  private let type: ControllerType
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  // MARK: Public Methods
+  init(type: ControllerType) {
+    self.type = type
 
-    resultsTableView.delegate = self
-    resultsTableView.dataSource = self
-    resultsTableView.register(
-      InspectAllTableViewCell.self,
-      forCellReuseIdentifier: "searchResultCell"
-    )
+    super.init(nibName: nil, bundle: nil)
 
-    resultsTableView.backgroundColor = UIColor.clear
-    resultsTableView.separatorStyle = .none
+    setupViews()
+  }
 
-    view.backgroundColor = UIColor.myDarkBlack
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -67,21 +63,43 @@ class SeeAllSearchResultsViewController: UIViewController, MyStoreSubscriber, UI
     }
 
     switch type {
-    case .some(.artists):
+    case .artists:
       items = state.resources.artistsFor(ids: searchResults.artistIDs)
-    case .some(.tracks):
+    case .tracks:
       items = state.resources.tracksFor(ids: searchResults.trackIDs)
-    case .some(.albums):
+    case .albums:
       items = state.resources.albumsFor(ids: searchResults.albumIDs)
-    default:
-      break
     }
 
     return Props(items: items, seeds: state.seeds)
   }
 
   func didReceiveNewProps(props: Props) {
-    resultsTableView.reloadData()
+    tableView.reloadData()
+  }
+
+  // MARK: Private Methods
+  private func setupViews() {
+    view.backgroundColor = UIColor.myDarkBlack
+    setupTableView()
+  }
+
+  private func setupTableView() {
+    view.addSubview(tableView)
+
+    tableView.snp.makeConstraints { make in
+      make.edges.equalTo(view)
+    }
+
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.register(
+      InspectAllTableViewCell.self,
+      forCellReuseIdentifier: "searchResultCell"
+    )
+
+    tableView.backgroundColor = UIColor.clear
+    tableView.separatorStyle = .none
   }
 
   // MARK: UITableViewMethods
