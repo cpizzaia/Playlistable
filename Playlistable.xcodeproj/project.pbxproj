@@ -28,7 +28,6 @@
 		AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7411FA02D3500CAAD13 /* TabBarController.swift */; };
 		AC17B7FA1FBE9ACA0029AFB6 /* LockscreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */; };
 		AC17B7FE1FBE9C3F0029AFB6 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */; };
-		AC18FCC41FB3E95A0079AFC8 /* InspectAllTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC18FCC31FB3E95A0079AFC8 /* InspectAllTableViewCell.xib */; };
 		AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */; };
 		AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC71FB412A20079AFC8 /* Item.swift */; };
 		AC313A5E2086DC8200675097 /* MyStoreSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC313A5D2086DC8200675097 /* MyStoreSubscriber.swift */; };
@@ -123,7 +122,6 @@
 		AC16D7411FA02D3500CAAD13 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockscreenController.swift; sourceTree = "<group>"; };
 		AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
-		AC18FCC31FB3E95A0079AFC8 /* InspectAllTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InspectAllTableViewCell.xib; sourceTree = "<group>"; };
 		AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectAllTableViewCell.swift; sourceTree = "<group>"; };
 		AC18FCC71FB412A20079AFC8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Playlistable.entitlements; sourceTree = "<group>"; };
@@ -477,15 +475,6 @@
 			path = PlayBarContainerViewController;
 			sourceTree = "<group>";
 		};
-		AC8C20471FC9E25D006FF1AC /* InspectAllTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				AC18FCC31FB3E95A0079AFC8 /* InspectAllTableViewCell.xib */,
-				AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */,
-			);
-			path = InspectAllTableViewCell;
-			sourceTree = "<group>";
-		};
 		ACB19DDA207D9DB800F1771A /* SpotifyRefreshMiddleware */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,7 +558,7 @@
 		ACF43246200BEAB600110B53 /* GenericTableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				AC8C20471FC9E25D006FF1AC /* InspectAllTableViewCell */,
+				AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */,
 			);
 			path = GenericTableViewCells;
 			sourceTree = "<group>";
@@ -664,7 +653,6 @@
 				ACF4324D200C136C00110B53 /* ItemWithTrackListViewController.xib in Resources */,
 				AC5787221FDE18140057D41A /* SeedsViewController.xib in Resources */,
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,
-				AC18FCC41FB3E95A0079AFC8 /* InspectAllTableViewCell.xib in Resources */,
 				AC4C84EB201430B100C8A4E6 /* CircularStd-Bold.otf in Resources */,
 				AC4C84EA201430B100C8A4E6 /* CircularStd-BoldItalic.otf in Resources */,
 				AC4C84ED201430B100C8A4E6 /* CircularStd-Black.otf in Resources */,

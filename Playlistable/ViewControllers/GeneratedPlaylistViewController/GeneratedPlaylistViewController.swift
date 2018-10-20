@@ -49,7 +49,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     playlistTableView.separatorStyle = .none
 
     playlistTableView.register(
-      UINib(nibName: "InspectAllTableViewCell", bundle: nil),
+      InspectAllTableViewCell.self,
       forCellReuseIdentifier: "generatedTrackCell"
     )
 

@@ -53,7 +53,7 @@ class SeedsViewController: UIViewController, MyStoreSubscriber, UITableViewDeleg
     seedsTableView.isScrollEnabled = false
 
     seedsTableView.register(
-      UINib(nibName: "InspectAllTableViewCell", bundle: nil),
+      InspectAllTableViewCell.self,
       forCellReuseIdentifier: "seedsCell"
     )
 

@@ -37,7 +37,7 @@ class SeeAllSearchResultsViewController: UIViewController, MyStoreSubscriber, UI
     resultsTableView.delegate = self
     resultsTableView.dataSource = self
     resultsTableView.register(
-      UINib(nibName: "InspectAllTableViewCell", bundle: nil),
+      InspectAllTableViewCell.self,
       forCellReuseIdentifier: "searchResultCell"
     )
 

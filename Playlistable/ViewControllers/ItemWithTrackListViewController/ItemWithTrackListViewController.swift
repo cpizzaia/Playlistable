@@ -34,7 +34,7 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     trackListTableView.separatorStyle = .none
     trackListTableView.showsVerticalScrollIndicator = false
     trackListTableView.register(
-      UINib(nibName: "InspectAllTableViewCell", bundle: nil),
+      InspectAllTableViewCell.self,
       forCellReuseIdentifier: "trackListCell"
     )
 

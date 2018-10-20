@@ -34,17 +34,19 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     }
   }
 
+  // MARK: Public Properties
   var props: Props?
-  var sections = [Int: [Item]]()
-  var searchTimer: Timer?
-  let searchTip = EasyTipView(text: "Start by searching for your favorite music.")
-  let selectTip = EasyTipView(text: "Tap a song or artist to select it, you can select up to 5 total of any combination. When you are finished go to the Seeds tab to generate your Playlist.")
 
   // MARK: Private Properties
   private let noResultsView = NoSearchResultsView()
   private let searchResultsTableView = UITableView(frame: .zero, style: .grouped)
   private let searchBar = UISearchBar()
+  private var sections = [Int: [Item]]()
+  private var searchTimer: Timer?
+  private let searchTip = EasyTipView(text: "Start by searching for your favorite music.")
+  private let selectTip = EasyTipView(text: "Tap a song or artist to select it, you can select up to 5 total of any combination. When you are finished go to the Seeds tab to generate your Playlist.")
 
+  // MARK: Public Methods
   init() {
     super.init(nibName: nil, bundle: nil)
 
@@ -170,7 +172,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     searchResultsTableView.delegate = self
     searchResultsTableView.dataSource = self
     searchResultsTableView.register(
-      UINib(nibName: "InspectAllTableViewCell", bundle: nil),
+      InspectAllTableViewCell.self,
       forCellReuseIdentifier: "searchCell"
     )
   }
