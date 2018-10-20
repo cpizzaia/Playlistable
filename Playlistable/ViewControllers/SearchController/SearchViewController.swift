@@ -219,11 +219,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
       return nil
     }
 
-    let view = loadUIViewFromNib(SearchResultSectionHeaderView.self)
+    var view: SearchResultSectionHeaderView?
 
     switch items.first {
     case _ as Artist:
-      view.setupView(withTitle: "Artists", buttonTitle: "See All", andAction: {
+      view = SearchResultSectionHeaderView(withTitle: "Artists", buttonTitle: "See All", andAction: {
         let vc = loadUIViewControllerFromNib(SeeAllSearchResultsViewController.self)
 
         vc.type = .artists
@@ -231,7 +231,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
         self.navigationController?.pushViewController(vc, animated: true)
       })
     case _ as Track:
-      view.setupView(withTitle: "Tracks", buttonTitle: "See All", andAction: {
+      view = SearchResultSectionHeaderView(withTitle: "Tracks", buttonTitle: "See All", andAction: {
         let vc = loadUIViewControllerFromNib(SeeAllSearchResultsViewController.self)
 
         vc.type = .tracks
@@ -239,7 +239,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
         self.navigationController?.pushViewController(vc, animated: true)
       })
     case _ as Album:
-      view.setupView(withTitle: "Albums", buttonTitle: "See All", andAction: {
+      view = SearchResultSectionHeaderView(withTitle: "Albums", buttonTitle: "See All", andAction: {
         let vc = loadUIViewControllerFromNib(SeeAllSearchResultsViewController.self)
 
         vc.type = .albums
@@ -247,7 +247,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
         self.navigationController?.pushViewController(vc, animated: true)
       })
     default:
-      break
+      return nil
     }
 
     return view
