@@ -23,26 +23,22 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     case album
   }
 
-  @IBOutlet var trackListTableView: UITableView!
-
-  var itemType: ItemType?
   var props: Props?
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  private let trackListTableView = UITableView(frame: .zero, style: .grouped)
 
-    trackListTableView.separatorStyle = .none
-    trackListTableView.showsVerticalScrollIndicator = false
-    trackListTableView.register(
-      InspectAllTableViewCell.self,
-      forCellReuseIdentifier: "trackListCell"
-    )
+  private let itemType: ItemType
 
-    trackListTableView.delegate = self
-    trackListTableView.dataSource = self
-    trackListTableView.backgroundColor = UIColor.clear
+  init(itemType: ItemType) {
+    self.itemType = itemType
 
-    view.backgroundColor = UIColor.myDarkBlack
+    super.init(nibName: nil, bundle: nil)
+
+    setupViews()
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -65,10 +61,8 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
 
   func didReceiveNewProps(props: Props) {
     switch itemType {
-    case .some(.album):
+    case .album:
       newPropsForAlbum(props: props)
-    default:
-      break
     }
 
     title = props.item?.title
@@ -100,6 +94,32 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
     }
 
     return Props(item: nil, tracks: [], seeds: state.seeds)
+  }
+
+  // MARK: Private Methods
+  private func setupViews() {
+    view.backgroundColor = UIColor.myDarkBlack
+
+    setupTableView()
+  }
+
+  private func setupTableView() {
+    view.addSubview(trackListTableView)
+
+    trackListTableView.snp.makeConstraints { make in
+      make.edges.equalTo(view)
+    }
+
+    trackListTableView.separatorStyle = .none
+    trackListTableView.showsVerticalScrollIndicator = false
+    trackListTableView.register(
+      InspectAllTableViewCell.self,
+      forCellReuseIdentifier: "trackListCell"
+    )
+
+    trackListTableView.delegate = self
+    trackListTableView.dataSource = self
+    trackListTableView.backgroundColor = UIColor.clear
   }
 
   // MARK: UITableViewDelegate Methods

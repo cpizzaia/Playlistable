@@ -235,9 +235,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
       cell.setupCellWithImage(forItem: item, action: {
         mainStore.dispatch(InspectAlbumActions.InspectAlbum(albumID: album.id))
 
-        let vc = loadUIViewControllerFromNib(ItemWithTrackListViewController.self)
-
-        vc.itemType = .album
+        let vc = ItemWithTrackListViewController(itemType: .album)
 
         self.navigationController?.pushViewController(vc, animated: true)
       })
