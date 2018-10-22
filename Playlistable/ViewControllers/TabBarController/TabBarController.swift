@@ -46,7 +46,7 @@ class TabBarController: UITabBarController, MyStoreSubscriber {
     tabOne.tabBarItem.image = UIImage(named: "PlaylistTab")?.resizeImageWith(targetSize: CGSize(width: tabBar.bounds.height - 20, height: tabBar.bounds.height))
     tabOne.tabBarItem.selectedImage = UIImage(named: "PlaylistTab")?.resizeImageWith(targetSize: CGSize(width: tabBar.bounds.height - 20, height: tabBar.bounds.height))
 
-    let tabTwo = UINavigationController(rootViewController: loadUIViewControllerFromNib(SeedsViewController.self))
+    let tabTwo = UINavigationController(rootViewController: SeedsViewController())
 
     tabTwo.tabBarItem = UITabBarItem()
     tabTwo.tabBarItem.title = "Seeds"

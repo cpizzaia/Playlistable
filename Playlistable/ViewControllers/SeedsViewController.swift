@@ -30,41 +30,23 @@ class SeedsViewController: UIViewController, MyStoreSubscriber, UITableViewDeleg
     }
   }
 
-  @IBOutlet var seedsTableView: UITableView!
-  @IBOutlet var titleLabel: UILabel!
-  @IBOutlet var generatePlaylistButton: UIButton!
-
-  @IBAction func generatePlaylistButtonTapped(_ sender: UIButton) {
-    generateFunction()
-    tabBarController?.selectedIndex = 0
-  }
-
   var props: Props?
 
-  var generateFunction = {}
+  // MARK: Private Properties
+  private let seedsTableView = UITableView(frame: .zero, style: .grouped)
+  private let titleLabel = UILabel()
+  private let generatePlaylistButton = BigButton()
+  private var generateFunction = {}
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    view.backgroundColor = UIColor.myDarkBlack
+  // MARK: Public Methods
+  init() {
+    super.init(nibName: nil, bundle: nil)
 
-    seedsTableView.delegate = self
-    seedsTableView.dataSource = self
+    setupViews()
+  }
 
-    seedsTableView.isScrollEnabled = false
-
-    seedsTableView.register(
-      InspectAllTableViewCell.self,
-      forCellReuseIdentifier: "seedsCell"
-    )
-
-    seedsTableView.separatorStyle = .none
-    seedsTableView.backgroundColor = UIColor.clear
-
-    titleLabel.font = UIFont.myFont(withSize: 17)
-    titleLabel.textColor = UIColor.myWhite
-
-    generatePlaylistButton.setTitleColor(UIColor.myWhite, for: .normal)
-    generatePlaylistButton.titleLabel?.font = UIFont.myFont(withSize: 17)
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +77,71 @@ class SeedsViewController: UIViewController, MyStoreSubscriber, UITableViewDeleg
     setTitleLabel()
 
     seedsTableView.reloadData()
+  }
+
+  @objc func generatePlaylistButtonTapped(_ sender: UIButton) {
+    generateFunction()
+    tabBarController?.selectedIndex = 0
+  }
+
+  // MARK: Private Methods
+  private func setupViews() {
+    view.backgroundColor = UIColor.myDarkBlack
+
+    setupTitleLabel()
+    setupGenerateButton()
+    setupTableView()
+  }
+
+  private func setupTitleLabel() {
+    view.addSubview(titleLabel)
+
+    titleLabel.snp.makeConstraints { make in
+      make.centerX.equalTo(view)
+      make.top.equalTo(view).offset(30)
+    }
+
+    titleLabel.font = UIFont.myFont(withSize: 17)
+    titleLabel.textColor = UIColor.myWhite
+  }
+
+  private func setupTableView() {
+    view.addSubview(seedsTableView)
+
+    seedsTableView.snp.makeConstraints { make in
+      make.leading.trailing.equalTo(view)
+      make.top.equalTo(titleLabel).offset(20)
+      make.bottom.equalTo(generatePlaylistButton.snp.top).inset(30)
+    }
+
+    seedsTableView.delegate = self
+    seedsTableView.dataSource = self
+
+    seedsTableView.isScrollEnabled = false
+
+    seedsTableView.register(
+      InspectAllTableViewCell.self,
+      forCellReuseIdentifier: "seedsCell"
+    )
+
+    seedsTableView.separatorStyle = .none
+    seedsTableView.backgroundColor = UIColor.clear
+  }
+
+  private func setupGenerateButton() {
+    view.addSubview(generatePlaylistButton)
+
+    generatePlaylistButton.snp.makeConstraints { make in
+      make.width.equalTo(view).multipliedBy(0.55)
+      make.height.equalTo(view).multipliedBy(0.085)
+      make.bottom.equalTo(view).inset(60)
+      make.centerX.equalTo(view)
+    }
+
+    generatePlaylistButton.setTitleColor(UIColor.myWhite, for: .normal)
+    generatePlaylistButton.titleLabel?.font = UIFont.myFont(withSize: 17)
+    generatePlaylistButton.addTarget(self, action: #selector(generatePlaylistButtonTapped), for: .touchUpInside)
+    generatePlaylistButton.setTitle("GENERATE", for: .normal)
   }
 
   private func setTitleLabel() {
