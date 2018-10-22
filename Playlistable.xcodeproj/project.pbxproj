@@ -37,7 +37,6 @@
 		AC36E6DC1FE5942A0025BBE1 /* SearchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6DB1FE5942A0025BBE1 /* SearchActions.swift */; };
 		AC36E6E31FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6E21FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift */; };
 		AC36E6E61FE731090025BBE1 /* SeeAllSearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC36E6E51FE731090025BBE1 /* SeeAllSearchResultsViewController.swift */; };
-		AC4C84D72014046400C8A4E6 /* ItemWithTrackListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84D62014046400C8A4E6 /* ItemWithTrackListHeaderView.xib */; };
 		AC4C84DA2014050300C8A4E6 /* ItemWithTrackListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84D92014050300C8A4E6 /* ItemWithTrackListHeaderView.swift */; };
 		AC4C84DC2014293300C8A4E6 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84DB2014293300C8A4E6 /* UIColorExtensions.swift */; };
 		AC4C84DE20142C1800C8A4E6 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84DD20142C1800C8A4E6 /* UIFontExtensions.swift */; };
@@ -131,7 +130,6 @@
 		AC36E6DB1FE5942A0025BBE1 /* SearchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActions.swift; sourceTree = "<group>"; };
 		AC36E6E21FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultSectionHeaderView.swift; sourceTree = "<group>"; };
 		AC36E6E51FE731090025BBE1 /* SeeAllSearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllSearchResultsViewController.swift; sourceTree = "<group>"; };
-		AC4C84D62014046400C8A4E6 /* ItemWithTrackListHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemWithTrackListHeaderView.xib; sourceTree = "<group>"; };
 		AC4C84D92014050300C8A4E6 /* ItemWithTrackListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemWithTrackListHeaderView.swift; sourceTree = "<group>"; };
 		AC4C84DB2014293300C8A4E6 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		AC4C84DD20142C1800C8A4E6 /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
@@ -323,15 +321,6 @@
 				AC3268941FAFC3A9000AA05B /* ParseResources.swift */,
 			);
 			path = APIMiddleware;
-			sourceTree = "<group>";
-		};
-		AC4C84D8201404E600C8A4E6 /* ItemWithTrackListHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				AC4C84D62014046400C8A4E6 /* ItemWithTrackListHeaderView.xib */,
-				AC4C84D92014050300C8A4E6 /* ItemWithTrackListHeaderView.swift */,
-			);
-			path = ItemWithTrackListHeaderView;
 			sourceTree = "<group>";
 		};
 		AC4C84DF2014307C00C8A4E6 /* Resources */ = {
@@ -555,7 +544,7 @@
 		ACF43249200C12EF00110B53 /* ItemWithTrackListViewController */ = {
 			isa = PBXGroup;
 			children = (
-				AC4C84D8201404E600C8A4E6 /* ItemWithTrackListHeaderView */,
+				AC4C84D92014050300C8A4E6 /* ItemWithTrackListHeaderView.swift */,
 				ACF4324A200C132C00110B53 /* ItemWithTrackListViewController.swift */,
 				ACF4324C200C136C00110B53 /* ItemWithTrackListViewController.xib */,
 			);
@@ -638,7 +627,6 @@
 				AC4C84F0201430B100C8A4E6 /* CircularStd-BookItalic.otf in Resources */,
 				AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */,
 				AC4C84E9201430B100C8A4E6 /* CircularStd-MediumItalic.otf in Resources */,
-				AC4C84D72014046400C8A4E6 /* ItemWithTrackListHeaderView.xib in Resources */,
 				ACF4324D200C136C00110B53 /* ItemWithTrackListViewController.xib in Resources */,
 				AC5787221FDE18140057D41A /* SeedsViewController.xib in Resources */,
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,

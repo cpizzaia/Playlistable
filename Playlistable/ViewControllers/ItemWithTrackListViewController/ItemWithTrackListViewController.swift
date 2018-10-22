@@ -145,11 +145,7 @@ class ItemWithTrackListViewController: UIViewController, UITableViewDelegate, UI
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     guard let item = props?.item else { return nil }
 
-    let view = loadUIViewFromNib(ItemWithTrackListHeaderView.self)
-
-    view.setup(forItem: item)
-
-    return view
+    return ItemWithTrackListHeaderView(item: item)
   }
 
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
