@@ -50,7 +50,6 @@
 		AC4C84F0201430B100C8A4E6 /* CircularStd-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84E8201430B100C8A4E6 /* CircularStd-BookItalic.otf */; };
 		AC4C84F320146E8F00C8A4E6 /* BigButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84F220146E8F00C8A4E6 /* BigButton.swift */; };
 		AC4C84F6201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4C84F5201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift */; };
-		AC4C84F82015111000C8A4E6 /* GeneratedPlaylistHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC4C84F72015111000C8A4E6 /* GeneratedPlaylistHeaderView.xib */; };
 		AC53C9711FE37C6300664733 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53C9701FE37C6300664733 /* SearchViewController.swift */; };
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
 		AC5787201FDE17F00057D41A /* SeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57871F1FDE17F00057D41A /* SeedsViewController.swift */; };
@@ -141,7 +140,6 @@
 		AC4C84E8201430B100C8A4E6 /* CircularStd-BookItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CircularStd-BookItalic.otf"; sourceTree = "<group>"; };
 		AC4C84F220146E8F00C8A4E6 /* BigButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigButton.swift; sourceTree = "<group>"; };
 		AC4C84F5201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedPlaylistHeaderView.swift; sourceTree = "<group>"; };
-		AC4C84F72015111000C8A4E6 /* GeneratedPlaylistHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneratedPlaylistHeaderView.xib; sourceTree = "<group>"; };
 		AC53C9701FE37C6300664733 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AC57871F1FDE17F00057D41A /* SeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsViewController.swift; sourceTree = "<group>"; };
@@ -350,15 +348,6 @@
 			path = UIButtons;
 			sourceTree = "<group>";
 		};
-		AC4C84F4201510C000C8A4E6 /* GeneratedPlaylistHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				AC4C84F5201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift */,
-				AC4C84F72015111000C8A4E6 /* GeneratedPlaylistHeaderView.xib */,
-			);
-			path = GeneratedPlaylistHeaderView;
-			sourceTree = "<group>";
-		};
 		AC53C96D1FE37B8200664733 /* SearchController */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,7 +413,7 @@
 		AC8C20441FC9E226006FF1AC /* GeneratedPlaylistViewController */ = {
 			isa = PBXGroup;
 			children = (
-				AC4C84F4201510C000C8A4E6 /* GeneratedPlaylistHeaderView */,
+				AC4C84F5201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift */,
 				AC11971A1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift */,
 				AC11971C1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib */,
 			);
@@ -620,7 +609,6 @@
 				AC4C84EE201430B100C8A4E6 /* CircularStd-Medium.otf in Resources */,
 				AC4C84EF201430B100C8A4E6 /* CircularStd-BlackItalic.otf in Resources */,
 				AC11971D1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib in Resources */,
-				AC4C84F82015111000C8A4E6 /* GeneratedPlaylistHeaderView.xib in Resources */,
 				AC4C84EC201430B100C8A4E6 /* CircularStd-Book.otf in Resources */,
 				AC02D0D01F9CF5B3009ED193 /* Assets.xcassets in Resources */,
 			);

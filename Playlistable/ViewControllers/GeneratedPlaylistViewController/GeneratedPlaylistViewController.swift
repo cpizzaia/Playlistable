@@ -195,9 +195,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
 
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    let view = loadUIViewFromNib(GeneratedPlaylistHeaderView.self)
-
-    view.setupView(action: {
+    let view = GeneratedPlaylistHeaderView(action: {
       guard
         let props = self.props,
         let playlistID = props.playlistID
