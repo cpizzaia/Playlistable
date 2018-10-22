@@ -17,7 +17,6 @@
 		AC02D0DC1F9CF73B009ED193 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02D0DB1F9CF73B009ED193 /* APIRequest.swift */; };
 		AC02D0DF1F9CF7EF009ED193 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02D0DE1F9CF7EF009ED193 /* AppConstants.swift */; };
 		AC11971B1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC11971A1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift */; };
-		AC11971D1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC11971C1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib */; };
 		AC11971F1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC11971E1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift */; };
 		AC1197211FB8F447009D1646 /* GeneratePlaylistActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1197201FB8F447009D1646 /* GeneratePlaylistActions.swift */; };
 		AC1197231FB90EBB009D1646 /* SpotifyPlayerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1197221FB90EBB009D1646 /* SpotifyPlayerActions.swift */; };
@@ -66,6 +65,7 @@
 		AC8AB6BC1FA9777D00251F85 /* ResourceActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */; };
 		AC8C20401FC9DA2F006FF1AC /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C203F1FC9DA2F006FF1AC /* UIButtonExtensions.swift */; };
 		AC98D98F217AAC5C009EF80D /* NoSearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC98D98E217AAC5C009EF80D /* NoSearchResultsView.swift */; };
+		AC98D991217D85E2009EF80D /* NoPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC98D990217D85E2009EF80D /* NoPlaylistView.swift */; };
 		ACA09EA51F9D556800220E8B /* APIMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA09EA41F9D556800220E8B /* APIMiddleware.swift */; };
 		ACA3BF09207B280A008C0876 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA3BF08207B280A008C0876 /* ArrayExtensions.swift */; };
 		ACAA1A421FB548F700F6B345 /* SeedsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAA1A411FB548F700F6B345 /* SeedsReducer.swift */; };
@@ -106,7 +106,6 @@
 		AC02D0DB1F9CF73B009ED193 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		AC02D0DE1F9CF7EF009ED193 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		AC11971A1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedPlaylistViewController.swift; sourceTree = "<group>"; };
-		AC11971C1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneratedPlaylistViewController.xib; sourceTree = "<group>"; };
 		AC11971E1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratedPlaylistReducer.swift; sourceTree = "<group>"; };
 		AC1197201FB8F447009D1646 /* GeneratePlaylistActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePlaylistActions.swift; sourceTree = "<group>"; };
 		AC1197221FB90EBB009D1646 /* SpotifyPlayerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlayerActions.swift; sourceTree = "<group>"; };
@@ -156,6 +155,7 @@
 		AC8AB6BB1FA9777D00251F85 /* ResourceActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceActions.swift; sourceTree = "<group>"; };
 		AC8C203F1FC9DA2F006FF1AC /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		AC98D98E217AAC5C009EF80D /* NoSearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSearchResultsView.swift; sourceTree = "<group>"; };
+		AC98D990217D85E2009EF80D /* NoPlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPlaylistView.swift; sourceTree = "<group>"; };
 		ACA09EA41F9D556800220E8B /* APIMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIMiddleware.swift; sourceTree = "<group>"; };
 		ACA3BF08207B280A008C0876 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		ACAA1A411FB548F700F6B345 /* SeedsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsReducer.swift; sourceTree = "<group>"; };
@@ -415,7 +415,7 @@
 			children = (
 				AC4C84F5201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift */,
 				AC11971A1FB8DE91009D1646 /* GeneratedPlaylistViewController.swift */,
-				AC11971C1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib */,
+				AC98D990217D85E2009EF80D /* NoPlaylistView.swift */,
 			);
 			path = GeneratedPlaylistViewController;
 			sourceTree = "<group>";
@@ -608,7 +608,6 @@
 				AC4C84ED201430B100C8A4E6 /* CircularStd-Black.otf in Resources */,
 				AC4C84EE201430B100C8A4E6 /* CircularStd-Medium.otf in Resources */,
 				AC4C84EF201430B100C8A4E6 /* CircularStd-BlackItalic.otf in Resources */,
-				AC11971D1FB8DEC0009D1646 /* GeneratedPlaylistViewController.xib in Resources */,
 				AC4C84EC201430B100C8A4E6 /* CircularStd-Book.otf in Resources */,
 				AC02D0D01F9CF5B3009ED193 /* Assets.xcassets in Resources */,
 			);
@@ -731,6 +730,7 @@
 				AC4C84F6201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift in Sources */,
 				ACC816682027C3A800A03946 /* MutableCollectionExtensions.swift in Sources */,
 				AC8C20401FC9DA2F006FF1AC /* UIButtonExtensions.swift in Sources */,
+				AC98D991217D85E2009EF80D /* NoPlaylistView.swift in Sources */,
 				AC11972F1FB95686009D1646 /* PlayerBarContainerViewController.swift in Sources */,
 				ACBDF1401F9D172E001760D7 /* ConfigureStore.swift in Sources */,
 				ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */,

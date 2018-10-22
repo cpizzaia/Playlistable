@@ -39,7 +39,7 @@ class TabBarController: UITabBarController, MyStoreSubscriber {
     tabBar.tintColor = UIColor.myWhite
     tabBar.isTranslucent = false
 
-    let tabOne = UINavigationController(rootViewController: loadUIViewControllerFromNib(GeneratedPlaylistViewController.self))
+    let tabOne = UINavigationController(rootViewController: GeneratedPlaylistViewController())
 
     tabOne.tabBarItem = UITabBarItem()
     tabOne.tabBarItem.title = "Playlist"

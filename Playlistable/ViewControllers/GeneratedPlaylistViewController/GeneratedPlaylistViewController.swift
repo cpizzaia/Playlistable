@@ -25,36 +25,29 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
     let isGenerating: Bool
   }
 
-  @IBOutlet var noPlaylistView: UIView!
-  @IBOutlet var noPlaylistViewLabel: UILabel!
-  @IBOutlet var playlistView: UIView!
-  @IBOutlet var playlistTableView: UITableView!
-
+  // MARK: Public Properties
   var props: Props?
+
+  // MARK: Private Properties
+  private let noPlaylistView = NoPlaylistView()
+  private let playlistTableView = UITableView(frame: .zero, style: .grouped)
+
+  // MARK: Public Methods
+  init() {
+    super.init(nibName: nil, bundle: nil)
+
+    setupViews()
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = UIColor.myDarkBlack
-
-    noPlaylistView.backgroundColor = UIColor.clear
-    noPlaylistViewLabel.font = UIFont.myFont(withSize: 17)
-    noPlaylistViewLabel.textColor = UIColor.myWhite
-
-    playlistView.backgroundColor = UIColor.clear
-
-    playlistTableView.delegate = self
-    playlistTableView.dataSource = self
-    playlistTableView.delaysContentTouches = false
-    playlistTableView.backgroundColor = UIColor.myDarkBlack
-    playlistTableView.separatorStyle = .none
-
-    playlistTableView.register(
-      InspectAllTableViewCell.self,
-      forCellReuseIdentifier: "generatedTrackCell"
-    )
 
     // Adding view above section header to make color the same
-    var frame = playlistTableView.bounds
+    var frame = UIScreen.main.bounds
     frame.origin.y = -frame.size.height
 
     let bgView = UIView(frame: frame)
@@ -103,13 +96,10 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   }
 
   func didReceiveNewProps(props: Props) {
-
     noPlaylistView.isHidden = !props.noTracks
-    playlistView.isHidden = props.noTracks
 
     if props.isGenerating {
       noPlaylistView.isHidden = true
-      playlistView.isHidden = true
       SVProgressHUD.show()
     } else {
       SVProgressHUD.dismiss()
@@ -159,6 +149,41 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
       },
       failure: {}
     )
+  }
+
+  // MARK: Private Methods
+  private func setupViews() {
+    view.backgroundColor = UIColor.myDarkBlack
+
+    setupPlaylistTableView()
+    setupNoPlaylistView()
+  }
+
+  private func setupPlaylistTableView() {
+    view.addSubview(playlistTableView)
+
+    playlistTableView.snp.makeConstraints { make in
+      make.edges.equalTo(view)
+    }
+
+    playlistTableView.delegate = self
+    playlistTableView.dataSource = self
+    playlistTableView.delaysContentTouches = false
+    playlistTableView.backgroundColor = UIColor.myDarkBlack
+    playlistTableView.separatorStyle = .none
+
+    playlistTableView.register(
+      InspectAllTableViewCell.self,
+      forCellReuseIdentifier: "generatedTrackCell"
+    )
+  }
+
+  private func setupNoPlaylistView() {
+    view.addSubview(noPlaylistView)
+
+    noPlaylistView.snp.makeConstraints { make in
+      make.edges.equalTo(view)
+    }
   }
 
   // MARK: Table View Methods
