@@ -29,6 +29,8 @@
 		AC17B7FE1FBE9C3F0029AFB6 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */; };
 		AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */; };
 		AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC71FB412A20079AFC8 /* Item.swift */; };
+		AC2F609C218AA3EA003879E0 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F609B218AA3EA003879E0 /* TabBarView.swift */; };
+		AC2F609E218AA8E6003879E0 /* PlayAndTabBarContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2F609D218AA8E6003879E0 /* PlayAndTabBarContainerViewController.swift */; };
 		AC313A5E2086DC8200675097 /* MyStoreSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC313A5D2086DC8200675097 /* MyStoreSubscriber.swift */; };
 		AC3259BA207F001C008AB997 /* QueryParamMarketInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3259B9207F001C008AB997 /* QueryParamMarketInjector.swift */; };
 		AC3268951FAFC3A9000AA05B /* ParseResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3268941FAFC3A9000AA05B /* ParseResources.swift */; };
@@ -119,6 +121,8 @@
 		AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectAllTableViewCell.swift; sourceTree = "<group>"; };
 		AC18FCC71FB412A20079AFC8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Playlistable.entitlements; sourceTree = "<group>"; };
+		AC2F609B218AA3EA003879E0 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		AC2F609D218AA8E6003879E0 /* PlayAndTabBarContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAndTabBarContainerViewController.swift; sourceTree = "<group>"; };
 		AC313A5D2086DC8200675097 /* MyStoreSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreSubscriber.swift; sourceTree = "<group>"; };
 		AC3259B9207F001C008AB997 /* QueryParamMarketInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParamMarketInjector.swift; sourceTree = "<group>"; };
 		AC3268941FAFC3A9000AA05B /* ParseResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResources.swift; sourceTree = "<group>"; };
@@ -300,6 +304,15 @@
 			path = StateManagers;
 			sourceTree = "<group>";
 		};
+		AC2F609A218AA3C5003879E0 /* PlayAndTabBarContainerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AC2F609B218AA3EA003879E0 /* TabBarView.swift */,
+				AC2F609D218AA8E6003879E0 /* PlayAndTabBarContainerViewController.swift */,
+			);
+			path = PlayAndTabBarContainerViewController;
+			sourceTree = "<group>";
+		};
 		AC3259B8207F0001008AB997 /* QueryParamMarketInjector */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +374,7 @@
 		AC6271A11F9EDB9B002B068B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AC2F609A218AA3C5003879E0 /* PlayAndTabBarContainerViewController */,
 				AC36E6E51FE731090025BBE1 /* SeeAllSearchResultsViewController.swift */,
 				ACCE5195205F11DE008877F2 /* IntroViewController.swift */,
 				AC57871F1FDE17F00057D41A /* SeedsViewController.swift */,
@@ -712,6 +726,7 @@
 				AC8AB6B21FA964B300251F85 /* TrackFactory.swift in Sources */,
 				AC74DCBD20844105009F0C2E /* AudioInterruptionController.swift in Sources */,
 				AC02D0DC1F9CF73B009ED193 /* APIRequest.swift in Sources */,
+				AC2F609E218AA8E6003879E0 /* PlayAndTabBarContainerViewController.swift in Sources */,
 				AC0148761F9D700200F9A732 /* SpotifyAuthActions.swift in Sources */,
 				AC4C84DA2014050300C8A4E6 /* ItemWithTrackListHeaderView.swift in Sources */,
 				AC5787201FDE17F00057D41A /* SeedsViewController.swift in Sources */,
@@ -759,6 +774,7 @@
 				AC11971F1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift in Sources */,
 				AC313A5E2086DC8200675097 /* MyStoreSubscriber.swift in Sources */,
 				AC01487F1F9D907D00F9A732 /* URLExtensions.swift in Sources */,
+				AC2F609C218AA3EA003879E0 /* TabBarView.swift in Sources */,
 				AC17B7FA1FBE9ACA0029AFB6 /* LockscreenController.swift in Sources */,
 				ACBDF1331F9CFC23001760D7 /* Artist.swift in Sources */,
 				AC02D0DF1F9CF7EF009ED193 /* AppConstants.swift in Sources */,

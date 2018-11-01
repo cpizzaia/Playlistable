@@ -23,11 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     window = UIWindow(frame: UIScreen.main.bounds)
 
-    if mainStore.state.spotifyAuth.isRefreshable {
-      window?.rootViewController = loadUIViewControllerFromNib(PlayerBarContainerViewController.self)
-    } else {
-      window?.rootViewController = IntroViewController()
-    }
+//    if mainStore.state.spotifyAuth.isRefreshable {
+//      window?.rootViewController = loadUIViewControllerFromNib(PlayerBarContainerViewController.self)
+//    } else {
+//      window?.rootViewController = IntroViewController()
+//    }
+
+    window?.rootViewController = PlayAndTabBarContainerViewController()
 
     window?.makeKeyAndVisible()
 
