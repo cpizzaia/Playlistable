@@ -30,7 +30,7 @@ extension UIColor {
     return UIColor(rgb: 0x999999)
   }
 
-  static var myLighterBlack: UIColor { // so far only used for duration bar background
+  static var myDarkGray: UIColor { // so far only used for duration bar background
     return UIColor(rgb: 0x323232)
   }
 

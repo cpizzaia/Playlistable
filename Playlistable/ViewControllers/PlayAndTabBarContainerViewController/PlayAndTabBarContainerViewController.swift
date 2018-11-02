@@ -87,7 +87,12 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
     tabBar.switchToTab(index: props.selectedTabIndex)
 
     if let track = props.currentTrack {
-      playBar.update(forTrack: track, isPlaying: props.isPlaying)
+      playBar.update(
+        forTrack: track,
+        startTime: SpotifyPlayerActions.getCurrentPlayerPosition(),
+        endTime: (Double(track.durationMS / 1000)),
+        isPlaying: props.isPlaying
+      )
       playBar.show()
     } else {
       playBar.hide()

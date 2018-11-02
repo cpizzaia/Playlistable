@@ -13,6 +13,11 @@ class PlayBarView: UIView {
   // MARK: Private Properties
   private let trackTitleLabel = UILabel()
   private let pausePlayButton = UIButton()
+  private let durationBarBackground = UIView()
+  private let durationBar = UIView()
+  private var endTime: Double = 0
+  private var isPlaying = false
+  private var isAnimatingDuration = false
 
   // MARK: Public Methods
   init() {
@@ -24,9 +29,10 @@ class PlayBarView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
-  func update(forTrack track: Track, isPlaying: Bool) {
+  func update(forTrack track: Track, startTime: Double, endTime: Double, isPlaying: Bool) {
     updateFor(isPlaying: isPlaying)
     updateTitleLabel(forTrack: track)
+    animateDuration(startTime: startTime, endTime: endTime, isStopped: !isPlaying)
   }
 
   func hide() {
@@ -52,9 +58,12 @@ class PlayBarView: UIView {
     }
 
     backgroundColor = .myLightBlack
+    clipsToBounds = true
 
     setupTrackTitleLabel()
     setupPausePlayButton()
+    setupDurationBarBackground()
+    setupDurationBar()
   }
 
   private func setupTrackTitleLabel() {
@@ -82,6 +91,29 @@ class PlayBarView: UIView {
     }
   }
 
+  private func setupDurationBarBackground() {
+    addSubview(durationBarBackground)
+
+    durationBarBackground.snp.makeConstraints { make in
+      make.leading.trailing.equalTo(self)
+      make.bottom.equalTo(self)
+      make.height.equalTo(2)
+    }
+
+    durationBarBackground.backgroundColor = .green
+  }
+
+  private func setupDurationBar() {
+    durationBarBackground.addSubview(durationBar)
+
+    durationBar.snp.makeConstraints { make in
+      make.leading.top.bottom.equalTo(durationBarBackground)
+      make.width.equalTo(0)
+    }
+
+    durationBar.backgroundColor = .red
+  }
+
   private func updateFor(isPlaying: Bool) {
     runOnMainThread {
       self.pausePlayButton.setTitleColor(.myWhite, for: .normal)
@@ -97,6 +129,41 @@ class PlayBarView: UIView {
   private func updateTitleLabel(forTrack track: Track) {
     runOnMainThread {
       self.trackTitleLabel.attributedText = "\(track.name) \u{2022} \(track.artistNames.first ?? "")".attributedStringForPartiallyColoredText(track.artistNames.first ?? "", with: .myGray)
+    }
+  }
+
+  func animateDuration(startTime: Double, endTime: Double, isStopped: Bool) {
+    runOnMainThread {
+      if self.isAnimatingDuration && !isStopped && self.endTime == endTime { return }
+
+      self.endTime = endTime
+
+      self.durationBar.layer.removeAllAnimations()
+
+      let percentCompleted = startTime / endTime
+      let timeLeft = endTime - startTime
+
+      let fullWidth = self.frame.size.width
+
+      self.durationBar.snp.updateConstraints { update in
+        update.width.equalTo(fullWidth * CGFloat(1 - percentCompleted))
+      }
+
+      self.layoutIfNeeded()
+
+      if isStopped { return }
+
+      self.isAnimatingDuration = true
+
+      self.durationBar.snp.updateConstraints { update in
+        update.width.equalTo(fullWidth)
+      }
+
+      UIView.animate(withDuration: timeLeft, delay: 0, options: .curveLinear, animations: {
+        self.layoutIfNeeded()
+      }, completion: { _ in
+        self.isAnimatingDuration = false
+      })
     }
   }
 }

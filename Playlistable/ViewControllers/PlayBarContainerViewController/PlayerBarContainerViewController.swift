@@ -87,7 +87,7 @@ class PlayerBarContainerViewController: UIViewController, MyStoreSubscriber {
     playBarTitleLabel.textColor = UIColor.myWhite
 
     durationBarView.backgroundColor = UIColor.myWhite
-    durationBarBackground.backgroundColor = UIColor.myLighterBlack
+    durationBarBackground.backgroundColor = UIColor.myDarkGray
   }
 
   override func viewWillAppear(_ animated: Bool) {

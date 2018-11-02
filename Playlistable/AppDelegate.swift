@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var preferences = EasyTipView.Preferences()
 
     preferences.drawing.font = UIFont.myFont(withSize: 17)
-    preferences.drawing.backgroundColor = UIColor.myLighterBlack
+    preferences.drawing.backgroundColor = UIColor.myDarkGray
     preferences.drawing.foregroundColor = UIColor.myWhite
 
     EasyTipView.globalPreferences = preferences
