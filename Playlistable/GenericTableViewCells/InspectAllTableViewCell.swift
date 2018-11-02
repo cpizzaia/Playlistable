@@ -128,7 +128,7 @@ class InspectAllTableViewCell: UITableViewCell {
     }
 
     subTitleLabel.font = UIFont.myFont(withSize: 15)
-    subTitleLabel.textColor = UIColor.myDarkWhite
+    subTitleLabel.textColor = UIColor.myGray
   }
 
   private func setupActionButton() {

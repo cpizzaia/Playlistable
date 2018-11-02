@@ -26,7 +26,7 @@ extension UIColor {
     return UIColor(rgb: 0xE0AC00)
   }
 
-  static var myDarkWhite: UIColor {
+  static var myGray: UIColor {
     return UIColor(rgb: 0x999999)
   }
 

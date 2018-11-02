@@ -61,7 +61,7 @@ class PlayerBarContainerViewController: UIViewController, MyStoreSubscriber {
     isPlayerBarHidden = playBarView.isHidden
 
     if let track = props.playingTrack {
-      playBarTitleLabel.attributedText = "\(track.name) \u{2022} \(track.artistNames.first ?? "")".attributedStringForPartiallyColoredText(track.artistNames.first ?? "", with: UIColor.myDarkWhite)
+      playBarTitleLabel.attributedText = "\(track.name) \u{2022} \(track.artistNames.first ?? "")".attributedStringForPartiallyColoredText(track.artistNames.first ?? "", with: UIColor.myGray)
 
       animateDuration(startTime: SpotifyPlayerActions.getCurrentPlayerPosition(), endTime: Double(track.durationMS) / 1000.0, isStopped: !props.isPlaying)
     }

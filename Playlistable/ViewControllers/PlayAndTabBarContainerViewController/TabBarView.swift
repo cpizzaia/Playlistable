@@ -21,18 +21,28 @@ class TabBarView: UIView {
     let name: String
   }
 
+  // MARK: Private Types
+  typealias TabUIElement = (label: UILabel, imageView: UIImageView)
+
   // MARK: Public Properties
   weak var delegate: TabBarViewDelegate?
+  var currentViewController: UIViewController {
+    return tabs[currentTabIndex].viewController
+  }
 
   // MARK: Private Properties
   private let tabs: [Tab]
   private let stackView = UIStackView()
+  private var tabUIElements = [TabUIElement]()
+  private var currentTabIndex: Int
 
   // MARK: Public Methods
-  init(tabs: [Tab]) {
+  init(tabs: [Tab], initialTabIndex: Int = 0) {
     self.tabs = tabs
+    self.currentTabIndex = initialTabIndex
     super.init(frame: .zero)
     setupViews()
+    setCurrentTab(index: initialTabIndex)
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -40,7 +50,7 @@ class TabBarView: UIView {
   }
 
   @objc func tabPressed(_ button: UIButton) {
-    delegate?.selected(viewController: tabs[button.tag].viewController)
+    self.switchToTab(index: button.tag)
   }
 
   // MARK: Private Methods
@@ -92,7 +102,9 @@ class TabBarView: UIView {
       make.top.equalTo(backgroundView).offset(4)
     }
 
-    imageView.image = UIImage(named: tab.imageString)
+    let image = UIImage(named: tab.imageString)?.withRenderingMode(.alwaysTemplate)
+    imageView.tintColor = .myGray
+    imageView.image = image
 
     // Setting up tab name
     backgroundView.addSubview(nameLabel)
@@ -104,7 +116,9 @@ class TabBarView: UIView {
 
     nameLabel.text = tab.name
     nameLabel.font = .myFont(withSize: 10)
-    nameLabel.textColor = .myWhite
+    nameLabel.textColor = .myGray
+
+    tabUIElements.append((label: nameLabel, imageView: imageView))
 
     // Setting up tab button
     backgroundView.addSubview(button)
@@ -116,5 +130,27 @@ class TabBarView: UIView {
 
     button.addTarget(self, action: #selector(tabPressed), for: .touchUpInside)
     button.tag = index
+  }
+
+  private func switchToTab(index: Int) {
+    if currentTabIndex == index { return }
+
+    setCurrentTab(index: index)
+    delegate?.selected(viewController: self.tabs[index].viewController)
+  }
+
+  private func setCurrentTab(index: Int) {
+    DispatchQueue.main.async {
+      let currentTabUIElement = self.tabUIElements[self.currentTabIndex]
+      let selectedTabUIElement = self.tabUIElements[index]
+
+      currentTabUIElement.imageView.tintColor = .myGray
+      currentTabUIElement.label.textColor = .myGray
+
+      selectedTabUIElement.imageView.tintColor = .myWhite
+      selectedTabUIElement.label.textColor = .myWhite
+
+      self.currentTabIndex = index
+    }
   }
 }
