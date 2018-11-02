@@ -81,7 +81,7 @@ class SeedsViewController: UIViewController, MyStoreSubscriber, UITableViewDeleg
 
   @objc func generatePlaylistButtonTapped(_ sender: UIButton) {
     generateFunction()
-    tabBarController?.selectedIndex = 0
+    mainStore.dispatch(TabBarActions.SwitchTabIndex(selectedIndex: 0))
   }
 
   // MARK: Private Methods

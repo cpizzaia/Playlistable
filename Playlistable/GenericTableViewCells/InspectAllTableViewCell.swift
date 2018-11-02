@@ -16,7 +16,7 @@ class InspectAllTableViewCell: UITableViewCell {
     get {
       return _seededCell
     } set {
-      DispatchQueue.main.async {
+      runOnMainThread {
         self.backgroundColor = newValue ? UIColor.myAccent.withAlphaComponent(0.5) : UIColor.clear
 
         self._seededCell = newValue
@@ -147,7 +147,7 @@ class InspectAllTableViewCell: UITableViewCell {
   }
 
   private func showImage() {
-    DispatchQueue.main.async {
+    runOnMainThread {
       self.itemImage.snp.remakeConstraints { make in
         make.height.equalTo(self.contentView).multipliedBy(0.8)
         make.width.equalTo(self.itemImage.snp.height)
@@ -158,7 +158,7 @@ class InspectAllTableViewCell: UITableViewCell {
   }
 
   private func hideImage() {
-    DispatchQueue.main.async {
+    runOnMainThread {
       self.itemImage.snp.remakeConstraints { make in
         make.height.equalTo(self.contentView).multipliedBy(0.8)
         make.width.equalTo(0)

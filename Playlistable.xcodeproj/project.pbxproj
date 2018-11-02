@@ -81,6 +81,9 @@
 		ACBDF1431F9D3749001760D7 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1421F9D3749001760D7 /* AppReducer.swift */; };
 		ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */; };
 		ACBDF14D1F9D541E001760D7 /* LoggingMiddlware.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */; };
+		ACBF9BCC218BD5B400A16155 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BCB218BD5B400A16155 /* MyNavigationController.swift */; };
+		ACBF9BCE218BD93D00A16155 /* TabBarReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BCD218BD93D00A16155 /* TabBarReducer.swift */; };
+		ACBF9BD0218BD9A800A16155 /* TabBarActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BCF218BD9A800A16155 /* TabBarActions.swift */; };
 		ACC816682027C3A800A03946 /* MutableCollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */; };
 		ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816692027C3F500A03946 /* SequenceExtensions.swift */; };
 		ACCE5196205F11DE008877F2 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE5195205F11DE008877F2 /* IntroViewController.swift */; };
@@ -173,6 +176,9 @@
 		ACBDF1421F9D3749001760D7 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		ACBDF1441F9D38B4001760D7 /* SpotifyAuthReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthReducer.swift; sourceTree = "<group>"; };
 		ACBDF14C1F9D541E001760D7 /* LoggingMiddlware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingMiddlware.swift; sourceTree = "<group>"; };
+		ACBF9BCB218BD5B400A16155 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
+		ACBF9BCD218BD93D00A16155 /* TabBarReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarReducer.swift; sourceTree = "<group>"; };
+		ACBF9BCF218BD9A800A16155 /* TabBarActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarActions.swift; sourceTree = "<group>"; };
 		ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableCollectionExtensions.swift; sourceTree = "<group>"; };
 		ACC816692027C3F500A03946 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		ACCE5195205F11DE008877F2 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
@@ -253,6 +259,7 @@
 		AC02D0C71F9CF5B3009ED193 /* Playlistable */ = {
 			isa = PBXGroup;
 			children = (
+				ACBF9BCA218BD5A200A16155 /* SubClasses */,
 				ACEC1E1520962CAC009CC83C /* Services */,
 				AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */,
 				AC4C84F120146E1400C8A4E6 /* UIButtons */,
@@ -485,6 +492,7 @@
 				AC1197241FB91198009D1646 /* SpotifyPlayerReducer.swift */,
 				AC36E6D91FE593660025BBE1 /* SearchReducer.swift */,
 				ACF4324E200C261F00110B53 /* InspectAlbumReducer.swift */,
+				ACBF9BCD218BD93D00A16155 /* TabBarReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -499,6 +507,7 @@
 				AC1197221FB90EBB009D1646 /* SpotifyPlayerActions.swift */,
 				AC36E6DB1FE5942A0025BBE1 /* SearchActions.swift */,
 				ACF43251200C334000110B53 /* InspectAlbumActions.swift */,
+				ACBF9BCF218BD9A800A16155 /* TabBarActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -513,6 +522,14 @@
 				AC3268931FAFC382000AA05B /* APIMiddleware */,
 			);
 			path = Middleware;
+			sourceTree = "<group>";
+		};
+		ACBF9BCA218BD5A200A16155 /* SubClasses */ = {
+			isa = PBXGroup;
+			children = (
+				ACBF9BCB218BD5B400A16155 /* MyNavigationController.swift */,
+			);
+			path = SubClasses;
 			sourceTree = "<group>";
 		};
 		ACEC1E1520962CAC009CC83C /* Services */ = {
@@ -718,6 +735,7 @@
 				ACF4324F200C261F00110B53 /* InspectAlbumReducer.swift in Sources */,
 				AC01487B1F9D855D00F9A732 /* APIQueryParamsFormatter.swift in Sources */,
 				ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */,
+				ACBF9BCE218BD93D00A16155 /* TabBarReducer.swift in Sources */,
 				AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */,
 				AC98D98F217AAC5C009EF80D /* NoSearchResultsView.swift in Sources */,
 				ACEC1E1720962CDD009CC83C /* MyUserDefaults.swift in Sources */,
@@ -733,6 +751,7 @@
 				AC53C9711FE37C6300664733 /* SearchViewController.swift in Sources */,
 				AC02D0C91F9CF5B3009ED193 /* AppDelegate.swift in Sources */,
 				ACF4324B200C132C00110B53 /* ItemWithTrackListViewController.swift in Sources */,
+				ACBF9BD0218BD9A800A16155 /* TabBarActions.swift in Sources */,
 				AC8AB6AF1FA9641B00251F85 /* SpotifyResponseParser.swift in Sources */,
 				ACCE5196205F11DE008877F2 /* IntroViewController.swift in Sources */,
 				AC17B7FE1FBE9C3F0029AFB6 /* StateManager.swift in Sources */,
@@ -772,6 +791,7 @@
 				AC4C84F320146E8F00C8A4E6 /* BigButton.swift in Sources */,
 				AC8AB6B41FA967ED00251F85 /* ArtistFactory.swift in Sources */,
 				AC11971F1FB8E4D9009D1646 /* GeneratedPlaylistReducer.swift in Sources */,
+				ACBF9BCC218BD5B400A16155 /* MyNavigationController.swift in Sources */,
 				AC313A5E2086DC8200675097 /* MyStoreSubscriber.swift in Sources */,
 				AC01487F1F9D907D00F9A732 /* URLExtensions.swift in Sources */,
 				AC2F609C218AA3EA003879E0 /* TabBarView.swift in Sources */,

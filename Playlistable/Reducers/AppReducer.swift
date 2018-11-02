@@ -17,6 +17,7 @@ struct AppState: StateType {
   var spotifyPlayer: SpotifyPlayerState
   var search: SearchState
   var inspectAlbum: InspectAlbumState
+  var tabBar: TabBarState
 }
 
 func appReducer(action: Action, state: AppState?) -> AppState {
@@ -27,6 +28,7 @@ func appReducer(action: Action, state: AppState?) -> AppState {
     generatedPlaylist: generatedPlaylistReducer(action: action, state: state?.generatedPlaylist),
     spotifyPlayer: spotifyPlayerReducer(action: action, state: state?.spotifyPlayer),
     search: searchReducer(action: action, state: state?.search),
-    inspectAlbum: inspectAlbumReducer(action: action, state: state?.inspectAlbum)
+    inspectAlbum: inspectAlbumReducer(action: action, state: state?.inspectAlbum),
+    tabBar: tabBarReducer(action: action, state: state?.tabBar)
   )
 }

@@ -111,7 +111,7 @@ class LockScreenController: NSObject, StateManager {
   }
 
   private func updateNowPlayingInfo(forTrack track: Track) {
-    DispatchQueue.main.async {
+    runOnMainThread {
       var info = [
         MPMediaItemPropertyMediaType: 1 as AnyObject,
         MPMediaItemPropertyIsCloudItem: false as AnyObject,

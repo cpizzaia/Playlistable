@@ -74,7 +74,7 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
 
   func didReceiveNewProps(props: Props) {
     if props.spotifyAuthState.isAuthed && !props.doesNotHaveUser && props.hasPremium {
-      let vc = loadUIViewControllerFromNib(PlayerBarContainerViewController.self)
+      let vc = PlayAndTabBarContainerViewController()
 
       present(vc, animated: true, completion: nil)
 

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol TabBarViewDelegate: class {
-  func selected(viewController: UIViewController)
+  func selected(viewController: UIViewController, atTabIndex tabIndex: Int)
 }
 
 class TabBarView: UIView {
@@ -51,6 +51,13 @@ class TabBarView: UIView {
 
   @objc func tabPressed(_ button: UIButton) {
     self.switchToTab(index: button.tag)
+  }
+
+  func switchToTab(index: Int) {
+    if currentTabIndex == index { return }
+
+    setCurrentTab(index: index)
+    delegate?.selected(viewController: self.tabs[index].viewController, atTabIndex: index)
   }
 
   // MARK: Private Methods
@@ -132,15 +139,8 @@ class TabBarView: UIView {
     button.tag = index
   }
 
-  private func switchToTab(index: Int) {
-    if currentTabIndex == index { return }
-
-    setCurrentTab(index: index)
-    delegate?.selected(viewController: self.tabs[index].viewController)
-  }
-
   private func setCurrentTab(index: Int) {
-    DispatchQueue.main.async {
+    runOnMainThread {
       let currentTabUIElement = self.tabUIElements[self.currentTabIndex]
       let selectedTabUIElement = self.tabUIElements[index]
 

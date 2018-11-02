@@ -9,21 +9,32 @@
 import Foundation
 import UIKit
 
-class PlayAndTabBarContainerViewController: UIViewController {
+class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate, MyStoreSubscriber {
+  // MARK: Public Types
+  typealias StoreSubscriberStateType = AppState
+
+  struct Props {
+    let selectedTabIndex: Int
+  }
+
+  // MARK: Public Properties
+  var props: Props?
+
   // MARK: Private Properties
+  private var currentViewController: UIViewController?
   private let tabBar = TabBarView(tabs: [
     TabBarView.Tab(
-      viewController: UINavigationController(rootViewController: GeneratedPlaylistViewController()),
+      viewController: MyNavigationController(rootViewController: GeneratedPlaylistViewController()),
       imageString: "PlaylistTab",
       name: "Playlist"
     ),
     TabBarView.Tab(
-      viewController: UINavigationController(rootViewController: SeedsViewController()),
+      viewController: MyNavigationController(rootViewController: SeedsViewController()),
       imageString: "SeedsTab",
       name: "Seeds"
     ),
     TabBarView.Tab(
-      viewController: UINavigationController(rootViewController: SearchViewController()),
+      viewController: MyNavigationController(rootViewController: SearchViewController()),
       imageString: "SearchTab",
       name: "Search"
     )
@@ -34,19 +45,86 @@ class PlayAndTabBarContainerViewController: UIViewController {
     super.init(nibName: nil, bundle: nil)
 
     setupViews()
+    switchTo(viewController: tabBar.currentViewController)
+
+    let navAppearance = UINavigationBar.appearance()
+
+    navAppearance.tintColor = UIColor.myWhite
+    navAppearance.isTranslucent = false
+    navAppearance.setBackgroundImage(UIImage(), for: .default)
+    navAppearance.shadowImage = UIImage()
   }
 
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    mainStore.subscribe(self)
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+
+    mainStore.unsubscribe(self)
+  }
+
+  func mapStateToProps(state: AppState) -> Props {
+    return Props(selectedTabIndex: state.tabBar.selectedIndex)
+  }
+
+  func didReceiveNewProps(props: Props) {
+    tabBar.switchToTab(index: props.selectedTabIndex)
+  }
+
   // MARK: Private Methods
   private func setupViews() {
+    setupTabBar()
+  }
+
+  private func setupTabBar() {
     view.addSubview(tabBar)
 
     tabBar.snp.makeConstraints { make in
       make.leading.trailing.equalTo(self.view)
       make.bottom.equalTo(self.view)
     }
+
+    tabBar.delegate = self
+  }
+
+  private func switchTo(viewController: UIViewController) {
+    removeCurrentViewController()
+    display(viewController: viewController)
+  }
+
+  private func removeCurrentViewController() {
+    currentViewController?.view.removeFromSuperview()
+    currentViewController?.removeFromParent()
+  }
+
+  private func display(viewController: UIViewController) {
+    addChild(viewController)
+
+    view.addSubview(viewController.view)
+
+    view.sendSubviewToBack(viewController.view)
+
+    viewController.view.snp.makeConstraints { make in
+      make.top.leading.trailing.equalTo(view)
+      make.bottom.equalTo(tabBar.snp.top)
+    }
+
+    viewController.didMove(toParent: self)
+
+    currentViewController = viewController
+  }
+
+  // MARK: TabBarViewDelegate
+  func selected(viewController: UIViewController, atTabIndex tabIndex: Int) {
+    switchTo(viewController: viewController)
+    mainStore.dispatch(TabBarActions.SwitchTabIndex(selectedIndex: tabIndex))
   }
 }

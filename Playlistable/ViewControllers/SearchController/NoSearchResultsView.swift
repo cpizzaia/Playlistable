@@ -25,13 +25,13 @@ class NoSearchResultsView: UIView {
   }
 
   func switchToHasSearched() {
-    DispatchQueue.main.async {
+    runOnMainThread {
       self.descriptionLabel.text = "Your search had no results"
     }
   }
 
   func switchToHasntSearched() {
-    DispatchQueue.main.async {
+    runOnMainThread {
       self.descriptionLabel.text = "Start by searching for your favorite music"
     }
   }

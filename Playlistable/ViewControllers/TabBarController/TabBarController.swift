@@ -121,5 +121,4 @@ class TabBarController: UITabBarController, MyStoreSubscriber {
     navigationController.navigationBar.backgroundColor = UIColor.myLightBlack
     navigationController.navigationBar.barTintColor = UIColor.myLightBlack
   }
-
 }

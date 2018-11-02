@@ -37,7 +37,14 @@ func loadUIViewFromNib<T: UIView>(_ className: T.Type) -> T {
 
 func delay(_ delay: Double, closure:@escaping () -> Void) {
   DispatchQueue.main.asyncAfter(
-    deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+    deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure
+  )
+}
+
+func runOnMainThread(_ block: @escaping () -> Void) {
+  if Thread.isMainThread { return block() }
+
+  DispatchQueue.main.async(execute: block)
 }
 
 func trackURI(fromID id: String) -> String {

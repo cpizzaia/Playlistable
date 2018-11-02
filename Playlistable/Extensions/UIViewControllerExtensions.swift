@@ -80,7 +80,7 @@ extension UIViewController {
       successActionTitle: "OK",
       failureActionTitle: "Cancel",
       success: {
-        DispatchQueue.main.async {
+        runOnMainThread {
           self.tabBarController?.selectedIndex = 1
         }
     },
