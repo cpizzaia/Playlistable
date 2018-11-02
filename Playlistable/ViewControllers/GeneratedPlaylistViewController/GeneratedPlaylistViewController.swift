@@ -239,16 +239,4 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return UIScreen.main.bounds.height * 0.075
   }
-
-  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    return heightForFooterWithPlayerBar
-  }
-
-  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-    let view = UIView()
-
-    view.backgroundColor = .clear
-
-    return view
-  }
 }

@@ -134,7 +134,7 @@ class SeedsViewController: UIViewController, MyStoreSubscriber, UITableViewDeleg
     generatePlaylistButton.snp.makeConstraints { make in
       make.width.equalTo(view).multipliedBy(0.55)
       make.height.equalTo(view).multipliedBy(0.085)
-      make.bottom.equalTo(view).inset(60)
+      make.bottom.equalTo(view).inset(30)
       make.centerX.equalTo(view)
     }
 

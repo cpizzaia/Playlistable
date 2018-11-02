@@ -55,6 +55,8 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
     super.viewWillAppear(animated)
 
     mainStore.subscribe(self)
+
+    mainStore.dispatch(TabBarActions.SwitchTabIndex(selectedIndex: 2))
   }
 
   override func viewWillDisappear(_ animated: Bool) {

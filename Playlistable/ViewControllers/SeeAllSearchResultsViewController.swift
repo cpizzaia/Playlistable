@@ -156,16 +156,4 @@ class SeeAllSearchResultsViewController: UIViewController, MyStoreSubscriber, UI
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 70
   }
-
-  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-    let view = UIView()
-
-    view.backgroundColor = UIColor.myDarkBlack
-
-    return view
-  }
-
-  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    return heightForFooterWithPlayerBar
-  }
 }

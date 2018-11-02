@@ -312,10 +312,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
     }
   }
 
-  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    return heightForFooterWithPlayerBar
-  }
-
   // MARK: UISearchBar Methods
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     guard let query = searchBar.text else { return }

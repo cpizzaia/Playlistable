@@ -15,6 +15,8 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
 
   struct Props {
     let selectedTabIndex: Int
+    let currentTrack: Track?
+    let isPlaying: Bool
   }
 
   // MARK: Public Properties
@@ -22,6 +24,7 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
 
   // MARK: Private Properties
   private var currentViewController: UIViewController?
+  private let playBar = PlayBarView()
   private let tabBar = TabBarView(tabs: [
     TabBarView.Tab(
       viewController: MyNavigationController(rootViewController: GeneratedPlaylistViewController()),
@@ -65,16 +68,36 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
   }
 
   func mapStateToProps(state: AppState) -> Props {
-    return Props(selectedTabIndex: state.tabBar.selectedIndex)
+    let currentTrack: Track?
+
+    if let trackID = state.spotifyPlayer.playingTrackID {
+      currentTrack = state.resources.trackFor(id: trackID)
+    } else {
+      currentTrack = nil
+    }
+
+    return Props(
+      selectedTabIndex: state.tabBar.selectedIndex,
+      currentTrack: currentTrack,
+      isPlaying: state.spotifyPlayer.isPlaying
+    )
   }
 
   func didReceiveNewProps(props: Props) {
     tabBar.switchToTab(index: props.selectedTabIndex)
+
+    if let track = props.currentTrack {
+      playBar.update(forTrack: track, isPlaying: props.isPlaying)
+      playBar.show()
+    } else {
+      playBar.hide()
+    }
   }
 
   // MARK: Private Methods
   private func setupViews() {
     setupTabBar()
+    setupPlayBar()
   }
 
   private func setupTabBar() {
@@ -86,6 +109,15 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
     }
 
     tabBar.delegate = self
+  }
+
+  private func setupPlayBar() {
+    view.addSubview(playBar)
+
+    playBar.snp.makeConstraints { make in
+      make.leading.trailing.equalTo(view)
+      make.bottom.equalTo(tabBar.snp.top)
+    }
   }
 
   private func switchTo(viewController: UIViewController) {
@@ -107,7 +139,7 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
 
     viewController.view.snp.makeConstraints { make in
       make.top.leading.trailing.equalTo(view)
-      make.bottom.equalTo(tabBar.snp.top)
+      make.bottom.equalTo(playBar.snp.top)
     }
 
     viewController.didMove(toParent: self)

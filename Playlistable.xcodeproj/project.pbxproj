@@ -85,6 +85,7 @@
 		ACBF9BCE218BD93D00A16155 /* TabBarReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BCD218BD93D00A16155 /* TabBarReducer.swift */; };
 		ACBF9BD0218BD9A800A16155 /* TabBarActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BCF218BD9A800A16155 /* TabBarActions.swift */; };
 		ACBF9BD2218BE7AF00A16155 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BD1218BE7AF00A16155 /* LoadingViewController.swift */; };
+		ACBF9BD4218BF2D000A16155 /* PlayBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BD3218BF2D000A16155 /* PlayBarView.swift */; };
 		ACC816682027C3A800A03946 /* MutableCollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */; };
 		ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816692027C3F500A03946 /* SequenceExtensions.swift */; };
 		ACCE5196205F11DE008877F2 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE5195205F11DE008877F2 /* IntroViewController.swift */; };
@@ -181,6 +182,7 @@
 		ACBF9BCD218BD93D00A16155 /* TabBarReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarReducer.swift; sourceTree = "<group>"; };
 		ACBF9BCF218BD9A800A16155 /* TabBarActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarActions.swift; sourceTree = "<group>"; };
 		ACBF9BD1218BE7AF00A16155 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		ACBF9BD3218BF2D000A16155 /* PlayBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBarView.swift; sourceTree = "<group>"; };
 		ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableCollectionExtensions.swift; sourceTree = "<group>"; };
 		ACC816692027C3F500A03946 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		ACCE5195205F11DE008877F2 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			children = (
 				AC2F609B218AA3EA003879E0 /* TabBarView.swift */,
 				AC2F609D218AA8E6003879E0 /* PlayAndTabBarContainerViewController.swift */,
+				ACBF9BD3218BF2D000A16155 /* PlayBarView.swift */,
 			);
 			path = PlayAndTabBarContainerViewController;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				ACBF9BD0218BD9A800A16155 /* TabBarActions.swift in Sources */,
 				AC8AB6AF1FA9641B00251F85 /* SpotifyResponseParser.swift in Sources */,
 				ACCE5196205F11DE008877F2 /* IntroViewController.swift in Sources */,
+				ACBF9BD4218BF2D000A16155 /* PlayBarView.swift in Sources */,
 				AC17B7FE1FBE9C3F0029AFB6 /* StateManager.swift in Sources */,
 				ACAA1A421FB548F700F6B345 /* SeedsReducer.swift in Sources */,
 				AC1197231FB90EBB009D1646 /* SpotifyPlayerActions.swift in Sources */,
