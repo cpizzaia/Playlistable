@@ -46,13 +46,6 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
 
     setupViews()
     switchTo(viewController: tabBar.currentViewController)
-
-    let navAppearance = UINavigationBar.appearance()
-
-    navAppearance.tintColor = UIColor.myWhite
-    navAppearance.isTranslucent = false
-    navAppearance.setBackgroundImage(UIImage(), for: .default)
-    navAppearance.shadowImage = UIImage()
   }
 
   required init?(coder aDecoder: NSCoder) {

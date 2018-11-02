@@ -33,6 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     startStateManagers()
 
+    let navAppearance = UINavigationBar.appearance()
+
+    navAppearance.tintColor = UIColor.myWhite
+    navAppearance.isTranslucent = false
+    navAppearance.setBackgroundImage(UIImage(), for: .default)
+    navAppearance.shadowImage = UIImage()
+
     return true
   }
 
