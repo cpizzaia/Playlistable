@@ -111,7 +111,7 @@ class SeedsViewController: UIViewController, MyStoreSubscriber, UITableViewDeleg
     seedsTableView.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view)
       make.top.equalTo(titleLabel).offset(20)
-      make.bottom.equalTo(generatePlaylistButton.snp.top).inset(30)
+      make.bottom.equalTo(generatePlaylistButton.snp.top)
     }
 
     seedsTableView.delegate = self
