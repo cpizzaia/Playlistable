@@ -84,6 +84,7 @@
 		ACBF9BCC218BD5B400A16155 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BCB218BD5B400A16155 /* MyNavigationController.swift */; };
 		ACBF9BCE218BD93D00A16155 /* TabBarReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BCD218BD93D00A16155 /* TabBarReducer.swift */; };
 		ACBF9BD0218BD9A800A16155 /* TabBarActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BCF218BD9A800A16155 /* TabBarActions.swift */; };
+		ACBF9BD2218BE7AF00A16155 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BD1218BE7AF00A16155 /* LoadingViewController.swift */; };
 		ACC816682027C3A800A03946 /* MutableCollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */; };
 		ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816692027C3F500A03946 /* SequenceExtensions.swift */; };
 		ACCE5196205F11DE008877F2 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE5195205F11DE008877F2 /* IntroViewController.swift */; };
@@ -179,6 +180,7 @@
 		ACBF9BCB218BD5B400A16155 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
 		ACBF9BCD218BD93D00A16155 /* TabBarReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarReducer.swift; sourceTree = "<group>"; };
 		ACBF9BCF218BD9A800A16155 /* TabBarActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarActions.swift; sourceTree = "<group>"; };
+		ACBF9BD1218BE7AF00A16155 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableCollectionExtensions.swift; sourceTree = "<group>"; };
 		ACC816692027C3F500A03946 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		ACCE5195205F11DE008877F2 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				AC8C20411FC9E1E4006FF1AC /* TabBarController */,
 				AC8C20441FC9E226006FF1AC /* GeneratedPlaylistViewController */,
 				AC8C20451FC9E23D006FF1AC /* PlayBarContainerViewController */,
+				ACBF9BD1218BE7AF00A16155 /* LoadingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 				AC4C84F6201510E200C8A4E6 /* GeneratedPlaylistHeaderView.swift in Sources */,
 				ACC816682027C3A800A03946 /* MutableCollectionExtensions.swift in Sources */,
 				AC8C20401FC9DA2F006FF1AC /* UIButtonExtensions.swift in Sources */,
+				ACBF9BD2218BE7AF00A16155 /* LoadingViewController.swift in Sources */,
 				AC98D991217D85E2009EF80D /* NoPlaylistView.swift in Sources */,
 				AC11972F1FB95686009D1646 /* PlayerBarContainerViewController.swift in Sources */,
 				ACBDF1401F9D172E001760D7 /* ConfigureStore.swift in Sources */,

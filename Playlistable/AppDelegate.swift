@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     window = UIWindow(frame: UIScreen.main.bounds)
 
-    window?.rootViewController = IntroViewController()
+    window?.rootViewController = LoadingViewController()
 
     window?.makeKeyAndVisible()
 
