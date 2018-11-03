@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate, MyStoreSubscriber {
+class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate, PlayBarViewDelegate, MyStoreSubscriber {
   // MARK: Public Types
   typealias StoreSubscriberStateType = AppState
 
@@ -123,6 +123,8 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
       make.leading.trailing.equalTo(view)
       make.bottom.equalTo(tabBar.snp.top)
     }
+
+    playBar.delegate = self
   }
 
   private func switchTo(viewController: UIViewController) {
@@ -156,5 +158,14 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
   func selected(viewController: UIViewController, atTabIndex tabIndex: Int) {
     switchTo(viewController: viewController)
     mainStore.dispatch(TabBarActions.SwitchTabIndex(selectedIndex: tabIndex))
+  }
+
+  // MARK: PlayBarViewDelegate
+  func didTapPlayButton() {
+    mainStore.dispatch(SpotifyPlayerActions.resume())
+  }
+
+  func didTapPauseButton() {
+    mainStore.dispatch(SpotifyPlayerActions.pause())
   }
 }

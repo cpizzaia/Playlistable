@@ -9,7 +9,15 @@
 import Foundation
 import UIKit
 
+protocol PlayBarViewDelegate: class {
+  func didTapPlayButton()
+  func didTapPauseButton()
+}
+
 class PlayBarView: UIView {
+  // MARK: Public Properties
+  weak var delegate: PlayBarViewDelegate?
+
   // MARK: Private Properties
   private let trackTitleLabel = UILabel()
   private let pausePlayButton = UIButton()
@@ -30,6 +38,7 @@ class PlayBarView: UIView {
   }
 
   func update(forTrack track: Track, startTime: Double, endTime: Double, isPlaying: Bool) {
+    self.isPlaying = isPlaying
     updateFor(isPlaying: isPlaying)
     updateTitleLabel(forTrack: track)
     animateDuration(startTime: startTime, endTime: endTime, isStopped: !isPlaying)
@@ -49,6 +58,10 @@ class PlayBarView: UIView {
         make.height.equalTo(49)
       }
     }
+  }
+
+  @objc func pausePlayButtonTapped() {
+    isPlaying ? delegate?.didTapPauseButton() : delegate?.didTapPlayButton()
   }
 
   // MARK: Private Methods
@@ -89,6 +102,8 @@ class PlayBarView: UIView {
       make.trailing.equalTo(self).inset(8)
       make.height.equalTo(pausePlayButton.snp.height)
     }
+
+    pausePlayButton.addTarget(self, action: #selector(pausePlayButtonTapped), for: .touchUpInside)
   }
 
   private func setupDurationBarBackground() {
