@@ -176,7 +176,6 @@ enum SpotifyAuthActions {
 
   static func postAuthAction(accessToken: String) -> Action {
     return WrapInDispatch { dispatch, getState in
-      dispatch(SpotifyPlayerActions.initializePlayer(clientID: clientID, accessToken: accessToken))
       dispatch(
         SpotifyAuthActions.getCurrentUser(success: { _ in
           guard let userID = getState()?.spotifyAuth.userID else { return }
@@ -188,6 +187,10 @@ enum SpotifyAuthActions {
       )
       dispatch(SpotifyPlayerActions.setHighBitrate())
     }
+  }
+
+  static func authorizePlayer(accessToken: String) -> Action {
+    return SpotifyPlayerActions.initializePlayer(clientID: clientID, accessToken: accessToken)
   }
 
   static func receiveSpotifyAuth(url: URL) -> Action? {

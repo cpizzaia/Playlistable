@@ -100,7 +100,7 @@ class PlayBarView: UIView {
       make.height.equalTo(2)
     }
 
-    durationBarBackground.backgroundColor = .green
+    durationBarBackground.backgroundColor = .myDarkGray
   }
 
   private func setupDurationBar() {
@@ -111,7 +111,7 @@ class PlayBarView: UIView {
       make.width.equalTo(0)
     }
 
-    durationBar.backgroundColor = .red
+    durationBar.backgroundColor = .myWhite
   }
 
   private func updateFor(isPlaying: Bool) {
@@ -145,8 +145,9 @@ class PlayBarView: UIView {
 
       let fullWidth = self.frame.size.width
 
-      self.durationBar.snp.updateConstraints { update in
-        update.width.equalTo(fullWidth * CGFloat(1 - percentCompleted))
+      self.durationBar.snp.remakeConstraints { make in
+        make.leading.top.bottom.equalTo(self.durationBarBackground)
+        make.width.equalTo(fullWidth * CGFloat(percentCompleted))
       }
 
       self.layoutIfNeeded()
@@ -155,11 +156,12 @@ class PlayBarView: UIView {
 
       self.isAnimatingDuration = true
 
-      self.durationBar.snp.updateConstraints { update in
-        update.width.equalTo(fullWidth)
-      }
-
       UIView.animate(withDuration: timeLeft, delay: 0, options: .curveLinear, animations: {
+        self.durationBar.snp.remakeConstraints { make in
+          make.leading.top.bottom.equalTo(self.durationBarBackground)
+          make.width.equalTo(fullWidth)
+        }
+
         self.layoutIfNeeded()
       }, completion: { _ in
         self.isAnimatingDuration = false

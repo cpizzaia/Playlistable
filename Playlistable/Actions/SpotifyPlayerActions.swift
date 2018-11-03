@@ -20,6 +20,7 @@ enum SpotifyPlayerActions {
   struct StartPlayerFailed: Action {}
 
   struct InitializedPlayer: Action {}
+  struct InitializingPlayer: Action {}
 
   struct SettingBitrate: Action {
     let bitrate: SPTBitrate
@@ -78,6 +79,7 @@ enum SpotifyPlayerActions {
 
   static func initializePlayer(clientID: String, accessToken: String) -> Action {
     return WrapInDispatch { dispatch, _ in
+      dispatch(InitializingPlayer())
       player.delegate = streamingDelegate
       player.playbackDelegate = playbackDelegate
       dispatch(startPlayer(clientID: clientID))
