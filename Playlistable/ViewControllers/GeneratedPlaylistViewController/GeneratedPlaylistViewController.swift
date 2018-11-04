@@ -31,6 +31,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   // MARK: Private Properties
   private let noPlaylistView = NoPlaylistView()
   private let playlistTableView = UITableView(frame: .zero, style: .grouped)
+  private var headerView: GeneratedPlaylistHeaderView?
 
   // MARK: Public Methods
   init() {
@@ -97,6 +98,7 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
 
   func didReceiveNewProps(props: Props) {
     noPlaylistView.isHidden = !props.noTracks
+    headerView?.isHidden = !noPlaylistView.isHidden
 
     if props.isGenerating {
       noPlaylistView.isHidden = true
@@ -232,6 +234,9 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
         shouldShuffle: true
       ))
     })
+
+    headerView = view
+    headerView?.isHidden = !noPlaylistView.isHidden
 
     return view
   }
