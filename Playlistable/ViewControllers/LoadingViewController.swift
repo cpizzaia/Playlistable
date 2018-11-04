@@ -16,7 +16,7 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
   struct Props {
     let isAuthed: Bool
     let hasUser: Bool
-    let hasPremium: Bool
+    let hasPremium: Bool?
     let hasPlaylist: Bool
     let userID: String?
     let isFetchingStoredPlaylist: Bool
@@ -25,6 +25,9 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
 
   // MARK: Public Properties
   var props: Props?
+
+  // MARK: Private Properties
+  private var presentedNotPremiumAlert = false
 
   // MARK: Public Methods
   init() {
@@ -53,7 +56,7 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
     return Props(
       isAuthed: state.spotifyAuth.isAuthed,
       hasUser: state.spotifyAuth.userID != nil,
-      hasPremium: state.spotifyAuth.isPremium == true,
+      hasPremium: state.spotifyAuth.isPremium,
       hasPlaylist: state.generatedPlaylist.playlistID != nil,
       userID: state.spotifyAuth.userID,
       isFetchingStoredPlaylist: state.generatedPlaylist.isFetchingStoredPlaylist,
@@ -79,6 +82,18 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
     {
       mainStore.dispatch(action)
     }
+
+    if props.hasPremium == false && !presentedNotPremiumAlert {
+      presentedNotPremiumAlert = true
+      presentAlertView(
+        title: "Error",
+        message: "You must have Spotify Premium to login.",
+        completion: {
+          mainStore.dispatch(SpotifyAuthActions.Deauthorize())
+          self.presentedNotPremiumAlert = false
+        }
+      )
+    }
   }
 
   // MARK: Private Methods
@@ -91,7 +106,7 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
   }
 
   private func isAuthorizedToUseApp(props: Props) -> Bool {
-    return props.isAuthed && props.hasUser && props.hasPremium
+    return props.isAuthed && props.hasUser && props.hasPremium == true
   }
 
   private func setupViews() {

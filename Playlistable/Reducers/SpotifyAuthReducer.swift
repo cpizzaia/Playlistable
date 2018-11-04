@@ -70,6 +70,13 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
   var state = state ?? initialSpotifyAuthState
 
   switch action {
+  case _ as SpotifyAuthActions.Deauthorize:
+    state.token = nil
+    state.refreshToken = nil
+    state.isPremium = nil
+    state.userID = nil
+    state.market = nil
+
   case _ as SpotifyAuthActions.RequestSpotifyAuth:
     state.isRequestingToken = true
 
@@ -119,6 +126,7 @@ func spotifyAuthReducer(action: Action, state: SpotifyAuthState?) -> SpotifyAuth
     state.userID = action.response["id"].string
     state.market = action.response["country"].string
     state.isPremium = action.response["product"].string == "premium"
+    state.isRequestingUser = false
 
   default:
     break

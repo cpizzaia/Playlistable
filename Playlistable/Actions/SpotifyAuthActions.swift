@@ -80,6 +80,8 @@ enum SpotifyAuthActions {
     let isInitializing = true
   }
 
+  struct Deauthorize: Action {}
+
   struct RequestSpotifyAuth: APIRequestAction {}
 
   struct RequestSpotifyRefreshAuth: APIRequestAction {}

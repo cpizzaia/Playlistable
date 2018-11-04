@@ -16,7 +16,7 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
   typealias StoreSubscriberStateType = AppState
 
   struct Props {
-    let hasPremium: Bool
+    let hasPremium: Bool?
     let doesNotHaveUser: Bool
     let isRequestingUser: Bool
     let spotifyAuthState: SpotifyAuthState
@@ -28,17 +28,7 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
   private let descriptionText = UILabel()
   private let titleLabel = UILabel()
   private let loginButton = UIButton()
-  private var hasSpotifyPremium: Bool? {
-    didSet {
-      if oldValue == false || hasSpotifyPremium != false { return }
-
-      presentAlertView(
-        title: "Error",
-        message: "You must have Spotify Premium to login.",
-        completion: {}
-      )
-    }
-  }
+  private var presentedNotPremiumAlert = false
 
   // MARK: Public Methods
   init() {
@@ -67,7 +57,7 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
 
   func mapStateToProps(state: AppState) -> Props {
     return Props(
-      hasPremium: state.spotifyAuth.isPremium == true,
+      hasPremium: state.spotifyAuth.isPremium,
       doesNotHaveUser: state.spotifyAuth.userID == nil,
       isRequestingUser: state.spotifyAuth.isRequestingUser,
       spotifyAuthState: state.spotifyAuth
@@ -75,7 +65,7 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
   }
 
   func didReceiveNewProps(props: Props) {
-    if props.spotifyAuthState.isAuthed && !props.doesNotHaveUser && props.hasPremium {
+    if props.spotifyAuthState.isAuthed && !props.doesNotHaveUser && props.hasPremium == true {
       let vc = PlayAndTabBarContainerViewController()
 
       present(vc, animated: true, completion: nil)
@@ -85,6 +75,18 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
 
     if props.spotifyAuthState.isAuthed && props.doesNotHaveUser && !props.isRequestingUser {
       mainStore.dispatch(SpotifyAuthActions.getCurrentUser(success: { _ in }, failure: {}))
+    }
+
+    if props.hasPremium == false && !presentedNotPremiumAlert {
+      presentedNotPremiumAlert = true
+      presentAlertView(
+        title: "Error",
+        message: "You must have Spotify Premium to login.",
+        completion: {
+          mainStore.dispatch(SpotifyAuthActions.Deauthorize())
+          self.presentedNotPremiumAlert = false
+        }
+      )
     }
   }
 
