@@ -108,18 +108,9 @@ enum SpotifyAuthActions {
     let error: APIRequest.APIError
   }
 
-  static func oAuthSpotify(authState: SpotifyAuthState) -> Action {
+  static func oAuthSpotify() -> Action {
     return WrapInDispatch { dispatch, _ in
       dispatch(RequestSpotifyAuth())
-
-      if authState.isRefreshable && authState.shouldRefresh {
-        dispatch(
-          refreshSpotifyAuthAndInitPlayer(
-            refreshToken: authState.refreshToken ?? ""
-          )
-        )
-        return
-      }
 
       if hasSpotifyInstalled {
         log("Authing from spotify app")
@@ -136,15 +127,11 @@ enum SpotifyAuthActions {
     }
   }
 
-  static func refreshSpotifyAuthAndInitPlayer(refreshToken: String) -> Action {
+  static func refreshSpotifyAuth(refreshToken: String) -> Action {
     return WrapInDispatch { dispatch, getState in
       dispatch(refreshSpotifyAuth(
         refreshToken: refreshToken,
-        success: { _ in
-          guard let token = getState()?.spotifyAuth.token else { return }
-
-          dispatch(postAuthAction(accessToken: token))
-        },
+        success: { _ in },
         failure: {}
       ))
     }
@@ -171,21 +158,6 @@ enum SpotifyAuthActions {
         success: success,
         failure: failure
       ))
-    }
-  }
-
-  static func postAuthAction(accessToken: String) -> Action {
-    return WrapInDispatch { dispatch, getState in
-      dispatch(
-        SpotifyAuthActions.getCurrentUser(success: { _ in
-          guard let userID = getState()?.spotifyAuth.userID else { return }
-
-          if let action = GeneratePlaylistActions.reloadPlaylistFromStorage(userID: userID) {
-            dispatch(action)
-          }
-        }, failure: {})
-      )
-      dispatch(SpotifyPlayerActions.setHighBitrate())
     }
   }
 
@@ -218,14 +190,7 @@ enum SpotifyAuthActions {
           failureAction: ErrorSpotifyAuth.self
         ),
         url: "https://accounts.spotify.com/api/token",
-        success: { _ in
-          guard
-            let newState = getState(),
-            let token = newState.spotifyAuth.token
-            else { return }
-
-          dispatch(postAuthAction(accessToken: token))
-      },
+        success: { _ in },
         failure: {}
       ))
     }

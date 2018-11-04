@@ -10,29 +10,6 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-  static func returnToTabBarController(completion: @escaping (TabBarController?) -> Void) {
-    guard let currentViewController = currentViewController() else { return }
-
-    if currentViewController.tabBarController == nil {
-      if let nav = currentViewController.navigationController {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock({
-          returnToTabBarController(completion: completion)
-        })
-
-        nav.popViewController(animated: true)
-
-        CATransaction.commit()
-      } else {
-        currentViewController.dismiss(animated: true, completion: {
-          returnToTabBarController(completion: completion)
-        })
-      }
-    } else {
-      completion(currentViewController.tabBarController as? TabBarController)
-    }
-  }
-
   static func currentViewController() -> UIViewController? {
     guard let viewController = UIApplication.shared.keyWindow?.rootViewController else { return nil}
     return UIViewController.findBestViewController(viewController)

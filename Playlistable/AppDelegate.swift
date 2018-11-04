@@ -56,6 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     LockScreenController.start()
     AudioInterruptionController.start()
     SpotifyPlayerController.start()
+    SpotifyAuthController.start()
   }
 
   private func configureApp() {

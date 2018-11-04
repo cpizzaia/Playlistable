@@ -21,10 +21,6 @@
 		AC1197211FB8F447009D1646 /* GeneratePlaylistActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1197201FB8F447009D1646 /* GeneratePlaylistActions.swift */; };
 		AC1197231FB90EBB009D1646 /* SpotifyPlayerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1197221FB90EBB009D1646 /* SpotifyPlayerActions.swift */; };
 		AC1197251FB91198009D1646 /* SpotifyPlayerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1197241FB91198009D1646 /* SpotifyPlayerReducer.swift */; };
-		AC11972F1FB95686009D1646 /* PlayerBarContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC11972E1FB95686009D1646 /* PlayerBarContainerViewController.swift */; };
-		AC1197311FB956B1009D1646 /* PlayerBarContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC1197301FB956B1009D1646 /* PlayerBarContainerViewController.xib */; };
-		AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC16D73F1FA02CA300CAAD13 /* TabBarController.xib */; };
-		AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC16D7411FA02D3500CAAD13 /* TabBarController.swift */; };
 		AC17B7FA1FBE9ACA0029AFB6 /* LockscreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */; };
 		AC17B7FE1FBE9C3F0029AFB6 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */; };
 		AC18FCC61FB3E9A20079AFC8 /* InspectAllTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */; };
@@ -87,6 +83,7 @@
 		ACBF9BD2218BE7AF00A16155 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BD1218BE7AF00A16155 /* LoadingViewController.swift */; };
 		ACBF9BD4218BF2D000A16155 /* PlayBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBF9BD3218BF2D000A16155 /* PlayBarView.swift */; };
 		ACC1A894218E517F00A441E2 /* SpotifyPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC1A893218E517F00A441E2 /* SpotifyPlayerController.swift */; };
+		ACC1A896218F672800A441E2 /* SpotifyAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC1A895218F672800A441E2 /* SpotifyAuthController.swift */; };
 		ACC816682027C3A800A03946 /* MutableCollectionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */; };
 		ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC816692027C3F500A03946 /* SequenceExtensions.swift */; };
 		ACCE5196205F11DE008877F2 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE5195205F11DE008877F2 /* IntroViewController.swift */; };
@@ -118,10 +115,6 @@
 		AC1197201FB8F447009D1646 /* GeneratePlaylistActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePlaylistActions.swift; sourceTree = "<group>"; };
 		AC1197221FB90EBB009D1646 /* SpotifyPlayerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlayerActions.swift; sourceTree = "<group>"; };
 		AC1197241FB91198009D1646 /* SpotifyPlayerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlayerReducer.swift; sourceTree = "<group>"; };
-		AC11972E1FB95686009D1646 /* PlayerBarContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerBarContainerViewController.swift; sourceTree = "<group>"; };
-		AC1197301FB956B1009D1646 /* PlayerBarContainerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerBarContainerViewController.xib; sourceTree = "<group>"; };
-		AC16D73F1FA02CA300CAAD13 /* TabBarController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabBarController.xib; sourceTree = "<group>"; };
-		AC16D7411FA02D3500CAAD13 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AC17B7F91FBE9ACA0029AFB6 /* LockscreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockscreenController.swift; sourceTree = "<group>"; };
 		AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		AC18FCC51FB3E9A20079AFC8 /* InspectAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectAllTableViewCell.swift; sourceTree = "<group>"; };
@@ -185,6 +178,7 @@
 		ACBF9BD1218BE7AF00A16155 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		ACBF9BD3218BF2D000A16155 /* PlayBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayBarView.swift; sourceTree = "<group>"; };
 		ACC1A893218E517F00A441E2 /* SpotifyPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyPlayerController.swift; sourceTree = "<group>"; };
+		ACC1A895218F672800A441E2 /* SpotifyAuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthController.swift; sourceTree = "<group>"; };
 		ACC816672027C3A800A03946 /* MutableCollectionExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableCollectionExtensions.swift; sourceTree = "<group>"; };
 		ACC816692027C3F500A03946 /* SequenceExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceExtensions.swift; sourceTree = "<group>"; };
 		ACCE5195205F11DE008877F2 /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
@@ -314,6 +308,7 @@
 				AC17B7FD1FBE9C3F0029AFB6 /* StateManager.swift */,
 				AC74DCBC20844105009F0C2E /* AudioInterruptionController.swift */,
 				ACC1A893218E517F00A441E2 /* SpotifyPlayerController.swift */,
+				ACC1A895218F672800A441E2 /* SpotifyAuthController.swift */,
 			);
 			path = StateManagers;
 			sourceTree = "<group>";
@@ -395,9 +390,7 @@
 				AC57871F1FDE17F00057D41A /* SeedsViewController.swift */,
 				ACF43249200C12EF00110B53 /* ItemWithTrackListViewController */,
 				AC53C96D1FE37B8200664733 /* SearchController */,
-				AC8C20411FC9E1E4006FF1AC /* TabBarController */,
 				AC8C20441FC9E226006FF1AC /* GeneratedPlaylistViewController */,
-				AC8C20451FC9E23D006FF1AC /* PlayBarContainerViewController */,
 				ACBF9BD1218BE7AF00A16155 /* LoadingViewController.swift */,
 			);
 			path = ViewControllers;
@@ -431,15 +424,6 @@
 			path = Factories;
 			sourceTree = "<group>";
 		};
-		AC8C20411FC9E1E4006FF1AC /* TabBarController */ = {
-			isa = PBXGroup;
-			children = (
-				AC16D7411FA02D3500CAAD13 /* TabBarController.swift */,
-				AC16D73F1FA02CA300CAAD13 /* TabBarController.xib */,
-			);
-			path = TabBarController;
-			sourceTree = "<group>";
-		};
 		AC8C20441FC9E226006FF1AC /* GeneratedPlaylistViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,15 +432,6 @@
 				AC98D990217D85E2009EF80D /* NoPlaylistView.swift */,
 			);
 			path = GeneratedPlaylistViewController;
-			sourceTree = "<group>";
-		};
-		AC8C20451FC9E23D006FF1AC /* PlayBarContainerViewController */ = {
-			isa = PBXGroup;
-			children = (
-				AC11972E1FB95686009D1646 /* PlayerBarContainerViewController.swift */,
-				AC1197301FB956B1009D1646 /* PlayerBarContainerViewController.xib */,
-			);
-			path = PlayBarContainerViewController;
 			sourceTree = "<group>";
 		};
 		ACB19DDA207D9DB800F1771A /* SpotifyRefreshMiddleware */ = {
@@ -638,9 +613,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC1197311FB956B1009D1646 /* PlayerBarContainerViewController.xib in Resources */,
 				AC4C84F0201430B100C8A4E6 /* CircularStd-BookItalic.otf in Resources */,
-				AC16D7401FA02CA300CAAD13 /* TabBarController.xib in Resources */,
 				AC4C84E9201430B100C8A4E6 /* CircularStd-MediumItalic.otf in Resources */,
 				AC02D0D31F9CF5B3009ED193 /* LaunchScreen.storyboard in Resources */,
 				AC4C84EB201430B100C8A4E6 /* CircularStd-Bold.otf in Resources */,
@@ -745,7 +718,6 @@
 				AC01487B1F9D855D00F9A732 /* APIQueryParamsFormatter.swift in Sources */,
 				ACBDF1351F9CFDF7001760D7 /* Image.swift in Sources */,
 				ACBF9BCE218BD93D00A16155 /* TabBarReducer.swift in Sources */,
-				AC16D7421FA02D3500CAAD13 /* TabBarController.swift in Sources */,
 				AC98D98F217AAC5C009EF80D /* NoSearchResultsView.swift in Sources */,
 				ACEC1E1720962CDD009CC83C /* MyUserDefaults.swift in Sources */,
 				AC0148791F9D80C100F9A732 /* UIViewControllerExtensions.swift in Sources */,
@@ -777,7 +749,6 @@
 				AC8C20401FC9DA2F006FF1AC /* UIButtonExtensions.swift in Sources */,
 				ACBF9BD2218BE7AF00A16155 /* LoadingViewController.swift in Sources */,
 				AC98D991217D85E2009EF80D /* NoPlaylistView.swift in Sources */,
-				AC11972F1FB95686009D1646 /* PlayerBarContainerViewController.swift in Sources */,
 				ACBDF1401F9D172E001760D7 /* ConfigureStore.swift in Sources */,
 				ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */,
 				ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */,
@@ -813,6 +784,7 @@
 				ACBDF1371F9CFE48001760D7 /* Track.swift in Sources */,
 				AC1197251FB91198009D1646 /* SpotifyPlayerReducer.swift in Sources */,
 				AC74DCB520830326009F0C2E /* Playlist.swift in Sources */,
+				ACC1A896218F672800A441E2 /* SpotifyAuthController.swift in Sources */,
 				ACBDF1431F9D3749001760D7 /* AppReducer.swift in Sources */,
 				AC1197211FB8F447009D1646 /* GeneratePlaylistActions.swift in Sources */,
 				AC3268951FAFC3A9000AA05B /* ParseResources.swift in Sources */,

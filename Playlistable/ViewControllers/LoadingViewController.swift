@@ -15,9 +15,8 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
 
   struct Props {
     let isAuthed: Bool
-    let doesNotHaveUser: Bool
+    let hasUser: Bool
     let hasPremium: Bool
-    let isRequestingUser: Bool
   }
 
   // MARK: Public Properties
@@ -49,9 +48,8 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
   func mapStateToProps(state: AppState) -> Props {
     return Props(
       isAuthed: state.spotifyAuth.isAuthed,
-      doesNotHaveUser: state.spotifyAuth.userID == nil,
-      hasPremium: state.spotifyAuth.isPremium == true,
-      isRequestingUser: state.spotifyAuth.isRequestingUser
+      hasUser: state.spotifyAuth.userID != nil,
+      hasPremium: state.spotifyAuth.isPremium == true
     )
   }
 
@@ -60,14 +58,10 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
       return present(IntroViewController(), animated: true, completion: nil)
     }
 
-    if props.isAuthed && !props.doesNotHaveUser && props.hasPremium {
+    if props.isAuthed && props.hasUser && props.hasPremium {
       let vc = PlayAndTabBarContainerViewController()
 
       return present(vc, animated: true, completion: nil)
-    }
-
-    if props.isAuthed && props.doesNotHaveUser && !props.isRequestingUser {
-      mainStore.dispatch(SpotifyAuthActions.getCurrentUser(success: { _ in }, failure: {}))
     }
   }
 

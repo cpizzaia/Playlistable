@@ -89,8 +89,7 @@ class IntroViewController: UIViewController, MyStoreSubscriber {
   }
 
   @objc func loginButtonPressed(_ sender: UIButton) {
-    guard let auth = props?.spotifyAuthState else { return }
-    mainStore.dispatch(SpotifyAuthActions.oAuthSpotify(authState: auth))
+    mainStore.dispatch(SpotifyAuthActions.oAuthSpotify())
   }
 
   // MARK: Private Methods
