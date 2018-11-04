@@ -17,6 +17,10 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
     let isAuthed: Bool
     let hasUser: Bool
     let hasPremium: Bool
+    let hasPlaylist: Bool
+    let userID: String?
+    let isFetchingStoredPlaylist: Bool
+    let hasFetchedStoredPlaylist: Bool
   }
 
   // MARK: Public Properties
@@ -49,7 +53,11 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
     return Props(
       isAuthed: state.spotifyAuth.isAuthed,
       hasUser: state.spotifyAuth.userID != nil,
-      hasPremium: state.spotifyAuth.isPremium == true
+      hasPremium: state.spotifyAuth.isPremium == true,
+      hasPlaylist: state.generatedPlaylist.playlistID != nil,
+      userID: state.spotifyAuth.userID,
+      isFetchingStoredPlaylist: state.generatedPlaylist.isFetchingStoredPlaylist,
+      hasFetchedStoredPlaylist: state.generatedPlaylist.hasFetchedStoredPlaylist
     )
   }
 
@@ -58,14 +66,34 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
       return present(IntroViewController(), animated: true, completion: nil)
     }
 
-    if props.isAuthed && props.hasUser && props.hasPremium {
+    if isAuthorizedToUseApp(props: props) && !playlistNeedsToBeFetched(props: props) {
       let vc = PlayAndTabBarContainerViewController()
 
       return present(vc, animated: true, completion: nil)
     }
+
+    if
+      let userID = props.userID,
+      let action = GeneratePlaylistActions.reloadPlaylistFromStorage(userID: userID),
+      shouldFetchPlaylist(props: props)
+    {
+      mainStore.dispatch(action)
+    }
   }
 
-  // MARK: Private Properties
+  // MARK: Private Methods
+  private func playlistNeedsToBeFetched(props: Props) -> Bool {
+    return props.hasPlaylist && !props.hasFetchedStoredPlaylist
+  }
+
+  private func shouldFetchPlaylist(props: Props) -> Bool {
+    return props.hasPlaylist && !props.isFetchingStoredPlaylist && !props.hasFetchedStoredPlaylist
+  }
+
+  private func isAuthorizedToUseApp(props: Props) -> Bool {
+    return props.isAuthed && props.hasUser && props.hasPremium
+  }
+
   private func setupViews() {
     view.backgroundColor = .myDarkBlack
 

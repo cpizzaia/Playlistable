@@ -11,6 +11,8 @@ import ReSwift
 
 struct GeneratedPlaylistState {
   var isGenerating: Bool
+  var isFetchingStoredPlaylist: Bool
+  var hasFetchedStoredPlaylist: Bool
   var trackIDsGeneratedFromSeeds: [String]
   var playlistID: String? {
     didSet {
@@ -39,8 +41,10 @@ struct GeneratedPlaylistState {
 
 private let initialGeneratedPlaylistState = GeneratedPlaylistState(
   isGenerating: false,
+  isFetchingStoredPlaylist: false,
+  hasFetchedStoredPlaylist: false,
   trackIDsGeneratedFromSeeds: [],
-  playlistID: nil,
+  playlistID: MyUserDefaults.storedGeneratedPlaylistID,
   seedsUsed: nil
 )
 
@@ -54,12 +58,17 @@ func generatedPlaylistReducer(action: Action, state: GeneratedPlaylistState?) ->
     state.isGenerating = true
   case _ as GeneratePlaylistActions.GeneratedPlaylist:
     state.isGenerating = false
+    state.hasFetchedStoredPlaylist = true
   case let action as SeedsActions.GeneratedFromSeeds:
     state.seedsUsed = action.seeds
   case let action as GeneratePlaylistActions.ReceiveCreateGeneratedPlaylist:
     state.playlistID = action.response["id"].string
+  case _ as GeneratePlaylistActions.RequestStoredPlaylist:
+    state.isFetchingStoredPlaylist = true
   case let action as GeneratePlaylistActions.ReceiveStoredPlaylist:
     state.playlistID = action.response["id"].string
+    state.isFetchingStoredPlaylist = false
+    state.hasFetchedStoredPlaylist = true
   case let action as GeneratePlaylistActions.ReceiveStoredSeedsState:
     state.seedsUsed = action.seeds
   default:
