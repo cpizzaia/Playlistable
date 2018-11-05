@@ -17,6 +17,7 @@ class SpotifyAuthController: StateManager {
     let isAuthRefreshable: Bool
     let requestingUser: Bool
     let refreshToken: String?
+    let isRefreshingToken: Bool
   }
 
   typealias StoreSubscriberStateType = AppState
@@ -45,7 +46,8 @@ class SpotifyAuthController: StateManager {
       isAuthed: state.spotifyAuth.isAuthed,
       isAuthRefreshable: state.spotifyAuth.isRefreshable,
       requestingUser: state.spotifyAuth.isRequestingUser,
-      refreshToken: state.spotifyAuth.refreshToken
+      refreshToken: state.spotifyAuth.refreshToken,
+      isRefreshingToken: state.spotifyAuth.isRefreshingToken
     )
   }
 
@@ -54,7 +56,7 @@ class SpotifyAuthController: StateManager {
       mainStore.dispatch(SpotifyAuthActions.getCurrentUser(success: { _ in }, failure: {}))
     }
 
-    if let refreshToken = props.refreshToken, !props.isAuthed && props.isAuthRefreshable {
+    if let refreshToken = props.refreshToken, !props.isAuthed && props.isAuthRefreshable && !props.isRefreshingToken {
       mainStore.dispatch(SpotifyAuthActions.refreshSpotifyAuth(refreshToken: refreshToken))
     }
   }

@@ -10,13 +10,12 @@ import Foundation
 import UIKit
 
 protocol TabBarViewDelegate: class {
-  func selected(viewController: UIViewController, atTabIndex tabIndex: Int)
+  func selectedTab(atIndex: Int)
 }
 
 class TabBarView: UIView {
   // MARK: Public Types
   struct Tab {
-    let viewController: UIViewController
     let imageString: String
     let name: String
   }
@@ -26,9 +25,6 @@ class TabBarView: UIView {
 
   // MARK: Public Properties
   weak var delegate: TabBarViewDelegate?
-  var currentViewController: UIViewController {
-    return tabs[currentTabIndex].viewController
-  }
 
   // MARK: Private Properties
   private let tabs: [Tab]
@@ -57,7 +53,7 @@ class TabBarView: UIView {
     if currentTabIndex == index { return }
 
     setCurrentTab(index: index)
-    delegate?.selected(viewController: self.tabs[index].viewController, atTabIndex: index)
+    delegate?.selectedTab(atIndex: index)
   }
 
   // MARK: Private Methods

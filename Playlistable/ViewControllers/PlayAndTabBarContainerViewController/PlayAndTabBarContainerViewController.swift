@@ -17,6 +17,7 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
     let selectedTabIndex: Int
     let currentTrack: Track?
     let isPlaying: Bool
+    let currentViewController: UIViewController
   }
 
   // MARK: Public Properties
@@ -27,17 +28,14 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
   private let playBar = PlayBarView()
   private let tabBar = TabBarView(tabs: [
     TabBarView.Tab(
-      viewController: MyNavigationController(rootViewController: GeneratedPlaylistViewController()),
       imageString: "PlaylistTab",
       name: "Playlist"
     ),
     TabBarView.Tab(
-      viewController: MyNavigationController(rootViewController: SeedsViewController()),
       imageString: "SeedsTab",
       name: "Seeds"
     ),
     TabBarView.Tab(
-      viewController: MyNavigationController(rootViewController: SearchViewController()),
       imageString: "SearchTab",
       name: "Search"
     )
@@ -48,7 +46,6 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
     super.init(nibName: nil, bundle: nil)
 
     setupViews()
-    switchTo(viewController: tabBar.currentViewController)
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -79,7 +76,8 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
     return Props(
       selectedTabIndex: state.tabBar.selectedIndex,
       currentTrack: currentTrack,
-      isPlaying: state.spotifyPlayer.isPlaying
+      isPlaying: state.spotifyPlayer.isPlaying,
+      currentViewController: state.tabBar.currentViewController
     )
   }
 
@@ -97,6 +95,8 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
     } else {
       playBar.hide()
     }
+
+    switchTo(viewController: props.currentViewController)
   }
 
   // MARK: Private Methods
@@ -128,6 +128,7 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
   }
 
   private func switchTo(viewController: UIViewController) {
+    if currentViewController == viewController { return }
     removeCurrentViewController()
     display(viewController: viewController)
   }
@@ -155,9 +156,8 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
   }
 
   // MARK: TabBarViewDelegate
-  func selected(viewController: UIViewController, atTabIndex tabIndex: Int) {
-    switchTo(viewController: viewController)
-    mainStore.dispatch(TabBarActions.SwitchTabIndex(selectedIndex: tabIndex))
+  func selectedTab(atIndex index: Int) {
+    mainStore.dispatch(TabBarActions.SwitchTabIndex(selectedIndex: index))
   }
 
   // MARK: PlayBarViewDelegate

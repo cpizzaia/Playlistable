@@ -11,9 +11,21 @@ import ReSwift
 
 struct TabBarState {
   var selectedIndex: Int
+  let viewControllers: [UIViewController]
+
+  var currentViewController: UIViewController {
+    return viewControllers[selectedIndex]
+  }
 }
 
-private let initialTabBarState = TabBarState(selectedIndex: 0)
+private let initialTabBarState = TabBarState(
+  selectedIndex: 0,
+  viewControllers: [
+    MyNavigationController(rootViewController: GeneratedPlaylistViewController()),
+    MyNavigationController(rootViewController: SeedsViewController()),
+    MyNavigationController(rootViewController: SearchViewController())
+  ]
+)
 
 func tabBarReducer(action: Action, state: TabBarState?) -> TabBarState {
   var state = state ?? initialTabBarState
