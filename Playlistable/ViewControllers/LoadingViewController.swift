@@ -21,6 +21,7 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
     let userID: String?
     let isFetchingStoredPlaylist: Bool
     let hasFetchedStoredPlaylist: Bool
+    let isAuthRefreshable: Bool
   }
 
   // MARK: Public Properties
@@ -60,12 +61,13 @@ class LoadingViewController: UIViewController, MyStoreSubscriber {
       hasPlaylist: state.generatedPlaylist.playlistID != nil,
       userID: state.spotifyAuth.userID,
       isFetchingStoredPlaylist: state.generatedPlaylist.isFetchingStoredPlaylist,
-      hasFetchedStoredPlaylist: state.generatedPlaylist.hasFetchedStoredPlaylist
+      hasFetchedStoredPlaylist: state.generatedPlaylist.hasFetchedStoredPlaylist,
+      isAuthRefreshable: state.spotifyAuth.isRefreshable
     )
   }
 
   func didReceiveNewProps(props: Props) {
-    if !props.isAuthed {
+    if !props.isAuthed && !props.isAuthRefreshable {
       return present(IntroViewController(), animated: true, completion: nil)
     }
 
