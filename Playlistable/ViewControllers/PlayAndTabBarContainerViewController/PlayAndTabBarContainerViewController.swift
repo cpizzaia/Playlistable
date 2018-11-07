@@ -42,10 +42,24 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
   ])
 
   // MARK: Public Methods
-  init() {
+  init(notificationCenter: NotificationCenter = NotificationCenter.default) {
     super.init(nibName: nil, bundle: nil)
 
     setupViews()
+
+    notificationCenter.addObserver(
+      self,
+      selector: #selector(handleEnteredForeground),
+      name: UIApplication.willEnterForegroundNotification,
+      object: nil
+    )
+
+    notificationCenter.addObserver(
+      self,
+      selector: #selector(handleEnteredBackground),
+      name: UIApplication.didEnterBackgroundNotification,
+      object: nil
+    )
   }
 
   required init?(coder aDecoder: NSCoder) {
@@ -97,6 +111,14 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
     }
 
     switchTo(viewController: props.currentViewController)
+  }
+
+  @objc func handleEnteredForeground() {
+    mainStore.subscribe(self)
+  }
+
+  @objc func handleEnteredBackground() {
+    mainStore.unsubscribe(self)
   }
 
   // MARK: Private Methods
