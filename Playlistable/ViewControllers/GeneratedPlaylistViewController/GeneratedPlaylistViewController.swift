@@ -32,6 +32,15 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
   private let noPlaylistView = NoPlaylistView()
   private let playlistTableView = UITableView(frame: .zero, style: .grouped)
   private var headerView: GeneratedPlaylistHeaderView?
+  private var tracks = [Track]() {
+    didSet {
+      if oldValue == tracks { return }
+
+      runOnMainThread {
+        self.playlistTableView.reloadData()
+      }
+    }
+  }
 
   // MARK: Public Methods
   init() {
@@ -118,7 +127,11 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
       navigationItem.setLeftBarButton(leftNavigatorButton, animated: true)
     }
 
-    playlistTableView.reloadData()
+    tracks = props.tracks
+
+    if let playingTrack = props.currentlyPlayingTrack {
+      updateCells(forPlayingTrack: playingTrack)
+    }
   }
 
   @objc private func savePlaylist() {
@@ -185,6 +198,14 @@ class GeneratedPlaylistViewController: UIViewController, UITableViewDelegate, UI
 
     noPlaylistView.snp.makeConstraints { make in
       make.edges.equalTo(view)
+    }
+  }
+
+  private func updateCells(forPlayingTrack track: Track) {
+    playlistTableView.visibleCells.forEach { cell in
+      guard let inspectCell = cell as? InspectAllTableViewCell else { return }
+
+      inspectCell.currentlyPlaying = (inspectCell.item as? Track) == track
     }
   }
 

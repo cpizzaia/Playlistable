@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct Track: Item {
+struct Track: Item, Equatable {
+  static func == (lhs: Track, rhs: Track) -> Bool {
+    return lhs.id == rhs.id
+  }
+
   let id: String
   var albumID: String
   var artistIDs: [String]

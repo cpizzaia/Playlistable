@@ -44,6 +44,7 @@ class InspectAllTableViewCell: UITableViewCell {
   private var innerGradient: CALayer?
   private var currentImageURL: URL?
   private var action = {}
+  private(set) var item: Item?
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -199,5 +200,6 @@ class InspectAllTableViewCell: UITableViewCell {
     }
 
     currentlyPlaying = false
+    self.item = item
   }
 }
