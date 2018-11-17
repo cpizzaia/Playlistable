@@ -58,7 +58,7 @@ extension UIViewController {
       failureActionTitle: "Cancel",
       success: {
         runOnMainThread {
-          self.tabBarController?.selectedIndex = 1
+          mainStore.dispatch(TabBarActions.SwitchTabIndex(selectedIndex: 1))
         }
     },
       failure: {}
