@@ -9,20 +9,24 @@
 import Foundation
 import UIKit
 
-class BigButton: UIButton {
+class BigButton: DepressableClosureButton {
+  // MARK: Public Methods
+  override init() {
+    super.init()
 
-  private var styled = false
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    if styled { return }
-    styled = true
-
-    layer.cornerRadius = frame.size.height / 2
     clipsToBounds = true
-
     backgroundColor = UIColor.myAccent
     titleLabel?.font = UIFont.myFontBold(withSize: 15)
-
     setTitleColor(UIColor.myWhite, for: .normal)
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  override func layoutSubviews() {
+    super.layoutSubviews()
+
+    layer.cornerRadius = frame.size.height / 2
   }
 }

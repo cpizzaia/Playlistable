@@ -51,6 +51,7 @@
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
 		AC5787201FDE17F00057D41A /* SeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57871F1FDE17F00057D41A /* SeedsViewController.swift */; };
 		AC5E5F1B21A107CF0020FD44 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5E5F1A21A107CF0020FD44 /* ImageButton.swift */; };
+		AC5E5F1E21A1111B0020FD44 /* DepressableClosureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5E5F1D21A1111B0020FD44 /* DepressableClosureButton.swift */; };
 		AC74DCB520830326009F0C2E /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCB420830326009F0C2E /* Playlist.swift */; };
 		AC74DCB72083042C009F0C2E /* PlaylistFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCB62083042C009F0C2E /* PlaylistFactory.swift */; };
 		AC74DCBD20844105009F0C2E /* AudioInterruptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCBC20844105009F0C2E /* AudioInterruptionController.swift */; };
@@ -147,6 +148,7 @@
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AC57871F1FDE17F00057D41A /* SeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsViewController.swift; sourceTree = "<group>"; };
 		AC5E5F1A21A107CF0020FD44 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
+		AC5E5F1D21A1111B0020FD44 /* DepressableClosureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepressableClosureButton.swift; sourceTree = "<group>"; };
 		AC74DCB420830326009F0C2E /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		AC74DCB62083042C009F0C2E /* PlaylistFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistFactory.swift; sourceTree = "<group>"; };
 		AC74DCBC20844105009F0C2E /* AudioInterruptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioInterruptionController.swift; sourceTree = "<group>"; };
@@ -265,7 +267,6 @@
 				ACBF9BCA218BD5A200A16155 /* SubClasses */,
 				ACEC1E1520962CAC009CC83C /* Services */,
 				AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */,
-				AC4C84F120146E1400C8A4E6 /* UIButtons */,
 				AC4C84DF2014307C00C8A4E6 /* Resources */,
 				AC17B7F61FBE99900029AFB6 /* StateManagers */,
 				AC8AB6B01FA9649F00251F85 /* Factories */,
@@ -366,14 +367,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		AC4C84F120146E1400C8A4E6 /* UIButtons */ = {
-			isa = PBXGroup;
-			children = (
-				AC4C84F220146E8F00C8A4E6 /* BigButton.swift */,
-			);
-			path = UIButtons;
-			sourceTree = "<group>";
-		};
 		AC53C96D1FE37B8200664733 /* SearchController */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,9 +380,19 @@
 		AC5E5F1921A107A90020FD44 /* CustomReusableViews */ = {
 			isa = PBXGroup;
 			children = (
-				AC5E5F1A21A107CF0020FD44 /* ImageButton.swift */,
+				AC5E5F1C21A110D50020FD44 /* Buttons */,
 			);
 			path = CustomReusableViews;
+			sourceTree = "<group>";
+		};
+		AC5E5F1C21A110D50020FD44 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				AC4C84F220146E8F00C8A4E6 /* BigButton.swift */,
+				AC5E5F1A21A107CF0020FD44 /* ImageButton.swift */,
+				AC5E5F1D21A1111B0020FD44 /* DepressableClosureButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		AC6271A11F9EDB9B002B068B /* ViewControllers */ = {
@@ -796,6 +799,7 @@
 				ACBDF1371F9CFE48001760D7 /* Track.swift in Sources */,
 				AC1197251FB91198009D1646 /* SpotifyPlayerReducer.swift in Sources */,
 				AC74DCB520830326009F0C2E /* Playlist.swift in Sources */,
+				AC5E5F1E21A1111B0020FD44 /* DepressableClosureButton.swift in Sources */,
 				ACC1A896218F672800A441E2 /* SpotifyAuthController.swift in Sources */,
 				ACBDF1431F9D3749001760D7 /* AppReducer.swift in Sources */,
 				AC1197211FB8F447009D1646 /* GeneratePlaylistActions.swift in Sources */,

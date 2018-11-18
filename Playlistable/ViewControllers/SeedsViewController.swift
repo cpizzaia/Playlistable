@@ -133,13 +133,12 @@ class SeedsViewController: UIViewController, MyStoreSubscriber, UITableViewDeleg
 
     generatePlaylistButton.snp.makeConstraints { make in
       make.width.equalTo(view).multipliedBy(0.55)
-      make.height.equalTo(view).multipliedBy(0.085)
+      make.height.equalTo(UIScreen.main.bounds.height * 0.075)
       make.bottom.equalTo(view).inset(30)
       make.centerX.equalTo(view)
     }
 
     generatePlaylistButton.setTitleColor(UIColor.myWhite, for: .normal)
-    generatePlaylistButton.titleLabel?.font = UIFont.myFont(withSize: 17)
     generatePlaylistButton.addTarget(self, action: #selector(generatePlaylistButtonTapped), for: .touchUpInside)
     generatePlaylistButton.setTitle("GENERATE", for: .normal)
   }
