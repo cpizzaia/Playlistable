@@ -50,6 +50,7 @@
 		AC53C9711FE37C6300664733 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC53C9701FE37C6300664733 /* SearchViewController.swift */; };
 		AC5787191FDCAD860057D41A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5787181FDCAD860057D41A /* StringExtensions.swift */; };
 		AC5787201FDE17F00057D41A /* SeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC57871F1FDE17F00057D41A /* SeedsViewController.swift */; };
+		AC5E5F1B21A107CF0020FD44 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5E5F1A21A107CF0020FD44 /* ImageButton.swift */; };
 		AC74DCB520830326009F0C2E /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCB420830326009F0C2E /* Playlist.swift */; };
 		AC74DCB72083042C009F0C2E /* PlaylistFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCB62083042C009F0C2E /* PlaylistFactory.swift */; };
 		AC74DCBD20844105009F0C2E /* AudioInterruptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC74DCBC20844105009F0C2E /* AudioInterruptionController.swift */; };
@@ -145,6 +146,7 @@
 		AC53C9701FE37C6300664733 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AC5787181FDCAD860057D41A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AC57871F1FDE17F00057D41A /* SeedsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedsViewController.swift; sourceTree = "<group>"; };
+		AC5E5F1A21A107CF0020FD44 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		AC74DCB420830326009F0C2E /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		AC74DCB62083042C009F0C2E /* PlaylistFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistFactory.swift; sourceTree = "<group>"; };
 		AC74DCBC20844105009F0C2E /* AudioInterruptionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioInterruptionController.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		AC02D0C71F9CF5B3009ED193 /* Playlistable */ = {
 			isa = PBXGroup;
 			children = (
+				AC5E5F1921A107A90020FD44 /* CustomReusableViews */,
 				ACBF9BCA218BD5A200A16155 /* SubClasses */,
 				ACEC1E1520962CAC009CC83C /* Services */,
 				AC1AF6021FC534B600DEFE09 /* Playlistable.entitlements */,
@@ -379,6 +382,14 @@
 				AC98D98E217AAC5C009EF80D /* NoSearchResultsView.swift */,
 			);
 			path = SearchController;
+			sourceTree = "<group>";
+		};
+		AC5E5F1921A107A90020FD44 /* CustomReusableViews */ = {
+			isa = PBXGroup;
+			children = (
+				AC5E5F1A21A107CF0020FD44 /* ImageButton.swift */,
+			);
+			path = CustomReusableViews;
 			sourceTree = "<group>";
 		};
 		AC6271A11F9EDB9B002B068B /* ViewControllers */ = {
@@ -753,6 +764,7 @@
 				ACC8166A2027C3F500A03946 /* SequenceExtensions.swift in Sources */,
 				ACBDF1451F9D38B4001760D7 /* SpotifyAuthReducer.swift in Sources */,
 				AC18FCC81FB412A20079AFC8 /* Item.swift in Sources */,
+				AC5E5F1B21A107CF0020FD44 /* ImageButton.swift in Sources */,
 				AC36E6E31FE5DBED0025BBE1 /* SearchResultSectionHeaderView.swift in Sources */,
 				AC36E6E61FE731090025BBE1 /* SeeAllSearchResultsViewController.swift in Sources */,
 				AC4C84DE20142C1800C8A4E6 /* UIFontExtensions.swift in Sources */,

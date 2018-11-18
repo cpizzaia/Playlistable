@@ -20,7 +20,8 @@ class PlayBarView: UIView {
 
   // MARK: Private Properties
   private let trackTitleLabel = UILabel()
-  private let pausePlayButton = UIButton()
+  private let pausePlayButton = ImageButton()
+  private let trackInfoContainer = UIView()
   private let durationBarBackground = UIView()
   private let durationBar = UIView()
   private var endTime: Double = 0
@@ -73,19 +74,29 @@ class PlayBarView: UIView {
     backgroundColor = .myLightBlack
     clipsToBounds = true
 
-    setupTrackTitleLabel()
-    setupPausePlayButton()
     setupDurationBarBackground()
     setupDurationBar()
+    setupTrackInfoContainer()
+    setupPausePlayButton()
+    setupTrackTitleLabel()
+  }
+
+  private func setupTrackInfoContainer() {
+    addSubview(trackInfoContainer)
+
+    trackInfoContainer.snp.makeConstraints { make in
+      make.top.leading.trailing.equalTo(self)
+      make.bottom.equalTo(durationBarBackground.snp.top)
+    }
   }
 
   private func setupTrackTitleLabel() {
-    addSubview(trackTitleLabel)
+    trackInfoContainer.addSubview(trackTitleLabel)
 
     trackTitleLabel.snp.makeConstraints { make in
-      make.center.equalTo(self)
-      make.width.equalTo(self).multipliedBy(0.7)
-      make.height.equalTo(self)
+      make.center.equalTo(trackInfoContainer)
+      make.trailing.lessThanOrEqualTo(pausePlayButton.snp.leading).offset(-15)
+      make.height.equalTo(trackInfoContainer)
     }
 
     trackTitleLabel.textAlignment = .center
@@ -94,16 +105,17 @@ class PlayBarView: UIView {
   }
 
   private func setupPausePlayButton() {
-    addSubview(pausePlayButton)
+    trackInfoContainer.addSubview(pausePlayButton)
 
     pausePlayButton.snp.makeConstraints { make in
-      make.centerY.equalTo(self)
-      make.width.equalTo(self).multipliedBy(0.08)
-      make.trailing.equalTo(self).inset(8)
-      make.height.equalTo(pausePlayButton.snp.height)
+      make.centerY.equalTo(trackInfoContainer)
+      make.width.equalTo(pausePlayButton.snp.height)
+      make.trailing.equalTo(trackInfoContainer).inset(12)
+      make.height.equalTo(25)
     }
 
-    pausePlayButton.addTarget(self, action: #selector(pausePlayButtonTapped), for: .touchUpInside)
+    pausePlayButton.button.addTarget(self, action: #selector(pausePlayButtonTapped), for: .touchUpInside)
+    pausePlayButton.imageView.contentMode = .scaleAspectFit
   }
 
   private func setupDurationBarBackground() {
@@ -131,12 +143,12 @@ class PlayBarView: UIView {
 
   private func updateFor(isPlaying: Bool) {
     runOnMainThread {
-      self.pausePlayButton.setTitleColor(.myWhite, for: .normal)
+      self.pausePlayButton.button.setTitleColor(.myWhite, for: .normal)
 
       if isPlaying {
-        self.pausePlayButton.setImage(UIImage(named: "roundedPause")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.pausePlayButton.imageView.image = UIImage(named: "pause")
       } else {
-        self.pausePlayButton.setImage(UIImage(named: "roundedPlay")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.pausePlayButton.imageView.image = UIImage(named: "logo")
       }
     }
   }
