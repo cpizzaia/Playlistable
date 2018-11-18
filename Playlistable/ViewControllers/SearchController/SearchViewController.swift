@@ -145,7 +145,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate, MyStoreSubscr
 
     searchBar.snp.makeConstraints { make in
       make.width.equalTo(view)
-      make.top.equalTo(view).offset(20)
+      make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
     }
 
     searchBar.delegate = self
