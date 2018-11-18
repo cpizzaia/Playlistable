@@ -123,6 +123,8 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
 
   // MARK: Private Methods
   private func setupViews() {
+    view.backgroundColor = .myLightBlack
+
     setupTabBar()
     setupPlayBar()
   }
@@ -132,7 +134,7 @@ class PlayAndTabBarContainerViewController: UIViewController, TabBarViewDelegate
 
     tabBar.snp.makeConstraints { make in
       make.leading.trailing.equalTo(self.view)
-      make.bottom.equalTo(self.view)
+      make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
     }
 
     tabBar.delegate = self
